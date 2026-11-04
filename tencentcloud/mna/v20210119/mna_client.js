@@ -557,7 +557,7 @@ class MnaClient extends AbstractClient {
     }
 
     /**
-     * Download traffic data on the usage statistics page
+     * Download traffic data on the usage statistics page.
      * @param {GetStatisticDataByNameRequest} req
      * @param {function(string, GetStatisticDataByNameResponse):void} cb
      * @public

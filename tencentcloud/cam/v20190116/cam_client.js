@@ -99,6 +99,7 @@ const GroupInfo = models.GroupInfo;
 const AddUserRequest = models.AddUserRequest;
 const UpdateAssumeRolePolicyRequest = models.UpdateAssumeRolePolicyRequest;
 const LoginActionFlag = models.LoginActionFlag;
+const ListAccountsResponse = models.ListAccountsResponse;
 const DeleteRoleRequest = models.DeleteRoleRequest;
 const UpdateRoleConsoleLoginRequest = models.UpdateRoleConsoleLoginRequest;
 const UpdateUserResponse = models.UpdateUserResponse;
@@ -115,6 +116,7 @@ const DisableUserSSORequest = models.DisableUserSSORequest;
 const UpdateSAMLProviderResponse = models.UpdateSAMLProviderResponse;
 const UpdateAccessKeyRequest = models.UpdateAccessKeyRequest;
 const UpdateUserRequest = models.UpdateUserRequest;
+const ListAllUser = models.ListAllUser;
 const CreateSAMLProviderRequest = models.CreateSAMLProviderRequest;
 const AttachPolicyInfo = models.AttachPolicyInfo;
 const ConsumeCustomMFATokenRequest = models.ConsumeCustomMFATokenRequest;
@@ -200,6 +202,7 @@ const DescribeSafeAuthFlagCollRequest = models.DescribeSafeAuthFlagCollRequest;
 const PutRolePermissionsBoundaryResponse = models.PutRolePermissionsBoundaryResponse;
 const SetMfaFlagRequest = models.SetMfaFlagRequest;
 const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
+const ListAccountsRequest = models.ListAccountsRequest;
 const ListAccessKeysResponse = models.ListAccessKeysResponse;
 const GetSecurityLastUsedResponse = models.GetSecurityLastUsedResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
@@ -580,6 +583,17 @@ class CamClient extends AbstractClient {
     DeleteRole(req, cb) {
         let resp = new DeleteRoleResponse();
         this.request("DeleteRole", req, resp, cb);
+    }
+
+    /**
+     * Query all account lists.
+     * @param {ListAccountsRequest} req
+     * @param {function(string, ListAccountsResponse):void} cb
+     * @public
+     */
+    ListAccounts(req, cb) {
+        let resp = new ListAccountsResponse();
+        this.request("ListAccounts", req, resp, cb);
     }
 
     /**

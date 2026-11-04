@@ -3103,57 +3103,55 @@ class GetStatisticDataByNameRequest extends  AbstractModel {
         super();
 
         /**
-         * Device name. If not specified, pass "-1".
+         * <p>Device name. If no device is specified, you can pass "-1"</p>
          * @type {string || null}
          */
         this.DeviceName = null;
 
         /**
-         * Start time of statistics (seconds).
+         * <p>Start time of statistics, unit: s</p>
          * @type {number || null}
          */
         this.BeginTime = null;
 
         /**
-         * Statistics end time (s).
+         * <p>Statistics end time, unit: s</p>
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * Aggregation granularity:
-Hourly statistics
-2: Daily statistics
+         * <p>Time granularity</p><p>Enumeration values:</p><ul><li>1: hourly statistics</li><li>2: daily statistics</li><li>3: per minute</li><li>4: every 5 minutes</li></ul>
          * @type {number || null}
          */
         this.TimeGranularity = null;
 
         /**
-         * Access region. Value ranges from 'MC' to 'AM'. MC=Chinese mainland AP=Asia Pacific EU=Europe AM=Americas. Leave it blank to represent all regions.
+         * <p>Access region. Value range: ['MC','AP','EU','AM'] MC=Chinese mainland AP=Asia Pacific EU=Europe AM=Americas. If not specified, it represents all regions.</p>
          * @type {string || null}
          */
         this.AccessRegion = null;
 
         /**
-         * Gateway type. 0: public cloud gateway; 1: private gateway. Default is 0 if not specified.
+         * <p>Gateway type. 0: public cloud gateway; 1: private gateway. Defaults to 0 if not passed.</p>
          * @type {number || null}
          */
         this.GatewayType = null;
 
         /**
-         * Device name list. Up to 10 devices. Used when downloading traffic volume of multiple devices. At this point, DeviceName can be "-1".
+         * <p>Device name list, up to 10 devices. Used when downloading traffic for multiple devices. At this point, DeviceName can be set to "-1"</p>
          * @type {Array.<string> || null}
          */
         this.DeviceList = null;
 
         /**
-         * Device group ID. If not specified, do not pass it. Used when downloading data by grouping.
+         * <p>Device group ID. Do not pass it if no group is specified. Used when downloading data by group</p>
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
-         * Application ID. Leave blank if no designated application is specified. Used when downloading data by app.
+         * <p>Application ID. If not specified, leave it blank. Used when downloading data by application</p>
          * @type {string || null}
          */
         this.MpApplicationId = null;
@@ -5805,7 +5803,7 @@ class GetStatisticDataByNameResponse extends  AbstractModel {
         super();
 
         /**
-         * File address url
+         * <p>File address url</p>
          * @type {string || null}
          */
         this.FilePath = null;

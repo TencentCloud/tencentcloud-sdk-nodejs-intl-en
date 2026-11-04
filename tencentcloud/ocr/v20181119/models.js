@@ -2726,7 +2726,8 @@ class GeneralBasicOCRResponse extends  AbstractModel {
         this.PdfPageSize = null;
 
         /**
-         * 
+         * Rotation angle of the image, measured in degrees. The horizontal direction of the text is 0; clockwise is positive, counterclockwise is negative.
+Example value: 6.5 
          * @type {number || null}
          */
         this.Angle = null;

@@ -17,30 +17,36 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * Result payload
+ * DeleteSkillShare request structure.
  * @class
  */
-class SearchResultPayload extends  AbstractModel {
+class DeleteSkillShareRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Additional information of knowledge graph (JSON string)</p>
+         * <p>Application remarks, required (pop-up "Application Remarks")</p>
          * @type {string || null}
          */
-        this.GraphData = null;
+        this.ApplyRemark = null;
 
         /**
-         * <p>List of hit image URLs</p>
-         * @type {Array.<string> || null}
-         */
-        this.ImageUrlList = null;
-
-        /**
-         * <p>Table additional information (JSON string)</p>
+         * <p>Original Skill ID, required (frontend does not need to detect the _shared suffix)</p>
          * @type {string || null}
          */
-        this.SheetInfo = null;
+        this.SkillId = null;
+
+        /**
+         * <p>Space ID, required</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Original version ID, required (identical to the version_id passed when publishing via CreateSkillShare)</p>
+         * @type {string || null}
+         */
+        this.VersionId = null;
 
     }
 
@@ -51,38 +57,45 @@ class SearchResultPayload extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GraphData = 'GraphData' in params ? params.GraphData : null;
-        this.ImageUrlList = 'ImageUrlList' in params ? params.ImageUrlList : null;
-        this.SheetInfo = 'SheetInfo' in params ? params.SheetInfo : null;
+        this.ApplyRemark = 'ApplyRemark' in params ? params.ApplyRemark : null;
+        this.SkillId = 'SkillId' in params ? params.SkillId : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
 
     }
 }
 
 /**
- * Retrieval request context info
+ * ToolConfig
  * @class
  */
-class SearchContext extends  AbstractModel {
+class ToolConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Request source<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>CALL_SOURCE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>CALL_SOURCE_RAG</td><td>1</td><td>Standard mode</td></tr><tr><td>CALL_SOURCE_WORKFLOW</td><td>2</td><td>Workflow</td></tr><tr><td>CALL_SOURCE_PLUGIN</td><td>3</td><td>Plug-in</td></tr><tr><td>CALL_SOURCE_OPENCLAW</td><td>4</td><td>openclaw</td></tr><tr><td>CALL_SOURCE_RECALL_TEST</td><td>5</td><td>Recall test</td></tr><tr><td>CALL_SOURCE_RECALL_TEST_DIFF</td><td>6</td><td>Recall test in comparison scenarios also needs to trigger the retrieval interface. The difference is that in this case, the frontend does not need to update the latest configuration. Because when comparing 1, 2, and 3, the final saved one may be 2.</td></tr></tbody></table></p>
-         * @type {number || null}
+         * <p>API tool configuration message.</p>
+         * @type {ApiToolConfig || null}
          */
-        this.CallSource = null;
+        this.ApiToolConfig = null;
 
         /**
-         * <p>adp DOMAIN: 1=development DOMAIN, 2=production DOMAIN<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>adp_DOMAIN_UNSPECIFIED</td><td>0</td><td>not specified</td></tr><tr><td>adp_DOMAIN_DEV</td><td>1</td><td>development DOMAIN</td></tr><tr><td>adp_DOMAIN_PROD</td><td>2</td><td>production DOMAIN</td></tr></tbody></table></p>
-         * @type {number || null}
+         * <p>Application configuration information</p>
+         * @type {AppToolConfig || null}
          */
-        this.Domain = null;
+        this.AppToolConfig = null;
 
         /**
-         * <p>Visitor ID</p>
-         * @type {string || null}
+         * <p>Code tool configuration message</p>
+         * @type {CodeToolConfig || null}
          */
-        this.VisitorId = null;
+        this.CodeToolConfig = null;
+
+        /**
+         * <p>Configuration information of the MCP tool</p>
+         * @type {MCPToolConfig || null}
+         */
+        this.MCPToolConfig = null;
 
     }
 
@@ -93,32 +106,110 @@ class SearchContext extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CallSource = 'CallSource' in params ? params.CallSource : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.VisitorId = 'VisitorId' in params ? params.VisitorId : null;
+
+        if (params.ApiToolConfig) {
+            let obj = new ApiToolConfig();
+            obj.deserialize(params.ApiToolConfig)
+            this.ApiToolConfig = obj;
+        }
+
+        if (params.AppToolConfig) {
+            let obj = new AppToolConfig();
+            obj.deserialize(params.AppToolConfig)
+            this.AppToolConfig = obj;
+        }
+
+        if (params.CodeToolConfig) {
+            let obj = new CodeToolConfig();
+            obj.deserialize(params.CodeToolConfig)
+            this.CodeToolConfig = obj;
+        }
+
+        if (params.MCPToolConfig) {
+            let obj = new MCPToolConfig();
+            obj.deserialize(params.MCPToolConfig)
+            this.MCPToolConfig = obj;
+        }
 
     }
 }
 
 /**
- * Common key-value pair
+ * SkillClassification: Skill category and source information.
  * @class
  */
-class KVPair extends  AbstractModel {
+class SkillClassification extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Key
-         * @type {string || null}
+         * Billing type of a Skill
+
+Enumeration values:
+| uint | Description |
+| --- | --- |
+| 0 | Free |
+| 1 | payment |
+         * @type {number || null}
          */
-        this.Key = null;
+        this.BillingType = null;
 
         /**
-         * Value
+         * Built-in Skill source. This parameter is valid only when create_type is Skill_create_type_BUILTIN.
+
+Enumeration values:
+| uint | Description |
+| --- | --- |
+| 0 | Placeholder |
+| 1 | ADP proprietary |
+| 2 | Tencent proprietary |
+| 3 | SkillHub |
+| 99 | Other |
+         * @type {number || null}
+         */
+        this.BuiltinSource = null;
+
+        /**
+         * Skill category
          * @type {string || null}
          */
-        this.Value = null;
+        this.CategoryKey = null;
+
+        /**
+         * Ways to create a Skill
+
+Enumeration values:
+| uint | Description |
+| --- | --- |
+| 0 | Placeholder |
+| 1 | file upload |
+2 | Generated by an enterprise-level shared process |
+| 3 | AIGC generation |
+| 99 | Built-in Skill |
+         * @type {number || null}
+         */
+        this.CreateType = null;
+
+        /**
+         * Skill provider type
+
+Enumeration values:
+| uint | Description |
+| --- | --- |
+| 0 | Placeholder |
+| 1 | Official |
+| 2 | third party |
+| 3 | Custom |
+| 4 | Custom enterprise-level sharing |
+         * @type {number || null}
+         */
+        this.ProviderType = null;
+
+        /**
+         * Skill source link
+         * @type {string || null}
+         */
+        this.SourceLink = null;
 
     }
 
@@ -129,105 +220,12 @@ class KVPair extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * A single retrieval result
- * @class
- */
-class KnowledgeResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * <p>Confidence degree</p>
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * <p>Hit knowledge type: 1=QA, 2=document fragment, 3=database, 4=map<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_QA</td><td>1</td><td>QA</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_DOC</td><td>2</td><td>Document fragment</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_DB</td><td>3</td><td>Database</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_GRAPH</td><td>4</td><td>Map</td></tr></tbody></table></p>
-         * @type {number || null}
-         */
-        this.KnowledgeType = null;
-
-        /**
-         * <p>Recall type list</p>
-         * @type {Array.<number> || null}
-         */
-        this.RecallTypeList = null;
-
-        /**
-         * <p>Result payload</p>
-         * @type {SearchResultPayload || null}
-         */
-        this.ResultPayload = null;
-
-        /**
-         * <p>Result type<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>SEARCH_RESULT_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SEARCH_RESULT_TYPE_RETRIEVAL</td><td>1</td><td>Standard search result</td></tr><tr><td>SEARCH_RESULT_TYPE_TEXT_TO_SQL</td><td>2</td><td>text2sql result</td></tr><tr><td>SEARCH_RESULT_TYPE_IMAGE_SEARCH_IMAGE</td><td>3</td><td></td></tr><tr><td>SEARCH_RESULT_TYPE_TEXT_SEARCH_IMAGE</td><td>4</td><td></td></tr></tbody></table></p>
-         * @type {number || null}
-         */
-        this.ResultType = null;
-
-        /**
-         * <p>Additional information for similar questions.</p>
-         * @type {SimilarQuestionExtra || null}
-         */
-        this.SimilarQuestionExtra = null;
-
-        /**
-         * <p>Basic information of knowledge fragment</p>
-         * @type {KnowledgeSnippetProfile || null}
-         */
-        this.SnippetProfile = null;
-
-        /**
-         * <p>Knowledge source information</p>
-         * @type {KnowledgeSource || null}
-         */
-        this.SourceInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.KnowledgeType = 'KnowledgeType' in params ? params.KnowledgeType : null;
-        this.RecallTypeList = 'RecallTypeList' in params ? params.RecallTypeList : null;
-
-        if (params.ResultPayload) {
-            let obj = new SearchResultPayload();
-            obj.deserialize(params.ResultPayload)
-            this.ResultPayload = obj;
-        }
-        this.ResultType = 'ResultType' in params ? params.ResultType : null;
-
-        if (params.SimilarQuestionExtra) {
-            let obj = new SimilarQuestionExtra();
-            obj.deserialize(params.SimilarQuestionExtra)
-            this.SimilarQuestionExtra = obj;
-        }
-
-        if (params.SnippetProfile) {
-            let obj = new KnowledgeSnippetProfile();
-            obj.deserialize(params.SnippetProfile)
-            this.SnippetProfile = obj;
-        }
-
-        if (params.SourceInfo) {
-            let obj = new KnowledgeSource();
-            obj.deserialize(params.SourceInfo)
-            this.SourceInfo = obj;
-        }
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
+        this.BuiltinSource = 'BuiltinSource' in params ? params.BuiltinSource : null;
+        this.CategoryKey = 'CategoryKey' in params ? params.CategoryKey : null;
+        this.CreateType = 'CreateType' in params ? params.CreateType : null;
+        this.ProviderType = 'ProviderType' in params ? params.ProviderType : null;
+        this.SourceLink = 'SourceLink' in params ? params.SourceLink : null;
 
     }
 }
@@ -275,6 +273,34 @@ class SearchInput extends  AbstractModel {
 }
 
 /**
+ * Agent advanced setting
+ * @class
+ */
+class AgentAdvancedConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Maximum reasoning round</p>
+         * @type {number || null}
+         */
+        this.MaxReasoningRound = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxReasoningRound = 'MaxReasoningRound' in params ? params.MaxReasoningRound : null;
+
+    }
+}
+
+/**
  * Final rerank configuration
  * @class
  */
@@ -303,24 +329,24 @@ class FinalRerankConfig extends  AbstractModel {
 }
 
 /**
- * Additional information of the similar question
+ * PluginStatistics
  * @class
  */
-class SimilarQuestionExtra extends  AbstractModel {
+class PluginStatistics extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Text content of the similar question</p>
-         * @type {string || null}
+         * Plug-in calling volume
+         * @type {number || null}
          */
-        this.Content = null;
+        this.CallCount = null;
 
         /**
-         * <p>Similar question ID</p>
-         * @type {string || null}
+         * Number of tools
+         * @type {number || null}
          */
-        this.SimilarQuestionId = null;
+        this.ToolCount = null;
 
     }
 
@@ -331,43 +357,142 @@ class SimilarQuestionExtra extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Content = 'Content' in params ? params.Content : null;
-        this.SimilarQuestionId = 'SimilarQuestionId' in params ? params.SimilarQuestionId : null;
+        this.CallCount = 'CallCount' in params ? params.CallCount : null;
+        this.ToolCount = 'ToolCount' in params ? params.ToolCount : null;
 
     }
 }
 
 /**
- * SearchKnowledge request structure.
+ * Intent attainment information
  * @class
  */
-class SearchKnowledgeRequest extends  AbstractModel {
+class IntentAchievementInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Advanced search configuration</p>
-         * @type {SearchAdvancedConfig || null}
+         * Description
+         * @type {string || null}
          */
-        this.AdvancedConfig = null;
+        this.Description = null;
 
         /**
-         * <p>Retrieval input</p>
-         * @type {SearchInput || null}
+         * Name
+         * @type {string || null}
          */
-        this.Input = null;
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * RollbackRelease request structure.
+ * @class
+ */
+class RollbackReleaseRequest extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * <p>Retrieval context</p>
-         * @type {SearchContext || null}
+         * app_id
+         * @type {string || null}
          */
-        this.Context = null;
+        this.AppId = null;
 
         /**
-         * <p>Billing information</p>
-         * @type {SearchBilling || null}
+         * release_id
+         * @type {string || null}
          */
-        this.SearchBilling = null;
+        this.ReleaseId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ReleaseId = 'ReleaseId' in params ? params.ReleaseId : null;
+
+    }
+}
+
+/**
+ * API parameters of the workflow
+ * @class
+ */
+class CustomVariable extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Parameter Value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeModelList response structure.
+ * @class
+ */
+class DescribeModelListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Model list</p>
+         * @type {Array.<Model> || null}
+         */
+        this.ModelList = null;
+
+        /**
+         * <p>Total number of models</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -379,43 +504,724 @@ class SearchKnowledgeRequest extends  AbstractModel {
             return;
         }
 
-        if (params.AdvancedConfig) {
-            let obj = new SearchAdvancedConfig();
-            obj.deserialize(params.AdvancedConfig)
-            this.AdvancedConfig = obj;
+        if (params.ModelList) {
+            this.ModelList = new Array();
+            for (let z in params.ModelList) {
+                let obj = new Model();
+                obj.deserialize(params.ModelList[z]);
+                this.ModelList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Model configuration
+ * @class
+ */
+class AppModelConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AI one-click optimization model
+         * @type {AIOptimizeModel || null}
+         */
+        this.AiOptimizeModel = null;
+
+        /**
+         * Real-time file parsing model
+         * @type {FileParseModel || null}
+         */
+        this.FileParseModel = null;
+
+        /**
+         * Generate model configuration
+         * @type {GenerateModel || null}
+         */
+        this.GenerateModel = null;
+
+        /**
+         * Multimodal QA model
+         * @type {MultiModalQAModel || null}
+         */
+        this.MultiModalQaModel = null;
+
+        /**
+         * Multimodal understanding model
+         * @type {MultiModalUnderstandingModel || null}
+         */
+        this.MultiModalUnderstandingModel = null;
+
+        /**
+         * Prompt rewrite model
+         * @type {PromptRewriteModel || null}
+         */
+        this.PromptRewriteModel = null;
+
+        /**
+         * Thinking model configuration
+         * @type {ThinkModel || null}
+         */
+        this.ThinkModel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
+        if (params.AiOptimizeModel) {
+            let obj = new AIOptimizeModel();
+            obj.deserialize(params.AiOptimizeModel)
+            this.AiOptimizeModel = obj;
+        }
+
+        if (params.FileParseModel) {
+            let obj = new FileParseModel();
+            obj.deserialize(params.FileParseModel)
+            this.FileParseModel = obj;
+        }
+
+        if (params.GenerateModel) {
+            let obj = new GenerateModel();
+            obj.deserialize(params.GenerateModel)
+            this.GenerateModel = obj;
+        }
+
+        if (params.MultiModalQaModel) {
+            let obj = new MultiModalQAModel();
+            obj.deserialize(params.MultiModalQaModel)
+            this.MultiModalQaModel = obj;
+        }
+
+        if (params.MultiModalUnderstandingModel) {
+            let obj = new MultiModalUnderstandingModel();
+            obj.deserialize(params.MultiModalUnderstandingModel)
+            this.MultiModalUnderstandingModel = obj;
+        }
+
+        if (params.PromptRewriteModel) {
+            let obj = new PromptRewriteModel();
+            obj.deserialize(params.PromptRewriteModel)
+            this.PromptRewriteModel = obj;
+        }
+
+        if (params.ThinkModel) {
+            let obj = new ThinkModel();
+            obj.deserialize(params.ThinkModel)
+            this.ThinkModel = obj;
+        }
+
+    }
+}
+
+/**
+ * Plugin details
+ * @class
+ */
+class Plugin extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Plug-in configuration
+         * @type {PluginConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * Creation time, Unix Timestamp
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Plug-in operation management information
+         * @type {PluginOperation || null}
+         */
+        this.Operation = null;
+
+        /**
+         * Plugin ID
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * Plugin version number
+         * @type {number || null}
+         */
+        this.PluginVersion = null;
+
+        /**
+         * Basic plug-in information.
+         * @type {PluginProfile || null}
+         */
+        this.Profile = null;
+
+        /**
+         * Plug-in statistical information
+         * @type {PluginStatistics || null}
+         */
+        this.Statistics = null;
+
+        /**
+         * <p>Plug-in status. 1: available, 2: unavailable </p><p>Enumeration values:</p><ul><li>1: available</li><li>2: unavailable</li></ul>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Tool list
+         * @type {Array.<Tool> || null}
+         */
+        this.ToolList = null;
+
+        /**
+         * Update time, Unix timestamp
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Plugin status information by user dimension
+         * @type {PluginUserState || null}
+         */
+        this.UserState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Config) {
+            let obj = new PluginConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.Operation) {
+            let obj = new PluginOperation();
+            obj.deserialize(params.Operation)
+            this.Operation = obj;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.PluginVersion = 'PluginVersion' in params ? params.PluginVersion : null;
+
+        if (params.Profile) {
+            let obj = new PluginProfile();
+            obj.deserialize(params.Profile)
+            this.Profile = obj;
+        }
+
+        if (params.Statistics) {
+            let obj = new PluginStatistics();
+            obj.deserialize(params.Statistics)
+            this.Statistics = obj;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.ToolList) {
+            this.ToolList = new Array();
+            for (let z in params.ToolList) {
+                let obj = new Tool();
+                obj.deserialize(params.ToolList[z]);
+                this.ToolList.push(obj);
+            }
+        }
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.UserState) {
+            let obj = new PluginUserState();
+            obj.deserialize(params.UserState)
+            this.UserState = obj;
+        }
+
+    }
+}
+
+/**
+ * ApiKey authentication configuration
+ * @class
+ */
+class ApiKeyAuthConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key position. HEADER/QUERY
+
+Enumeration values:
+| uint | Description |
+| --- | --- |
+Header authentication
+| 1 | Query authentication |
+         * @type {number || null}
+         */
+        this.KeyLocation = null;
+
+        /**
+         * Key parameter name
+         * @type {string || null}
+         */
+        this.KeyParamName = null;
+
+        /**
+         * Key parameter value
+         * @type {string || null}
+         */
+        this.KeyParamValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyLocation = 'KeyLocation' in params ? params.KeyLocation : null;
+        this.KeyParamName = 'KeyParamName' in params ? params.KeyParamName : null;
+        this.KeyParamValue = 'KeyParamValue' in params ? params.KeyParamValue : null;
+
+    }
+}
+
+/**
+ * Credential parameter configuration of the Agent plug-in (variable mode)
+ * @class
+ */
+class AgentPluginCredentialParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Parameter location</p><p>Enumeration values:</p><ul><li>0: Header authentication</li><li>1: Query authentication</li></ul>
+         * @type {number || null}
+         */
+        this.KeyLocation = null;
+
+        /**
+         * <p>Parameter name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Source of parameter value</p>
+         * @type {AgentInput || null}
+         */
+        this.Input = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyLocation = 'KeyLocation' in params ? params.KeyLocation : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
         if (params.Input) {
-            let obj = new SearchInput();
+            let obj = new AgentInput();
             obj.deserialize(params.Input)
             this.Input = obj;
         }
 
-        if (params.Context) {
-            let obj = new SearchContext();
-            obj.deserialize(params.Context)
-            this.Context = obj;
+    }
+}
+
+/**
+ * DescribeConversation request structure.
+ * @class
+ */
+class DescribeConversationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session ID</p>
+         * @type {string || null}
+         */
+        this.ConversationId = null;
+
+        /**
+         * <p>Session type. Enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (not specified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor trial), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share a link)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Application key</p>
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * <p>Primary user Uin.</p>
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * <p>Sub-user Uin</p>
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_SHARE. Share code</p>
+         * @type {string || null}
+         */
+        this.ShareCode = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConversationId = 'ConversationId' in params ? params.ConversationId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.ShareCode = 'ShareCode' in params ? params.ShareCode : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * Conversation session information
+ * @class
+ */
+class Conversation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>App ID</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Session ID</p>
+         * @type {string || null}
+         */
+        this.ConversationId = null;
+
+        /**
+         * <p>Creation time.</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Session type enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (unspecified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor trial), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share a link)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Update time.</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * <p>Session title</p>
+         * @type {string || null}
+         */
+        this.Title = null;
+
+        /**
+         * <p>Client-side AgentId used by the session</p>
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ConversationId = 'ConversationId' in params ? params.ConversationId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Title = 'Title' in params ? params.Title : null;
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+
+    }
+}
+
+/**
+ * Plugin authorization configuration
+ * @class
+ */
+class AuthConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Authorization mode.</p><p>Enumeration values:</p><ul><li>0: No authentication</li><li>1: API Key authentication</li><li>2: CAM authorization</li><li>3: OAuth 2.0 authorization</li></ul>
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * <p>API Key Authorization Configuration</p>
+         * @type {ApiKeyAuthConfig || null}
+         */
+        this.ApiKeyAuthConfig = null;
+
+        /**
+         * <p>CAM Authorization Configuration</p>
+         * @type {CamAuthConfig || null}
+         */
+        this.CamAuthConfig = null;
+
+        /**
+         * <p>OAuth 2.0 authorization configuration</p>
+         * @type {OAuthConfig || null}
+         */
+        this.OAuthConfig = null;
+
+        /**
+         * <p>AccessKey authorization configuration</p>
+         * @type {AccessKeyAuthConfig || null}
+         */
+        this.AccessKeyAuthConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+
+        if (params.ApiKeyAuthConfig) {
+            let obj = new ApiKeyAuthConfig();
+            obj.deserialize(params.ApiKeyAuthConfig)
+            this.ApiKeyAuthConfig = obj;
         }
 
-        if (params.SearchBilling) {
-            let obj = new SearchBilling();
-            obj.deserialize(params.SearchBilling)
-            this.SearchBilling = obj;
+        if (params.CamAuthConfig) {
+            let obj = new CamAuthConfig();
+            obj.deserialize(params.CamAuthConfig)
+            this.CamAuthConfig = obj;
+        }
+
+        if (params.OAuthConfig) {
+            let obj = new OAuthConfig();
+            obj.deserialize(params.OAuthConfig)
+            this.OAuthConfig = obj;
+        }
+
+        if (params.AccessKeyAuthConfig) {
+            let obj = new AccessKeyAuthConfig();
+            obj.deserialize(params.AccessKeyAuthConfig)
+            this.AccessKeyAuthConfig = obj;
         }
 
     }
 }
 
 /**
- * Database search configuration
+ * AppShareAccessControl
  * @class
  */
-class DBRetrievalConfig extends  AbstractModel {
+class AppShareAccessControl extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Whether to enable</p>
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>APP_SHARE_ACCESS_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>APP_SHARE_ACCESS_TYPE_PUBLIC</td><td>1</td><td>Public access (accessible to all users)</td></tr><tr><td>APP_SHARE_ACCESS_TYPE_INTERNAL</td><td>2</td><td>Internal access (accessible only to organizational users)</td></tr><tr><td>APP_SHARE_ACCESS_TYPE_ACCOUNT_WHITELIST</td><td>3</td><td>Account allowlist (accessible to specified UIN/mobile phone/mailbox/IP)</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * <p>Whether to enable access control</p><p>Enumeration values:</p><ul><li>true: Enable</li><li>false: Disable</li></ul>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * <p>Whitelist information</p>
+         * @type {Array.<AppShareWhitelistItem> || null}
+         */
+        this.Whitelist = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+        if (params.Whitelist) {
+            this.Whitelist = new Array();
+            for (let z in params.Whitelist) {
+                let obj = new AppShareWhitelistItem();
+                obj.deserialize(params.Whitelist[z]);
+                this.Whitelist.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Knowledge base classification info (including metadata configuration)
+ * @class
+ */
+class KBCategory extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether it can be added</p>
+         * @type {boolean || null}
+         */
+        this.CanAdd = null;
+
+        /**
+         * <p>Whether it is deletable</p>
+         * @type {boolean || null}
+         */
+        this.CanDelete = null;
+
+        /**
+         * <p>Whether it is editable</p>
+         * @type {boolean || null}
+         */
+        this.CanEdit = null;
+
+        /**
+         * <p>Category ID</p>
+         * @type {string || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * <p>Subcategory list.</p>
+         * @type {Array.<KBCategory> || null}
+         */
+        this.ChildList = null;
+
+        /**
+         * <p>Is leaf node (no subcategory)</p>
+         * @type {boolean || null}
+         */
+        this.IsLeaf = null;
+
+        /**
+         * <p>The number of category objects</p>
+         * @type {number || null}
+         */
+        this.ItemCount = null;
+
+        /**
+         * <p>Metadata configuration (configuration message when this category is set as metadata)</p>
+         * @type {MetaValue || null}
+         */
+        this.MetaValue = null;
+
+        /**
+         * <p>Category name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CanAdd = 'CanAdd' in params ? params.CanAdd : null;
+        this.CanDelete = 'CanDelete' in params ? params.CanDelete : null;
+        this.CanEdit = 'CanEdit' in params ? params.CanEdit : null;
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+
+        if (params.ChildList) {
+            this.ChildList = new Array();
+            for (let z in params.ChildList) {
+                let obj = new KBCategory();
+                obj.deserialize(params.ChildList[z]);
+                this.ChildList.push(obj);
+            }
+        }
+        this.IsLeaf = 'IsLeaf' in params ? params.IsLeaf : null;
+        this.ItemCount = 'ItemCount' in params ? params.ItemCount : null;
+
+        if (params.MetaValue) {
+            let obj = new MetaValue();
+            obj.deserialize(params.MetaValue)
+            this.MetaValue = obj;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * Custom configuration for the dialogue side (shared across all modes, with permission to modify configuration dynamically during a dialogue)
+ * @class
+ */
+class DialogCustomConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to enable dynamic configuration modification on the dialogue side</p>
          * @type {boolean || null}
          */
         this.Enabled = null;
@@ -430,6 +1236,13967 @@ class DBRetrievalConfig extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * DescribeAppSummaryList request structure.
+ * @class
+ */
+class DescribeAppSummaryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Space ID (required)
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * Filter criteria (multiple filters are in an AND relationship with each other, AND multiple Values of the same Filter are in an OR relationship): - AppStatus: APP STATUS, enumeration value, exact match (APP_STATUS_OFFLINE=1/APP_STATUS_RUNNING=2/APP_STATUS_DISABLED=3) - AppMode: application MODE, enumeration value, exact match (APP_MODE_STANDARD=1/APP_MODE_AGENT=2/APP_MODE_SINGLE_WORKFLOW=3/APP_MODE_CLAW_AGENT=4)
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * Page number, starting from 0.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Number of items per page. Maximum: 100.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Fuzzy query
+         * @type {string || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+
+    }
+}
+
+/**
+ * ExecuteConfig
+ * @class
+ */
+class ExecuteConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Prompt configuration</p>
+         * @type {AppTriggerPromptExecuteConfig || null}
+         */
+        this.PromptConfig = null;
+
+        /**
+         * <p>Workflow configuration.</p>
+         * @type {AppTriggerWorkflowExecuteConfig || null}
+         */
+        this.WorkflowConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PromptConfig) {
+            let obj = new AppTriggerPromptExecuteConfig();
+            obj.deserialize(params.PromptConfig)
+            this.PromptConfig = obj;
+        }
+
+        if (params.WorkflowConfig) {
+            let obj = new AppTriggerWorkflowExecuteConfig();
+            obj.deserialize(params.WorkflowConfig)
+            this.WorkflowConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateLabel response structure.
+ * @class
+ */
+class CreateLabelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tag ID</p>
+         * @type {string || null}
+         */
+        this.LabelId = null;
+
+        /**
+         * <p>Tag value (standard word + synonym list, including the term_id generated by the backend)</p>
+         * @type {Array.<LabelTerm> || null}
+         */
+        this.TermList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LabelId = 'LabelId' in params ? params.LabelId : null;
+
+        if (params.TermList) {
+            this.TermList = new Array();
+            for (let z in params.TermList) {
+                let obj = new LabelTerm();
+                obj.deserialize(params.TermList[z]);
+                this.TermList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TriggerConfig
+ * @class
+ */
+class TriggerConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Timer configuration.</p>
+         * @type {AppTriggerScheduleConfig || null}
+         */
+        this.ScheduledConfig = null;
+
+        /**
+         * <p>Webhook configuration</p>
+         * @type {AppTriggerWebhookConfig || null}
+         */
+        this.WebhookConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ScheduledConfig) {
+            let obj = new AppTriggerScheduleConfig();
+            obj.deserialize(params.ScheduledConfig)
+            this.ScheduledConfig = obj;
+        }
+
+        if (params.WebhookConfig) {
+            let obj = new AppTriggerWebhookConfig();
+            obj.deserialize(params.WebhookConfig)
+            this.WebhookConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeModelList request structure.
+ * @class
+ */
+class DescribeModelListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Model scenario. 0-case-insensitive, 1-standard generation, 2-standard thinking, 3-Agent thinking, 4-multimodal understanding, 5-multimodal QA, 6-rewrite, 7-long-term memory, 8-natural language to SQL, 9-AI optimization, 10-real-time file parsing, 11-file parsing, 12-GraphRAG, 13-OpenClaw, 14-multimodal Embedding, 15-Rerank, 16-text Embedding, 17-Widget, 18-Claw mode, 19-workflow code generation, 20-workflow large model node, 21-dedicated vectorization for workflow node, 22-workflow parameter extraction, 23-workflow large model knowledge q&a, 24-workflow tag extraction, 25-workflow intent recognition, 26-workflow tab, 27-workflow logical judgment, 28-documentation generation QA, 29-knowledge base Schema</p><p>Enumeration values:</p><ul><li>0: case-insensitive</li><li>1: standard generation</li><li>2: standard thinking</li><li>3: Agent thinking</li><li>4: multimodal understanding</li><li>5: multimodal QA</li><li>6: rewrite</li><li>7: long-term memory</li><li>8: natural language to SQL</li><li>9: AI optimization</li><li>10: real-time file parsing</li><li>11: file parsing</li><li>12: GraphRAG</li><li>13: OpenClaw</li><li>14: multimodal Embedding</li><li>15: Rerank</li><li>16: text Embedding</li><li>17: Widget</li><li>18: Claw mode</li><li>19: workflow code generation</li><li>20: workflow large model node</li><li>21: dedicated vectorization for workflow node</li><li>22: workflow parameter extraction</li><li>23: workflow large model knowledge q&a</li><li>24: workflow tag extraction</li><li>25: workflow intent recognition</li><li>26: workflow tab</li><li>27: workflow logical judgment</li><li>28: documentation generation QA</li><li>29: knowledge base Schema</li></ul>
+         * @type {number || null}
+         */
+        this.ModelScene = null;
+
+        /**
+         * <p>Filter conditions (multiple Filters are combined with AND, and multiple Values within the same Filter are combined with OR)<br>DeveloperName: model author name<br>ProviderName: model provider name<br>ProviderType: model provider type</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Page number. Starts from 0</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Number of items per page. Default: 20. Maximum: 100</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <p>Fuzzy search by keyword</p>
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * <p>Space ID</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelScene = 'ModelScene' in params ? params.ModelScene : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+    }
+}
+
+/**
+ * DescribeMsgRecordCategoryList response structure.
+ * @class
+ */
+class DescribeMsgRecordCategoryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Message record category tree list</p>
+         * @type {Array.<MsgRecordCategory> || null}
+         */
+        this.CategoryList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CategoryList) {
+            this.CategoryList = new Array();
+            for (let z in params.CategoryList) {
+                let obj = new MsgRecordCategory();
+                obj.deserialize(params.CategoryList[z]);
+                this.CategoryList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteVariable response structure.
+ * @class
+ */
+class DeleteVariableResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeLabelSummaryList response structure.
+ * @class
+ */
+class DescribeLabelSummaryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tag list.</p>
+         * @type {Array.<LabelSummary> || null}
+         */
+        this.LabelList = null;
+
+        /**
+         * <p>Total.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LabelList) {
+            this.LabelList = new Array();
+            for (let z in params.LabelList) {
+                let obj = new LabelSummary();
+                obj.deserialize(params.LabelList[z]);
+                this.LabelList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Function Tool configuration executed by the caller
+ * @class
+ */
+class AgentExternalToolConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tool type</p><p>Input parameter limit: currently only support "function"</p>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Tool name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Tool description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Tool input parameter definition</p>
+         * @type {Array.<RequestParam> || null}
+         */
+        this.Parameters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Parameters) {
+            this.Parameters = new Array();
+            for (let z in params.Parameters) {
+                let obj = new RequestParam();
+                obj.deserialize(params.Parameters[z]);
+                this.Parameters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * API plug-in configuration
+ * @class
+ */
+class ApiPluginConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Authorization configuration message
+         * @type {AuthConfig || null}
+         */
+        this.AuthConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AuthConfig) {
+            let obj = new AuthConfig();
+            obj.deserialize(params.AuthConfig)
+            this.AuthConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * Configuration in appeal - Record whether each configuration item is in appeal
+ * @class
+ */
+class AppealingStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the avatar is under appeal
+         * @type {boolean || null}
+         */
+        this.AvatarInAppeal = null;
+
+        /**
+         * Is the fallback response included in the appeal?
+         * @type {boolean || null}
+         */
+        this.FallbackReplyInAppeal = null;
+
+        /**
+         * Whether the welcome message is required in an appeal
+         * @type {boolean || null}
+         */
+        this.GreetingInAppeal = null;
+
+        /**
+         * Whether the application name is under appeal
+         * @type {boolean || null}
+         */
+        this.NameInAppeal = null;
+
+        /**
+         * Whether the role description is in the appeal
+         * @type {boolean || null}
+         */
+        this.RoleInAppeal = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AvatarInAppeal = 'AvatarInAppeal' in params ? params.AvatarInAppeal : null;
+        this.FallbackReplyInAppeal = 'FallbackReplyInAppeal' in params ? params.FallbackReplyInAppeal : null;
+        this.GreetingInAppeal = 'GreetingInAppeal' in params ? params.GreetingInAppeal : null;
+        this.NameInAppeal = 'NameInAppeal' in params ? params.NameInAppeal : null;
+        this.RoleInAppeal = 'RoleInAppeal' in params ? params.RoleInAppeal : null;
+
+    }
+}
+
+/**
+ * DescribeVariable response structure.
+ * @class
+ */
+class DescribeVariableResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Variable information
+         * @type {Variable || null}
+         */
+        this.Variable = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Variable) {
+            let obj = new Variable();
+            obj.deserialize(params.Variable)
+            this.Variable = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateLabel request structure.
+ * @class
+ */
+class CreateLabelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Tag name (length not less than 1 character)</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Tag value (standard term + synonym list), where term_id is generated by the backend and left empty upon creation</p>
+         * @type {Array.<LabelTerm> || null}
+         */
+        this.TermList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.TermList) {
+            this.TermList = new Array();
+            for (let z in params.TermList) {
+                let obj = new LabelTerm();
+                obj.deserialize(params.TermList[z]);
+                this.TermList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CodeToolConfig
+ * @class
+ */
+class CodeToolConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Code</p>
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * <p>Example.</p>
+         * @type {ToolExample || null}
+         */
+        this.Example = null;
+
+        /**
+         * <p>Input parameter</p>
+         * @type {Array.<RequestParam> || null}
+         */
+        this.Inputs = null;
+
+        /**
+         * <p>Output parameters</p>
+         * @type {Array.<ResponseParam> || null}
+         */
+        this.Outputs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+
+        if (params.Example) {
+            let obj = new ToolExample();
+            obj.deserialize(params.Example)
+            this.Example = obj;
+        }
+
+        if (params.Inputs) {
+            this.Inputs = new Array();
+            for (let z in params.Inputs) {
+                let obj = new RequestParam();
+                obj.deserialize(params.Inputs[z]);
+                this.Inputs.push(obj);
+            }
+        }
+
+        if (params.Outputs) {
+            this.Outputs = new Array();
+            for (let z in params.Outputs) {
+                let obj = new ResponseParam();
+                obj.deserialize(params.Outputs[z]);
+                this.Outputs.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Skill business shared configuration.
+ * @class
+ */
+class SkillCorpShareConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>SHARE_SCOPE_TYPE_UNSPECIFIED</td> <td>0</td> <td></td> </tr> <tr> <td>SHARE_SCOPE_TYPE_ALL</td> <td>1</td> <td></td> </tr> <tr> <td>SHARE_SCOPE_TYPE_ACCOUNT</td> <td>2</td> <td></td> </tr> <tr> <td>SHARE_SCOPE_TYPE_SPACE</td> <td>3</td> <td></td> </tr> </tbody> </table> <p>Enumeration values:</p> <ul> <li>0: Unspecified</li> <li>1: Shared across the business</li> <li>3: Shared by space</li> </ul>
+         * @type {number || null}
+         */
+        this.ShareScope = null;
+
+        /**
+         * <p>Share range information. Only spaces are supported. StrId is the space ID, and Name is the space name.</p>
+         * @type {Array.<Identity> || null}
+         */
+        this.ShareScopeList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShareScope = 'ShareScope' in params ? params.ShareScope : null;
+
+        if (params.ShareScopeList) {
+            this.ShareScopeList = new Array();
+            for (let z in params.ShareScopeList) {
+                let obj = new Identity();
+                obj.deserialize(params.ShareScopeList[z]);
+                this.ShareScopeList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * WeeklyTime
+ * @class
+ */
+class WeeklyTime extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time
+         * @type {string || null}
+         */
+        this.TimeOfDay = null;
+
+        /**
+         * Day of the week
+         * @type {number || null}
+         */
+        this.Weekday = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeOfDay = 'TimeOfDay' in params ? params.TimeOfDay : null;
+        this.Weekday = 'Weekday' in params ? params.Weekday : null;
+
+    }
+}
+
+/**
+ * Aggregated details of resource usage
+ * @class
+ */
+class UsageSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Exclusive to MODEL domain</p>
+         * @type {ModelUsageSummary || null}
+         */
+        this.Model = null;
+
+        /**
+         * <p>PLATFORM domain exclusive</p>
+         * @type {PlatformUsageSummary || null}
+         */
+        this.Platform = null;
+
+        /**
+         * <p>Exclusive to PLUGIN domain</p>
+         * @type {PluginUsageSummary || null}
+         */
+        this.Plugin = null;
+
+        /**
+         * <p>Source ID; CORP view=space_id (corporate view grouped by space), SPACE view=app_id (uint64 string), APP view=app_id</p>
+         * @type {string || null}
+         */
+        this.SourceId = null;
+
+        /**
+         * <p>Source name; CORP view=space_name, SPACE view=app_name, APP view=app_name</p>
+         * @type {string || null}
+         */
+        this.SourceName = null;
+
+        /**
+         * <p>View type, determines the business meaning of SourceId/SourceName</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>VIEW_TYPE_UNSPECIFIED</td><td>0</td><td>Unspecified (invalid value, do not pass in requests)</td></tr><tr><td>VIEW_TYPE_CORP</td><td>1</td><td>Corporate view</td></tr><tr><td>VIEW_TYPE_SPACE</td><td>2</td><td>Space view</td></tr><tr><td>VIEW_TYPE_APP</td><td>3</td><td>Application view</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.ViewType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Model) {
+            let obj = new ModelUsageSummary();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
+
+        if (params.Platform) {
+            let obj = new PlatformUsageSummary();
+            obj.deserialize(params.Platform)
+            this.Platform = obj;
+        }
+
+        if (params.Plugin) {
+            let obj = new PluginUsageSummary();
+            obj.deserialize(params.Plugin)
+            this.Plugin = obj;
+        }
+        this.SourceId = 'SourceId' in params ? params.SourceId : null;
+        this.SourceName = 'SourceName' in params ? params.SourceName : null;
+        this.ViewType = 'ViewType' in params ? params.ViewType : null;
+
+    }
+}
+
+/**
+ * Cloud disk mounting configuration in the application sandbox.
+ * @class
+ */
+class FileVolumeMount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Access mode: RO=read-only, RW=read-write; required. Only RW can be used when mounting to /workdir.</p>
+         * @type {string || null}
+         */
+        this.AccessMode = null;
+
+        /**
+         * <p>Absolute mount directory in the sandbox; /workdir can be mounted at most once and only RW can be used.</p>
+         * @type {string || null}
+         */
+        this.MountPath = null;
+
+        /**
+         * <p>Cloud disk identification</p>
+         * @type {string || null}
+         */
+        this.VolumeId = null;
+
+        /**
+         * <p>Server-side generated mount flag. Reserved for modification, optional for new additions.</p>
+         * @type {string || null}
+         */
+        this.MountId = null;
+
+        /**
+         * <p>Path relative to the root directory of cloud disk data; an empty string indicates mounting the entire data root directory.</p>
+         * @type {string || null}
+         */
+        this.RelativePath = null;
+
+        /**
+         * <p>Cloud disk name. It is supplemented by the server only when querying the application configuration and ignored during modification. It is empty when it cannot be obtained and does not impact the mount configuration.</p>
+         * @type {string || null}
+         */
+        this.VolumeName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessMode = 'AccessMode' in params ? params.AccessMode : null;
+        this.MountPath = 'MountPath' in params ? params.MountPath : null;
+        this.VolumeId = 'VolumeId' in params ? params.VolumeId : null;
+        this.MountId = 'MountId' in params ? params.MountId : null;
+        this.RelativePath = 'RelativePath' in params ? params.RelativePath : null;
+        this.VolumeName = 'VolumeName' in params ? params.VolumeName : null;
+
+    }
+}
+
+/**
+ * Reference abstract (for detail page display, corresponding to DB t_skill_reference)
+ * @class
+ */
+class SkillReferenceSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Associated ID</p>
+         * @type {string || null}
+         */
+        this.ReferenceId = null;
+
+        /**
+         * <p>Association name</p>
+         * @type {string || null}
+         */
+        this.ReferenceName = null;
+
+        /**
+         * <p>Association type</p><p>Enumeration values:<br>| uint | Description |<br>| --- | --- |<br>| 0 | Placeholder |<br>| 1 | ClawPro |<br>| 2 | agent |</p>
+         * @type {number || null}
+         */
+        this.ReferenceType = null;
+
+        /**
+         * <p>Space ID</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Space name</p>
+         * @type {string || null}
+         */
+        this.SpaceName = null;
+
+        /**
+         * <p>Reference instance owner</p>
+         * @type {string || null}
+         */
+        this.Owner = null;
+
+        /**
+         * <p>Application identifier</p>
+         * @type {AppIdentity || null}
+         */
+        this.AppIdentity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReferenceId = 'ReferenceId' in params ? params.ReferenceId : null;
+        this.ReferenceName = 'ReferenceName' in params ? params.ReferenceName : null;
+        this.ReferenceType = 'ReferenceType' in params ? params.ReferenceType : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.SpaceName = 'SpaceName' in params ? params.SpaceName : null;
+        this.Owner = 'Owner' in params ? params.Owner : null;
+
+        if (params.AppIdentity) {
+            let obj = new AppIdentity();
+            obj.deserialize(params.AppIdentity)
+            this.AppIdentity = obj;
+        }
+
+    }
+}
+
+/**
+ * BillingAttribute
+ * @class
+ */
+class BillingAttribute extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Property name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Attribute value.</p>
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeConcurrencyLimitDetailList response structure.
+ * @class
+ */
+class DescribeConcurrencyLimitDetailListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Concurrency limit exceeded details list</p>
+         * @type {Array.<ConcurrencyLimitDetail> || null}
+         */
+        this.ConcurrencyLimitDetailList = null;
+
+        /**
+         * <p>Total record count, for frontend pagination</p>
+         * @type {string || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ConcurrencyLimitDetailList) {
+            this.ConcurrencyLimitDetailList = new Array();
+            for (let z in params.ConcurrencyLimitDetailList) {
+                let obj = new ConcurrencyLimitDetail();
+                obj.deserialize(params.ConcurrencyLimitDetailList[z]);
+                this.ConcurrencyLimitDetailList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyLabel response structure.
+ * @class
+ */
+class ModifyLabelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tag value after modification (standard word + synonym list)</p>
+         * @type {Array.<LabelTerm> || null}
+         */
+        this.TermList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TermList) {
+            this.TermList = new Array();
+            for (let z in params.TermList) {
+                let obj = new LabelTerm();
+                obj.deserialize(params.TermList[z]);
+                this.TermList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Editable configuration of the Agent
+ * @class
+ */
+class AgentSpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Agent Basic Configuration</p>
+         * @type {AgentProfile || null}
+         */
+        this.Profile = null;
+
+        /**
+         * <p>System prompt</p>
+         * @type {string || null}
+         */
+        this.Instructions = null;
+
+        /**
+         * <p>Primary model configuration</p>
+         * @type {AgentModelConfig || null}
+         */
+        this.Model = null;
+
+        /**
+         * <p>Tool information</p>
+         * @type {Array.<AgentToolConfig> || null}
+         */
+        this.ToolList = null;
+
+        /**
+         * <p>Plugin information.</p>
+         * @type {Array.<AgentPluginConfig> || null}
+         */
+        this.PluginList = null;
+
+        /**
+         * <p>Skill information.</p>
+         * @type {Array.<AgentSkillConfig> || null}
+         */
+        this.SkillList = null;
+
+        /**
+         * <p>Advanced settings</p>
+         * @type {AgentAdvancedConfig || null}
+         */
+        this.AdvancedConfig = null;
+
+        /**
+         * <p>List of Function Tools executed by the caller</p><p>Input parameter limit: only available in client user state Agent scenarios. B-end configuration state Agent ignores this field and</p>
+         * @type {Array.<AgentExternalToolConfig> || null}
+         */
+        this.ExternalToolList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Profile) {
+            let obj = new AgentProfile();
+            obj.deserialize(params.Profile)
+            this.Profile = obj;
+        }
+        this.Instructions = 'Instructions' in params ? params.Instructions : null;
+
+        if (params.Model) {
+            let obj = new AgentModelConfig();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
+
+        if (params.ToolList) {
+            this.ToolList = new Array();
+            for (let z in params.ToolList) {
+                let obj = new AgentToolConfig();
+                obj.deserialize(params.ToolList[z]);
+                this.ToolList.push(obj);
+            }
+        }
+
+        if (params.PluginList) {
+            this.PluginList = new Array();
+            for (let z in params.PluginList) {
+                let obj = new AgentPluginConfig();
+                obj.deserialize(params.PluginList[z]);
+                this.PluginList.push(obj);
+            }
+        }
+
+        if (params.SkillList) {
+            this.SkillList = new Array();
+            for (let z in params.SkillList) {
+                let obj = new AgentSkillConfig();
+                obj.deserialize(params.SkillList[z]);
+                this.SkillList.push(obj);
+            }
+        }
+
+        if (params.AdvancedConfig) {
+            let obj = new AgentAdvancedConfig();
+            obj.deserialize(params.AdvancedConfig)
+            this.AdvancedConfig = obj;
+        }
+
+        if (params.ExternalToolList) {
+            this.ExternalToolList = new Array();
+            for (let z in params.ExternalToolList) {
+                let obj = new AgentExternalToolConfig();
+                obj.deserialize(params.ExternalToolList[z]);
+                this.ExternalToolList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ClawAgent Configuration
+ * @class
+ */
+class ClawAgentConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Agent Team Collaboration Configuration</p>
+         * @type {ClawAgentAgentTeamConfig || null}
+         */
+        this.AgentTeamConfig = null;
+
+        /**
+         * <p>Long-term memory configuration</p>
+         * @type {ClawAgentLongMemoryConfig || null}
+         */
+        this.LongMemoryConfig = null;
+
+        /**
+         * <p>Channel context timeout configuration clearing</p>
+         * @type {ClawAgentChannelContextTimeoutConfig || null}
+         */
+        this.ChannelContextTimeoutConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AgentTeamConfig) {
+            let obj = new ClawAgentAgentTeamConfig();
+            obj.deserialize(params.AgentTeamConfig)
+            this.AgentTeamConfig = obj;
+        }
+
+        if (params.LongMemoryConfig) {
+            let obj = new ClawAgentLongMemoryConfig();
+            obj.deserialize(params.LongMemoryConfig)
+            this.LongMemoryConfig = obj;
+        }
+
+        if (params.ChannelContextTimeoutConfig) {
+            let obj = new ClawAgentChannelContextTimeoutConfig();
+            obj.deserialize(params.ChannelContextTimeoutConfig)
+            this.ChannelContextTimeoutConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * <p>Model restrictive information</p>
+ * @class
+ */
+class ModelLimit extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Model context length display copy (for example, 128K, 1000K)</p>
+         * @type {string || null}
+         */
+        this.ContextLengthDescription = null;
+
+        /**
+         * <p>Character limit for model dialog box input length</p>
+         * @type {number || null}
+         */
+        this.InputLengthLimit = null;
+
+        /**
+         * <p>Maximum input Tokens display copy (for example, 960k, formatted on the server, empty string if not configured)</p>
+         * @type {string || null}
+         */
+        this.MaxInputTokensDescription = null;
+
+        /**
+         * <p>Display copy for the maximum output Tokens (for example, 64k, formatted on the server, empty string if not configured)</p>
+         * @type {string || null}
+         */
+        this.MaxOutputTokensDescription = null;
+
+        /**
+         * <p>Model prompt content length character limit</p>
+         * @type {number || null}
+         */
+        this.PromptLengthLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ContextLengthDescription = 'ContextLengthDescription' in params ? params.ContextLengthDescription : null;
+        this.InputLengthLimit = 'InputLengthLimit' in params ? params.InputLengthLimit : null;
+        this.MaxInputTokensDescription = 'MaxInputTokensDescription' in params ? params.MaxInputTokensDescription : null;
+        this.MaxOutputTokensDescription = 'MaxOutputTokensDescription' in params ? params.MaxOutputTokensDescription : null;
+        this.PromptLengthLimit = 'PromptLengthLimit' in params ? params.PromptLengthLimit : null;
+
+    }
+}
+
+/**
+ * Reply type distribution item
+ * @class
+ */
+class Distribution extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Count of calls for this reply method</p>
+         * @type {string || null}
+         */
+        this.CallCount = null;
+
+        /**
+         * <p>Percentage of this reply method in the total number of calls (percentage, 0–100, rounded to two decimal places; all 0 when no data is available, and the sum of all items is 100 when there is data)</p>
+         * @type {number || null}
+         */
+        this.Percentage = null;
+
+        /**
+         * <p>Reply method name (internationalized according to the request language; falls back to the Enumeration Name of reply_method when i18n is missing)</p>
+         * @type {string || null}
+         */
+        this.ReplyName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CallCount = 'CallCount' in params ? params.CallCount : null;
+        this.Percentage = 'Percentage' in params ? params.Percentage : null;
+        this.ReplyName = 'ReplyName' in params ? params.ReplyName : null;
+
+    }
+}
+
+/**
+ * CreatePlugin request structure.
+ * @class
+ */
+class CreatePluginRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Basic information of the plug-in.</p>
+         * @type {PluginProfile || null}
+         */
+        this.Profile = null;
+
+        /**
+         * <p>Plug-in type configuration</p>
+         * @type {PluginConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * <p>Current workspace id</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Tool list of the plug-in</p>
+         * @type {Array.<Tool> || null}
+         */
+        this.ToolList = null;
+
+        /**
+         * <p>User Main Account logged in (required in integrator mode)</p>
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * <p>User sub-account for login (required in integrator mode)</p>
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Profile) {
+            let obj = new PluginProfile();
+            obj.deserialize(params.Profile)
+            this.Profile = obj;
+        }
+
+        if (params.Config) {
+            let obj = new PluginConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+        if (params.ToolList) {
+            this.ToolList = new Array();
+            for (let z in params.ToolList) {
+                let obj = new Tool();
+                obj.deserialize(params.ToolList[z]);
+                this.ToolList.push(obj);
+            }
+        }
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+
+    }
+}
+
+/**
+ * Thinking model configuration
+ * @class
+ */
+class ThinkModel extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Thinking model
+         * @type {ModelDetailInfo || null}
+         */
+        this.Model = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Model) {
+            let obj = new ModelDetailInfo();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteAgent response structure.
+ * @class
+ */
+class DeleteAgentResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyConversation response structure.
+ * @class
+ */
+class ModifyConversationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RetryRelease request structure.
+ * @class
+ */
+class RetryReleaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Release Task ID
+         * @type {string || null}
+         */
+        this.ReleaseId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ReleaseId = 'ReleaseId' in params ? params.ReleaseId : null;
+
+    }
+}
+
+/**
+ * App configuration - All user-modifiable configurations
+ * @class
+ */
+class AppConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Trial configuration
+         * @type {AppExperienceConfig || null}
+         */
+        this.Experience = null;
+
+        /**
+         * Welcome message configuration
+         * @type {AppGreetingConfig || null}
+         */
+        this.Greeting = null;
+
+        /**
+         * Memory configuration
+         * @type {AppMemoryConfig || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Mode-related configuration
+         * @type {AppModeConfig || null}
+         */
+        this.Mode = null;
+
+        /**
+         * Model configuration
+         * @type {AppModelConfig || null}
+         */
+        this.Model = null;
+
+        /**
+         * Online search configuration
+         * @type {AppWebSearchConfig || null}
+         */
+        this.WebSearch = null;
+
+        /**
+         * Workflow configuration
+         * @type {AppWorkflowConfig || null}
+         */
+        this.Workflow = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Experience) {
+            let obj = new AppExperienceConfig();
+            obj.deserialize(params.Experience)
+            this.Experience = obj;
+        }
+
+        if (params.Greeting) {
+            let obj = new AppGreetingConfig();
+            obj.deserialize(params.Greeting)
+            this.Greeting = obj;
+        }
+
+        if (params.Memory) {
+            let obj = new AppMemoryConfig();
+            obj.deserialize(params.Memory)
+            this.Memory = obj;
+        }
+
+        if (params.Mode) {
+            let obj = new AppModeConfig();
+            obj.deserialize(params.Mode)
+            this.Mode = obj;
+        }
+
+        if (params.Model) {
+            let obj = new AppModelConfig();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
+
+        if (params.WebSearch) {
+            let obj = new AppWebSearchConfig();
+            obj.deserialize(params.WebSearch)
+            this.WebSearch = obj;
+        }
+
+        if (params.Workflow) {
+            let obj = new AppWorkflowConfig();
+            obj.deserialize(params.Workflow)
+            this.Workflow = obj;
+        }
+
+    }
+}
+
+/**
+ * Application auxiliary information - contains various auxiliary statuses and extended information (non-modifiable by users)
+ * @class
+ */
+class AppAuxiliaryInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Appeal information.
+         * @type {AppAppeal || null}
+         */
+        this.Appeal = null;
+
+        /**
+         * Search for resource status
+         * @type {SearchResourceStatusInfo || null}
+         */
+        this.SearchResourceStatus = null;
+
+        /**
+         * Special status information
+         * @type {SpecialStatusInfo || null}
+         */
+        this.SpecialStatusInfo = null;
+
+        /**
+         * Sub-status information.
+         * @type {AppSubStatusInfo || null}
+         */
+        this.SubStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Appeal) {
+            let obj = new AppAppeal();
+            obj.deserialize(params.Appeal)
+            this.Appeal = obj;
+        }
+
+        if (params.SearchResourceStatus) {
+            let obj = new SearchResourceStatusInfo();
+            obj.deserialize(params.SearchResourceStatus)
+            this.SearchResourceStatus = obj;
+        }
+
+        if (params.SpecialStatusInfo) {
+            let obj = new SpecialStatusInfo();
+            obj.deserialize(params.SpecialStatusInfo)
+            this.SpecialStatusInfo = obj;
+        }
+
+        if (params.SubStatus) {
+            let obj = new AppSubStatusInfo();
+            obj.deserialize(params.SubStatus)
+            this.SubStatus = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyConversation request structure.
+ * @class
+ */
+class ModifyConversationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session type. Enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (not specified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor trial), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share a link)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>App ID</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Application key</p>
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * <p>User sub-account logged in (required in integrator mode)</p>
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * <p>User Main Account logged in (required in integrator mode)</p>
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * <p>Required when Type is CONVERSATION_TYPE_SHARE. Share code</p>
+         * @type {string || null}
+         */
+        this.ShareCode = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Session ID.
+         * @type {string || null}
+         */
+        this.ConversationId = null;
+
+        /**
+         * Session heading
+         * @type {string || null}
+         */
+        this.Title = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.ShareCode = 'ShareCode' in params ? params.ShareCode : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.ConversationId = 'ConversationId' in params ? params.ConversationId : null;
+        this.Title = 'Title' in params ? params.Title : null;
+
+    }
+}
+
+/**
+ * CreateChannel response structure.
+ * @class
+ */
+class CreateChannelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNodeRunDetail request structure.
+ * @class
+ */
+class DescribeNodeRunDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Node operation instance ID</p>
+         * @type {string || null}
+         */
+        this.NodeRunId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.NodeRunId = 'NodeRunId' in params ? params.NodeRunId : null;
+
+    }
+}
+
+/**
+ * DeleteCategory response structure.
+ * @class
+ */
+class DeleteCategoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Result payload
+ * @class
+ */
+class SearchResultPayload extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Additional information of knowledge graph (JSON string)</p>
+         * @type {string || null}
+         */
+        this.GraphData = null;
+
+        /**
+         * <p>List of hit image URLs</p>
+         * @type {Array.<string> || null}
+         */
+        this.ImageUrlList = null;
+
+        /**
+         * <p>Table additional information (JSON string)</p>
+         * @type {string || null}
+         */
+        this.SheetInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GraphData = 'GraphData' in params ? params.GraphData : null;
+        this.ImageUrlList = 'ImageUrlList' in params ? params.ImageUrlList : null;
+        this.SheetInfo = 'SheetInfo' in params ? params.SheetInfo : null;
+
+    }
+}
+
+/**
+ * QA query condition
+ * @class
+ */
+class QAQuery extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Query keyword (fuzzy search)</p>
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * <p>Query scope (fields that query acts on): 1=question, 2=tag or tag value, 3=answer; multiple selections supported, unavailable by default</p>
+         * @type {Array.<number> || null}
+         */
+        this.QueryScopeList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Query = 'Query' in params ? params.Query : null;
+        this.QueryScopeList = 'QueryScopeList' in params ? params.QueryScopeList : null;
+
+    }
+}
+
+/**
+ * DescribeAppTrigger response structure.
+ * @class
+ */
+class DescribeAppTriggerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application trigger information</p>
+         * @type {AppTrigger || null}
+         */
+        this.Trigger = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Trigger) {
+            let obj = new AppTrigger();
+            obj.deserialize(params.Trigger)
+            this.Trigger = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CallMCPTool request structure.
+ * @class
+ */
+class CallMCPToolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Capacity boundary: one request can only call the tool on this plugin</p>
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * <p>thread on the agent-exec side</p>
+         * @type {string || null}
+         */
+        this.ThreadId = null;
+
+        /**
+         * <p>Tool Name, used for locating the tool_id in the configured tool_list of the plugin</p>
+         * @type {string || null}
+         */
+        this.ToolName = null;
+
+        /**
+         * <p>JSON: Original tool input parameters, passed through to the MCP Server as-is</p>
+         * @type {string || null}
+         */
+        this.Arguments = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.ThreadId = 'ThreadId' in params ? params.ThreadId : null;
+        this.ToolName = 'ToolName' in params ? params.ToolName : null;
+        this.Arguments = 'Arguments' in params ? params.Arguments : null;
+
+    }
+}
+
+/**
+ * ModifyVariable response structure.
+ * @class
+ */
+class ModifyVariableResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Agent skill input parameter
+ * @class
+ */
+class AgentSkillConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Skill ID</p>
+         * @type {string || null}
+         */
+        this.SkillId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SkillId = 'SkillId' in params ? params.SkillId : null;
+
+    }
+}
+
+/**
+ * ModifyAgent request structure.
+ * @class
+ */
+class ModifyAgentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Agent Id</p>
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+        /**
+         * <p>Information of the Agent after modification</p>
+         * @type {AgentSpec || null}
+         */
+        this.Agent = null;
+
+        /**
+         * <p>Field path that needs to be updated, for example ["Profile.Name", "Profile.IconUrl", "Instructions", "Model", "ToolList", "PluginList", "SkillList", "AdvancedConfig"]</p>
+         * @type {FieldMask || null}
+         */
+        this.UpdateMask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+
+        if (params.Agent) {
+            let obj = new AgentSpec();
+            obj.deserialize(params.Agent)
+            this.Agent = obj;
+        }
+
+        if (params.UpdateMask) {
+            let obj = new FieldMask();
+            obj.deserialize(params.UpdateMask)
+            this.UpdateMask = obj;
+        }
+
+    }
+}
+
+/**
+ * Workflow node running details
+ * @class
+ */
+class NodeRunDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Node running information</p>
+         * @type {NodeRun || null}
+         */
+        this.NodeRun = null;
+
+        /**
+         * <p>Node operation content.</p>
+         * @type {NodeRunContent || null}
+         */
+        this.NodeRunContent = null;
+
+        /**
+         * <p>Node operation process</p>
+         * @type {NodeRunExecution || null}
+         */
+        this.NodeRunExecution = null;
+
+        /**
+         * <p>Node operation logs</p>
+         * @type {NodeRunLog || null}
+         */
+        this.NodeRunLog = null;
+
+        /**
+         * <p>Statistical information.</p>
+         * @type {Array.<Statistic> || null}
+         */
+        this.StatisticList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NodeRun) {
+            let obj = new NodeRun();
+            obj.deserialize(params.NodeRun)
+            this.NodeRun = obj;
+        }
+
+        if (params.NodeRunContent) {
+            let obj = new NodeRunContent();
+            obj.deserialize(params.NodeRunContent)
+            this.NodeRunContent = obj;
+        }
+
+        if (params.NodeRunExecution) {
+            let obj = new NodeRunExecution();
+            obj.deserialize(params.NodeRunExecution)
+            this.NodeRunExecution = obj;
+        }
+
+        if (params.NodeRunLog) {
+            let obj = new NodeRunLog();
+            obj.deserialize(params.NodeRunLog)
+            this.NodeRunLog = obj;
+        }
+
+        if (params.StatisticList) {
+            this.StatisticList = new Array();
+            for (let z in params.StatisticList) {
+                let obj = new Statistic();
+                obj.deserialize(params.StatisticList[z]);
+                this.StatisticList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Online search configuration (for international edition)
+ * @class
+ */
+class AppWebSearchConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API key
+         * @type {string || null}
+         */
+        this.ApiKey = null;
+
+        /**
+         * Whether enabled
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * Service provider
+         * @type {string || null}
+         */
+        this.Provider = null;
+
+        /**
+         * Number of returned results.
+         * @type {number || null}
+         */
+        this.TopN = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApiKey = 'ApiKey' in params ? params.ApiKey : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Provider = 'Provider' in params ? params.Provider : null;
+        this.TopN = 'TopN' in params ? params.TopN : null;
+
+    }
+}
+
+/**
+ * Basic configuration of the Agent
+ * @class
+ */
+class AgentProfile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Agent Name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Icon URL</p>
+         * @type {string || null}
+         */
+        this.IconUrl = null;
+
+        /**
+         * <p>Agent role: 0=primary / 1=secondary</p>
+         * @type {number || null}
+         */
+        this.Role = null;
+
+        /**
+         * <p>Agent description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Application name.</p>
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * <p>Developer</p>
+         * @type {string || null}
+         */
+        this.Developer = null;
+
+        /**
+         * <p>Primary AgentId, read-only, cannot be updated through API modification</p>
+         * @type {string || null}
+         */
+        this.ParentAgentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.IconUrl = 'IconUrl' in params ? params.IconUrl : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.Developer = 'Developer' in params ? params.Developer : null;
+        this.ParentAgentId = 'ParentAgentId' in params ? params.ParentAgentId : null;
+
+    }
+}
+
+/**
+ * Retrieve advanced configuration
+ * @class
+ */
+class SearchAdvancedConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Final ReRank Configuration</p>
+         * @type {FinalRerankConfig || null}
+         */
+        this.FinalRerankConfig = null;
+
+        /**
+         * <p>Search configuration of each knowledge base</p>
+         * @type {Array.<KBRetrievalConfig> || null}
+         */
+        this.KbRetrievalList = null;
+
+        /**
+         * <p>Retrieve knowledge type: 1=document and QA, 2=rejected question<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>SEARCH_KNOWLEDGE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SEARCH_KNOWLEDGE_TYPE_DOC_QA</td><td>1</td><td>Document and QA</td></tr><tr><td>SEARCH_KNOWLEDGE_TYPE_REJECTED_QUESTION</td><td>2</td><td>Rejected question</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.KnowledgeType = null;
+
+        /**
+         * <p>Number of final returned results</p>
+         * @type {number || null}
+         */
+        this.RecallCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FinalRerankConfig) {
+            let obj = new FinalRerankConfig();
+            obj.deserialize(params.FinalRerankConfig)
+            this.FinalRerankConfig = obj;
+        }
+
+        if (params.KbRetrievalList) {
+            this.KbRetrievalList = new Array();
+            for (let z in params.KbRetrievalList) {
+                let obj = new KBRetrievalConfig();
+                obj.deserialize(params.KbRetrievalList[z]);
+                this.KbRetrievalList.push(obj);
+            }
+        }
+        this.KnowledgeType = 'KnowledgeType' in params ? params.KnowledgeType : null;
+        this.RecallCount = 'RecallCount' in params ? params.RecallCount : null;
+
+    }
+}
+
+/**
+ * Effective scope of knowledge
+ * @class
+ */
+class KnowledgeScope extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Effective scope<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>Disabled</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>Development domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>Release domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>Global</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.EffectiveDomain = null;
+
+        /**
+         * <p>Applicable scope (tag condition).</p>
+         * @type {Array.<LabelRef> || null}
+         */
+        this.LabelRefList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EffectiveDomain = 'EffectiveDomain' in params ? params.EffectiveDomain : null;
+
+        if (params.LabelRefList) {
+            this.LabelRefList = new Array();
+            for (let z in params.LabelRefList) {
+                let obj = new LabelRef();
+                obj.deserialize(params.LabelRefList[z]);
+                this.LabelRefList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * RunAppTriggerNow request structure.
+ * @class
+ */
+class RunAppTriggerNowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Application trigger ID</p>
+         * @type {string || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * <p>Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * AppTriggerWebhookConfig
+ * @class
+ */
+class AppTriggerWebhookConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Trigger webhook parameter configuration</p>
+         * @type {AppTriggerWebhookParamSchemaConfig || null}
+         */
+        this.ParamSchemaConfig = null;
+
+        /**
+         * <p>key of the webhook</p>
+         * @type {string || null}
+         */
+        this.WebhookKey = null;
+
+        /**
+         * <p>webhook key</p>
+         * @type {string || null}
+         */
+        this.WebhookToken = null;
+
+        /**
+         * <p>webhook domain name or IP address</p>
+         * @type {string || null}
+         */
+        this.WebhookUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ParamSchemaConfig) {
+            let obj = new AppTriggerWebhookParamSchemaConfig();
+            obj.deserialize(params.ParamSchemaConfig)
+            this.ParamSchemaConfig = obj;
+        }
+        this.WebhookKey = 'WebhookKey' in params ? params.WebhookKey : null;
+        this.WebhookToken = 'WebhookToken' in params ? params.WebhookToken : null;
+        this.WebhookUrl = 'WebhookUrl' in params ? params.WebhookUrl : null;
+
+    }
+}
+
+/**
+ * CreateVariable response structure.
+ * @class
+ */
+class CreateVariableResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * variable_id
+         * @type {string || null}
+         */
+        this.VariableId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VariableId = 'VariableId' in params ? params.VariableId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Sharing link information (returned by details query; the non-modifiable part for users; the modifiable part of access_control is handled by ModifyApp)
+ * @class
+ */
+class AppShareURLInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Currently effective access control configuration
+         * @type {AppShareAccessControl || null}
+         */
+        this.AccessControl = null;
+
+        /**
+         * Share URL
+         * @type {string || null}
+         */
+        this.ShareUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AccessControl) {
+            let obj = new AppShareAccessControl();
+            obj.deserialize(params.AccessControl)
+            this.AccessControl = obj;
+        }
+        this.ShareUrl = 'ShareUrl' in params ? params.ShareUrl : null;
+
+    }
+}
+
+/**
+ * <p>Model attributes (supported workflow types/AI call types/want to close model parameters/whether deep thinking is supported/whether limited-time free/whether default model)</p>
+ * @class
+ */
+class ModelProperty extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Property name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Attribute value.</p>
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * CreateRelease response structure.
+ * @class
+ */
+class CreateReleaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>need_approval</p>
+         * @type {boolean || null}
+         */
+        this.NeedApproval = null;
+
+        /**
+         * <p>release_id</p>
+         * @type {string || null}
+         */
+        this.ReleaseId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NeedApproval = 'NeedApproval' in params ? params.NeedApproval : null;
+        this.ReleaseId = 'ReleaseId' in params ? params.ReleaseId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConflictQASummaryList response structure.
+ * @class
+ */
+class DescribeConflictQASummaryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Conflict question list</p>
+         * @type {Array.<ConflictQASummary> || null}
+         */
+        this.ConflictQaList = null;
+
+        /**
+         * <p>Total.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ConflictQaList) {
+            this.ConflictQaList = new Array();
+            for (let z in params.ConflictQaList) {
+                let obj = new ConflictQASummary();
+                obj.deserialize(params.ConflictQaList[z]);
+                this.ConflictQaList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConversationList request structure.
+ * @class
+ */
+class DescribeConversationListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session type. Pass CONVERSATION_TYPE_UNSPECIFIED to indicate all. Enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (not specified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor trial), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share a link)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>App ID</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Application key</p>
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * <p>Keyword</p>
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * <p>Number limit (integer), used in conjunction with Offset</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Sub-account Uin</p>
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * <p>Root account Uin</p>
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * <p>Offset (integer), used in conjunction with Limit, starts from 0</p>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_SHARE. Share code</p>
+         * @type {string || null}
+         */
+        this.ShareCode = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * <p>Client-side AgentId, used when querying sessions created based on the client-side AgentId</p>
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ShareCode = 'ShareCode' in params ? params.ShareCode : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+
+    }
+}
+
+/**
+ * Model details
+ * @class
+ */
+class ModelDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Model alias
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Limit on number of historical conversations
+         * @type {number || null}
+         */
+        this.HistoryLimit = null;
+
+        /**
+         * Unique model ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * Model parameters
+         * @type {ModelParams || null}
+         */
+        this.ModelParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.HistoryLimit = 'HistoryLimit' in params ? params.HistoryLimit : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+
+        if (params.ModelParams) {
+            let obj = new ModelParams();
+            obj.deserialize(params.ModelParams)
+            this.ModelParams = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyVariable request structure.
+ * @class
+ */
+class ModifyVariableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * app_id
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Variable information
+         * @type {Variable || null}
+         */
+        this.Variable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.Variable) {
+            let obj = new Variable();
+            obj.deserialize(params.Variable)
+            this.Variable = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeConcurrencyLimitDetailList request structure.
+ * @class
+ */
+class DescribeConcurrencyLimitDetailListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Query time range (Unix seconds)</p>
+         * @type {TimeRange || null}
+         */
+        this.TimeRange = null;
+
+        /**
+         * <p>View scope: business view / space view / application view</p>
+         * @type {ViewScope || null}
+         */
+        this.ViewScope = null;
+
+        /**
+         * <p>Extended filtering. Filter combination rule: multiple items use AND, and value_list within the same item uses OR. Supported Names: concurrency_type (qpm_tpm/dedicated, default qpm_tpm), model_name (required), space_id, app_id/resource_id/source_id (application ID, multiple selection), metric_source_type (METRIC_SOURCE_TYPE_* Enumeration Name or integer)</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Page number, starting from 0</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Number of items per page. Maximum value: 100.</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TimeRange) {
+            let obj = new TimeRange();
+            obj.deserialize(params.TimeRange)
+            this.TimeRange = obj;
+        }
+
+        if (params.ViewScope) {
+            let obj = new ViewScope();
+            obj.deserialize(params.ViewScope)
+            this.ViewScope = obj;
+        }
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * DescribeNodeRunDetail response structure.
+ * @class
+ */
+class DescribeNodeRunDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Node operation instance details</p>
+         * @type {NodeRunDetail || null}
+         */
+        this.NodeRunDetail = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NodeRunDetail) {
+            let obj = new NodeRunDetail();
+            obj.deserialize(params.NodeRunDetail)
+            this.NodeRunDetail = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MCP plug-in configuration message
+ * @class
+ */
+class MCPPluginConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>MCP plug-in public access address</p>
+         * @type {string || null}
+         */
+        this.ExternalMCPServerUrl = null;
+
+        /**
+         * <p>MCP server address</p>
+         * @type {string || null}
+         */
+        this.MCPServerUrl = null;
+
+        /**
+         * <p>MCP transmission type: SSE/Streamable<br>Enumeration values:<br>| uint | Description |<br>| --- | --- |<br>| 0 | SSE + HTTP mode |<br>| 1 | Streamable HTTP mode |</p>
+         * @type {number || null}
+         */
+        this.MCPTransport = null;
+
+        /**
+         * <p>header parameters of the MCP plug-in</p>
+         * @type {Array.<PluginParam> || null}
+         */
+        this.PluginHeader = null;
+
+        /**
+         * <p>query parameter of the MCP plug-in</p>
+         * @type {Array.<PluginParam> || null}
+         */
+        this.PluginQuery = null;
+
+        /**
+         * <p>SSE persistent connection timeout period, in seconds</p>
+         * @type {number || null}
+         */
+        this.SSEReadTimeout = null;
+
+        /**
+         * <p>Request timeout period, in seconds</p>
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+        /**
+         * <p>Authorization information.</p>
+         * @type {AuthConfig || null}
+         */
+        this.AuthConfig = null;
+
+        /**
+         * <p>Whether the interactive interface (MCP Apps) and plug-in-level tags are supported. Default false</p>
+         * @type {boolean || null}
+         */
+        this.SupportsApps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExternalMCPServerUrl = 'ExternalMCPServerUrl' in params ? params.ExternalMCPServerUrl : null;
+        this.MCPServerUrl = 'MCPServerUrl' in params ? params.MCPServerUrl : null;
+        this.MCPTransport = 'MCPTransport' in params ? params.MCPTransport : null;
+
+        if (params.PluginHeader) {
+            this.PluginHeader = new Array();
+            for (let z in params.PluginHeader) {
+                let obj = new PluginParam();
+                obj.deserialize(params.PluginHeader[z]);
+                this.PluginHeader.push(obj);
+            }
+        }
+
+        if (params.PluginQuery) {
+            this.PluginQuery = new Array();
+            for (let z in params.PluginQuery) {
+                let obj = new PluginParam();
+                obj.deserialize(params.PluginQuery[z]);
+                this.PluginQuery.push(obj);
+            }
+        }
+        this.SSEReadTimeout = 'SSEReadTimeout' in params ? params.SSEReadTimeout : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+
+        if (params.AuthConfig) {
+            let obj = new AuthConfig();
+            obj.deserialize(params.AuthConfig)
+            this.AuthConfig = obj;
+        }
+        this.SupportsApps = 'SupportsApps' in params ? params.SupportsApps : null;
+
+    }
+}
+
+/**
+ * DescribeAppStatisticsOverview request structure.
+ * @class
+ */
+class DescribeAppStatisticsOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application type. Available values: APP_TYPE_RAG (RAG), APP_TYPE_WORKFLOW (Workflow), APP_TYPE_CLAW (Claw), APP_TYPE_MULTIAGENT (MultiAgent). In the current period, only APP_TYPE_RAG takes effect. The rest are reserved values. Importing them will return InvalidParameter.</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>APP_TYPE_UNSPECIFIED</td><td>0</td><td>Unspecified (invalid value, do not import in requests)</td></tr><tr><td>APP_TYPE_RAG</td><td>1</td><td>RAG (uniquely supported in the current period)</td></tr><tr><td>APP_TYPE_WORKFLOW</td><td>2</td><td>Workflow (reserved, not currently supported)</td></tr><tr><td>APP_TYPE_CLAW</td><td>3</td><td>Claw (reserved, not currently supported)</td></tr><tr><td>APP_TYPE_MULTIAGENT</td><td>4</td><td>MultiAgent (reserved, not currently supported)</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.AppType = null;
+
+        /**
+         * <p>Query time range (Unix seconds)</p>
+         * @type {TimeRange || null}
+         */
+        this.TimeRange = null;
+
+        /**
+         * <p>View scope: application view (VIEW_TYPE_APP). For scope_id, enter the app ID (decimal string of the uint64 snowflake ID)</p>
+         * @type {ViewScope || null}
+         */
+        this.ViewScope = null;
+
+        /**
+         * <p>Space ID</p><p>Parameter format: <p>Space ID</p></p><p>Default value: default_space</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Application ID</p><p>Parameter format:</p><p>Application ID</p><p></p><p>Reference value: 2099767969573745984</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Extended filtering. Filter combination rule: multiple items use AND, and value_list under the same item uses OR. Supported Name: space_id (Space ID), channel_type (calling method/channel type; for values, see the trpc.adp.common.v2.ChannelType Enumeration Name). If channel_type is not specified, aggregation is performed by all channels.</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppType = 'AppType' in params ? params.AppType : null;
+
+        if (params.TimeRange) {
+            let obj = new TimeRange();
+            obj.deserialize(params.TimeRange)
+            this.TimeRange = obj;
+        }
+
+        if (params.ViewScope) {
+            let obj = new ViewScope();
+            obj.deserialize(params.ViewScope)
+            this.ViewScope = obj;
+        }
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateMsgRecordCategory response structure.
+ * @class
+ */
+class CreateMsgRecordCategoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Business ID of the created category.</p>
+         * @type {string || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateQAList request structure.
+ * @class
+ */
+class CreateQAListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Batch create (quantity: 1-20)</p>
+         * @type {Array.<QACreateSpec> || null}
+         */
+        this.QaList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+        if (params.QaList) {
+            this.QaList = new Array();
+            for (let z in params.QaList) {
+                let obj = new QACreateSpec();
+                obj.deserialize(params.QaList[z]);
+                this.QaList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteVariable request structure.
+ * @class
+ */
+class DeleteVariableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * app_id
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * variable_id
+         * @type {string || null}
+         */
+        this.VariableId = null;
+
+        /**
+         * module_type. Enumeration values: 1: environment parameter, 2: application parameter, 3: system parameter, -1: ALL parameters
+         * @type {number || null}
+         */
+        this.ModuleType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.VariableId = 'VariableId' in params ? params.VariableId : null;
+        this.ModuleType = 'ModuleType' in params ? params.ModuleType : null;
+
+    }
+}
+
+/**
+ * ReleaseSkill response structure.
+ * @class
+ */
+class ReleaseSkillResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AppTriggerInstance
+ * @class
+ */
+class AppTriggerInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application id</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Session id</p>
+         * @type {string || null}
+         */
+        this.ConversationId = null;
+
+        /**
+         * <p>Trigger creation time</p>
+         * @type {string || null}
+         */
+        this.CreatedAt = null;
+
+        /**
+         * <p>End time.</p>
+         * @type {string || null}
+         */
+        this.FinishedAt = null;
+
+        /**
+         * <p>Trigger running instance id</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Request ID</p>
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+        /**
+         * <p>Result code</p>
+         * @type {string || null}
+         */
+        this.ResultCode = null;
+
+        /**
+         * <p>Result Summary</p>
+         * @type {string || null}
+         */
+        this.ResultSummary = null;
+
+        /**
+         * <p>Single dialogue id</p>
+         * @type {string || null}
+         */
+        this.RunId = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>APP_TRIGGER_INSTANCE_SOURCE_UNSPECIFIED</td><td>0</td><td>Unspecified</td></tr><tr><td>APP_TRIGGER_INSTANCE_SOURCE_APP_TRIGGER</td><td>1</td><td>Originates from an application trigger</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.Source = null;
+
+        /**
+         * <p>Trigger start execution time</p>
+         * @type {string || null}
+         */
+        this.StartedAt = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>TIMER_RUN_STATUS_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>TIMER_RUN_STATUS_PENDING</td> <td>1</td> <td>Waiting to execute</td> </tr> <tr> <td>TIMER_RUN_STATUS_RUNNING</td> <td>2</td> <td>Executing</td> </tr> <tr> <td>TIMER_RUN_STATUS_RETRY_WAIT</td> <td>3</td> <td>Wait for retry</td> </tr> <tr> <td>TIMER_RUN_STATUS_SUCCESS</td> <td>4</td> <td>Successful</td> </tr> <tr> <td>TIMER_RUN_STATUS_DEAD</td> <td>5</td> <td>Failure final state (retry exhausted / non-retriable)</td> </tr> <tr> <td>TIMER_RUN_STATUS_CANCELLED</td> <td>6</td> <td>Cancelled by task pause/deletion/modification</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>TraceId, used for logging</p>
+         * @type {string || null}
+         */
+        this.TraceId = null;
+
+        /**
+         * <p>Trigger id</p>
+         * @type {string || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * <p>Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * <p>Workflow running ID</p>
+         * @type {string || null}
+         */
+        this.WorkflowRunId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ConversationId = 'ConversationId' in params ? params.ConversationId : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.FinishedAt = 'FinishedAt' in params ? params.FinishedAt : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ResultCode = 'ResultCode' in params ? params.ResultCode : null;
+        this.ResultSummary = 'ResultSummary' in params ? params.ResultSummary : null;
+        this.RunId = 'RunId' in params ? params.RunId : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.StartedAt = 'StartedAt' in params ? params.StartedAt : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.TraceId = 'TraceId' in params ? params.TraceId : null;
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.WorkflowRunId = 'WorkflowRunId' in params ? params.WorkflowRunId : null;
+
+    }
+}
+
+/**
+ * ModifyDocList request structure.
+ * @class
+ */
+class ModifyDocListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Document ID list to be modified (quantity: 1-20)</p>
+         * @type {Array.<string> || null}
+         */
+        this.DocIdList = null;
+
+        /**
+         * <p>Knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Ownership category ID</p>
+         * @type {string || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * <p>Application scope<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>Disabled</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>Development domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>Release domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>Global</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.EffectiveDomain = null;
+
+        /**
+         * <p>Expiration policy (validity time and behavior after the validity period expires)</p>
+         * @type {ExpirationPolicy || null}
+         */
+        this.ExpirationPolicy = null;
+
+        /**
+         * <p>External link</p>
+         * @type {DocExternalLink || null}
+         */
+        this.ExternalLink = null;
+
+        /**
+         * <p>Tag list.</p>
+         * @type {LabelRefIdentityList || null}
+         */
+        this.LabelRefList = null;
+
+        /**
+         * <p>Switch configuration</p>
+         * @type {DocSwitch || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DocIdList = 'DocIdList' in params ? params.DocIdList : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+        this.EffectiveDomain = 'EffectiveDomain' in params ? params.EffectiveDomain : null;
+
+        if (params.ExpirationPolicy) {
+            let obj = new ExpirationPolicy();
+            obj.deserialize(params.ExpirationPolicy)
+            this.ExpirationPolicy = obj;
+        }
+
+        if (params.ExternalLink) {
+            let obj = new DocExternalLink();
+            obj.deserialize(params.ExternalLink)
+            this.ExternalLink = obj;
+        }
+
+        if (params.LabelRefList) {
+            let obj = new LabelRefIdentityList();
+            obj.deserialize(params.LabelRefList)
+            this.LabelRefList = obj;
+        }
+
+        if (params.Switch) {
+            let obj = new DocSwitch();
+            obj.deserialize(params.Switch)
+            this.Switch = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeWorkflowRun response structure.
+ * @class
+ */
+class DescribeWorkflowRunResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Workflow running instance details.</p>
+         * @type {WorkflowRun || null}
+         */
+        this.WorkflowRun = null;
+
+        /**
+         * <p>Node list</p>
+         * @type {Array.<NodeRun> || null}
+         */
+        this.NodeRunList = null;
+
+        /**
+         * <p>NodePath of the sub-workflow</p>
+         * @type {string || null}
+         */
+        this.SubWorkflowNodePath = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WorkflowRun) {
+            let obj = new WorkflowRun();
+            obj.deserialize(params.WorkflowRun)
+            this.WorkflowRun = obj;
+        }
+
+        if (params.NodeRunList) {
+            this.NodeRunList = new Array();
+            for (let z in params.NodeRunList) {
+                let obj = new NodeRun();
+                obj.deserialize(params.NodeRunList[z]);
+                this.NodeRunList.push(obj);
+            }
+        }
+        this.SubWorkflowNodePath = 'SubWorkflowNodePath' in params ? params.SubWorkflowNodePath : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteConversation request structure.
+ * @class
+ */
+class DeleteConversationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session ID.</p>
+         * @type {string || null}
+         */
+        this.ConversationId = null;
+
+        /**
+         * <p>Session type. Enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (not specified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor trial), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share a link)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Application key</p>
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * <p>Sub-user Uin.</p>
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * <p>Root user Uin.</p>
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * <p>Required when Type is CONVERSATION_TYPE_SHARE. Share code</p>
+         * @type {string || null}
+         */
+        this.ShareCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConversationId = 'ConversationId' in params ? params.ConversationId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.ShareCode = 'ShareCode' in params ? params.ShareCode : null;
+
+    }
+}
+
+/**
+ * DescribeConflictQASummaryList request structure.
+ * @class
+ */
+class DescribeConflictQASummaryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Common filter (supports filter by status: PENDING/RESOLVED)</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Page number, starting from 0</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Number of items per page. Default value: 10. Maximum value: 100.</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * DescribeSkillSummaryList request structure.
+ * @class
+ */
+class DescribeSkillSummaryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Space ID. Required.
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * Query only the Skills favorited by the current user
+         * @type {boolean || null}
+         */
+        this.FavoriteOnly = null;
+
+        /**
+         * Filter criteria (multiple Filters are in an AND relationship, while multiple Values within the same Filter are in an OR relationship):
+-SkillIdList: List of skill IDs, string array, exact match
+- ProviderType: Skill provider type, enumerated value array, exact match
+     (SKILL_PROVIDER_TYPE_OFFICIAL=1/SKILL_PROVIDER_TYPE_THIRD_PARTY=2/SKILL_PROVIDER_TYPE_CUSTOM=3/SKILL_PROVIDER_TYPE_CUSTOM_SHARED=4)
+-CategoryKey: Category identifier, string array, exact match.
+- AnalysisStatus: Security detection status, enumeration value array, exact match.
+     (SKILL_ANALYSIS_PENDING=0/SKILL_ANALYSIS_RUNNING=1/SKILL_ANALYSIS_AVAILABLE=2/SKILL_ANALYSIS_UNAVAILABLE=3/SKILL_ANALYSIS_FAILED=4)
+- RiskLevel: Risk level, enumerated value array, exact match
+     (SKILL_RISK_NONE=0/SKILL_RISK_LOW=1/SKILL_RISK_MEDIUM=2/SKILL_RISK_HIGH=3)
+- SkillStatus: Publishing status in the Skill dimension. Enumerated value array. Exact match. OR between multiple values. Only meaningful when Perspective is EDITOR or ALL.
+(SKILL_STATUS_INITIALIZED=0/SKILL_STATUS_AUDITING=1/SKILL_STATUS_PENDING_RELEASE=2/SKILL_STATUS_RELEASED=3)
+- ShareStatus: Shared status, enumeration value array, exact match. This parameter is valid only when ProviderType includes SKILL_PROVIDER_TYPE_CUSTOM/SKILL_PROVIDER_TYPE_CUSTOM_SHARED.
+     (SHARE_STATUS_UNSHARED=0/SHARE_STATUS_SHARED=1/SHARE_STATUS_APPROVING=2)
+-Perspective: Perspective enum, string single value. The length of Values must be 1. Multi-value is deemed as illegal. This parameter is valid only when ProviderType=SKILL_PROVIDER_TYPE_CUSTOM. Default if not passed: USER
+(USER=User perspective. Only Skills with usage permissions are returned / EDITOR=Editor perspective. Only Skills with edit permission are returned / ALL=Full perspective. Skills with any permission bit are returned)
+-Creator: Filter by creator. String single value. The length of Values must be 1. Multi-value is deemed as illegal. This parameter is valid only when ProviderType=SKILL_PROVIDER_TYPE_CUSTOM.
+Currently, only the placeholder "$self" is supported, which means only Skills created by the current caller are returned.
+To scale to a specified identity subsequently, add the agreement here if needed.
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * Page number, starting from 0
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Number of items per page. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Fuzzy search by name/display name
+         * @type {string || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.FavoriteOnly = 'FavoriteOnly' in params ? params.FavoriteOnly : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+
+    }
+}
+
+/**
+ * CopyApp response structure.
+ * @class
+ */
+class CopyAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * new_app_id
+         * @type {string || null}
+         */
+        this.NewAppId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NewAppId = 'NewAppId' in params ? params.NewAppId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Agent plug-in credential configuration
+ * @class
+ */
+class AgentPluginCredentialConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Plugin authentication value source</p><p>Enumeration values:</p><ul><li>0: Unspecified</li><li>1: Use the default authentication value of the plug-in. Only APIKey/AccessKey is supported.</li><li>2: Refer to a credential</li><li>3: Refer to a variable</li></ul>
+         * @type {number || null}
+         */
+        this.AuthValueSource = null;
+
+        /**
+         * <p>Credential ID</p><p>Input parameter limit: required when AuthValueSource=2</p>
+         * @type {string || null}
+         */
+        this.CredentialId = null;
+
+        /**
+         * <p>Parameter configuration</p>
+         * @type {Array.<AgentPluginCredentialParam> || null}
+         */
+        this.ParamList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuthValueSource = 'AuthValueSource' in params ? params.AuthValueSource : null;
+        this.CredentialId = 'CredentialId' in params ? params.CredentialId : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new AgentPluginCredentialParam();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CallMCPTool response structure.
+ * @class
+ */
+class CallMCPToolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>JSON: The complete original CallToolResult, including structuredContent / isError / _meta</p>
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ComplexBillingItem
+ * @class
+ */
+class ComplexBillingItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Composite billing dimensions</p>
+         * @type {Array.<BillingAttribute> || null}
+         */
+        this.BillingAttributeList = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>UNKNOW</td><td>0</td><td></td></tr><tr><td>TOKEN</td><td>1</td><td>TOKEN-based</td></tr><tr><td>PAGE_COUNT</td><td>2</td><td>By PAGE NUMBER</td></tr><tr><td>TIMES</td><td>3</td><td>TIMES-based</td></tr><tr><td>TIMES_THOUSAND</td><td>4</td><td>By THOUSAND TIMES</td></tr><tr><td>SECOND</td><td>5</td><td>Duration-based</td></tr><tr><td>CHARACTER</td><td>6</td><td>By NUMBER of characters</td></tr><tr><td>CHARACTER_THOUSAND</td><td>7</td><td>By THOUSAND characters</td></tr><tr><td>SHEET</td><td>8</td><td>By SHEET</td></tr><tr><td>NUMBER</td><td>9</td><td>By COUNT</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.BillingUnit = null;
+
+        /**
+         * <p>Cash price</p><p>Unit: CNY</p>
+         * @type {number || null}
+         */
+        this.CashPrice = null;
+
+        /**
+         * <p>pu price</p><p>Unit: pu</p>
+         * @type {number || null}
+         */
+        this.PuPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BillingAttributeList) {
+            this.BillingAttributeList = new Array();
+            for (let z in params.BillingAttributeList) {
+                let obj = new BillingAttribute();
+                obj.deserialize(params.BillingAttributeList[z]);
+                this.BillingAttributeList.push(obj);
+            }
+        }
+        this.BillingUnit = 'BillingUnit' in params ? params.BillingUnit : null;
+        this.CashPrice = 'CashPrice' in params ? params.CashPrice : null;
+        this.PuPrice = 'PuPrice' in params ? params.PuPrice : null;
+
+    }
+}
+
+/**
+ * BackgroundImage configuration
+ * @class
+ */
+class BackgroundImage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Brightness level
+         * @type {number || null}
+         */
+        this.Brightness = null;
+
+        /**
+         * Landscape image (pc)
+         * @type {string || null}
+         */
+        this.LandscapeImageUrl = null;
+
+        /**
+         * Original image
+         * @type {string || null}
+         */
+        this.OriginalImageUrl = null;
+
+        /**
+         * Long image (mobile phone)
+         * @type {string || null}
+         */
+        this.PortraitImageUrl = null;
+
+        /**
+         * Theme color
+         * @type {string || null}
+         */
+        this.ThemeColor = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Brightness = 'Brightness' in params ? params.Brightness : null;
+        this.LandscapeImageUrl = 'LandscapeImageUrl' in params ? params.LandscapeImageUrl : null;
+        this.OriginalImageUrl = 'OriginalImageUrl' in params ? params.OriginalImageUrl : null;
+        this.PortraitImageUrl = 'PortraitImageUrl' in params ? params.PortraitImageUrl : null;
+        this.ThemeColor = 'ThemeColor' in params ? params.ThemeColor : null;
+
+    }
+}
+
+/**
+ * TimerScheduleConfig
+ * @class
+ */
+class TimerScheduleConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cron configuration.
+         * @type {CronSchedule || null}
+         */
+        this.Cron = null;
+
+        /**
+         * Daily trigger
+         * @type {DailySchedule || null}
+         */
+        this.Daily = null;
+
+        /**
+         * Fixed interval
+         * @type {IntervalSchedule || null}
+         */
+        this.Interval = null;
+
+        /**
+         * Manual only
+         * @type {ManualOnlySchedule || null}
+         */
+        this.ManualOnly = null;
+
+        /**
+         * Single time
+         * @type {OnceSchedule || null}
+         */
+        this.Once = null;
+
+        /**
+         * Enumeration values:
+| uint | Description |
+| --- | --- |
+| 0 |  |
+Manual only
+| 2 | Daily |
+| 3 | Weekly |
+| 4 | By interval |
+| 5 | One-time |
+| 6 | Cron |
+         * @type {number || null}
+         */
+        this.ScheduleType = null;
+
+        /**
+         * Time zone
+         * @type {string || null}
+         */
+        this.Timezone = null;
+
+        /**
+         * Triggers at a fixed time weekly.
+         * @type {WeeklySchedule || null}
+         */
+        this.Weekly = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Cron) {
+            let obj = new CronSchedule();
+            obj.deserialize(params.Cron)
+            this.Cron = obj;
+        }
+
+        if (params.Daily) {
+            let obj = new DailySchedule();
+            obj.deserialize(params.Daily)
+            this.Daily = obj;
+        }
+
+        if (params.Interval) {
+            let obj = new IntervalSchedule();
+            obj.deserialize(params.Interval)
+            this.Interval = obj;
+        }
+
+        if (params.ManualOnly) {
+            let obj = new ManualOnlySchedule();
+            obj.deserialize(params.ManualOnly)
+            this.ManualOnly = obj;
+        }
+
+        if (params.Once) {
+            let obj = new OnceSchedule();
+            obj.deserialize(params.Once)
+            this.Once = obj;
+        }
+        this.ScheduleType = 'ScheduleType' in params ? params.ScheduleType : null;
+        this.Timezone = 'Timezone' in params ? params.Timezone : null;
+
+        if (params.Weekly) {
+            let obj = new WeeklySchedule();
+            obj.deserialize(params.Weekly)
+            this.Weekly = obj;
+        }
+
+    }
+}
+
+/**
+ * <p>Model complete information</p>
+ * @class
+ */
+class Model extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Model badge list</p>
+         * @type {Array.<ModelBadge> || null}
+         */
+        this.BadgeList = null;
+
+        /**
+         * <p>Model author information</p>
+         * @type {ModelDeveloperBasic || null}
+         */
+        this.DeveloperInfo = null;
+
+        /**
+         * <p>Model restrictive information</p>
+         * @type {ModelLimit || null}
+         */
+        this.LimitInfo = null;
+
+        /**
+         * <p>Model basic information</p>
+         * @type {ModelBasic || null}
+         */
+        this.ModelBasic = null;
+
+        /**
+         * <p>Model hyperparameter configuration</p>
+         * @type {Array.<ModelParameter> || null}
+         */
+        this.ParameterList = null;
+
+        /**
+         * <p>Model attribute configuration</p>
+         * @type {Array.<ModelProperty> || null}
+         */
+        this.PropertyList = null;
+
+        /**
+         * <p>Model provider info</p>
+         * @type {ModelProviderBasic || null}
+         */
+        this.ProviderInfo = null;
+
+        /**
+         * <p>Model status information</p>
+         * @type {ModelStatus || null}
+         */
+        this.StatusInfo = null;
+
+        /**
+         * <p>Model tag list</p>
+         * @type {Array.<string> || null}
+         */
+        this.TagList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BadgeList) {
+            this.BadgeList = new Array();
+            for (let z in params.BadgeList) {
+                let obj = new ModelBadge();
+                obj.deserialize(params.BadgeList[z]);
+                this.BadgeList.push(obj);
+            }
+        }
+
+        if (params.DeveloperInfo) {
+            let obj = new ModelDeveloperBasic();
+            obj.deserialize(params.DeveloperInfo)
+            this.DeveloperInfo = obj;
+        }
+
+        if (params.LimitInfo) {
+            let obj = new ModelLimit();
+            obj.deserialize(params.LimitInfo)
+            this.LimitInfo = obj;
+        }
+
+        if (params.ModelBasic) {
+            let obj = new ModelBasic();
+            obj.deserialize(params.ModelBasic)
+            this.ModelBasic = obj;
+        }
+
+        if (params.ParameterList) {
+            this.ParameterList = new Array();
+            for (let z in params.ParameterList) {
+                let obj = new ModelParameter();
+                obj.deserialize(params.ParameterList[z]);
+                this.ParameterList.push(obj);
+            }
+        }
+
+        if (params.PropertyList) {
+            this.PropertyList = new Array();
+            for (let z in params.PropertyList) {
+                let obj = new ModelProperty();
+                obj.deserialize(params.PropertyList[z]);
+                this.PropertyList.push(obj);
+            }
+        }
+
+        if (params.ProviderInfo) {
+            let obj = new ModelProviderBasic();
+            obj.deserialize(params.ProviderInfo)
+            this.ProviderInfo = obj;
+        }
+
+        if (params.StatusInfo) {
+            let obj = new ModelStatus();
+            obj.deserialize(params.StatusInfo)
+            this.StatusInfo = obj;
+        }
+        this.TagList = 'TagList' in params ? params.TagList : null;
+
+    }
+}
+
+/**
+ * Digital human configuration
+ * @class
+ */
+class DigitalHumanConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Digital human avatar asset id
+         * @type {string || null}
+         */
+        this.AssetKey = null;
+
+        /**
+         * Digital human image
+         * @type {string || null}
+         */
+        this.Avatar = null;
+
+        /**
+         * Digital human avatar name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Preview address of the digital human
+         * @type {string || null}
+         */
+        this.PreviewUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetKey = 'AssetKey' in params ? params.AssetKey : null;
+        this.Avatar = 'Avatar' in params ? params.Avatar : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.PreviewUrl = 'PreviewUrl' in params ? params.PreviewUrl : null;
+
+    }
+}
+
+/**
+ * Search for resource status information
+ * @class
+ */
+class SearchResourceStatusInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Search resource status: AVAILABLE(1)=resource available, EXHAUSTED(2)=resource used up. Enumeration values: 1: resource available, 2: resource used up
+         * @type {number || null}
+         */
+        this.ResourceStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceStatus = 'ResourceStatus' in params ? params.ResourceStatus : null;
+
+    }
+}
+
+/**
+ * CreateQAGenerationTask request structure.
+ * @class
+ */
+class CreateQAGenerationTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>List of document IDs for QA to be generated (quantity: 1-20)</p>
+         * @type {Array.<string> || null}
+         */
+        this.DocIdList = null;
+
+        /**
+         * <p>ID of the knowledge base it belongs to</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DocIdList = 'DocIdList' in params ? params.DocIdList : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+    }
+}
+
+/**
+ * DescribeSpaceList request structure.
+ * @class
+ */
+class DescribeSpaceListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Support fuzzy search by space name.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Query = 'Query' in params ? params.Query : null;
+
+    }
+}
+
+/**
+ * AppTriggerRunLog
+ * @class
+ */
+class AppTriggerRunLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session id</p>
+         * @type {string || null}
+         */
+        this.ConversationId = null;
+
+        /**
+         * <p>Execution time</p>
+         * @type {string || null}
+         */
+        this.DurationMs = null;
+
+        /**
+         * <p>End time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss</p>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_FIRE_TYPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_FIRE_TYPE_SCHEDULED</td> <td>1</td> <td>Scheduled trigger</td> </tr> <tr> <td>APP_TRIGGER_FIRE_TYPE_WEBHOOK</td> <td>2</td> <td>Webhook trigger</td> </tr> <tr> <td>APP_TRIGGER_FIRE_TYPE_MANUAL_RUN</td> <td>3</td> <td>Manual immediate execution</td> </tr> <tr> <td>APP_TRIGGER_FIRE_TYPE_TEST_RUN</td> <td>4</td> <td>Test execution</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.FireType = null;
+
+        /**
+         * <p>Trigger instance id</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>TIMER_RUN_PUSH_STATUS_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>TIMER_RUN_PUSH_STATUS_NONE</td> <td>1</td> <td>Push notification not configured</td> </tr> <tr> <td>TIMER_RUN_PUSH_STATUS_WAITING</td> <td>2</td> <td>Pending</td> </tr> <tr> <td>TIMER_RUN_PUSH_STATUS_SUCCESS</td> <td>3</td> <td>Push successful</td> </tr> <tr> <td>TIMER_RUN_PUSH_STATUS_FAILED</td> <td>4</td> <td>Push failure</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.PushStatus = null;
+
+        /**
+         * <p>Result code</p>
+         * @type {string || null}
+         */
+        this.ResultCode = null;
+
+        /**
+         * <p>Result Overview</p>
+         * @type {string || null}
+         */
+        this.ResultSummary = null;
+
+        /**
+         * <p>Single dialogue id</p>
+         * @type {string || null}
+         */
+        this.RunId = null;
+
+        /**
+         * <p>Trigger time</p><p>Parameter format: YYYY:MM:DD hh:mm:ss</p>
+         * @type {string || null}
+         */
+        this.ScheduledFireTime = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Execution start time</p><p>Parameter format: YYYY:MM:DD hh:mm:ss</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>TIMER_RUN_STATUS_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>TIMER_RUN_STATUS_PENDING</td> <td>1</td> <td>Waiting to execute</td> </tr> <tr> <td>TIMER_RUN_STATUS_RUNNING</td> <td>2</td> <td>Executing</td> </tr> <tr> <td>TIMER_RUN_STATUS_RETRY_WAIT</td> <td>3</td> <td>Wait for retry</td> </tr> <tr> <td>TIMER_RUN_STATUS_SUCCESS</td> <td>4</td> <td>Successful</td> </tr> <tr> <td>TIMER_RUN_STATUS_DEAD</td> <td>5</td> <td>Failed final state (retry exhausted / non-retriable)</td> </tr> <tr> <td>TIMER_RUN_STATUS_CANCELLED</td> <td>6</td> <td>Cancelled due to task pause/deletion/modification</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Trigger id</p>
+         * @type {string || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * <p>Whether it has been read</p>
+         * @type {boolean || null}
+         */
+        this.Unread = null;
+
+        /**
+         * <p>Visitor Id</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * <p>Workflow run id</p>
+         * @type {string || null}
+         */
+        this.WorkflowRunId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConversationId = 'ConversationId' in params ? params.ConversationId : null;
+        this.DurationMs = 'DurationMs' in params ? params.DurationMs : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.FireType = 'FireType' in params ? params.FireType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.PushStatus = 'PushStatus' in params ? params.PushStatus : null;
+        this.ResultCode = 'ResultCode' in params ? params.ResultCode : null;
+        this.ResultSummary = 'ResultSummary' in params ? params.ResultSummary : null;
+        this.RunId = 'RunId' in params ? params.RunId : null;
+        this.ScheduledFireTime = 'ScheduledFireTime' in params ? params.ScheduledFireTime : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+        this.Unread = 'Unread' in params ? params.Unread : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.WorkflowRunId = 'WorkflowRunId' in params ? params.WorkflowRunId : null;
+
+    }
+}
+
+/**
+ * Content message information
+ * @class
+ */
+class ConversationContent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Text content</p>
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * <p>Content type. text: text, image: image, file: file, custom_variables: custom input parameter information, widget_action: widget action information</p>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Custom parameter data</p>
+         * @type {Array.<string> || null}
+         */
+        this.CustomParamList = null;
+
+        /**
+         * <p>Custom parameter data</p>
+         * @type {Array.<string> || null}
+         */
+        this.CustomParams = null;
+
+        /**
+         * <p>Custom variable data</p>
+         * @type {string || null}
+         */
+        this.CustomVariablesData = null;
+
+        /**
+         * <p>Business form</p>
+         * @type {string || null}
+         */
+        this.EnterpriseCharts = null;
+
+        /**
+         * <p>Tab List</p>
+         * @type {Array.<string> || null}
+         */
+        this.OptionCardList = null;
+
+        /**
+         * <p>Tab list.</p>
+         * @type {Array.<string> || null}
+         */
+        this.OptionCards = null;
+
+        /**
+         * <p>Tab mode. Enumeration values: 0-OPTION_MODE_SINGLE (single selection), 1-OPTION_MODE_MULTI (multiple selection)</p>
+         * @type {number || null}
+         */
+        this.OptionMode = null;
+
+        /**
+         * <p>Reference marker information list</p>
+         * @type {Array.<ConversationQuoteInfo> || null}
+         */
+        this.QuoteInfoList = null;
+
+        /**
+         * <p>List of reference superscript information</p>
+         * @type {Array.<ConversationQuoteInfo> || null}
+         */
+        this.QuoteInfos = null;
+
+        /**
+         * <p>Reference source list</p>
+         * @type {Array.<ConversationReference> || null}
+         */
+        this.ReferenceList = null;
+
+        /**
+         * <p>Reference list</p>
+         * @type {Array.<ConversationReference> || null}
+         */
+        this.References = null;
+
+        /**
+         * <p>Associated record ID</p>
+         * @type {string || null}
+         */
+        this.RelatedRecordId = null;
+
+        /**
+         * <p>Intelligent Agent Task List</p>
+         * @type {Array.<ConversationAgentTask> || null}
+         */
+        this.TaskList = null;
+
+        /**
+         * <p>Intelligent Agent Task List</p>
+         * @type {Array.<ConversationAgentTask> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * <p>Workflow input parameter</p>
+         * @type {string || null}
+         */
+        this.WorkflowInput = null;
+
+        /**
+         * <p>MCP-APP call information</p>
+         * @type {ConversationMcpApp || null}
+         */
+        this.McpApp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.CustomParamList = 'CustomParamList' in params ? params.CustomParamList : null;
+        this.CustomParams = 'CustomParams' in params ? params.CustomParams : null;
+        this.CustomVariablesData = 'CustomVariablesData' in params ? params.CustomVariablesData : null;
+        this.EnterpriseCharts = 'EnterpriseCharts' in params ? params.EnterpriseCharts : null;
+        this.OptionCardList = 'OptionCardList' in params ? params.OptionCardList : null;
+        this.OptionCards = 'OptionCards' in params ? params.OptionCards : null;
+        this.OptionMode = 'OptionMode' in params ? params.OptionMode : null;
+
+        if (params.QuoteInfoList) {
+            this.QuoteInfoList = new Array();
+            for (let z in params.QuoteInfoList) {
+                let obj = new ConversationQuoteInfo();
+                obj.deserialize(params.QuoteInfoList[z]);
+                this.QuoteInfoList.push(obj);
+            }
+        }
+
+        if (params.QuoteInfos) {
+            this.QuoteInfos = new Array();
+            for (let z in params.QuoteInfos) {
+                let obj = new ConversationQuoteInfo();
+                obj.deserialize(params.QuoteInfos[z]);
+                this.QuoteInfos.push(obj);
+            }
+        }
+
+        if (params.ReferenceList) {
+            this.ReferenceList = new Array();
+            for (let z in params.ReferenceList) {
+                let obj = new ConversationReference();
+                obj.deserialize(params.ReferenceList[z]);
+                this.ReferenceList.push(obj);
+            }
+        }
+
+        if (params.References) {
+            this.References = new Array();
+            for (let z in params.References) {
+                let obj = new ConversationReference();
+                obj.deserialize(params.References[z]);
+                this.References.push(obj);
+            }
+        }
+        this.RelatedRecordId = 'RelatedRecordId' in params ? params.RelatedRecordId : null;
+
+        if (params.TaskList) {
+            this.TaskList = new Array();
+            for (let z in params.TaskList) {
+                let obj = new ConversationAgentTask();
+                obj.deserialize(params.TaskList[z]);
+                this.TaskList.push(obj);
+            }
+        }
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new ConversationAgentTask();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+        this.WorkflowInput = 'WorkflowInput' in params ? params.WorkflowInput : null;
+
+        if (params.McpApp) {
+            let obj = new ConversationMcpApp();
+            obj.deserialize(params.McpApp)
+            this.McpApp = obj;
+        }
+
+    }
+}
+
+/**
+ * CAM authorization information
+ * @class
+ */
+class CamAuthConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Role name.</p>
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * <p>Key location HEADER/QUERY</p><p>Enumeration values:<br>| uint | Description |<br>| --- | --- |<br>| 0 | Header authentication |<br>| 1 | Request information authentication |</p>
+         * @type {number || null}
+         */
+        this.KeyLocation = null;
+
+        /**
+         * <p>SecretId field name</p>
+         * @type {string || null}
+         */
+        this.SecretIdName = null;
+
+        /**
+         * <p>SecretKey field name</p>
+         * @type {string || null}
+         */
+        this.SecretKeyName = null;
+
+        /**
+         * <p>CAM Access Key Field Configuration</p>
+         * @type {Array.<AccessKeyParamConfig> || null}
+         */
+        this.ParamList = null;
+
+        /**
+         * <p>Whether CAM role authorization is supported.</p>
+         * @type {boolean || null}
+         */
+        this.SupportRoleAuth = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.KeyLocation = 'KeyLocation' in params ? params.KeyLocation : null;
+        this.SecretIdName = 'SecretIdName' in params ? params.SecretIdName : null;
+        this.SecretKeyName = 'SecretKeyName' in params ? params.SecretKeyName : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new AccessKeyParamConfig();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+        this.SupportRoleAuth = 'SupportRoleAuth' in params ? params.SupportRoleAuth : null;
+
+    }
+}
+
+/**
+ * DescribeSkillReferenceList response structure.
+ * @class
+ */
+class DescribeSkillReferenceListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Reference summary grouped by SkillRefType: when total_count of a type is 0, it is not included in a group (no empty placeholder is returned). This period also writes to three paths: OPENCLAW / AGENT / CORP_ASSISTANT</p>
+         * @type {Array.<SkillReferenceGroup> || null}
+         */
+        this.ReferenceList = null;
+
+        /**
+         * <p>Whether the current user is allowed to forcibly delete a referenced Skill</p>
+         * @type {boolean || null}
+         */
+        this.AllowForceModify = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReferenceList) {
+            this.ReferenceList = new Array();
+            for (let z in params.ReferenceList) {
+                let obj = new SkillReferenceGroup();
+                obj.deserialize(params.ReferenceList[z]);
+                this.ReferenceList.push(obj);
+            }
+        }
+        this.AllowForceModify = 'AllowForceModify' in params ? params.AllowForceModify : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateKB request structure.
+ * @class
+ */
+class CreateKBRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Knowledge base type (0 not allowed. Parameter Value: 1=default knowledge base, 2=shared knowledge base)<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KB_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KB_TYPE_DEFAULT</td><td>1</td><td>Default knowledge base</td></tr><tr><td>KB_TYPE_SHARED</td><td>2</td><td>Shared knowledge base</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.KbType = null;
+
+        /**
+         * <p>Workspace ID</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Writable attribute</p>
+         * @type {KBSpec || null}
+         */
+        this.Spec = null;
+
+        /**
+         * <p>Share sub-type: 1=ordinary, 2=wechat official account<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>SHARED_KB_SUB_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SHARED_KB_SUB_TYPE_NORMAL</td><td>1</td><td>Ordinary</td></tr><tr><td>SHARED_KB_SUB_TYPE_PUBLIC_ACCOUNT</td><td>2</td><td>WeChat Official Account</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.SharedSubType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbType = 'KbType' in params ? params.KbType : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+        if (params.Spec) {
+            let obj = new KBSpec();
+            obj.deserialize(params.Spec)
+            this.Spec = obj;
+        }
+        this.SharedSubType = 'SharedSubType' in params ? params.SharedSubType : null;
+
+    }
+}
+
+/**
+ * CreateWorkflowRun response structure.
+ * @class
+ */
+class CreateWorkflowRunResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the workflow running instance</p>
+         * @type {string || null}
+         */
+        this.WorkflowRunId = null;
+
+        /**
+         * <p>Creation time (timestamp in milliseconds)</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WorkflowRunId = 'WorkflowRunId' in params ? params.WorkflowRunId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteMsgRecordCategory response structure.
+ * @class
+ */
+class DeleteMsgRecordCategoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Generative model configuration
+ * @class
+ */
+class GenerateModel extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Generative model
+         * @type {ModelDetailInfo || null}
+         */
+        this.Model = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Model) {
+            let obj = new ModelDetailInfo();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
+
+    }
+}
+
+/**
+ * SkillShare Skill business share information.
+ * @class
+ */
+class SkillShare extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Approval ID</p>
+         * @type {string || null}
+         */
+        this.ApprovalId = null;
+
+        /**
+         * <p>New skill_id associated after sharing</p>
+         * @type {string || null}
+         */
+        this.ShareSkillId = null;
+
+        /**
+         * <p>Shared version, for example 1.0.0</p>
+         * @type {string || null}
+         */
+        this.ShareVersion = null;
+
+        /**
+         * <p>Shared version ID</p>
+         * @type {string || null}
+         */
+        this.ShareVersionId = null;
+
+        /**
+         * <p>Original skill_id</p>
+         * @type {string || null}
+         */
+        this.SkillId = null;
+
+        /**
+         * <p>Shared state</p><p>Enumeration values:<br>| uint | Description |<br>| --- | --- |<br>| 0 | Not shared |<br>| 1 | Shared |<br>| 2 | Pending Approval |</p>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Business share scope</p>
+         * @type {SkillCorpShareConfig || null}
+         */
+        this.CorpShareConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApprovalId = 'ApprovalId' in params ? params.ApprovalId : null;
+        this.ShareSkillId = 'ShareSkillId' in params ? params.ShareSkillId : null;
+        this.ShareVersion = 'ShareVersion' in params ? params.ShareVersion : null;
+        this.ShareVersionId = 'ShareVersionId' in params ? params.ShareVersionId : null;
+        this.SkillId = 'SkillId' in params ? params.SkillId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.CorpShareConfig) {
+            let obj = new SkillCorpShareConfig();
+            obj.deserialize(params.CorpShareConfig)
+            this.CorpShareConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * AppShareWhitelistItem
+ * @class
+ */
+class AppShareWhitelistItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_SHARE_WHITELIST_TYPE_UNSPECIFIED</td> <td>0</td> <td></td> </tr> <tr> <td>APP_SHARE_WHITELIST_TYPE_UIN</td> <td>1</td> <td>UIN account</td> </tr> <tr> <td>APP_SHARE_WHITELIST_TYPE_PHONE</td> <td>2</td> <td>Mobile number</td> </tr> <tr> <td>APP_SHARE_WHITELIST_TYPE_EMAIL</td> <td>3</td> <td>Email address</td> </tr> <tr> <td>APP_SHARE_WHITELIST_TYPE_IP</td> <td>4</td> <td>IP address</td> </tr> <tr> <td>APP_SHARE_WHITELIST_TYPE_RTX</td> <td>5</td> <td>RTX account</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Allowlist array information</p><p>Parameter format: allowlist value</p>
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * ModifyKB request structure.
+ * @class
+ */
+class ModifyKBRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Writable attribute (use together with update_mask)</p>
+         * @type {KBSpec || null}
+         */
+        this.Spec = null;
+
+        /**
+         * <p>Field mask: specify the field to be modified (snake-shaped field name). Unlisted fields are ignored</p>
+         * @type {FieldMask || null}
+         */
+        this.UpdateMask = null;
+
+        /**
+         * <p>Scaling operation (for hosting special operations that cannot be categorized into regular field modification, such as triggering over-limit recovery. It is effective only when 'extend_fields' is also input in update_mask. For the value, refer to KBExtendedAction: 1=trigger over-limit recovery)</p>
+         * @type {KBModifyExtendFields || null}
+         */
+        this.ExtendFields = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+        if (params.Spec) {
+            let obj = new KBSpec();
+            obj.deserialize(params.Spec)
+            this.Spec = obj;
+        }
+
+        if (params.UpdateMask) {
+            let obj = new FieldMask();
+            obj.deserialize(params.UpdateMask)
+            this.UpdateMask = obj;
+        }
+
+        if (params.ExtendFields) {
+            let obj = new KBModifyExtendFields();
+            obj.deserialize(params.ExtendFields)
+            this.ExtendFields = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateWebSocketToken request structure.
+ * @class
+ */
+class CreateWebSocketTokenRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session type enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (unspecified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor trial), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share a link)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Application ID</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Application key</p>
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * <p>Sub-user Uin</p>
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * <p>Primary user Uin.</p>
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_SHARE. Share code</p>
+         * @type {string || null}
+         */
+        this.ShareCode = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.ShareCode = 'ShareCode' in params ? params.ShareCode : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * CreateWorkflowRun request structure.
+ * @class
+ */
+class CreateWorkflowRunRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID. For how to obtain it, see <a href="https://www.tencentcloud.com/document/product/1759/109469?from_cn_redirect=1#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">AppId</a></p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Execution environment. 1: Development domain, 2: Production domain</p>
+         * @type {number || null}
+         */
+        this.Domain = null;
+
+        /**
+         * <p>User input.</p>
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * <p>API parameter configuration</p>
+         * @type {Array.<CustomVariable> || null}
+         */
+        this.CustomVariableList = null;
+
+        /**
+         * <p>uid</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Query = 'Query' in params ? params.Query : null;
+
+        if (params.CustomVariableList) {
+            this.CustomVariableList = new Array();
+            for (let z in params.CustomVariableList) {
+                let obj = new CustomVariable();
+                obj.deserialize(params.CustomVariableList[z]);
+                this.CustomVariableList.push(obj);
+            }
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * NodeRunExecution
+ * @class
+ */
+class NodeRunExecution extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Batch operation summary</p>
+         * @type {BatchRunSummary || null}
+         */
+        this.BatchRunSummary = null;
+
+        /**
+         * <p>End time (timestamp in milliseconds).</p>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <p>Start time (timestamp in milliseconds)</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BatchRunSummary) {
+            let obj = new BatchRunSummary();
+            obj.deserialize(params.BatchRunSummary)
+            this.BatchRunSummary = obj;
+        }
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+
+    }
+}
+
+/**
+ * DescribeQA request structure.
+ * @class
+ */
+class DescribeQARequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>QA ID</p>
+         * @type {string || null}
+         */
+        this.QaId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.QaId = 'QaId' in params ? params.QaId : null;
+
+    }
+}
+
+/**
+ * DeleteSkill response structure.
+ * @class
+ */
+class DeleteSkillResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Skill exception notification.
+ * @class
+ */
+class SkillNotice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Notification level
+
+Enumeration values:
+| uint | Description |
+| --- | --- |
+| 0 | Placeholder |
+| 1 | Success, string literal: "success" |
+| 2 | Warning, string literal: "warning" |
+| 3 | Error, string literal: "error" |
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * Copywriting (post-i18n string)
+         * @type {string || null}
+         */
+        this.NoticeContent = null;
+
+        /**
+         * Version ID of the Skill that triggers this notice
+         * @type {string || null}
+         */
+        this.TriggerVersionId = null;
+
+        /**
+         * Notification type 
+
+Enumeration values:
+| uint | Description |
+| --- | --- |
+| 0 | Placeholder |
+| 1 | Release failure |
+| 2 | Shared approval rejected |
+         * @type {number || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Level = 'Level' in params ? params.Level : null;
+        this.NoticeContent = 'NoticeContent' in params ? params.NoticeContent : null;
+        this.TriggerVersionId = 'TriggerVersionId' in params ? params.TriggerVersionId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * DescribeAgentReleasePreviewList request structure.
+ * @class
+ */
+class DescribeAgentReleasePreviewListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Page number.</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Number of items per page: between 1 and 200</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <p>Query keyword, used for fuzzy matching of heading</p>
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * <p>Filter criteria</p><p>Input parameter limits: supports StartTime, EndTime, ActionList, ReleaseStatusList</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Document switch configuration
+ * @class
+ */
+class DocSwitch extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether it is downloadable</p>
+         * @type {boolean || null}
+         */
+        this.DownloadEnabled = null;
+
+        /**
+         * <p>Whether to show in the reference</p>
+         * @type {boolean || null}
+         */
+        this.ReferEnabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadEnabled = 'DownloadEnabled' in params ? params.DownloadEnabled : null;
+        this.ReferEnabled = 'ReferEnabled' in params ? params.ReferEnabled : null;
+
+    }
+}
+
+/**
+ * PauseAppTrigger request structure.
+ * @class
+ */
+class PauseAppTriggerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Application trigger ID</p>
+         * @type {string || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * <p>Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * Metadata value
+ * @class
+ */
+class MetaValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Metadata value name (for display only).</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Whether to refer to all values of this type (when true, ref_value_id should be 0)</p>
+         * @type {boolean || null}
+         */
+        this.RefAll = null;
+
+        /**
+         * <p>Business ID referenced by metadata (property ID, category ID, etc.); this field should be 0 when ref_all=true</p>
+         * @type {string || null}
+         */
+        this.RefValueId = null;
+
+        /**
+         * <p>Metadata usage scenario: 1=retrieve only, 2=both retrieve and generate<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>META_SCENE_UNKNOWN</td><td>0</td><td>Unknown</td></tr><tr><td>META_SCENE_SEARCH_ONLY</td><td>1</td><td>Retrieve only</td></tr><tr><td>META_SCENE_ALL</td><td>2</td><td>Both retrieve and generate</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.Scene = null;
+
+        /**
+         * <p>Metadata value type: 1=property tag, 2=document classification, 3=QA classification<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>META_VALUE_TYPE_UNKNOWN</td><td>0</td><td>Unknown</td></tr><tr><td>META_VALUE_TYPE_TAG</td><td>1</td><td>Property tag</td></tr><tr><td>META_VALUE_TYPE_DOC_CATEGORY</td><td>2</td><td>Document classification</td></tr><tr><td>META_VALUE_TYPE_QA_CATEGORY</td><td>3</td><td>QA classification</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.ValueType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RefAll = 'RefAll' in params ? params.RefAll : null;
+        this.RefValueId = 'RefValueId' in params ? params.RefValueId : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+
+    }
+}
+
+/**
+ * Modified items of tag standard words (incremental update)
+ * @class
+ */
+class LabelTermModifyItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Operation type (not allowed to be 0. Value: 1=create, 2=modify, 3=delete)<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>MODIFY_ACTION_UNKNOWN</td><td>0</td><td></td></tr><tr><td>MODIFY_ACTION_CREATE</td><td>1</td><td>Create</td></tr><tr><td>MODIFY_ACTION_UPDATE</td><td>2</td><td>Modify</td></tr><tr><td>MODIFY_ACTION_DELETE</td><td>3</td><td>Delete</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.ModifyAction = null;
+
+        /**
+         * <p>Synonym list (pass the complete synonym collection during CREATE and UPDATE, overriding update)</p>
+         * @type {Array.<string> || null}
+         */
+        this.SynonymList = null;
+
+        /**
+         * <p>Standard word (required for CREATE and UPDATE, can be left blank for DELETE)</p>
+         * @type {string || null}
+         */
+        this.Term = null;
+
+        /**
+         * <p>Standard term ID (required for UPDATE and DELETE; leave blank for CREATE, generated by the backend)</p>
+         * @type {string || null}
+         */
+        this.TermId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModifyAction = 'ModifyAction' in params ? params.ModifyAction : null;
+        this.SynonymList = 'SynonymList' in params ? params.SynonymList : null;
+        this.Term = 'Term' in params ? params.Term : null;
+        this.TermId = 'TermId' in params ? params.TermId : null;
+
+    }
+}
+
+/**
+ * CopyAgentFromApp request structure.
+ * @class
+ */
+class CopyAgentFromAppRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Target application ID. Required when kind=0</p>
+         * @type {string || null}
+         */
+        this.TargetAppId = null;
+
+        /**
+         * <p>Agent type, case-sensitive between B-end configuration Agent and C-end client user Agent</p><p>Enumeration values:</p><ul><li>0: Configuration end Agent</li><li>1: User space Agent</li></ul>
+         * @type {number || null}
+         */
+        this.Kind = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.TargetAppId = 'TargetAppId' in params ? params.TargetAppId : null;
+        this.Kind = 'Kind' in params ? params.Kind : null;
+
+    }
+}
+
+/**
+ * QA create specification (one-time input of non-persistent data)
+ * @class
+ */
+class QACreateSpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Query</p>
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * <p>Answer</p>
+         * @type {string || null}
+         */
+        this.Answer = null;
+
+        /**
+         * <p>Category ID</p>
+         * @type {string || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * <p>Associated document ID</p>
+         * @type {string || null}
+         */
+        this.DocId = null;
+
+        /**
+         * <p>Knowledge effective scope<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>Disabled</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>Development domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>Release domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>Global</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.EffectiveDomain = null;
+
+        /**
+         * <p>Expiration policy (validity time and behavior after the validity period expires)</p>
+         * @type {ExpirationPolicy || null}
+         */
+        this.ExpirationPolicy = null;
+
+        /**
+         * <p>Applicable scope (tag condition)</p>
+         * @type {Array.<LabelRefIdentity> || null}
+         */
+        this.LabelRefList = null;
+
+        /**
+         * <p>Issue description</p>
+         * @type {string || null}
+         */
+        this.QuestionDescription = null;
+
+        /**
+         * <p>Similar question list</p>
+         * @type {Array.<string> || null}
+         */
+        this.SimilarQuestionList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Question = 'Question' in params ? params.Question : null;
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+        this.DocId = 'DocId' in params ? params.DocId : null;
+        this.EffectiveDomain = 'EffectiveDomain' in params ? params.EffectiveDomain : null;
+
+        if (params.ExpirationPolicy) {
+            let obj = new ExpirationPolicy();
+            obj.deserialize(params.ExpirationPolicy)
+            this.ExpirationPolicy = obj;
+        }
+
+        if (params.LabelRefList) {
+            this.LabelRefList = new Array();
+            for (let z in params.LabelRefList) {
+                let obj = new LabelRefIdentity();
+                obj.deserialize(params.LabelRefList[z]);
+                this.LabelRefList.push(obj);
+            }
+        }
+        this.QuestionDescription = 'QuestionDescription' in params ? params.QuestionDescription : null;
+        this.SimilarQuestionList = 'SimilarQuestionList' in params ? params.SimilarQuestionList : null;
+
+    }
+}
+
+/**
+ * Model hyperparameter
+ * @class
+ */
+class ModelParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Default value.</p>
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * <p>Available Option List</p>
+         * @type {Array.<string> || null}
+         */
+        this.EnumValueList = null;
+
+        /**
+         * <p>Maximum value (valid only for numerical type).</p>
+         * @type {number || null}
+         */
+        this.MaxValue = null;
+
+        /**
+         * <p>Minimum value (valid only for numerical types).</p>
+         * @type {number || null}
+         */
+        this.MinValue = null;
+
+        /**
+         * <p>Hyperparameter name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Hyperparameter type. 1-floating-point number, 2-integer, 3-string</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.EnumValueList = 'EnumValueList' in params ? params.EnumValueList : null;
+        this.MaxValue = 'MaxValue' in params ? params.MaxValue : null;
+        this.MinValue = 'MinValue' in params ? params.MinValue : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * ModifyApp response structure.
+ * @class
+ */
+class ModifyAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>app_id</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Update time (Unix timestamp, in seconds)</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Expiration policy (validity time and behavior after the validity period expires)
+ * @class
+ */
+class ExpirationPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Validity time</p>
+         * @type {EffectivePeriod || null}
+         */
+        this.EffectivePeriod = null;
+
+        /**
+         * <p>Behavior after the validity period expires: 1=NOT_RETRIEVABLE cannot be retrieved, 2=RETRIEVABLE can still be retrieved; meaningless for permanent validity<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>EXPIRE_BEHAVIOR_UNKNOWN</td><td>0</td><td>Unspecified (server uses the default process)</td></tr><tr><td>EXPIRE_BEHAVIOR_NOT_RETRIEVABLE</td><td>1</td><td>Cannot be retrieved (removed upon expiration)</td></tr><tr><td>EXPIRE_BEHAVIOR_RETRIEVABLE</td><td>2</td><td>Can still be retrieved (not removed upon expiration, only the validity period is tagged)</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.ExpireBehavior = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EffectivePeriod) {
+            let obj = new EffectivePeriod();
+            obj.deserialize(params.EffectivePeriod)
+            this.EffectivePeriod = obj;
+        }
+        this.ExpireBehavior = 'ExpireBehavior' in params ? params.ExpireBehavior : null;
+
+    }
+}
+
+/**
+ * DescribeAccountList request structure.
+ * @class
+ */
+class DescribeAccountListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Page number</p><p>Starts from 0</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Pagination quantity</p><p>Value range: [1, 100]</p><p>Unit: count</p><p>Maximum: 100</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <p>Parameter filtering</p><p>Supports filter queries by SpaceId and NIckName</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeConversationList response structure.
+ * @class
+ */
+class DescribeConversationListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session list</p>
+         * @type {Array.<Conversation> || null}
+         */
+        this.ConversationList = null;
+
+        /**
+         * <p>Session list</p>
+         * @type {Array.<Conversation> || null}
+         */
+        this.Conversations = null;
+
+        /**
+         * <p>Total.</p>
+         * @type {string || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ConversationList) {
+            this.ConversationList = new Array();
+            for (let z in params.ConversationList) {
+                let obj = new Conversation();
+                obj.deserialize(params.ConversationList[z]);
+                this.ConversationList.push(obj);
+            }
+        }
+
+        if (params.Conversations) {
+            this.Conversations = new Array();
+            for (let z in params.Conversations) {
+                let obj = new Conversation();
+                obj.deserialize(params.Conversations[z]);
+                this.Conversations.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Multi-agent configuration
+ * @class
+ */
+class MultiAgentConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Agent collaboration configuration
+         * @type {AgentCollaborationConfig || null}
+         */
+        this.AgentCollaboration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AgentCollaboration) {
+            let obj = new AgentCollaborationConfig();
+            obj.deserialize(params.AgentCollaboration)
+            this.AgentCollaboration = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateWebSocketToken response structure.
+ * @class
+ */
+class CreateWebSocketTokenResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>WebSocket Token</p>
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * <p>uid, which will be used in the subsequent DescribeUserDialogConfig api</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Statistics
+ * @class
+ */
+class Statistic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Time to first token</p>
+         * @type {number || null}
+         */
+        this.FirstTokenCostMs = null;
+
+        /**
+         * <p>Input token count</p>
+         * @type {number || null}
+         */
+        this.InputTokens = null;
+
+        /**
+         * <p>Model name</p>
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * <p>Output token count</p>
+         * @type {number || null}
+         */
+        this.OutputTokens = null;
+
+        /**
+         * <p>Total reasoning time</p>
+         * @type {number || null}
+         */
+        this.TotalCostMs = null;
+
+        /**
+         * <p>Total input and output tokens</p>
+         * @type {number || null}
+         */
+        this.TotalTokens = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FirstTokenCostMs = 'FirstTokenCostMs' in params ? params.FirstTokenCostMs : null;
+        this.InputTokens = 'InputTokens' in params ? params.InputTokens : null;
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.OutputTokens = 'OutputTokens' in params ? params.OutputTokens : null;
+        this.TotalCostMs = 'TotalCostMs' in params ? params.TotalCostMs : null;
+        this.TotalTokens = 'TotalTokens' in params ? params.TotalTokens : null;
+
+    }
+}
+
+/**
+ * QA fragment highlight info
+ * @class
+ */
+class QASegmentHighlight extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Highlight end position</p>
+         * @type {string || null}
+         */
+        this.EndPos = null;
+
+        /**
+         * <p>Highlight starting position</p>
+         * @type {string || null}
+         */
+        this.StartPos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndPos = 'EndPos' in params ? params.EndPos : null;
+        this.StartPos = 'StartPos' in params ? params.StartPos : null;
+
+    }
+}
+
+/**
+ * DescribeSkillCategoryList response structure.
+ * @class
+ */
+class DescribeSkillCategoryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Skill category list
+         * @type {Array.<SkillCategory> || null}
+         */
+        this.CategoryList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CategoryList) {
+            this.CategoryList = new Array();
+            for (let z in params.CategoryList) {
+                let obj = new SkillCategory();
+                obj.deserialize(params.CategoryList[z]);
+                this.CategoryList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Query time range (Unix seconds)
+ * @class
+ */
+class TimeRange extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>End time in Unix seconds</p>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <p>Start time in Unix seconds</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+
+    }
+}
+
+/**
+ * Conflict query digest information
+ * @class
+ */
+class ConflictQASummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Conflict group ID</p>
+         * @type {string || null}
+         */
+        this.ConflictGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConflictGroupId = 'ConflictGroupId' in params ? params.ConflictGroupId : null;
+
+    }
+}
+
+/**
+ * ES configuration
+ * @class
+ */
+class ESConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether storage method modification is supported</p>
+         * @type {boolean || null}
+         */
+        this.CanModify = null;
+
+        /**
+         * <p>ES password (encrypted)</p>
+         * @type {string || null}
+         */
+        this.EncryptedPassword = null;
+
+        /**
+         * <p>ES cluster ID</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Storage type: 1=default storage, 2=custom storage<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>ES_STORAGE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>ES_STORAGE_TYPE_DEFAULT</td><td>1</td><td>Default storage</td></tr><tr><td>ES_STORAGE_TYPE_CUSTOM</td><td>2</td><td>Custom storage</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * <p>ES userName</p>
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CanModify = 'CanModify' in params ? params.CanModify : null;
+        this.EncryptedPassword = 'EncryptedPassword' in params ? params.EncryptedPassword : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+
+    }
+}
+
+/**
+ * App operation information
+ * @class
+ */
+class AppOperation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Creator
+         * @type {string || null}
+         */
+        this.Creator = null;
+
+        /**
+         * Creator UIN
+         * @type {string || null}
+         */
+        this.CreatorUin = null;
+
+        /**
+         * Creator account (for private scenarios)
+         * @type {string || null}
+         */
+        this.CreatorUserAccount = null;
+
+        /**
+         * Last modified (Unix timestamp in seconds).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Last modified by
+         * @type {string || null}
+         */
+        this.Updater = null;
+
+        /**
+         * Modifier UIN
+         * @type {string || null}
+         */
+        this.UpdaterUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Creator = 'Creator' in params ? params.Creator : null;
+        this.CreatorUin = 'CreatorUin' in params ? params.CreatorUin : null;
+        this.CreatorUserAccount = 'CreatorUserAccount' in params ? params.CreatorUserAccount : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Updater = 'Updater' in params ? params.Updater : null;
+        this.UpdaterUin = 'UpdaterUin' in params ? params.UpdaterUin : null;
+
+    }
+}
+
+/**
+ * ClawAgent Agent team collaboration configuration
+ * @class
+ */
+class ClawAgentAgentTeamConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to enable Agent team collaboration</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * <p>prompt content</p>
+         * @type {string || null}
+         */
+        this.PromptContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.PromptContent = 'PromptContent' in params ? params.PromptContent : null;
+
+    }
+}
+
+/**
+ * DescribeSystemVariableList response structure.
+ * @class
+ */
+class DescribeSystemVariableListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * system_variable_list
+         * @type {Array.<SystemVariable> || null}
+         */
+        this.SystemVariableList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SystemVariableList) {
+            this.SystemVariableList = new Array();
+            for (let z in params.SystemVariableList) {
+                let obj = new SystemVariable();
+                obj.deserialize(params.SystemVariableList[z]);
+                this.SystemVariableList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Workflow running instance metadata
+ * @class
+ */
+class WorkflowRunMetadata extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User input.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * Name of the main model
+         * @type {string || null}
+         */
+        this.MainModelName = null;
+
+        /**
+         * API parameter configuration
+         * @type {Array.<CustomVariable> || null}
+         */
+        this.CustomVariableList = null;
+
+        /**
+         * Flowchart of the workflow
+         * @type {string || null}
+         */
+        this.WorkflowGraph = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Query = 'Query' in params ? params.Query : null;
+        this.MainModelName = 'MainModelName' in params ? params.MainModelName : null;
+
+        if (params.CustomVariableList) {
+            this.CustomVariableList = new Array();
+            for (let z in params.CustomVariableList) {
+                let obj = new CustomVariable();
+                obj.deserialize(params.CustomVariableList[z]);
+                this.CustomVariableList.push(obj);
+            }
+        }
+        this.WorkflowGraph = 'WorkflowGraph' in params ? params.WorkflowGraph : null;
+
+    }
+}
+
+/**
+ * Plugin information of the Agent
+ * @class
+ */
+class AgentPlugin extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Basic plug-in configuration</p>
+         * @type {AgentPluginConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * <p>Plugin name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Plug-in icon url</p>
+         * @type {string || null}
+         */
+        this.IconUrl = null;
+
+        /**
+         * <p>Plugin description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Plug-in product type</p><p>Enumeration values:</p><ul><li>0: ordinary plug-in</li><li>1: connector plug-in</li></ul>
+         * @type {number || null}
+         */
+        this.PluginClass = null;
+
+        /**
+         * <p>Plug-in status</p><p>Enumeration values:</p><ul><li>0: unknown</li><li>1: available</li><li>2: unavailable</li></ul>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Plug-in authentication configuration status</p><p>Enumeration values:</p><ul><li>0: No authorization required</li><li>1: Unconfigured</li><li>2: Configured</li></ul>
+         * @type {number || null}
+         */
+        this.AuthConfigStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Config) {
+            let obj = new AgentPluginConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.IconUrl = 'IconUrl' in params ? params.IconUrl : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.PluginClass = 'PluginClass' in params ? params.PluginClass : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AuthConfigStatus = 'AuthConfigStatus' in params ? params.AuthConfigStatus : null;
+
+    }
+}
+
+/**
+ * Modified items of similar questions in a QA
+ * @class
+ */
+class SimilarQuestionModifySpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Content of the similar question (required for CREATE and UPDATE)</p>
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * <p>Operation type: 1=create, 2=modify, 3=delete<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>MODIFY_ACTION_UNKNOWN</td><td>0</td><td></td></tr><tr><td>MODIFY_ACTION_CREATE</td><td>1</td><td>Create</td></tr><tr><td>MODIFY_ACTION_UPDATE</td><td>2</td><td>Modify</td></tr><tr><td>MODIFY_ACTION_DELETE</td><td>3</td><td>Delete</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.ModifyAction = null;
+
+        /**
+         * <p>Similar question ID (required for UPDATE and DELETE)</p>
+         * @type {string || null}
+         */
+        this.SimilarQuestionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.ModifyAction = 'ModifyAction' in params ? params.ModifyAction : null;
+        this.SimilarQuestionId = 'SimilarQuestionId' in params ? params.SimilarQuestionId : null;
+
+    }
+}
+
+/**
+ * Retrieval billing information
+ * @class
+ */
+class SearchBilling extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Billing tag list</p>
+         * @type {Array.<KVPair> || null}
+         */
+        this.BillingTagList = null;
+
+        /**
+         * <p>Billing sub-business type</p>
+         * @type {string || null}
+         */
+        this.FinanceSubBusinessType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BillingTagList) {
+            this.BillingTagList = new Array();
+            for (let z in params.BillingTagList) {
+                let obj = new KVPair();
+                obj.deserialize(params.BillingTagList[z]);
+                this.BillingTagList.push(obj);
+            }
+        }
+        this.FinanceSubBusinessType = 'FinanceSubBusinessType' in params ? params.FinanceSubBusinessType : null;
+
+    }
+}
+
+/**
+ * DeleteQAList response structure.
+ * @class
+ */
+class DeleteQAListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Batch delete result</p>
+         * @type {Array.<OperationResult> || null}
+         */
+        this.ResultList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResultList) {
+            this.ResultList = new Array();
+            for (let z in params.ResultList) {
+                let obj = new OperationResult();
+                obj.deserialize(params.ResultList[z]);
+                this.ResultList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Basic information of node operation
+ * @class
+ */
+class NodeRun extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the node operation
+         * @type {string || null}
+         */
+        this.NodeRunId = null;
+
+        /**
+         * Node ID.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * ID of the workflow running instance
+         * @type {string || null}
+         */
+        this.WorkflowRunId = null;
+
+        /**
+         * Node name.
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Node type.
+1: Start node
+2: Parameter extraction node
+3: Large model node
+4: Knowledge Q&A node
+5: Knowledge retrieval node
+6: Tag extraction node
+7: Code execution node
+8: Tool node
+9: Logic judgment node
+10: Reply node
+11: Tab node
+12: Loop node
+13: Intent recognition node
+14: Workflow node
+15: Plug-in node
+16: End node
+17: Variable aggregate node data
+18: Batch processing node
+19: Message Queue node
+20: Database node
+21: Variable assignment node data
+22: Variable conversion node data
+23: Agent node
+24: Annotation node
+25: File collection node
+26: Text collection node
+27: Widget node
+         * @type {number || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Running state. 1: initial status; 2: running; 3: operation successful; 4: operation failure; 5: canceled
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error message
+         * @type {string || null}
+         */
+        this.FailMessage = null;
+
+        /**
+         * Total time consumed (ms)
+         * @type {number || null}
+         */
+        this.TotalCostMs = null;
+
+        /**
+         * Total number of tokens consumed
+         * @type {number || null}
+         */
+        this.TotalTokens = null;
+
+        /**
+         * Error code.
+         * @type {string || null}
+         */
+        this.FailCode = null;
+
+        /**
+         * List of branch indexes
+         * @type {Array.<number> || null}
+         */
+        this.BranchIndexList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeRunId = 'NodeRunId' in params ? params.NodeRunId : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.WorkflowRunId = 'WorkflowRunId' in params ? params.WorkflowRunId : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FailMessage = 'FailMessage' in params ? params.FailMessage : null;
+        this.TotalCostMs = 'TotalCostMs' in params ? params.TotalCostMs : null;
+        this.TotalTokens = 'TotalTokens' in params ? params.TotalTokens : null;
+        this.FailCode = 'FailCode' in params ? params.FailCode : null;
+        this.BranchIndexList = 'BranchIndexList' in params ? params.BranchIndexList : null;
+
+    }
+}
+
+/**
+ * Session reset information
+ * @class
+ */
+class ConversationResetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Last reset millisecond-level timestamp</p>
+         * @type {string || null}
+         */
+        this.ResetTime = null;
+
+        /**
+         * <p>Last boundary reset; this record and earlier records are no longer used as dialogue context</p>
+         * @type {string || null}
+         */
+        this.ResetThroughRecordId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResetTime = 'ResetTime' in params ? params.ResetTime : null;
+        this.ResetThroughRecordId = 'ResetThroughRecordId' in params ? params.ResetThroughRecordId : null;
+
+    }
+}
+
+/**
+ * QA source and associated document information
+ * @class
+ */
+class QASourceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application scope of the associated document<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>Disabled</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>Development domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>Release domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>Global</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.DocEffectiveDomain = null;
+
+        /**
+         * <p>Associated document ID</p>
+         * @type {string || null}
+         */
+        this.DocId = null;
+
+        /**
+         * <p>Associated document name</p>
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * <p>Associated document type</p>
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * <p>Source description.</p>
+         * @type {string || null}
+         */
+        this.SourceDesc = null;
+
+        /**
+         * <p>Source type: 1=documentation generation, 2=batch import, 3=manual entry<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>QA_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>QA_SOURCE_TYPE_DOC</td><td>1</td><td>Documentation generation</td></tr><tr><td>QA_SOURCE_TYPE_BATCH_IMPORT</td><td>2</td><td>Batch import</td></tr><tr><td>QA_SOURCE_TYPE_MANUAL</td><td>3</td><td>Manual entry</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DocEffectiveDomain = 'DocEffectiveDomain' in params ? params.DocEffectiveDomain : null;
+        this.DocId = 'DocId' in params ? params.DocId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.SourceDesc = 'SourceDesc' in params ? params.SourceDesc : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+
+    }
+}
+
+/**
+ * Common check results
+ * @class
+ */
+class CheckResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the verification passed.
+         * @type {boolean || null}
+         */
+        this.Passed = null;
+
+        /**
+         * Failure reason (filled when passed=false)
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Passed = 'Passed' in params ? params.Passed : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
+ * Reference source index information of QuoteInfo
+ * @class
+ */
+class ConversationQuoteInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Index value of the reference source</p>
+         * @type {number || null}
+         */
+        this.Index = null;
+
+        /**
+         * <p>Reference source location</p>
+         * @type {number || null}
+         */
+        this.Position = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Index = 'Index' in params ? params.Index : null;
+        this.Position = 'Position' in params ? params.Position : null;
+
+    }
+}
+
+/**
+ * DeleteLabelList request structure.
+ * @class
+ */
+class DeleteLabelListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Tag ID list to be deleted (quantity: 1-20)</p>
+         * @type {Array.<string> || null}
+         */
+        this.LabelIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.LabelIdList = 'LabelIdList' in params ? params.LabelIdList : null;
+
+    }
+}
+
+/**
+ * DescribeSpaceList response structure.
+ * @class
+ */
+class DescribeSpaceListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number.
+         * @type {string || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Space List
+         * @type {Array.<Space> || null}
+         */
+        this.SpaceList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.SpaceList) {
+            this.SpaceList = new Array();
+            for (let z in params.SpaceList) {
+                let obj = new Space();
+                obj.deserialize(params.SpaceList[z]);
+                this.SpaceList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Statistical information of a single dialogue history
+ * @class
+ */
+class ConversationRecordSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Reply record ID, corresponding to the record_id of the reply message in messages</p>
+         * @type {string || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * <p>ID of the user's question record, corresponding to the record_id of the user message in messages</p>
+         * @type {string || null}
+         */
+        this.RelatedRecordId = null;
+
+        /**
+         * <p>Duration info of a single dialogue</p>
+         * @type {ConversationRecordTimeUsage || null}
+         */
+        this.TimeUsage = null;
+
+        /**
+         * <p>token consumption information of a single dialogue</p>
+         * @type {ConversationRecordTokenUsage || null}
+         */
+        this.TokenUsage = null;
+
+        /**
+         * <p>Description of a single dialogue failure; empty if successful</p>
+         * @type {ConversationRecordErrorInfo || null}
+         */
+        this.ErrorInfo = null;
+
+        /**
+         * <p>Status of a single employee assistant dialogue.</p><p>Enumeration values: </p><ul><li>pending: Pending, </li><li>processing: Processing, </li><li>success: Success, </li><li>failed: Failure, </li><li>stop: Stopped.</li></ul>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.RelatedRecordId = 'RelatedRecordId' in params ? params.RelatedRecordId : null;
+
+        if (params.TimeUsage) {
+            let obj = new ConversationRecordTimeUsage();
+            obj.deserialize(params.TimeUsage)
+            this.TimeUsage = obj;
+        }
+
+        if (params.TokenUsage) {
+            let obj = new ConversationRecordTokenUsage();
+            obj.deserialize(params.TokenUsage)
+            this.TokenUsage = obj;
+        }
+
+        if (params.ErrorInfo) {
+            let obj = new ConversationRecordErrorInfo();
+            obj.deserialize(params.ErrorInfo)
+            this.ErrorInfo = obj;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * Duration info of a single dialogue
+ * @class
+ */
+class ConversationRecordTimeUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total time consumed for a single dialogue, in milliseconds</p>
+         * @type {string || null}
+         */
+        this.Elapsed = null;
+
+        /**
+         * <p>Time to first token, in milliseconds</p>
+         * @type {string || null}
+         */
+        this.FirstTokenCost = null;
+
+        /**
+         * <p>Total time consumed for model inference, in milliseconds</p>
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Elapsed = 'Elapsed' in params ? params.Elapsed : null;
+        this.FirstTokenCost = 'FirstTokenCost' in params ? params.FirstTokenCost : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+
+    }
+}
+
+/**
+ * Complete information of the application
+ * @class
+ */
+class App extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Auxiliary information (sub-status/approval/appeal/search for resource/special status)</p>
+         * @type {AppAuxiliaryInfo || null}
+         */
+        this.AuxiliaryInfo = null;
+
+        /**
+         * <p>Configuration.</p>
+         * @type {AppConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * <p>Metadata</p>
+         * @type {AppMetadata || null}
+         */
+        this.Metadata = null;
+
+        /**
+         * <p>Application key information</p>
+         * @type {AppSecretInfo || null}
+         */
+        this.SecretInfo = null;
+
+        /**
+         * <p>Sharing link information (including access control)</p>
+         * @type {AppShareURLInfo || null}
+         */
+        this.ShareUrlInfo = null;
+
+        /**
+         * <p>Status.</p>
+         * @type {AppStatusInfo || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Business shared configuration</p>
+         * @type {CorpShareConfig || null}
+         */
+        this.CorpShareConfig = null;
+
+        /**
+         * <p>List of shared knowledge bases referenced by the application</p>
+         * @type {Array.<AppSharedKbInfo> || null}
+         */
+        this.SharedKbList = null;
+
+        /**
+         * <p>portal shared configuration</p>
+         * @type {PortalShareConfig || null}
+         */
+        this.PortalShareConfig = null;
+
+        /**
+         * <p>Application-mounted cloud disk</p>
+         * @type {Array.<FileVolumeMount> || null}
+         */
+        this.FileVolumeMountList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AuxiliaryInfo) {
+            let obj = new AppAuxiliaryInfo();
+            obj.deserialize(params.AuxiliaryInfo)
+            this.AuxiliaryInfo = obj;
+        }
+
+        if (params.Config) {
+            let obj = new AppConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+
+        if (params.Metadata) {
+            let obj = new AppMetadata();
+            obj.deserialize(params.Metadata)
+            this.Metadata = obj;
+        }
+
+        if (params.SecretInfo) {
+            let obj = new AppSecretInfo();
+            obj.deserialize(params.SecretInfo)
+            this.SecretInfo = obj;
+        }
+
+        if (params.ShareUrlInfo) {
+            let obj = new AppShareURLInfo();
+            obj.deserialize(params.ShareUrlInfo)
+            this.ShareUrlInfo = obj;
+        }
+
+        if (params.Status) {
+            let obj = new AppStatusInfo();
+            obj.deserialize(params.Status)
+            this.Status = obj;
+        }
+
+        if (params.CorpShareConfig) {
+            let obj = new CorpShareConfig();
+            obj.deserialize(params.CorpShareConfig)
+            this.CorpShareConfig = obj;
+        }
+
+        if (params.SharedKbList) {
+            this.SharedKbList = new Array();
+            for (let z in params.SharedKbList) {
+                let obj = new AppSharedKbInfo();
+                obj.deserialize(params.SharedKbList[z]);
+                this.SharedKbList.push(obj);
+            }
+        }
+
+        if (params.PortalShareConfig) {
+            let obj = new PortalShareConfig();
+            obj.deserialize(params.PortalShareConfig)
+            this.PortalShareConfig = obj;
+        }
+
+        if (params.FileVolumeMountList) {
+            this.FileVolumeMountList = new Array();
+            for (let z in params.FileVolumeMountList) {
+                let obj = new FileVolumeMount();
+                obj.deserialize(params.FileVolumeMountList[z]);
+                this.FileVolumeMountList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * AppTriggerParamBindingValue
+ * @class
+ */
+class AppTriggerParamBindingValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Parameter value</p>
+         * @type {string || null}
+         */
+        this.ParamValue = null;
+
+        /**
+         * <p>Application variable name</p>
+         * @type {string || null}
+         */
+        this.VariableName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ParamValue = 'ParamValue' in params ? params.ParamValue : null;
+        this.VariableName = 'VariableName' in params ? params.VariableName : null;
+
+    }
+}
+
+/**
+ * DescribeAppTriggerRunLogList response structure.
+ * @class
+ */
+class DescribeAppTriggerRunLogListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Log list.</p>
+         * @type {Array.<AppTriggerRunLog> || null}
+         */
+        this.RunLogList = null;
+
+        /**
+         * <p>Number of log lists</p>
+         * @type {string || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RunLogList) {
+            this.RunLogList = new Array();
+            for (let z in params.RunLogList) {
+                let obj = new AppTriggerRunLog();
+                obj.deserialize(params.RunLogList[z]);
+                this.RunLogList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Document parsing model parameters
+ * @class
+ */
+class FileParseModel extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Model alias
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Model description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Enhanced mode
+         * @type {string || null}
+         */
+        this.EnhancementMode = null;
+
+        /**
+         * Unique ID of a model
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * Model type
+         * @type {string || null}
+         */
+        this.ModelProviderType = null;
+
+        /**
+         * Whether to enable formula enhancement
+         * @type {boolean || null}
+         */
+        this.EnableFormulaEnhancement = null;
+
+        /**
+         * Whether to enable LLM enhancement
+         * @type {boolean || null}
+         */
+        this.EnableLLMEnhancement = null;
+
+        /**
+         * Whether to output an HTML table
+         * @type {boolean || null}
+         */
+        this.OutputHtmlTable = null;
+
+        /**
+         * Supported file type list
+         * @type {Array.<SupportedFileType> || null}
+         */
+        this.SupportedFileList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.EnhancementMode = 'EnhancementMode' in params ? params.EnhancementMode : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.ModelProviderType = 'ModelProviderType' in params ? params.ModelProviderType : null;
+        this.EnableFormulaEnhancement = 'EnableFormulaEnhancement' in params ? params.EnableFormulaEnhancement : null;
+        this.EnableLLMEnhancement = 'EnableLLMEnhancement' in params ? params.EnableLLMEnhancement : null;
+        this.OutputHtmlTable = 'OutputHtmlTable' in params ? params.OutputHtmlTable : null;
+
+        if (params.SupportedFileList) {
+            this.SupportedFileList = new Array();
+            for (let z in params.SupportedFileList) {
+                let obj = new SupportedFileType();
+                obj.deserialize(params.SupportedFileList[z]);
+                this.SupportedFileList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Application appeal information (non-modifiable by users)
+ * @class
+ */
+class AppAppeal extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration items in an appeal
+         * @type {AppealingStatus || null}
+         */
+        this.AppealingStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AppealingStatus) {
+            let obj = new AppealingStatus();
+            obj.deserialize(params.AppealingStatus)
+            this.AppealingStatus = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeSkillCategoryList request structure.
+ * @class
+ */
+class DescribeSkillCategoryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * Standard word check item
+ * @class
+ */
+class LabelTermCheckResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Check results
+         * @type {CheckResult || null}
+         */
+        this.CheckResult = null;
+
+        /**
+         * Standard words to be checked
+         * @type {string || null}
+         */
+        this.Term = null;
+
+        /**
+         * Return the corresponding standard term ID if exists.
+         * @type {string || null}
+         */
+        this.TermId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CheckResult) {
+            let obj = new CheckResult();
+            obj.deserialize(params.CheckResult)
+            this.CheckResult = obj;
+        }
+        this.Term = 'Term' in params ? params.Term : null;
+        this.TermId = 'TermId' in params ? params.TermId : null;
+
+    }
+}
+
+/**
+ * DescribeLatestRelease response structure.
+ * @class
+ */
+class DescribeLatestReleaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether there is a release change
+         * @type {boolean || null}
+         */
+        this.IsChanged = null;
+
+        /**
+         * Publish information
+         * @type {ReleaseSummary || null}
+         */
+        this.ReleaseSummary = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsChanged = 'IsChanged' in params ? params.IsChanged : null;
+
+        if (params.ReleaseSummary) {
+            let obj = new ReleaseSummary();
+            obj.deserialize(params.ReleaseSummary)
+            this.ReleaseSummary = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Retrieval request context info
+ * @class
+ */
+class SearchContext extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Request source<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>CALL_SOURCE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>CALL_SOURCE_RAG</td><td>1</td><td>Standard mode</td></tr><tr><td>CALL_SOURCE_WORKFLOW</td><td>2</td><td>Workflow</td></tr><tr><td>CALL_SOURCE_PLUGIN</td><td>3</td><td>Plug-in</td></tr><tr><td>CALL_SOURCE_OPENCLAW</td><td>4</td><td>openclaw</td></tr><tr><td>CALL_SOURCE_RECALL_TEST</td><td>5</td><td>Recall test</td></tr><tr><td>CALL_SOURCE_RECALL_TEST_DIFF</td><td>6</td><td>Recall test in comparison scenarios also needs to trigger the retrieval interface. The difference is that in this case, the frontend does not need to update the latest configuration. Because when comparing 1, 2, and 3, the final saved one may be 2.</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.CallSource = null;
+
+        /**
+         * <p>adp DOMAIN: 1=development DOMAIN, 2=production DOMAIN<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>adp_DOMAIN_UNSPECIFIED</td><td>0</td><td>not specified</td></tr><tr><td>adp_DOMAIN_DEV</td><td>1</td><td>development DOMAIN</td></tr><tr><td>adp_DOMAIN_PROD</td><td>2</td><td>production DOMAIN</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.Domain = null;
+
+        /**
+         * <p>Visitor ID</p>
+         * @type {string || null}
+         */
+        this.VisitorId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CallSource = 'CallSource' in params ? params.CallSource : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.VisitorId = 'VisitorId' in params ? params.VisitorId : null;
+
+    }
+}
+
+/**
+ * ResponseParam
+ * @class
+ */
+class ResponseParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Variable description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Parameter name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>OUTPUT_RENDER_REPLACE</td><td>0</td><td>Overwrite (full replacement)</td></tr><tr><td>OUTPUT_RENDER_APPEND</td><td>1</td><td>Incremental append</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.RenderMode = null;
+
+        /**
+         * <p>Only useful for OBJECT or ARRAY_OBJECT types</p>
+         * @type {Array.<ResponseParam> || null}
+         */
+        this.SubParams = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>String</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>Integer</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>Floating-point number</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>Boolean value</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>Object</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>Array of strings</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>Array of integers</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>Array of floating-point numbers</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>Array of boolean values</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>Object array</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>Nested array</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>Null value</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>Unspecified type, used for OneOf and AnyOf scenarios</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RenderMode = 'RenderMode' in params ? params.RenderMode : null;
+
+        if (params.SubParams) {
+            this.SubParams = new Array();
+            for (let z in params.SubParams) {
+                let obj = new ResponseParam();
+                obj.deserialize(params.SubParams[z]);
+                this.SubParams.push(obj);
+            }
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * Single workflow configuration
+ * @class
+ */
+class SingleWorkflowConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to enable async workflow</p>
+         * @type {boolean || null}
+         */
+        this.AsyncWorkflow = null;
+
+        /**
+         * <p>Status Release status (UNPUBLISHED: to be released PUBLISHING: publishing PUBLISHED: released PUBLISHED_FAIL: release failure; DRAFT: to be debugged)</p>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Workflow description</p>
+         * @type {string || null}
+         */
+        this.WorkflowDescription = null;
+
+        /**
+         * <p>Workflow Id</p>
+         * @type {string || null}
+         */
+        this.WorkflowId = null;
+
+        /**
+         * <p>Workflow name.</p>
+         * @type {string || null}
+         */
+        this.WorkflowName = null;
+
+        /**
+         * <p>Whether the workflow is enabled</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncWorkflow = 'AsyncWorkflow' in params ? params.AsyncWorkflow : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.WorkflowDescription = 'WorkflowDescription' in params ? params.WorkflowDescription : null;
+        this.WorkflowId = 'WorkflowId' in params ? params.WorkflowId : null;
+        this.WorkflowName = 'WorkflowName' in params ? params.WorkflowName : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * CreatePlugin response structure.
+ * @class
+ */
+class CreatePluginResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Plugin_id</p>
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSimilarQuestion response structure.
+ * @class
+ */
+class CreateSimilarQuestionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Generated similar question list</p>
+         * @type {Array.<string> || null}
+         */
+        this.QuestionList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QuestionList = 'QuestionList' in params ? params.QuestionList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Workflow running instance time information
+ * @class
+ */
+class WorkflowRunTime extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Creation time (a millisecond timestamp).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Start time (timestamp in milliseconds)
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time (timestamp in milliseconds)
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * Collection of modifiable QA fields (used in conjunction with update_mask)
+ * @class
+ */
+class QAModifyFields extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Answer</p>
+         * @type {string || null}
+         */
+        this.Answer = null;
+
+        /**
+         * <p>Category ID</p>
+         * @type {string || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * <p>Associated document ID</p>
+         * @type {string || null}
+         */
+        this.DocId = null;
+
+        /**
+         * <p>Knowledge application scope<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>Disabled</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>Development domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>Release domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>Global</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.EffectiveDomain = null;
+
+        /**
+         * <p>Expiration policy (validity time and behavior after the validity period expires)</p>
+         * @type {ExpirationPolicy || null}
+         */
+        this.ExpirationPolicy = null;
+
+        /**
+         * <p>Whether to adopt (verification passed)</p>
+         * @type {boolean || null}
+         */
+        this.IsAccepted = null;
+
+        /**
+         * <p>Applicable scope (tag condition).</p>
+         * @type {Array.<LabelRefIdentity> || null}
+         */
+        this.LabelRefList = null;
+
+        /**
+         * <p>Query</p>
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * <p>Problem description</p>
+         * @type {string || null}
+         */
+        this.QuestionDescription = null;
+
+        /**
+         * <p>Similar question modification list</p>
+         * @type {Array.<SimilarQuestionModifySpec> || null}
+         */
+        this.SimilarQuestionList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+        this.DocId = 'DocId' in params ? params.DocId : null;
+        this.EffectiveDomain = 'EffectiveDomain' in params ? params.EffectiveDomain : null;
+
+        if (params.ExpirationPolicy) {
+            let obj = new ExpirationPolicy();
+            obj.deserialize(params.ExpirationPolicy)
+            this.ExpirationPolicy = obj;
+        }
+        this.IsAccepted = 'IsAccepted' in params ? params.IsAccepted : null;
+
+        if (params.LabelRefList) {
+            this.LabelRefList = new Array();
+            for (let z in params.LabelRefList) {
+                let obj = new LabelRefIdentity();
+                obj.deserialize(params.LabelRefList[z]);
+                this.LabelRefList.push(obj);
+            }
+        }
+        this.Question = 'Question' in params ? params.Question : null;
+        this.QuestionDescription = 'QuestionDescription' in params ? params.QuestionDescription : null;
+
+        if (params.SimilarQuestionList) {
+            this.SimilarQuestionList = new Array();
+            for (let z in params.SimilarQuestionList) {
+                let obj = new SimilarQuestionModifySpec();
+                obj.deserialize(params.SimilarQuestionList[z]);
+                this.SimilarQuestionList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Basic plug-in configuration of the Agent
+ * @class
+ */
+class AgentPluginConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>plugin_id</p>
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * <p>Plug-in Header parameter</p>
+         * @type {Array.<AgentPluginParameter> || null}
+         */
+        this.HeaderParameterList = null;
+
+        /**
+         * <p>Plug-in Query parameter</p>
+         * @type {Array.<AgentPluginParameter> || null}
+         */
+        this.QueryParameterList = null;
+
+        /**
+         * <p>Whether to use CAM one-click authorization. This parameter is valid only when auth_type=2</p>
+         * @type {boolean || null}
+         */
+        this.EnableCamRoleAuth = null;
+
+        /**
+         * <p>Authorization type</p><p>Enumeration values:</p><ul><li>0: No authentication</li><li>1: API Key</li><li>2: CAM authorization</li><li>3: OAuth2.0 authorization</li></ul>
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * <p>OAuth authorization and consent mode; 0 - developer authorization; 1 - user authorization (valid only when auth_type=3)</p>
+         * @type {number || null}
+         */
+        this.OAuthConsent = null;
+
+        /**
+         * <p>Credential configuration</p>
+         * @type {AgentPluginCredentialConfig || null}
+         */
+        this.CredentialConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+
+        if (params.HeaderParameterList) {
+            this.HeaderParameterList = new Array();
+            for (let z in params.HeaderParameterList) {
+                let obj = new AgentPluginParameter();
+                obj.deserialize(params.HeaderParameterList[z]);
+                this.HeaderParameterList.push(obj);
+            }
+        }
+
+        if (params.QueryParameterList) {
+            this.QueryParameterList = new Array();
+            for (let z in params.QueryParameterList) {
+                let obj = new AgentPluginParameter();
+                obj.deserialize(params.QueryParameterList[z]);
+                this.QueryParameterList.push(obj);
+            }
+        }
+        this.EnableCamRoleAuth = 'EnableCamRoleAuth' in params ? params.EnableCamRoleAuth : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+        this.OAuthConsent = 'OAuthConsent' in params ? params.OAuthConsent : null;
+
+        if (params.CredentialConfig) {
+            let obj = new AgentPluginCredentialConfig();
+            obj.deserialize(params.CredentialConfig)
+            this.CredentialConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * Plug-in summary information (for the plug-in list)
+ * @class
+ */
+class PluginSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Plug-in configuration message.</p>
+         * @type {PluginConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * <p>Whether shared is configured</p>
+         * @type {boolean || null}
+         */
+        this.IsShared = null;
+
+        /**
+         * <p>Plugin operation management information.</p>
+         * @type {PluginOperation || null}
+         */
+        this.Operation = null;
+
+        /**
+         * <p>plugin_id</p>
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * <p>Basic information of the plug-in.</p>
+         * @type {PluginProfile || null}
+         */
+        this.Profile = null;
+
+        /**
+         * <p>Space ID that the plug-in belongs to; empty for built-in plugins</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Plugin statistical information.</p>
+         * @type {PluginStatistics || null}
+         */
+        this.Statistics = null;
+
+        /**
+         * <p>Plug-in status. 1: available, 2: unavailable </p><p>Enumeration values:</p><ul><li>1: available</li><li>2: unavailable</li></ul>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Tool information</p>
+         * @type {Array.<ToolSummary> || null}
+         */
+        this.ToolList = null;
+
+        /**
+         * <p>Plugin status information by user dimension</p>
+         * @type {PluginUserState || null}
+         */
+        this.UserState = null;
+
+        /**
+         * <p>Update time, Unix timestamp</p><p>Unit: seconds</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Config) {
+            let obj = new PluginConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+        this.IsShared = 'IsShared' in params ? params.IsShared : null;
+
+        if (params.Operation) {
+            let obj = new PluginOperation();
+            obj.deserialize(params.Operation)
+            this.Operation = obj;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+
+        if (params.Profile) {
+            let obj = new PluginProfile();
+            obj.deserialize(params.Profile)
+            this.Profile = obj;
+        }
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+        if (params.Statistics) {
+            let obj = new PluginStatistics();
+            obj.deserialize(params.Statistics)
+            this.Statistics = obj;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.ToolList) {
+            this.ToolList = new Array();
+            for (let z in params.ToolList) {
+                let obj = new ToolSummary();
+                obj.deserialize(params.ToolList[z]);
+                this.ToolList.push(obj);
+            }
+        }
+
+        if (params.UserState) {
+            let obj = new PluginUserState();
+            obj.deserialize(params.UserState)
+            this.UserState = obj;
+        }
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * ModifyDocList response structure.
+ * @class
+ */
+class ModifyDocListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Batch modification result.</p>
+         * @type {Array.<OperationResult> || null}
+         */
+        this.ResultList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResultList) {
+            this.ResultList = new Array();
+            for (let z in params.ResultList) {
+                let obj = new OperationResult();
+                obj.deserialize(params.ResultList[z]);
+                this.ResultList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeQASummaryList request structure.
+ * @class
+ */
+class DescribeQASummaryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the knowledge base it belongs to</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Filter criteria (multiple Filters are in an AND relationship, and multiple Values of the same Filter are in an OR relationship): Status-QA status, enumeration value, exact match; CategoryId-category ID, exact match; SourceType-QA source type, enumeration value, exact match; EffectiveDomain-application scope, exact match; DocId-associated document ID, exact match; CreateTime-creation time, Unix seconds, BETWEEN passes [start second, end second]; UpdateTime-update time, Unix seconds, BETWEEN passes [start second, end second]</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Page number for pagination, starting from 0.</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Number of items per page. Default 10, maximum 100</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <p>Query condition (keyword + query scope)</p>
+         * @type {QAQuery || null}
+         */
+        this.Query = null;
+
+        /**
+         * <p>Switch configuration</p>
+         * @type {SummaryListSwitch || null}
+         */
+        this.SummaryListSwitch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+        if (params.Query) {
+            let obj = new QAQuery();
+            obj.deserialize(params.Query)
+            this.Query = obj;
+        }
+
+        if (params.SummaryListSwitch) {
+            let obj = new SummaryListSwitch();
+            obj.deserialize(params.SummaryListSwitch)
+            this.SummaryListSwitch = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateWorkspaceCredential response structure.
+ * @class
+ */
+class CreateWorkspaceCredentialResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Storage type</p>
+         * @type {string || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * <p>Workspace ID</p>
+         * @type {string || null}
+         */
+        this.WorkspaceId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+        this.WorkspaceId = 'WorkspaceId' in params ? params.WorkspaceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MCP App content for reconstructing an interactive app from a historical session
+ * @class
+ */
+class ConversationMcpApp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Capacity boundary: A single request is read-only for resources belonging to this plugin</p>
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * <p>ui:// resource, based on which the frontend calls ReadMCPResource to pull HTML</p>
+         * @type {string || null}
+         */
+        this.ResourceUri = null;
+
+        /**
+         * <p>thread on the agent-exec side</p>
+         * @type {string || null}
+         */
+        this.ThreadId = null;
+
+        /**
+         * <p>JSON: The complete original CallToolResult for replay when rebuilding historical sessions</p>
+         * @type {string || null}
+         */
+        this.ToolResult = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.ResourceUri = 'ResourceUri' in params ? params.ResourceUri : null;
+        this.ThreadId = 'ThreadId' in params ? params.ThreadId : null;
+        this.ToolResult = 'ToolResult' in params ? params.ToolResult : null;
+
+    }
+}
+
+/**
+ * DescribeAccountList response structure.
+ * @class
+ */
+class DescribeAccountListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total.</p>
+         * @type {string || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>Employee list</p>
+         * @type {Array.<AccountInfo> || null}
+         */
+        this.AccountList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AccountList) {
+            this.AccountList = new Array();
+            for (let z in params.AccountList) {
+                let obj = new AccountInfo();
+                obj.deserialize(params.AccountList[z]);
+                this.AccountList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteChannel response structure.
+ * @class
+ */
+class DeleteChannelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Parameter information of the MCP plug-in.
+ * @class
+ */
+class PluginParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to hide parameter configuration
+         * @type {boolean || null}
+         */
+        this.IsGlobalHidden = null;
+
+        /**
+         * Whether the parameter is required
+         * @type {boolean || null}
+         */
+        this.IsRequired = null;
+
+        /**
+         * Parameter name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Parameter value.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsGlobalHidden = 'IsGlobalHidden' in params ? params.IsGlobalHidden : null;
+        this.IsRequired = 'IsRequired' in params ? params.IsRequired : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * User input value
+ * @class
+ */
+class AgentUserInputValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>User input parameter value</p>
+         * @type {Array.<string> || null}
+         */
+        this.ValueList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ValueList = 'ValueList' in params ? params.ValueList : null;
+
+    }
+}
+
+/**
+ * SkillProfile basic display information.
+ * @class
+ */
+class SkillProfile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Creation time (Unix seconds).</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Creator.</p>
+         * @type {string || null}
+         */
+        this.Creator = null;
+
+        /**
+         * <p>Skill description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Skill show description</p>
+         * @type {string || null}
+         */
+        this.DisplayDescription = null;
+
+        /**
+         * <p>Skill display name</p>
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * <p>Skill icon</p>
+         * @type {string || null}
+         */
+        this.IconUrl = null;
+
+        /**
+         * <p>Skill name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Update time (Unix seconds).</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * <p>Space</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Creator = 'Creator' in params ? params.Creator : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.DisplayDescription = 'DisplayDescription' in params ? params.DisplayDescription : null;
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+        this.IconUrl = 'IconUrl' in params ? params.IconUrl : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+    }
+}
+
+/**
+ * ApiToolConfig
+ * @class
+ */
+class ApiToolConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Request body parameters</p>
+         * @type {Array.<RequestParam> || null}
+         */
+        this.Body = null;
+
+        /**
+         * <p>Example</p>
+         * @type {ToolExample || null}
+         */
+        this.Example = null;
+
+        /**
+         * <p>External call address of API plug-in</p>
+         * @type {string || null}
+         */
+        this.ExternalApiUrl = null;
+
+        /**
+         * <p>Header</p>
+         * @type {Array.<RequestParam> || null}
+         */
+        this.Header = null;
+
+        /**
+         * <p>Request method</p>
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * <p>Output</p>
+         * @type {Array.<ResponseParam> || null}
+         */
+        this.Outputs = null;
+
+        /**
+         * <p>Query parameter</p>
+         * @type {Array.<RequestParam> || null}
+         */
+        this.Query = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>STREAM_MODE_UNARY</td><td>0</td><td>Non-streaming</td></tr><tr><td>STREAM_MODE_STREAMING</td><td>1</td><td>Streaming</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.StreamMode = null;
+
+        /**
+         * <p>Address</p>
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Body) {
+            this.Body = new Array();
+            for (let z in params.Body) {
+                let obj = new RequestParam();
+                obj.deserialize(params.Body[z]);
+                this.Body.push(obj);
+            }
+        }
+
+        if (params.Example) {
+            let obj = new ToolExample();
+            obj.deserialize(params.Example)
+            this.Example = obj;
+        }
+        this.ExternalApiUrl = 'ExternalApiUrl' in params ? params.ExternalApiUrl : null;
+
+        if (params.Header) {
+            this.Header = new Array();
+            for (let z in params.Header) {
+                let obj = new RequestParam();
+                obj.deserialize(params.Header[z]);
+                this.Header.push(obj);
+            }
+        }
+        this.Method = 'Method' in params ? params.Method : null;
+
+        if (params.Outputs) {
+            this.Outputs = new Array();
+            for (let z in params.Outputs) {
+                let obj = new ResponseParam();
+                obj.deserialize(params.Outputs[z]);
+                this.Outputs.push(obj);
+            }
+        }
+
+        if (params.Query) {
+            this.Query = new Array();
+            for (let z in params.Query) {
+                let obj = new RequestParam();
+                obj.deserialize(params.Query[z]);
+                this.Query.push(obj);
+            }
+        }
+        this.StreamMode = 'StreamMode' in params ? params.StreamMode : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * ToolExample
+ * @class
+ */
+class ToolExample extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Request parameters</p>
+         * @type {string || null}
+         */
+        this.Request = null;
+
+        /**
+         * <p>Response parameter.</p>
+         * @type {string || null}
+         */
+        this.Response = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Request = 'Request' in params ? params.Request : null;
+        this.Response = 'Response' in params ? params.Response : null;
+
+    }
+}
+
+/**
+ * DescribeAppTriggerRunLogList request structure.
+ * @class
+ */
+class DescribeAppTriggerRunLogListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Filter parameters.</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Page number</p><p>Value range: [1, 1000000]</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Number of records per page</p><p>Value range: [1, 100]</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Application trigger ID</p>
+         * @type {string || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * <p>Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * Single item consumption measurement
+ * @class
+ */
+class ResourceConsumption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Feature tag. For the PLATFORM scenario, use the PlatformBizType enumeration name; for MODEL/PLUGIN scenarios, leave it empty</p>
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * <p>Consumption measurement unit</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>DOSAGE_UNIT_TOKEN</td><td>0</td><td>token (default)</td></tr><tr><td>DOSAGE_UNIT_PAGE_COUNT</td><td>1</td><td>page_count (page number)</td></tr><tr><td>DOSAGE_UNIT_TIMES</td><td>2</td><td>times (count)</td></tr><tr><td>DOSAGE_UNIT_SECOND</td><td>3</td><td>second (second)</td></tr><tr><td>DOSAGE_UNIT_ITEM</td><td>4</td><td>item (item)</td></tr><tr><td>DOSAGE_UNIT_SHEET</td><td>5</td><td>sheet (sheet)</td></tr><tr><td>DOSAGE_UNIT_CHARACTER</td><td>6</td><td>character (character)</td></tr><tr><td>DOSAGE_UNIT_GB</td><td>7</td><td>GB</td></tr><tr><td>DOSAGE_UNIT_NUMBER</td><td>8</td><td>number (count)</td></tr><tr><td>DOSAGE_UNIT_MILL_SECOND</td><td>9</td><td>mill_second (millisecond)</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.Unit = null;
+
+        /**
+         * <p>Consumption value</p>
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * <p>Basic model info (deprecated, please use ModelProfile)</p>
+ * @class
+ */
+class ModelBasic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Model description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Model icon address</p>
+         * @type {string || null}
+         */
+        this.IconUrl = null;
+
+        /**
+         * <p>Model ID</p>
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * <p>Model type</p><table><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>MODEL_TYPE_UNSPECIFIED</td><td>0</td><td>Unspecified</td></tr><tr><td>MODEL_TYPE_LLM</td><td>1</td><td>LLM model</td></tr><tr><td>MODEL_TYPE_RERANK</td><td>2</td><td>Rerank model</td></tr><tr><td>MODEL_TYPE_EMBEDDING</td><td>3</td><td>Embedding model</td></tr><tr><td>MODEL_TYPE_FILE_PARSE</td><td>4</td><td>Document parsing model</td></tr></table>
+         * @type {number || null}
+         */
+        this.ModelType = null;
+
+        /**
+         * <p>Model name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.IconUrl = 'IconUrl' in params ? params.IconUrl : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.ModelType = 'ModelType' in params ? params.ModelType : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * ModifyApp request structure.
+ * @class
+ */
+class ModifyAppRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Application mode. Enumeration values: 1: Standard mode, 2: Agent mode, 3: Single workflow mode, 4: ClawAgent mode</p>
+         * @type {number || null}
+         */
+        this.AppMode = null;
+
+        /**
+         * <p>App avatar</p>
+         * @type {string || null}
+         */
+        this.Avatar = null;
+
+        /**
+         * <p>Application configuration</p>
+         * @type {AppConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * <p>Application description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Application name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>List of IDs of shared knowledge bases to refer (full coverage)</p>
+         * @type {Array.<string> || null}
+         */
+        this.SharedKbIdList = null;
+
+        /**
+         * <p>App mount cloud disk</p>
+         * @type {Array.<AppFileVolumeMount> || null}
+         */
+        this.FileVolumeMountList = null;
+
+        /**
+         * <p>Field mask, specifying the fields to update (if Paths is empty, no fields will be updated). Paths enumeration values:<br>[Top level] Name, Avatar, Description, AppMode, SharedKbIdList, FileVolumeMountList<br>[Greeting] Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList<br>[Model] Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel<br>[WebSearch] Config.WebSearch<br>[Memory] Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent<br>[Mode] Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig,Config.Mode.ClawAgentConfig<br> [Mode.ClawAgentConfig] Config.Mode.ClawAgentConfig.LongMemoryConfig, Config.Mode.ClawAgentConfig.AgentTeamConfig, Config.Mode.ClawAgentConfig.ChannelContextTimeoutConfig<br>[Experience] Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced<br>[Experience.Conversation] Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch,Config.Experience.Conversation.NewMessageInterrupt<br>[Experience.Conversation.AiCall] Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman<br>[Experience.Advanced] Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility</p>
+         * @type {FieldMask || null}
+         */
+        this.UpdateMask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppMode = 'AppMode' in params ? params.AppMode : null;
+        this.Avatar = 'Avatar' in params ? params.Avatar : null;
+
+        if (params.Config) {
+            let obj = new AppConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SharedKbIdList = 'SharedKbIdList' in params ? params.SharedKbIdList : null;
+
+        if (params.FileVolumeMountList) {
+            this.FileVolumeMountList = new Array();
+            for (let z in params.FileVolumeMountList) {
+                let obj = new AppFileVolumeMount();
+                obj.deserialize(params.FileVolumeMountList[z]);
+                this.FileVolumeMountList.push(obj);
+            }
+        }
+
+        if (params.UpdateMask) {
+            let obj = new FieldMask();
+            obj.deserialize(params.UpdateMask)
+            this.UpdateMask = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteQAList request structure.
+ * @class
+ */
+class DeleteQAListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the knowledge base it belongs to</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>List of QA IDs to be deleted (quantity: 1-20)</p>
+         * @type {Array.<string> || null}
+         */
+        this.QaIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.QaIdList = 'QaIdList' in params ? params.QaIdList : null;
+
+    }
+}
+
+/**
+ * _meta corresponding to the MCP protocol tool, carrying UI meta information for MCP Apps tools (only resourceUri is consumed in the current period)
+ * @class
+ */
+class MCPToolMeta extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>UI extended meta information of the tool, corresponding to _meta.UI in the MCP protocol, declaring the interactive UI resource (ResourceUri) associated with the tool and the caller Visibility. Returned only when the tool supports MCP Apps or declares Visibility; this field is empty for text tools. For details, see the MCPToolUIMeta structure definition.</p>
+         * @type {MCPToolUIMeta || null}
+         */
+        this.Ui = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Ui) {
+            let obj = new MCPToolUIMeta();
+            obj.deserialize(params.Ui)
+            this.Ui = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateSpace response structure.
+ * @class
+ */
+class CreateSpaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Space id.
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateVariable request structure.
+ * @class
+ */
+class CreateVariableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * app_id
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Variable information
+         * @type {Variable || null}
+         */
+        this.Variable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.Variable) {
+            let obj = new Variable();
+            obj.deserialize(params.Variable)
+            this.Variable = obj;
+        }
+
+    }
+}
+
+/**
+ * ExportQA request structure.
+ * @class
+ */
+class ExportQARequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the knowledge base it belongs to</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Filter conditions (multiple Filters are in an AND relationship, and multiple Values of the same Filter are in an OR relationship): Status-QA status, enumeration value, exact match; CategoryId-category ID, exact match; SourceType-QA source type, enumeration value, exact match; EffectiveDomain-application scope, exact match; DocId-associated document ID, exact match; CreateTime-creation time, Unix seconds, BETWEEN passes [start second, end second]; UpdateTime-update time, Unix seconds, BETWEEN passes [start second, end second]; QaId-QA ID list, exact match, supports multiple values</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Query condition (keyword + query scope), consistent with DescribeQASummaryList</p>
+         * @type {QAQuery || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+
+        if (params.Query) {
+            let obj = new QAQuery();
+            obj.deserialize(params.Query)
+            this.Query = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeSystemVariableList request structure.
+ * @class
+ */
+class DescribeSystemVariableListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+    }
+}
+
+/**
+ * DescribeReleaseSummary response structure.
+ * @class
+ */
+class DescribeReleaseSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Release information
+         * @type {ReleaseSummary || null}
+         */
+        this.ReleaseSummary = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReleaseSummary) {
+            let obj = new ReleaseSummary();
+            obj.deserialize(params.ReleaseSummary)
+            this.ReleaseSummary = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QA digest information
+ * @class
+ */
+class QASummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Category path (including category ID, category ID path from the root node, and category name path)</p>
+         * @type {CategoryPath || null}
+         */
+        this.CategoryPath = null;
+
+        /**
+         * <p>Knowledge effective scope</p>
+         * @type {KnowledgeScope || null}
+         */
+        this.KnowledgeScope = null;
+
+        /**
+         * <p>Lifecycle information.</p>
+         * @type {QALifecycle || null}
+         */
+        this.Lifecycle = null;
+
+        /**
+         * <p>Meta information (question/answer/size statistics)</p>
+         * @type {QAMetadata || null}
+         */
+        this.Metadata = null;
+
+        /**
+         * <p>Operator information.</p>
+         * @type {QAOperator || null}
+         */
+        this.OperatorInfo = null;
+
+        /**
+         * <p>QA ID</p>
+         * @type {string || null}
+         */
+        this.QaId = null;
+
+        /**
+         * <p>Similar question statistics</p>
+         * @type {SimilarQuestionStat || null}
+         */
+        this.SimilarQuestion = null;
+
+        /**
+         * <p>Source information.</p>
+         * @type {QASourceInfo || null}
+         */
+        this.SourceInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CategoryPath) {
+            let obj = new CategoryPath();
+            obj.deserialize(params.CategoryPath)
+            this.CategoryPath = obj;
+        }
+
+        if (params.KnowledgeScope) {
+            let obj = new KnowledgeScope();
+            obj.deserialize(params.KnowledgeScope)
+            this.KnowledgeScope = obj;
+        }
+
+        if (params.Lifecycle) {
+            let obj = new QALifecycle();
+            obj.deserialize(params.Lifecycle)
+            this.Lifecycle = obj;
+        }
+
+        if (params.Metadata) {
+            let obj = new QAMetadata();
+            obj.deserialize(params.Metadata)
+            this.Metadata = obj;
+        }
+
+        if (params.OperatorInfo) {
+            let obj = new QAOperator();
+            obj.deserialize(params.OperatorInfo)
+            this.OperatorInfo = obj;
+        }
+        this.QaId = 'QaId' in params ? params.QaId : null;
+
+        if (params.SimilarQuestion) {
+            let obj = new SimilarQuestionStat();
+            obj.deserialize(params.SimilarQuestion)
+            this.SimilarQuestion = obj;
+        }
+
+        if (params.SourceInfo) {
+            let obj = new QASourceInfo();
+            obj.deserialize(params.SourceInfo)
+            this.SourceInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * MCPToolConfig
+ * @class
+ */
+class MCPToolConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Input parameter</p>
+         * @type {Array.<RequestParam> || null}
+         */
+        this.Inputs = null;
+
+        /**
+         * <p>Output parameters</p>
+         * @type {Array.<ResponseParam> || null}
+         */
+        this.Outputs = null;
+
+        /**
+         * <p>Tool meta information</p>
+         * @type {MCPToolMeta || null}
+         */
+        this.Meta = null;
+
+        /**
+         * <p>Whether the interactive interface (MCP Apps) and plug-in-level tags are supported. Default value: false</p>
+         * @type {boolean || null}
+         */
+        this.SupportsApps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Inputs) {
+            this.Inputs = new Array();
+            for (let z in params.Inputs) {
+                let obj = new RequestParam();
+                obj.deserialize(params.Inputs[z]);
+                this.Inputs.push(obj);
+            }
+        }
+
+        if (params.Outputs) {
+            this.Outputs = new Array();
+            for (let z in params.Outputs) {
+                let obj = new ResponseParam();
+                obj.deserialize(params.Outputs[z]);
+                this.Outputs.push(obj);
+            }
+        }
+
+        if (params.Meta) {
+            let obj = new MCPToolMeta();
+            obj.deserialize(params.Meta)
+            this.Meta = obj;
+        }
+        this.SupportsApps = 'SupportsApps' in params ? params.SupportsApps : null;
+
+    }
+}
+
+/**
+ * Skill summary in the SkillSummary list.
+ * @class
+ */
+class SkillSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Classification information
+         * @type {SkillClassification || null}
+         */
+        this.ClassificationInfo = null;
+
+        /**
+         * Current version information
+         * @type {SkillVersion || null}
+         */
+        this.CurrentVersionInfo = null;
+
+        /**
+         * Whether the current user collects it
+         * @type {boolean || null}
+         */
+        this.IsFavorite = null;
+
+        /**
+         * Basic information
+         * @type {SkillProfile || null}
+         */
+        this.Profile = null;
+
+        /**
+         * Skill ID
+         * @type {string || null}
+         */
+        this.SkillId = null;
+
+        /**
+         * Skill exception notification list
+         * @type {Array.<SkillNotice> || null}
+         */
+        this.NoticeList = null;
+
+        /**
+         * List of resource operation permission bits of the current user for this Skill. This parameter is fixed as an empty array for built-in or shared skills.
+         * @type {Array.<string> || null}
+         */
+        this.PermissionIdList = null;
+
+        /**
+         * Share information; there may be two entries, one is shared and the other is under review.
+         * @type {Array.<SkillShare> || null}
+         */
+        this.ShareList = null;
+
+        /**
+         * Skill status 
+
+Enumeration values:
+| uint | Description |
+| --- | --- |
+| 0 | Initialization (no published versions, and the latest version is in INITIALIZED/UNRELEASED) |
+Security detection in progress (no published versions, and the latest version is in AUDITING)
+| 2 | To be released (no published versions, and the latest version is in PENDING_RELEASE) |
+| 3 | Released (any RELEASED version exists, absorbent state) |
+         * @type {number || null}
+         */
+        this.SkillStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClassificationInfo) {
+            let obj = new SkillClassification();
+            obj.deserialize(params.ClassificationInfo)
+            this.ClassificationInfo = obj;
+        }
+
+        if (params.CurrentVersionInfo) {
+            let obj = new SkillVersion();
+            obj.deserialize(params.CurrentVersionInfo)
+            this.CurrentVersionInfo = obj;
+        }
+        this.IsFavorite = 'IsFavorite' in params ? params.IsFavorite : null;
+
+        if (params.Profile) {
+            let obj = new SkillProfile();
+            obj.deserialize(params.Profile)
+            this.Profile = obj;
+        }
+        this.SkillId = 'SkillId' in params ? params.SkillId : null;
+
+        if (params.NoticeList) {
+            this.NoticeList = new Array();
+            for (let z in params.NoticeList) {
+                let obj = new SkillNotice();
+                obj.deserialize(params.NoticeList[z]);
+                this.NoticeList.push(obj);
+            }
+        }
+        this.PermissionIdList = 'PermissionIdList' in params ? params.PermissionIdList : null;
+
+        if (params.ShareList) {
+            this.ShareList = new Array();
+            for (let z in params.ShareList) {
+                let obj = new SkillShare();
+                obj.deserialize(params.ShareList[z]);
+                this.ShareList.push(obj);
+            }
+        }
+        this.SkillStatus = 'SkillStatus' in params ? params.SkillStatus : null;
+
+    }
+}
+
+/**
+ * DescribeLabel request structure.
+ * @class
+ */
+class DescribeLabelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the knowledge base it belongs to</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Tag ID.</p>
+         * @type {string || null}
+         */
+        this.LabelId = null;
+
+        /**
+         * <p>Common filter.</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Standard term ID of the scroll loading cursor (pass 0 for the first request, and subsequently pass the TermId of the last item on the previous page)</p>
+         * @type {string || null}
+         */
+        this.LastTermId = null;
+
+        /**
+         * <p>Number of items to load at a time. Default: 10. Maximum: 100</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Keyword search</p>
+         * @type {string || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.LabelId = 'LabelId' in params ? params.LabelId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.LastTermId = 'LastTermId' in params ? params.LastTermId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Query = 'Query' in params ? params.Query : null;
+
+    }
+}
+
+/**
+ * Agent collaboration configuration
+ * @class
+ */
+class AgentCollaborationConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Collaboration mode. Enumeration values: 1: Free transfer: Agents can freely transmit tasks with each other. 2: Workflow orchestration: Collaboration based on predefined processes. 3: Plan-and-Execute: A collaboration mode with separate planning and execution.
+         * @type {number || null}
+         */
+        this.AgentCollaborationMode = null;
+
+        /**
+         * Workflow ID.
+         * @type {string || null}
+         */
+        this.WorkflowId = null;
+
+        /**
+         * Workflow name.
+         * @type {string || null}
+         */
+        this.WorkflowName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AgentCollaborationMode = 'AgentCollaborationMode' in params ? params.AgentCollaborationMode : null;
+        this.WorkflowId = 'WorkflowId' in params ? params.WorkflowId : null;
+        this.WorkflowName = 'WorkflowName' in params ? params.WorkflowName : null;
+
+    }
+}
+
+/**
+ * Abstract list query common switch configuration
+ * @class
+ */
+class SummaryListSwitch extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to display metadata</p>
+         * @type {boolean || null}
+         */
+        this.ShowMetadataEnabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShowMetadataEnabled = 'ShowMetadataEnabled' in params ? params.ShowMetadataEnabled : null;
+
+    }
+}
+
+/**
+ * CheckLabel request structure.
+ * @class
+ */
+class CheckLabelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the knowledge base it belongs to</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>List of standard words to be checked (quantity: 1–100)</p>
+         * @type {Array.<string> || null}
+         */
+        this.TermList = null;
+
+        /**
+         * <p>Tag ID (validates the uniqueness of standard terms under the specified tag)</p>
+         * @type {string || null}
+         */
+        this.LabelId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.TermList = 'TermList' in params ? params.TermList : null;
+        this.LabelId = 'LabelId' in params ? params.LabelId : null;
+
+    }
+}
+
+/**
+ * Role configuration
+ * @class
+ */
+class RoleConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Role description.
+         * @type {string || null}
+         */
+        this.RoleDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleDescription = 'RoleDescription' in params ? params.RoleDescription : null;
+
+    }
+}
+
+/**
+ * DescribeAuditLogList response structure.
+ * @class
+ */
+class DescribeAuditLogListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Operation log list.</p>
+         * @type {Array.<AuditLog> || null}
+         */
+        this.AuditLogList = null;
+
+        /**
+         * <p>es query start position</p><p>Used for querying the next page</p>
+         * @type {Array.<string> || null}
+         */
+        this.SearchAfter = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AuditLogList) {
+            this.AuditLogList = new Array();
+            for (let z in params.AuditLogList) {
+                let obj = new AuditLog();
+                obj.deserialize(params.AuditLogList[z]);
+                this.AuditLogList.push(obj);
+            }
+        }
+        this.SearchAfter = 'SearchAfter' in params ? params.SearchAfter : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeUsageSummaryList response structure.
+ * @class
+ */
+class DescribeUsageSummaryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total record count, used for frontend pagination</p>
+         * @type {string || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>Resource usage aggregation details list</p>
+         * @type {Array.<UsageSummary> || null}
+         */
+        this.UsageSummaryList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.UsageSummaryList) {
+            this.UsageSummaryList = new Array();
+            for (let z in params.UsageSummaryList) {
+                let obj = new UsageSummary();
+                obj.deserialize(params.UsageSummaryList[z]);
+                this.UsageSummaryList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeApp response structure.
+ * @class
+ */
+class DescribeAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>App details</p>
+         * @type {App || null}
+         */
+        this.App = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.App) {
+            let obj = new App();
+            obj.deserialize(params.App)
+            this.App = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteApp request structure.
+ * @class
+ */
+class DeleteAppRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>app_id</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Reason for deletion (optional, shown during approval)</p>
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
+ * DescribeAppSummaryList response structure.
+ * @class
+ */
+class DescribeAppSummaryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application abstract list
+         * @type {Array.<AppSummary> || null}
+         */
+        this.AppSummaryList = null;
+
+        /**
+         * total_count
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AppSummaryList) {
+            this.AppSummaryList = new Array();
+            for (let z in params.AppSummaryList) {
+                let obj = new AppSummary();
+                obj.deserialize(params.AppSummaryList[z]);
+                this.AppSummaryList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ClawAgent long-term memory configuration
+ * @class
+ */
+class ClawAgentLongMemoryConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to enable long-term memory</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * Agent digest information
+ * @class
+ */
+class AgentSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>AgentId</p>
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+        /**
+         * <p>Agent Identity Portrait</p>
+         * @type {AgentProfile || null}
+         */
+        this.Profile = null;
+
+        /**
+         * <p>Advanced setting; returned when scope=0</p>
+         * @type {AgentAdvancedConfig || null}
+         */
+        this.AdvancedConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+
+        if (params.Profile) {
+            let obj = new AgentProfile();
+            obj.deserialize(params.Profile)
+            this.Profile = obj;
+        }
+
+        if (params.AdvancedConfig) {
+            let obj = new AgentAdvancedConfig();
+            obj.deserialize(params.AdvancedConfig)
+            this.AdvancedConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * Supported file types
+ * @class
+ */
+class SupportedFileType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>File type (for example, txt, pdf, jpg; extension is recommended)</p>
+         * @type {string || null}
+         */
+        this.FileExt = null;
+
+        /**
+         * <p>File size limit (unit: byte)</p>
+         * @type {string || null}
+         */
+        this.MaxSizeBytes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.FileExt = 'FileExt' in params ? params.FileExt : null;
+        this.MaxSizeBytes = 'MaxSizeBytes' in params ? params.MaxSizeBytes : null;
+
+    }
+}
+
+/**
+ * SkillCategory classification information.
+ * @class
+ */
+class SkillCategory extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Category identifier
+         * @type {string || null}
+         */
+        this.CategoryKey = null;
+
+        /**
+         * Category name
+         * @type {string || null}
+         */
+        this.CategoryName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CategoryKey = 'CategoryKey' in params ? params.CategoryKey : null;
+        this.CategoryName = 'CategoryName' in params ? params.CategoryName : null;
+
+    }
+}
+
+/**
+ * Agent tool details
+ * @class
+ */
+class AgentTool extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tool configuration field</p>
+         * @type {AgentToolBasicConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * <p>Tool name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Tool status</p><p>Enumeration values:</p><ul><li>1: available</li><li>2: unavailable</li><li>3: invalid</li></ul>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Calling method</p><p>Enumeration values:</p><ul><li>0: Non-streaming</li><li>1: Streaming</li></ul>
+         * @type {number || null}
+         */
+        this.StreamMode = null;
+
+        /**
+         * <p>Tool access mode</p><p>Enumeration values:</p><ul><li>0: Not specified</li><li>1: Read-only</li><li>2: Write/Delete</li></ul>
+         * @type {number || null}
+         */
+        this.ToolAccessMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Config) {
+            let obj = new AgentToolBasicConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StreamMode = 'StreamMode' in params ? params.StreamMode : null;
+        this.ToolAccessMode = 'ToolAccessMode' in params ? params.ToolAccessMode : null;
+
+    }
+}
+
+/**
+ * ReleaseSkill request structure.
+ * @class
+ */
+class ReleaseSkillRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>SkillId</p>
+         * @type {string || null}
+         */
+        this.SkillId = null;
+
+        /**
+         * <p>Workspace ID</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Version ID</p>
+         * @type {string || null}
+         */
+        this.VersionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SkillId = 'SkillId' in params ? params.SkillId : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+
+    }
+}
+
+/**
+ * DescribeVariable request structure.
+ * @class
+ */
+class DescribeVariableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * app_id
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * variable_id
+         * @type {string || null}
+         */
+        this.VariableId = null;
+
+        /**
+         * module_type. Enumeration values: 1: environment parameter, 2: application parameter, 3: system parameter, -1: ALL parameters
+         * @type {number || null}
+         */
+        this.ModuleType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.VariableId = 'VariableId' in params ? params.VariableId : null;
+        this.ModuleType = 'ModuleType' in params ? params.ModuleType : null;
+
+    }
+}
+
+/**
+ * Basic information of the workflow running instance
+ * @class
+ */
+class WorkflowRunProfile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * ID of the workflow running instance	
+         * @type {string || null}
+         */
+        this.WorkflowRunId = null;
+
+        /**
+         * Workflow ID
+         * @type {string || null}
+         */
+        this.WorkflowId = null;
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.WorkflowRunId = 'WorkflowRunId' in params ? params.WorkflowRunId : null;
+        this.WorkflowId = 'WorkflowId' in params ? params.WorkflowId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * Operation log
+ * @class
+ */
+class AuditLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Employee information</p>
+         * @type {AccountInfo || null}
+         */
+        this.AccountInfo = null;
+
+        /**
+         * <p>Application business id</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Application name</p><p>Name when the operation log is triggered</p>
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * <p>Operation time</p><p>Parameter format: timestamp in seconds</p>
+         * @type {string || null}
+         */
+        this.OperateTime = null;
+
+        /**
+         * <p>Operation type.</p>
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * <p>Operation object.</p>
+         * @type {string || null}
+         */
+        this.Biz = null;
+
+        /**
+         * <p>Operation content</p>
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * <p>Unique ID for the operation.</p>
+         * @type {string || null}
+         */
+        this.UniqueId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AccountInfo) {
+            let obj = new AccountInfo();
+            obj.deserialize(params.AccountInfo)
+            this.AccountInfo = obj;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.OperateTime = 'OperateTime' in params ? params.OperateTime : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.Biz = 'Biz' in params ? params.Biz : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.UniqueId = 'UniqueId' in params ? params.UniqueId : null;
+
+    }
+}
+
+/**
+ * Workflow run instance output information
+ * @class
+ */
+class WorkflowRunOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Workflow output
+         * @type {string || null}
+         */
+        this.Output = null;
+
+        /**
+         * Current reply message
+         * @type {ReplyMessage || null}
+         */
+        this.LatestMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Output = 'Output' in params ? params.Output : null;
+
+        if (params.LatestMessage) {
+            let obj = new ReplyMessage();
+            obj.deserialize(params.LatestMessage)
+            this.LatestMessage = obj;
+        }
+
+    }
+}
+
+/**
+ * Input box configuration
+ * @class
+ */
+class InputBoxConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input box buttons: 1: Upload image, 2: Upload documents, 3: Tencent Docs, 4: Online search
+         * @type {Array.<number> || null}
+         */
+        this.InputBoxButtons = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputBoxButtons = 'InputBoxButtons' in params ? params.InputBoxButtons : null;
+
+    }
+}
+
+/**
+ * AppTrigger
+ * @class
+ */
+class AppTrigger extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Execution configuration</p>
+         * @type {ExecuteConfig || null}
+         */
+        this.ExecuteConfig = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_EXECUTE_TYPE_PROMPT</td> <td>1</td> <td>Command execution</td> </tr> <tr> <td>APP_TRIGGER_EXECUTE_TYPE_WORKFLOW</td> <td>2</td> <td>Workflow execution</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.ExecuteType = null;
+
+        /**
+         * <p>Number of failures</p>
+         * @type {string || null}
+         */
+        this.FailedCount = null;
+
+        /**
+         * <p>Push channel configuration</p>
+         * @type {TimerPushConfig || null}
+         */
+        this.PushConfig = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>APP_TRIGGER_STATUS_UNSPECIFIED</td><td>0</td><td>Unspecified</td></tr><tr><td>APP_TRIGGER_STATUS_ENABLED</td><td>1</td><td>Enablement</td></tr><tr><td>APP_TRIGGER_STATUS_PAUSED</td><td>2</td><td>Suspension</td></tr><tr><td>APP_TRIGGER_STATUS_DELETED</td><td>3</td><td>Deleted</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Number of successes</p>
+         * @type {string || null}
+         */
+        this.SuccessCount = null;
+
+        /**
+         * <p>Trigger configuration</p>
+         * @type {TriggerConfig || null}
+         */
+        this.TriggerConfig = null;
+
+        /**
+         * <p>Trigger ID</p>
+         * @type {string || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * <p>Trigger name</p>
+         * @type {string || null}
+         */
+        this.TriggerName = null;
+
+        /**
+         * <p>Trigger status</p>
+         * @type {TriggerStatus || null}
+         */
+        this.TriggerStatus = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>APP_TRIGGER_TYPE_UNSPECIFIED</td><td>0</td><td>Unspecified</td></tr><tr><td>APP_TRIGGER_TYPE_SCHEDULED</td><td>1</td><td>Scheduled trigger</td></tr><tr><td>APP_TRIGGER_TYPE_WEBHOOK</td><td>2</td><td>Webhook trigger</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.TriggerType = null;
+
+        /**
+         * <p>Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.ExecuteConfig) {
+            let obj = new ExecuteConfig();
+            obj.deserialize(params.ExecuteConfig)
+            this.ExecuteConfig = obj;
+        }
+        this.ExecuteType = 'ExecuteType' in params ? params.ExecuteType : null;
+        this.FailedCount = 'FailedCount' in params ? params.FailedCount : null;
+
+        if (params.PushConfig) {
+            let obj = new TimerPushConfig();
+            obj.deserialize(params.PushConfig)
+            this.PushConfig = obj;
+        }
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+
+        if (params.TriggerConfig) {
+            let obj = new TriggerConfig();
+            obj.deserialize(params.TriggerConfig)
+            this.TriggerConfig = obj;
+        }
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+
+        if (params.TriggerStatus) {
+            let obj = new TriggerStatus();
+            obj.deserialize(params.TriggerStatus)
+            this.TriggerStatus = obj;
+        }
+        this.TriggerType = 'TriggerType' in params ? params.TriggerType : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * DescribeAgentSummaryList response structure.
+ * @class
+ */
+class DescribeAgentSummaryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>Agent digest information</p>
+         * @type {Array.<AgentSummary> || null}
+         */
+        this.AgentList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AgentList) {
+            this.AgentList = new Array();
+            for (let z in params.AgentList) {
+                let obj = new AgentSummary();
+                obj.deserialize(params.AgentList[z]);
+                this.AgentList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteKB request structure.
+ * @class
+ */
+class DeleteKBRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Workspace ID</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+    }
+}
+
+/**
+ * SkillVersion version information.
+ * @class
+ */
+class SkillVersion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Detection information</p>
+         * @type {SkillAnalysisInfo || null}
+         */
+        this.AnalysisInfo = null;
+
+        /**
+         * <p>Current effective version number.</p>
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * <p>Current effective version ID</p>
+         * @type {string || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * <p>Skill version RELEASE process status:</p><pre><code>  - 0 INITIALIZED      initialization (initial version state)  - 1 AUDITING         under review (f_analysis_status ∈ {PENDING, RUNNING})  - 2 PENDING_RELEASE  awaiting RELEASE (low/medium-risk, waiting for user confirmation to publish)  - 3 RELEASED         RELEASED  - 4 UNRELEASED       not RELEASED (HIGH / UNAVAILABLE / FAILED / user give up, including the semantics of historical "not approved")Decoupled from SkillAnalysisStatus: the former is the RELEASE lifecycle from the user perspective, while the latter is the security detection stage.</code></pre>
+         * @type {number || null}
+         */
+        this.VersionStatus = null;
+
+        /**
+         * <p>md5 information of the Skill package</p>
+         * @type {string || null}
+         */
+        this.SkillMd5 = null;
+
+        /**
+         * <p>Version package address</p>
+         * @type {string || null}
+         */
+        this.SkillUrl = null;
+
+        /**
+         * <p>Version creation time (Unix seconds).</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>skill md document</p>
+         * @type {string || null}
+         */
+        this.SkillMarkdownUrl = null;
+
+        /**
+         * <p>Version change description</p>
+         * @type {string || null}
+         */
+        this.UpdateDesc = null;
+
+        /**
+         * <p>Change user.</p>
+         * @type {string || null}
+         */
+        this.Updater = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AnalysisInfo) {
+            let obj = new SkillAnalysisInfo();
+            obj.deserialize(params.AnalysisInfo)
+            this.AnalysisInfo = obj;
+        }
+        this.Version = 'Version' in params ? params.Version : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.VersionStatus = 'VersionStatus' in params ? params.VersionStatus : null;
+        this.SkillMd5 = 'SkillMd5' in params ? params.SkillMd5 : null;
+        this.SkillUrl = 'SkillUrl' in params ? params.SkillUrl : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.SkillMarkdownUrl = 'SkillMarkdownUrl' in params ? params.SkillMarkdownUrl : null;
+        this.UpdateDesc = 'UpdateDesc' in params ? params.UpdateDesc : null;
+        this.Updater = 'Updater' in params ? params.Updater : null;
+
+    }
+}
+
+/**
+ * Mode configuration - Contains unique configurations for different modes
+ * @class
+ */
+class AppModeConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Multi-agent configuration (Agent mode)
+         * @type {MultiAgentConfig || null}
+         */
+        this.MultiAgentConfig = null;
+
+        /**
+         * Single workflow configuration (single workflow mode)
+         * @type {SingleWorkflowConfig || null}
+         */
+        this.SingleWorkflowConfig = null;
+
+        /**
+         * ClawAgent Configuration (ClawAgent mode)
+         * @type {ClawAgentConfig || null}
+         */
+        this.ClawAgentConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MultiAgentConfig) {
+            let obj = new MultiAgentConfig();
+            obj.deserialize(params.MultiAgentConfig)
+            this.MultiAgentConfig = obj;
+        }
+
+        if (params.SingleWorkflowConfig) {
+            let obj = new SingleWorkflowConfig();
+            obj.deserialize(params.SingleWorkflowConfig)
+            this.SingleWorkflowConfig = obj;
+        }
+
+        if (params.ClawAgentConfig) {
+            let obj = new ClawAgentConfig();
+            obj.deserialize(params.ClawAgentConfig)
+            this.ClawAgentConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * Reply message
+ * @class
+ */
+class ReplyMessage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message array containing multiple message objects
+         * @type {Array.<ReplyContent> || null}
+         */
+        this.ContentList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ContentList) {
+            this.ContentList = new Array();
+            for (let z in params.ContentList) {
+                let obj = new ReplyContent();
+                obj.deserialize(params.ContentList[z]);
+                this.ContentList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Tool
+ * @class
+ */
+class Tool extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tool billing information</p>
+         * @type {ToolBilling || null}
+         */
+        this.Billing = null;
+
+        /**
+         * <p>Tool call count</p><p>Unit: count</p>
+         * @type {number || null}
+         */
+        this.CallCount = null;
+
+        /**
+         * <p>Tool description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Tool name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Plug-in ID</p>
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>TOOL_ACCESS_MODE_UNKNOWN</td><td>0</td><td>Not specified</td></tr><tr><td>TOOL_ACCESS_MODE_READ_ONLY</td><td>1</td><td>Read-only</td></tr><tr><td>TOOL_ACCESS_MODE_WRITE_DELETE</td><td>2</td><td>Write/Delete</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.ToolAccessMode = null;
+
+        /**
+         * <p>Tool configuration info</p>
+         * @type {ToolConfig || null}
+         */
+        this.ToolConfig = null;
+
+        /**
+         * <p>Tool ID</p>
+         * @type {string || null}
+         */
+        this.ToolId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Billing) {
+            let obj = new ToolBilling();
+            obj.deserialize(params.Billing)
+            this.Billing = obj;
+        }
+        this.CallCount = 'CallCount' in params ? params.CallCount : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.ToolAccessMode = 'ToolAccessMode' in params ? params.ToolAccessMode : null;
+
+        if (params.ToolConfig) {
+            let obj = new ToolConfig();
+            obj.deserialize(params.ToolConfig)
+            this.ToolConfig = obj;
+        }
+        this.ToolId = 'ToolId' in params ? params.ToolId : null;
+
+    }
+}
+
+/**
+ * Aggregated details of model resource usage (exclusive to MODEL domain)
+ * @class
+ */
+class ModelUsageSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Number of calls (top-level count of API calls)</p>
+         * @type {number || null}
+         */
+        this.CallCount = null;
+
+        /**
+         * <p>Whether it is the default knowledge base</p>
+         * @type {boolean || null}
+         */
+        this.IsDefaultKB = null;
+
+        /**
+         * <p>Model name, flag indicating the AI model used</p>
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * <p>MODEL domain consumption measurement list (authoritative field): lists each measurement category by unit + label. When unit=TOKEN, label is case-sensitive for Token subcategories (input/output/avg_*/cache_*), with an empty label indicating total_tokens; unit=PAGE_COUNT refers to the model's consumed page count</p>
+         * @type {Array.<ResourceConsumption> || null}
+         */
+        this.ResourceConsumptionList = null;
+
+        /**
+         * <p>Total model PU consumption (sum of PU consumption within the aggregate dimension)</p>
+         * @type {number || null}
+         */
+        this.ConsumptionPU = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CallCount = 'CallCount' in params ? params.CallCount : null;
+        this.IsDefaultKB = 'IsDefaultKB' in params ? params.IsDefaultKB : null;
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+
+        if (params.ResourceConsumptionList) {
+            this.ResourceConsumptionList = new Array();
+            for (let z in params.ResourceConsumptionList) {
+                let obj = new ResourceConsumption();
+                obj.deserialize(params.ResourceConsumptionList[z]);
+                this.ResourceConsumptionList.push(obj);
+            }
+        }
+        this.ConsumptionPU = 'ConsumptionPU' in params ? params.ConsumptionPU : null;
+
+    }
+}
+
+/**
+ * DescribeQA response structure.
+ * @class
+ */
+class DescribeQAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Fragment highlight information.</p>
+         * @type {Array.<QASegmentHighlight> || null}
+         */
+        this.HighlightList = null;
+
+        /**
+         * <p>Fragment content</p>
+         * @type {string || null}
+         */
+        this.PageContent = null;
+
+        /**
+         * <p>Problem description</p>
+         * @type {string || null}
+         */
+        this.QuestionDescription = null;
+
+        /**
+         * <p>Similar question list</p>
+         * @type {Array.<SimilarQuestion> || null}
+         */
+        this.SimilarQuestionList = null;
+
+        /**
+         * <p>Basic information.</p>
+         * @type {QASummary || null}
+         */
+        this.Summary = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.HighlightList) {
+            this.HighlightList = new Array();
+            for (let z in params.HighlightList) {
+                let obj = new QASegmentHighlight();
+                obj.deserialize(params.HighlightList[z]);
+                this.HighlightList.push(obj);
+            }
+        }
+        this.PageContent = 'PageContent' in params ? params.PageContent : null;
+        this.QuestionDescription = 'QuestionDescription' in params ? params.QuestionDescription : null;
+
+        if (params.SimilarQuestionList) {
+            this.SimilarQuestionList = new Array();
+            for (let z in params.SimilarQuestionList) {
+                let obj = new SimilarQuestion();
+                obj.deserialize(params.SimilarQuestionList[z]);
+                this.SimilarQuestionList.push(obj);
+            }
+        }
+
+        if (params.Summary) {
+            let obj = new QASummary();
+            obj.deserialize(params.Summary)
+            this.Summary = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVariableList response structure.
+ * @class
+ */
+class DescribeVariableListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * total_count
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * variable_list
+         * @type {Array.<Variable> || null}
+         */
+        this.VariableList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VariableList) {
+            this.VariableList = new Array();
+            for (let z in params.VariableList) {
+                let obj = new Variable();
+                obj.deserialize(params.VariableList[z]);
+                this.VariableList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Standard word (one tag value)
+ * @class
+ */
+class LabelTerm extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Synonym list</p>
+         * @type {Array.<string> || null}
+         */
+        this.SynonymList = null;
+
+        /**
+         * <p>Standard words</p>
+         * @type {string || null}
+         */
+        this.Term = null;
+
+        /**
+         * <p>Standard term ID (generated by the backend, not passed in upon creation)</p>
+         * @type {string || null}
+         */
+        this.TermId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SynonymList = 'SynonymList' in params ? params.SynonymList : null;
+        this.Term = 'Term' in params ? params.Term : null;
+        this.TermId = 'TermId' in params ? params.TermId : null;
+
+    }
+}
+
+/**
+ * ModifyQA request structure.
+ * @class
+ */
+class ModifyQARequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Modify field content (used in conjunction with update_mask)</p>
+         * @type {QAModifyFields || null}
+         */
+        this.Fields = null;
+
+        /**
+         * <p>ID of the knowledge base it belongs to</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>QA ID</p>
+         * @type {string || null}
+         */
+        this.QaId = null;
+
+        /**
+         * <p>Field mask: specifies the fields to be modified (supported Paths: Question, Answer, CategoryId, DocId, LabelRefList, QuestionDescription, ExpirationPolicy, SimilarQuestionList, EffectiveDomain, IsAccepted)</p>
+         * @type {FieldMask || null}
+         */
+        this.UpdateMask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Fields) {
+            let obj = new QAModifyFields();
+            obj.deserialize(params.Fields)
+            this.Fields = obj;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.QaId = 'QaId' in params ? params.QaId : null;
+
+        if (params.UpdateMask) {
+            let obj = new FieldMask();
+            obj.deserialize(params.UpdateMask)
+            this.UpdateMask = obj;
+        }
+
+    }
+}
+
+/**
+ * Tag abstract
+ * @class
+ */
+class LabelSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tag ID.</p>
+         * @type {string || null}
+         */
+        this.LabelId = null;
+
+        /**
+         * <p>Metadata configuration (configuration message when the tag is set to metadata)</p>
+         * @type {MetaValue || null}
+         */
+        this.MetaValue = null;
+
+        /**
+         * <p>Tag name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Number of resources referring to the tag</p>
+         * @type {number || null}
+         */
+        this.RefCount = null;
+
+        /**
+         * <p>Tag value (standard word + synonym list)</p>
+         * @type {Array.<LabelTerm> || null}
+         */
+        this.TermList = null;
+
+        /**
+         * <p>Total number of tag values.</p>
+         * @type {number || null}
+         */
+        this.TermTotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LabelId = 'LabelId' in params ? params.LabelId : null;
+
+        if (params.MetaValue) {
+            let obj = new MetaValue();
+            obj.deserialize(params.MetaValue)
+            this.MetaValue = obj;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RefCount = 'RefCount' in params ? params.RefCount : null;
+
+        if (params.TermList) {
+            this.TermList = new Array();
+            for (let z in params.TermList) {
+                let obj = new LabelTerm();
+                obj.deserialize(params.TermList[z]);
+                this.TermList.push(obj);
+            }
+        }
+        this.TermTotalCount = 'TermTotalCount' in params ? params.TermTotalCount : null;
+
+    }
+}
+
+/**
+ * DescribeReleaseList request structure.
+ * @class
+ */
+class DescribeReleaseListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Page number, starting from 0.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Number of items per page. Maximum: 100.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * ModifySpace response structure.
+ * @class
+ */
+class ModifySpaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Reference source information
+ * @class
+ */
+class ConversationReference extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Reference index</p>
+         * @type {number || null}
+         */
+        this.Index = null;
+
+        /**
+         * <p>Reference name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>REFERENCE source TYPE. Enumeration values: 0-APP_REFERENCE_TYPE_UNSPECIFIED (not specified), 1-APP_REFERENCE_TYPE_QA (QA), 2-APP_REFERENCE_TYPE_SEGMENT (fragment), 3-APP_REFERENCE_TYPE_DOC (document), 4-APP_REFERENCE_TYPE_WEB_SEARCH (WEB SEARCH), 5-APP_REFERENCE_TYPE_GRAPH_RAG (GraphRAG)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Index = 'Index' in params ? params.Index : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * Collection of modifiable tag fields (used in conjunction with update_mask)
+ * @class
+ */
+class LabelModifyFields extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tag name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>List of incremental modifications to standard words (add/modify/delete)</p>
+         * @type {Array.<LabelTermModifyItem> || null}
+         */
+        this.TermModifyList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.TermModifyList) {
+            this.TermModifyList = new Array();
+            for (let z in params.TermModifyList) {
+                let obj = new LabelTermModifyItem();
+                obj.deserialize(params.TermModifyList[z]);
+                this.TermModifyList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteMsgRecordCategory request structure.
+ * @class
+ */
+class DeleteMsgRecordCategoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>App ID</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Business ID of the category to be deleted</p>
+         * @type {string || null}
+         */
+        this.CategoryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+
+    }
+}
+
+/**
+ * Widget component content information
+ * @class
+ */
+class ConversationWidget extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Base64-encoded original widget data</p>
+         * @type {string || null}
+         */
+        this.EncodedWidget = null;
+
+        /**
+         * <p>payload from the user's last submission</p>
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * <p>Location of the widget in the text</p>
+         * @type {number || null}
+         */
+        this.Position = null;
+
+        /**
+         * <p>widget status JSON data</p>
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * <p>widget view data</p>
+         * @type {string || null}
+         */
+        this.View = null;
+
+        /**
+         * <p>component_ID</p>
+         * @type {string || null}
+         */
+        this.WidgetId = null;
+
+        /**
+         * <p>Component operation ID</p>
+         * @type {string || null}
+         */
+        this.WidgetRunId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EncodedWidget = 'EncodedWidget' in params ? params.EncodedWidget : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.Position = 'Position' in params ? params.Position : null;
+        this.State = 'State' in params ? params.State : null;
+        this.View = 'View' in params ? params.View : null;
+        this.WidgetId = 'WidgetId' in params ? params.WidgetId : null;
+        this.WidgetRunId = 'WidgetRunId' in params ? params.WidgetRunId : null;
+
+    }
+}
+
+/**
+ * Workflow running instance information
+ * @class
+ */
+class WorkflowRun extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Basic information of the workflow running instance
+         * @type {WorkflowRunSummary || null}
+         */
+        this.WorkflowRunSummary = null;
+
+        /**
+         * Workflow run instance output information
+         * @type {WorkflowRunOutput || null}
+         */
+        this.WorkflowRunOutput = null;
+
+        /**
+         * Workflow run instance metadata
+         * @type {WorkflowRunMetadata || null}
+         */
+        this.WorkflowRunMetadata = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WorkflowRunSummary) {
+            let obj = new WorkflowRunSummary();
+            obj.deserialize(params.WorkflowRunSummary)
+            this.WorkflowRunSummary = obj;
+        }
+
+        if (params.WorkflowRunOutput) {
+            let obj = new WorkflowRunOutput();
+            obj.deserialize(params.WorkflowRunOutput)
+            this.WorkflowRunOutput = obj;
+        }
+
+        if (params.WorkflowRunMetadata) {
+            let obj = new WorkflowRunMetadata();
+            obj.deserialize(params.WorkflowRunMetadata)
+            this.WorkflowRunMetadata = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeWorkflowRun request structure.
+ * @class
+ */
+class DescribeWorkflowRunRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID. For how to obtain it, see <a href="https://www.tencentcloud.com/document/product/1759/109469?from_cn_redirect=1#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">AppId</a></p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Workflow operation instance ID</p>
+         * @type {string || null}
+         */
+        this.WorkflowRunId = null;
+
+        /**
+         * <p>The NodePath of the specified sub-Workflow. Format: [&lt;node_id&gt;[&lt;index&gt;].]*&lt;node_id&gt;[&lt;index&gt;]  This path is used to locate a specific Workflow instance (Workflow Run), which can be the main Workflow instance or a sub-instance generated by a sub-Workflow node. The path consists of node identifiers separated by dots (.). Each node identifier is in the format of node id[instance index]. node id (node_id): The id of the node to which the sub-Workflow belongs. Instance index (index): The "instance index" is empty for Workflow nodes, and non-empty for loop and batch processing nodes, starting from 1. Example: "" or unset -> Query the main Workflow instance (parent Workflow) "node_id_a" -> Query the sub-Workflow instance corresponding to Workflow node node_id_a in the main Workflow "node_id_a.node_id_b[1]" -> Query the Workflow execution status of the first loop of loop node node_id_b in the sub-Workflow corresponding to Workflow node node_id_a</p>
+         * @type {string || null}
+         */
+        this.SubWorkflowNodePath = null;
+
+        /**
+         * <p>Whether to return the process diagram configuration of the workflow</p>
+         * @type {boolean || null}
+         */
+        this.IncludeWorkflowGraph = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.WorkflowRunId = 'WorkflowRunId' in params ? params.WorkflowRunId : null;
+        this.SubWorkflowNodePath = 'SubWorkflowNodePath' in params ? params.SubWorkflowNodePath : null;
+        this.IncludeWorkflowGraph = 'IncludeWorkflowGraph' in params ? params.IncludeWorkflowGraph : null;
+
+    }
+}
+
+/**
+ * Model definition in the Agent configuration
+ * @class
+ */
+class AgentModelConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Unique model id</p>
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * <p>Model alias</p>
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * <p>Model context length character limit</p>
+         * @type {number || null}
+         */
+        this.ContextWordsLimit = null;
+
+        /**
+         * <p>Instruction length character limit</p>
+         * @type {number || null}
+         */
+        this.InstructionsWordsLimit = null;
+
+        /**
+         * <p>Model parameters</p>
+         * @type {ModelParams || null}
+         */
+        this.ModelParameters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.ContextWordsLimit = 'ContextWordsLimit' in params ? params.ContextWordsLimit : null;
+        this.InstructionsWordsLimit = 'InstructionsWordsLimit' in params ? params.InstructionsWordsLimit : null;
+
+        if (params.ModelParameters) {
+            let obj = new ModelParams();
+            obj.deserialize(params.ModelParameters)
+            this.ModelParameters = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyQAList request structure.
+ * @class
+ */
+class ModifyQAListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the knowledge base it belongs to</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>List of QA IDs to be modified (quantity: 1-20)</p>
+         * @type {Array.<string> || null}
+         */
+        this.QaIdList = null;
+
+        /**
+         * <p>Category ID</p>
+         * @type {string || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * <p>Effective scope<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>Disabled</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>Development domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>Release domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>Global</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.EffectiveDomain = null;
+
+        /**
+         * <p>Expiration policy (validity time and behavior after the validity period expires)</p>
+         * @type {ExpirationPolicy || null}
+         */
+        this.ExpirationPolicy = null;
+
+        /**
+         * <p>Whether to adopt (verification passed)</p>
+         * @type {boolean || null}
+         */
+        this.IsAccepted = null;
+
+        /**
+         * <p>Applicable scope (tag condition list).</p>
+         * @type {LabelRefIdentityList || null}
+         */
+        this.LabelRefList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.QaIdList = 'QaIdList' in params ? params.QaIdList : null;
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+        this.EffectiveDomain = 'EffectiveDomain' in params ? params.EffectiveDomain : null;
+
+        if (params.ExpirationPolicy) {
+            let obj = new ExpirationPolicy();
+            obj.deserialize(params.ExpirationPolicy)
+            this.ExpirationPolicy = obj;
+        }
+        this.IsAccepted = 'IsAccepted' in params ? params.IsAccepted : null;
+
+        if (params.LabelRefList) {
+            let obj = new LabelRefIdentityList();
+            obj.deserialize(params.LabelRefList)
+            this.LabelRefList = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateConversation response structure.
+ * @class
+ */
+class CreateConversationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Conversation ID</p>
+         * @type {string || null}
+         */
+        this.ConversationId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConversationId = 'ConversationId' in params ? params.ConversationId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * NodeRunLog
+ * @class
+ */
+class NodeRunLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Logs of node.</p>
+         * @type {string || null}
+         */
+        this.Log = null;
+
+        /**
+         * <p>URLs of the complete content of logs of node (has a value only when the Log content exceeds the limit)</p>
+         * @type {string || null}
+         */
+        this.LogRef = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Log = 'Log' in params ? params.Log : null;
+        this.LogRef = 'LogRef' in params ? params.LogRef : null;
+
+    }
+}
+
+/**
+ * Variable information
+ * @class
+ */
+class Variable extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Default file name.</p>
+         * @type {string || null}
+         */
+        this.DefaultFileName = null;
+
+        /**
+         * <p>Default value.</p>
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * <p>Variable description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Variable module type</p><p>Enumeration values:</p><ul><li>0: API parameter</li><li>1: environment parameter</li><li>2: application parameter</li><li>3: system parameter</li></ul>
+         * @type {number || null}
+         */
+        this.ModuleType = null;
+
+        /**
+         * <p>Variable name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Variable type</p><p>Enumeration values:</p><ul><li>0: string</li><li>1: integer</li><li>2: floating-point number</li><li>3: boolean value</li><li>4: object</li><li>5: array of strings</li><li>6: array of integers</li><li>7: array of floating-point numbers</li><li>8: array of boolean values</li><li>9: object array</li><li>10: file</li><li>11: document</li><li>12: image</li><li>13: audio</li><li>14: video</li><li>15: file array</li><li>16: document array</li><li>17: image array</li><li>18: audio array</li><li>19: video array</li><li>20: array of arrays</li><li>21: key</li></ul>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Variable ID</p>
+         * @type {string || null}
+         */
+        this.VariableId = null;
+
+        /**
+         * <p>Whether to enable network policy (only effective for environment variables)</p>
+         * @type {boolean || null}
+         */
+        this.EnableEndpoints = null;
+
+        /**
+         * <p>Network policy list (Supported: precise domain name, *.wildcard domain, with optional protocol/port/path prefix)</p>
+         * @type {Array.<string> || null}
+         */
+        this.EndpointList = null;
+
+        /**
+         * <p>Whether it is a built-in variable.</p>
+         * @type {boolean || null}
+         */
+        this.IsBuiltin = null;
+
+        /**
+         * <p>Whether it can be injected into the sandbox environment.</p>
+         * @type {boolean || null}
+         */
+        this.EnableSandbox = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DefaultFileName = 'DefaultFileName' in params ? params.DefaultFileName : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ModuleType = 'ModuleType' in params ? params.ModuleType : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.VariableId = 'VariableId' in params ? params.VariableId : null;
+        this.EnableEndpoints = 'EnableEndpoints' in params ? params.EnableEndpoints : null;
+        this.EndpointList = 'EndpointList' in params ? params.EndpointList : null;
+        this.IsBuiltin = 'IsBuiltin' in params ? params.IsBuiltin : null;
+        this.EnableSandbox = 'EnableSandbox' in params ? params.EnableSandbox : null;
+
+    }
+}
+
+/**
+ * Timeliness retrieval enhancement configuration
+ * @class
+ */
+class ExpirationAwareness extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to enable timeliness retrieval. Once enabled, retrieval results will be sorted based on the validity time of the knowledge</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * Brief information of the shared knowledge base referenced by the app (only ID and name are returned during queries)
+ * @class
+ */
+class AppSharedKbInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Shared knowledge base ID
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * Name of the shared knowledge base
+         * @type {string || null}
+         */
+        this.KbName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.KbName = 'KbName' in params ? params.KbName : null;
+
+    }
+}
+
+/**
+ * ResetConversation response structure.
+ * @class
+ */
+class ResetConversationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Reset time, unit: ms</p>
+         * @type {string || null}
+         */
+        this.ResetTime = null;
+
+        /**
+         * <p>recordId of the last record before reset</p>
+         * @type {string || null}
+         */
+        this.ResetThroughRecordId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResetTime = 'ResetTime' in params ? params.ResetTime : null;
+        this.ResetThroughRecordId = 'ResetThroughRecordId' in params ? params.ResetThroughRecordId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DailySchedule
+ * @class
+ */
+class DailySchedule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time
+         * @type {string || null}
+         */
+        this.TimeOfDay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeOfDay = 'TimeOfDay' in params ? params.TimeOfDay : null;
+
+    }
+}
+
+/**
+ * Prompt rewrite configuration
+ * @class
+ */
+class PromptRewriteModel extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Model configuration
+         * @type {ModelDetailInfo || null}
+         */
+        this.Model = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Model) {
+            let obj = new ModelDetailInfo();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
+
+    }
+}
+
+/**
+ * ManualOnlySchedule
+ * @class
+ */
+class ManualOnlySchedule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Enable
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * ModifySpace request structure.
+ * @class
+ */
+class ModifySpaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Workspace name. Maximum length: 30 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Space description. Maximum length: 150 characters.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Space id
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * Fields to update. `Name` and `Description` supported.
+         * @type {FieldMask || null}
+         */
+        this.FieldMask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+        if (params.FieldMask) {
+            let obj = new FieldMask();
+            obj.deserialize(params.FieldMask)
+            this.FieldMask = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribePluginSummaryList request structure.
+ * @class
+ */
+class DescribePluginSummaryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Space ID, used when querying the plug-in list in the space</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Filter criteria list, supporting PluginKind, CategoryKey, PluginSource, PluginId, PluginClass, BillingType, AuthType, IsShared, IsCreatedByMe</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Whether to only return favorite plug-ins. If set to true, only plug-ins favorited by the current user are returned. If set to false or not specified, no filtering by favorite status is applied.</p>
+         * @type {boolean || null}
+         */
+        this.IsFavoriteOnly = null;
+
+        /**
+         * <p>Plug-in display scenario. If not passed or set to 0, the scenario is not limited.</p><p>Enumeration values:</p><ul><li>0: Not limited</li><li>1: Agent Mode</li><li>2: Workflow</li><li>3: Intelligent workbench</li></ul>
+         * @type {number || null}
+         */
+        this.Module = null;
+
+        /**
+         * <p>Page number. Starts from 0</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Size per page.</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <p>Query content fuzzy matching: plugin name/plugin description/tool name/tool description</p>
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * <p>Sorting method.</p><p>Enumeration values:</p><ul><li>0: not specified, default sorting</li><li>1: relevance ranking</li><li>2: sort by update time</li><li>3: default sorting</li><li>4: sort by popularity</li></ul>
+         * @type {number || null}
+         */
+        this.SortType = null;
+
+        /**
+         * <p>Filter plug-ins shared by the current space/business</p><p>Value range: [0, 2]</p>
+         * @type {number || null}
+         */
+        this.PluginSpaceRelation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.IsFavoriteOnly = 'IsFavoriteOnly' in params ? params.IsFavoriteOnly : null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.SortType = 'SortType' in params ? params.SortType : null;
+        this.PluginSpaceRelation = 'PluginSpaceRelation' in params ? params.PluginSpaceRelation : null;
+
+    }
+}
+
+/**
+ * Application-level cloud disk mounting configuration
+ * @class
+ */
+class AppFileVolumeMount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application cloud disk configuration</p>
+         * @type {FileVolumeMount || null}
+         */
+        this.FileVolumeMount = null;
+
+        /**
+         * <p>1: Add new 2: Modify 3: Delete</p>
+         * @type {number || null}
+         */
+        this.Action = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FileVolumeMount) {
+            let obj = new FileVolumeMount();
+            obj.deserialize(params.FileVolumeMount)
+            this.FileVolumeMount = obj;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+
+    }
+}
+
+/**
+ * CreateApp response structure.
+ * @class
+ */
+class CreateAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>app_id</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Modify the Extension Field of the knowledge base (used to trigger special operations)
+ * @class
+ */
+class KBModifyExtendFields extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Scaling operation: 1=trigger recovery from exceeded state<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KB_EXTENDED_ACTION_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KB_EXTENDED_ACTION_RESUME_EXCEEDED</td><td>1</td><td>Trigger recovery from exceeded state (restore the knowledge base from exceeded status to normal status)</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.Action = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+
+    }
+}
+
+/**
+ * QA search configuration
+ * @class
+ */
+class QARetrievalConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Confidence threshold</p>
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * <p>Whether to enable</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * <p>Return the top N entries</p>
+         * @type {number || null}
+         */
+        this.TopN = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.TopN = 'TopN' in params ? params.TopN : null;
+
+    }
+}
+
+/**
+ * CreateQAList response structure.
+ * @class
+ */
+class CreateQAListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Batch creation result.</p>
+         * @type {Array.<OperationResult> || null}
+         */
+        this.ResultList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResultList) {
+            this.ResultList = new Array();
+            for (let z in params.ResultList) {
+                let obj = new OperationResult();
+                obj.deserialize(params.ResultList[z]);
+                this.ResultList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * <p>Basic model author info (deprecated)</p>
+ * @class
+ */
+class ModelDeveloperBasic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Author alias.</p>
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * <p>Author flag</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * Trial configuration
+ * @class
+ */
+class AppExperienceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Advanced configuration
+         * @type {AppAdvancedConf || null}
+         */
+        this.Advanced = null;
+
+        /**
+         * Dialogue experience configuration
+         * @type {ConversationExperience || null}
+         */
+        this.Conversation = null;
+
+        /**
+         * Role configuration
+         * @type {RoleConfig || null}
+         */
+        this.Role = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Advanced) {
+            let obj = new AppAdvancedConf();
+            obj.deserialize(params.Advanced)
+            this.Advanced = obj;
+        }
+
+        if (params.Conversation) {
+            let obj = new ConversationExperience();
+            obj.deserialize(params.Conversation)
+            this.Conversation = obj;
+        }
+
+        if (params.Role) {
+            let obj = new RoleConfig();
+            obj.deserialize(params.Role)
+            this.Role = obj;
+        }
+
+    }
+}
+
+/**
+ * Details of the reply content
+ * @class
+ */
+class ReplyContent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Message content type<br>text: text<br>image: image<br>file: file<br>option_cards: tab<br>custom_params: user-customized business parameter<br>sandbox: cloud desktop<br>custom_variables: custom input parameter<br>web_search: web search content<br>file_collection: file collection info<br>widget: widget info<br>widget_action: client-side widget action information</p>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Text content</p>
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * <p>Tab information</p>
+         * @type {Array.<string> || null}
+         */
+        this.OptionCardList = null;
+
+        /**
+         * <p>File collection info</p>
+         * @type {ConversationFileCollection || null}
+         */
+        this.FileCollection = null;
+
+        /**
+         * <p>Widget information.</p>
+         * @type {ConversationWidget || null}
+         */
+        this.Widget = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.OptionCardList = 'OptionCardList' in params ? params.OptionCardList : null;
+
+        if (params.FileCollection) {
+            let obj = new ConversationFileCollection();
+            obj.deserialize(params.FileCollection)
+            this.FileCollection = obj;
+        }
+
+        if (params.Widget) {
+            let obj = new ConversationWidget();
+            obj.deserialize(params.Widget)
+            this.Widget = obj;
+        }
+
+    }
+}
+
+/**
+ * QA operator information
+ * @class
+ */
+class QAOperator extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Modifier</p>
+         * @type {Operator || null}
+         */
+        this.Modifier = null;
+
+        /**
+         * <p>Operation permission</p>
+         * @type {QAPermission || null}
+         */
+        this.Permission = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Modifier) {
+            let obj = new Operator();
+            obj.deserialize(params.Modifier)
+            this.Modifier = obj;
+        }
+
+        if (params.Permission) {
+            let obj = new QAPermission();
+            obj.deserialize(params.Permission)
+            this.Permission = obj;
+        }
+
+    }
+}
+
+/**
+ * Tag references list
+ * @class
+ */
+class LabelRefIdentityList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tag references list.</p>
+         * @type {Array.<LabelRefIdentity> || null}
+         */
+        this.ItemList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ItemList) {
+            this.ItemList = new Array();
+            for (let z in params.ItemList) {
+                let obj = new LabelRefIdentity();
+                obj.deserialize(params.ItemList[z]);
+                this.ItemList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateRelease request structure.
+ * @class
+ */
+class CreateReleaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>App sharing access control configuration</p>
+         * @type {AppShareAccessControl || null}
+         */
+        this.AppShareAccessControl = null;
+
+        /**
+         * <p>Channel ID list</p>
+         * @type {Array.<string> || null}
+         */
+        this.ChannelIdList = null;
+
+        /**
+         * <p>Business shared configuration</p>
+         * @type {CorpShareConfig || null}
+         */
+        this.CorpShareConfig = null;
+
+        /**
+         * <p>Release description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Batch change the debug-only knowledge in the default knowledge base to "effective in both debug and release"</p>
+         * @type {boolean || null}
+         */
+        this.IsDevToRelease = null;
+
+        /**
+         * <p>Whether to synchronize publishing as an application template</p>
+         * @type {boolean || null}
+         */
+        this.IsPublishAsTemplate = null;
+
+        /**
+         * <p>portal configuration</p>
+         * @type {PortalShareConfig || null}
+         */
+        this.PortalShareConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.AppShareAccessControl) {
+            let obj = new AppShareAccessControl();
+            obj.deserialize(params.AppShareAccessControl)
+            this.AppShareAccessControl = obj;
+        }
+        this.ChannelIdList = 'ChannelIdList' in params ? params.ChannelIdList : null;
+
+        if (params.CorpShareConfig) {
+            let obj = new CorpShareConfig();
+            obj.deserialize(params.CorpShareConfig)
+            this.CorpShareConfig = obj;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.IsDevToRelease = 'IsDevToRelease' in params ? params.IsDevToRelease : null;
+        this.IsPublishAsTemplate = 'IsPublishAsTemplate' in params ? params.IsPublishAsTemplate : null;
+
+        if (params.PortalShareConfig) {
+            let obj = new PortalShareConfig();
+            obj.deserialize(params.PortalShareConfig)
+            this.PortalShareConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateWorkspaceCredential request structure.
+ * @class
+ */
+class CreateWorkspaceCredentialRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session type. Enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (not specified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor trial), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share a link)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Workspace ID</p>
+         * @type {string || null}
+         */
+        this.WorkspaceId = null;
+
+        /**
+         * <p>App ID</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Application key</p>
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * <p>Sub-user Uin</p>
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * <p>Primary user Uin.</p>
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_SHARE. Share code</p>
+         * @type {string || null}
+         */
+        this.ShareCode = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.WorkspaceId = 'WorkspaceId' in params ? params.WorkspaceId : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.ShareCode = 'ShareCode' in params ? params.ShareCode : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * ModifyAppTrigger request structure.
+ * @class
+ */
+class ModifyAppTriggerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Trigger information</p>
+         * @type {AppTrigger || null}
+         */
+        this.Trigger = null;
+
+        /**
+         * <p>Unique ID of the trigger</p>
+         * @type {string || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * <p>Modify field</p>
+         * @type {FieldMask || null}
+         */
+        this.UpdateMask = null;
+
+        /**
+         * <p>Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+
+        if (params.Trigger) {
+            let obj = new AppTrigger();
+            obj.deserialize(params.Trigger)
+            this.Trigger = obj;
+        }
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+
+        if (params.UpdateMask) {
+            let obj = new FieldMask();
+            obj.deserialize(params.UpdateMask)
+            this.UpdateMask = obj;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * DescribeAppTriggerSummaryList response structure.
+ * @class
+ */
+class DescribeAppTriggerSummaryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Number of application triggers</p>
+         * @type {string || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * <p>Application trigger list</p>
+         * @type {Array.<AppTriggerSummary> || null}
+         */
+        this.TriggerList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TriggerList) {
+            this.TriggerList = new Array();
+            for (let z in params.TriggerList) {
+                let obj = new AppTriggerSummary();
+                obj.deserialize(params.TriggerList[z]);
+                this.TriggerList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAgent request structure.
+ * @class
+ */
+class CreateAgentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Agent configuration</p>
+         * @type {AgentSpec || null}
+         */
+        this.Agent = null;
+
+        /**
+         * <p>Agent type, case-sensitive between B-end configuration Agent and client user-mode Agent</p><p>Enumeration values:</p><ul><li>0: Configuration-end Agent</li><li>1: User-mode Agent</li></ul>
+         * @type {number || null}
+         */
+        this.Kind = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.Agent) {
+            let obj = new AgentSpec();
+            obj.deserialize(params.Agent)
+            this.Agent = obj;
+        }
+        this.Kind = 'Kind' in params ? params.Kind : null;
+
+    }
+}
+
+/**
+ * Dialogue experience configuration
+ * @class
+ */
+class ConversationExperience extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>AI Call Configuration</p>
+         * @type {AICallConfig || null}
+         */
+        this.AiCall = null;
+
+        /**
+         * <p>Background image configuration</p>
+         * @type {BackgroundImage || null}
+         */
+        this.BackgroundImage = null;
+
+        /**
+         * <p>Fallback response switch</p>
+         * @type {boolean || null}
+         */
+        this.EnableFallbackReply = null;
+
+        /**
+         * <p>Whether to use recommended questions.</p>
+         * @type {boolean || null}
+         */
+        this.EnableRecommended = null;
+
+        /**
+         * <p>Whether to use online search.</p>
+         * @type {boolean || null}
+         */
+        this.EnableWebSearch = null;
+
+        /**
+         * <p>Fallback response</p>
+         * @type {string || null}
+         */
+        this.FallbackReply = null;
+
+        /**
+         * <p>Input box configuration</p>
+         * @type {InputBoxConfig || null}
+         */
+        this.InputBoxConfig = null;
+
+        /**
+         * <p>Output method. Enumeration values: 1: streaming, 2: non-streaming</p>
+         * @type {number || null}
+         */
+        this.Method = null;
+
+        /**
+         * <p>Recommended question generation prompt mode. Enumeration value: 1: Prompt that outputs recommended questions combined with the knowledge base only</p>
+         * @type {number || null}
+         */
+        this.RecommendPromptMode = null;
+
+        /**
+         * <p>A new message interrupts the ongoing message</p>
+         * @type {boolean || null}
+         */
+        this.EnableNewMessageInterrupt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AiCall) {
+            let obj = new AICallConfig();
+            obj.deserialize(params.AiCall)
+            this.AiCall = obj;
+        }
+
+        if (params.BackgroundImage) {
+            let obj = new BackgroundImage();
+            obj.deserialize(params.BackgroundImage)
+            this.BackgroundImage = obj;
+        }
+        this.EnableFallbackReply = 'EnableFallbackReply' in params ? params.EnableFallbackReply : null;
+        this.EnableRecommended = 'EnableRecommended' in params ? params.EnableRecommended : null;
+        this.EnableWebSearch = 'EnableWebSearch' in params ? params.EnableWebSearch : null;
+        this.FallbackReply = 'FallbackReply' in params ? params.FallbackReply : null;
+
+        if (params.InputBoxConfig) {
+            let obj = new InputBoxConfig();
+            obj.deserialize(params.InputBoxConfig)
+            this.InputBoxConfig = obj;
+        }
+        this.Method = 'Method' in params ? params.Method : null;
+        this.RecommendPromptMode = 'RecommendPromptMode' in params ? params.RecommendPromptMode : null;
+        this.EnableNewMessageInterrupt = 'EnableNewMessageInterrupt' in params ? params.EnableNewMessageInterrupt : null;
+
+    }
+}
+
+/**
+ * DeletePlugin response structure.
+ * @class
+ */
+class DeletePluginResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeletePlugin request structure.
+ * @class
+ */
+class DeletePluginRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Plugin_id</p>
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * <p>User Main Account logged in (required in integrator mode)</p>
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * <p>User Sub-account logged in (required in integrator mode)</p>
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+
+    }
+}
+
+/**
+ * AI one-click optimization model configuration
+ * @class
+ */
+class AIOptimizeModel extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Model configuration
+         * @type {ModelDetailInfo || null}
+         */
+        this.Model = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Model) {
+            let obj = new ModelDetailInfo();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
 
     }
 }
@@ -475,36 +15242,36 @@ class SearchFilterConfig extends  AbstractModel {
 }
 
 /**
- * Token usage statistics
+ * Tag reference (for output parameters)
  * @class
  */
-class TokenUsage extends  AbstractModel {
+class LabelRef extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Number of completion tokens</p>
-         * @type {number || null}
-         */
-        this.CompletionTokens = null;
-
-        /**
-         * <p>Model name</p>
+         * <p>Tag ID.</p>
          * @type {string || null}
          */
-        this.ModelName = null;
+        this.LabelId = null;
 
         /**
-         * <p>prompt token count</p>
-         * @type {number || null}
+         * <p>Tag name.</p>
+         * @type {string || null}
          */
-        this.PromptTokens = null;
+        this.LabelName = null;
 
         /**
-         * <p>Total token count</p>
-         * @type {number || null}
+         * <p>Tag standard term ID list.</p>
+         * @type {Array.<string> || null}
          */
-        this.TotalTokens = null;
+        this.LabelTermIdList = null;
+
+        /**
+         * <p>Tag standard word list</p>
+         * @type {Array.<string> || null}
+         */
+        this.LabelTermList = null;
 
     }
 
@@ -515,10 +15282,10 @@ class TokenUsage extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompletionTokens = 'CompletionTokens' in params ? params.CompletionTokens : null;
-        this.ModelName = 'ModelName' in params ? params.ModelName : null;
-        this.PromptTokens = 'PromptTokens' in params ? params.PromptTokens : null;
-        this.TotalTokens = 'TotalTokens' in params ? params.TotalTokens : null;
+        this.LabelId = 'LabelId' in params ? params.LabelId : null;
+        this.LabelName = 'LabelName' in params ? params.LabelName : null;
+        this.LabelTermIdList = 'LabelTermIdList' in params ? params.LabelTermIdList : null;
+        this.LabelTermList = 'LabelTermList' in params ? params.LabelTermList : null;
 
     }
 }
@@ -643,6 +15410,1324 @@ class KBRetrievalConfig extends  AbstractModel {
 }
 
 /**
+ * DescribePluginSummaryList response structure.
+ * @class
+ */
+class DescribePluginSummaryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>plugin_list</p>
+         * @type {Array.<PluginSummary> || null}
+         */
+        this.PluginList = null;
+
+        /**
+         * <p>total_count</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PluginList) {
+            this.PluginList = new Array();
+            for (let z in params.PluginList) {
+                let obj = new PluginSummary();
+                obj.deserialize(params.PluginList[z]);
+                this.PluginList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Application sub-status information.
+ * @class
+ */
+class AppSubStatusInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Approval record ID (valid when `sub_status_list` contains `PUBLISH_APPROVING`)
+         * @type {string || null}
+         */
+        this.ApprovalId = null;
+
+        /**
+         * Application sub-status list (possibly in multiple sub-statuses at the same time)
+         * @type {Array.<number> || null}
+         */
+        this.SubStatusList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApprovalId = 'ApprovalId' in params ? params.ApprovalId : null;
+        this.SubStatusList = 'SubStatusList' in params ? params.SubStatusList : null;
+
+    }
+}
+
+/**
+ * View scope
+ * @class
+ */
+class ViewScope extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>View type; enumeration values: VIEW_TYPE_CORP(1) corporate view, VIEW_TYPE_SPACE(2) space view, VIEW_TYPE_APP(3) application view</p><table><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>VIEW_TYPE_UNSPECIFIED</td><td>0</td><td>Not specified (invalid value, do not pass in requests)</td></tr><tr><td>VIEW_TYPE_CORP</td><td>1</td><td>Corporate view</td></tr><tr><td>VIEW_TYPE_SPACE</td><td>2</td><td>Space view</td></tr><tr><td>VIEW_TYPE_APP</td><td>3</td><td>Application view</td></tr></table>
+         * @type {number || null}
+         */
+        this.ViewType = null;
+
+        /**
+         * <p>View scope ID; leave empty for VIEW_TYPE_CORP; enter space_id for VIEW_TYPE_SPACE; enter app_id for VIEW_TYPE_APP (decimal string of uint64 snowflake ID)</p>
+         * @type {string || null}
+         */
+        this.ScopeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ViewType = 'ViewType' in params ? params.ViewType : null;
+        this.ScopeId = 'ScopeId' in params ? params.ScopeId : null;
+
+    }
+}
+
+/**
+ * CreateConversation request structure.
+ * @class
+ */
+class CreateConversationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session type. Enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (unspecified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor trial), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share a link)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>App ID</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Application key</p>
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * <p>User Sub-account logged in (required in integrator mode)</p>
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * <p>User Main Account logged in (required in integrator mode)</p>
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_SHARE. Share code</p>
+         * @type {string || null}
+         */
+        this.ShareCode = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * <p>Client-side AgentId, available when "modify configuration dynamically in conversation" is enabled in Claw mode</p>
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.ShareCode = 'ShareCode' in params ? params.ShareCode : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+
+    }
+}
+
+/**
+ * CreateSkill response structure.
+ * @class
+ */
+class CreateSkillResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Skill ID after successful creation</p>
+         * @type {string || null}
+         */
+        this.SkillId = null;
+
+        /**
+         * <p>Version ID after successful creation</p>
+         * @type {string || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SkillId = 'SkillId' in params ? params.SkillId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMsgRecordCategoryList request structure.
+ * @class
+ */
+class DescribeMsgRecordCategoryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>App ID</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+    }
+}
+
+/**
+ * Call source
+ * @class
+ */
+class CallSource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Caller ID, whose meaning is determined by subject_type (such as app_id, kb_id)</p>
+         * @type {string || null}
+         */
+        this.SubjectId = null;
+
+        /**
+         * <p>Name of the calling entity</p>
+         * @type {string || null}
+         */
+        this.SubjectName = null;
+
+        /**
+         * <p>Caller type: APP/KB/WIDGET/OPEN_CLAW/KB_RECALL_TEST/WORKBENCH/MODEL_API</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>METRIC_SOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>METRIC_SOURCE_TYPE_APP</td><td>1</td><td>Application development</td></tr><tr><td>METRIC_SOURCE_TYPE_KB</td><td>2</td><td>Knowledge base</td></tr><tr><td>METRIC_SOURCE_TYPE_WIDGET</td><td>3</td><td>Widget</td></tr><tr><td>METRIC_SOURCE_TYPE_OPEN_CLAW</td><td>4</td><td>ClawPro</td></tr><tr><td>METRIC_SOURCE_TYPE_KB_RECALL_TEST</td><td>5</td><td>Knowledge base recall test</td></tr><tr><td>METRIC_SOURCE_TYPE_WORKBENCH</td><td>6</td><td>Intelligent workbench</td></tr><tr><td>METRIC_SOURCE_TYPE_MODEL_API</td><td>7</td><td>Model API call</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.SubjectType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubjectId = 'SubjectId' in params ? params.SubjectId : null;
+        this.SubjectName = 'SubjectName' in params ? params.SubjectName : null;
+        this.SubjectType = 'SubjectType' in params ? params.SubjectType : null;
+
+    }
+}
+
+/**
+ * AppTriggerPromptExecuteConfig
+ * @class
+ */
+class AppTriggerPromptExecuteConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Trigger execution prompt content</p>
+         * @type {string || null}
+         */
+        this.ExecutePrompt = null;
+
+        /**
+         * <p>api parameter binding</p>
+         * @type {AppTriggerParamBindingConfig || null}
+         */
+        this.ParamBindingsApi = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExecutePrompt = 'ExecutePrompt' in params ? params.ExecutePrompt : null;
+
+        if (params.ParamBindingsApi) {
+            let obj = new AppTriggerParamBindingConfig();
+            obj.deserialize(params.ParamBindingsApi)
+            this.ParamBindingsApi = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteSkillShare response structure.
+ * @class
+ */
+class DeleteSkillShareResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to go through the approval process (false means the removal has been directly executed without approval)</p>
+         * @type {boolean || null}
+         */
+        this.NeedApproval = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NeedApproval = 'NeedApproval' in params ? params.NeedApproval : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Basic information of the workflow running instance
+ * @class
+ */
+class WorkflowRunSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Runtime environment. 1: Development domain, 2: Production domain</p>
+         * @type {number || null}
+         */
+        this.Domain = null;
+
+        /**
+         * <p>Basic information of workflow operation instance</p>
+         * @type {WorkflowRunProfile || null}
+         */
+        this.WorkflowRunProfile = null;
+
+        /**
+         * <p>Workflow operation instance result</p>
+         * @type {WorkflowRunResult || null}
+         */
+        this.WorkflowRunResult = null;
+
+        /**
+         * <p>Time information of workflow running instance</p>
+         * @type {WorkflowRunTime || null}
+         */
+        this.WorkflowRunTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.WorkflowRunProfile) {
+            let obj = new WorkflowRunProfile();
+            obj.deserialize(params.WorkflowRunProfile)
+            this.WorkflowRunProfile = obj;
+        }
+
+        if (params.WorkflowRunResult) {
+            let obj = new WorkflowRunResult();
+            obj.deserialize(params.WorkflowRunResult)
+            this.WorkflowRunResult = obj;
+        }
+
+        if (params.WorkflowRunTime) {
+            let obj = new WorkflowRunTime();
+            obj.deserialize(params.WorkflowRunTime)
+            this.WorkflowRunTime = obj;
+        }
+
+    }
+}
+
+/**
+ * Publish digest information
+ * @class
+ */
+class ReleaseSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Creation time (Unix timestamp, in seconds)</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Release description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Release ID</p>
+         * @type {string || null}
+         */
+        this.ReleaseId = null;
+
+        /**
+         * <p>Released status. Enumeration values: 1: To be released, 2: Releasing, 3: Released successfully, 4: Release failure, 5: Under review, 6: Review successful, 7: Review failed, 8: Callback processing for successful release, 9: Release suspension, 10: Appeal under review, 11: Appeal passed, 12: Appeal not approved</p>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Status description.</p>
+         * @type {string || null}
+         */
+        this.StatusDescription = null;
+
+        /**
+         * <p>Application sharing access control</p>
+         * @type {AppShareAccessControl || null}
+         */
+        this.AppShareAccessControl = null;
+
+        /**
+         * <p>Release channel ID list</p>
+         * @type {Array.<string> || null}
+         */
+        this.ChannelIdList = null;
+
+        /**
+         * <p>Business shared configuration</p>
+         * @type {CorpShareConfig || null}
+         */
+        this.CorpShareConfig = null;
+
+        /**
+         * <p>portal configuration</p>
+         * @type {PortalShareConfig || null}
+         */
+        this.PortalShareConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ReleaseId = 'ReleaseId' in params ? params.ReleaseId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDescription = 'StatusDescription' in params ? params.StatusDescription : null;
+
+        if (params.AppShareAccessControl) {
+            let obj = new AppShareAccessControl();
+            obj.deserialize(params.AppShareAccessControl)
+            this.AppShareAccessControl = obj;
+        }
+        this.ChannelIdList = 'ChannelIdList' in params ? params.ChannelIdList : null;
+
+        if (params.CorpShareConfig) {
+            let obj = new CorpShareConfig();
+            obj.deserialize(params.CorpShareConfig)
+            this.CorpShareConfig = obj;
+        }
+
+        if (params.PortalShareConfig) {
+            let obj = new PortalShareConfig();
+            obj.deserialize(params.PortalShareConfig)
+            this.PortalShareConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * QA similar question
+ * @class
+ */
+class SimilarQuestion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Similar question content</p>
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * <p>Whether AI-generated</p>
+         * @type {boolean || null}
+         */
+        this.IsAiGenerated = null;
+
+        /**
+         * <p>Similar question ID</p>
+         * @type {string || null}
+         */
+        this.SimilarQuestionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.IsAiGenerated = 'IsAiGenerated' in params ? params.IsAiGenerated : null;
+        this.SimilarQuestionId = 'SimilarQuestionId' in params ? params.SimilarQuestionId : null;
+
+    }
+}
+
+/**
+ * Basic tool foundation configuration of the Agent
+ * @class
+ */
+class AgentToolBasicConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>plugin_id</p>
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * <p>Tool id</p>
+         * @type {string || null}
+         */
+        this.ToolId = null;
+
+        /**
+         * <p>Description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Tool input parameter list</p>
+         * @type {Array.<AgentToolInputParameter> || null}
+         */
+        this.InputList = null;
+
+        /**
+         * <p>Tool output parameter list</p>
+         * @type {Array.<AgentToolOutputParameter> || null}
+         */
+        this.OutputList = null;
+
+        /**
+         * <p>Tool Header parameter list</p>
+         * @type {Array.<AgentPluginParameter> || null}
+         */
+        this.HeaderParameterList = null;
+
+        /**
+         * <p>Tool Query parameter list</p>
+         * @type {Array.<AgentPluginParameter> || null}
+         */
+        this.QueryParameterList = null;
+
+        /**
+         * <p>Tool source: 0-comes from plug-in, 1-comes from workflow</p>
+         * @type {number || null}
+         */
+        this.ToolSource = null;
+
+        /**
+         * <p>Whether to disable</p>
+         * @type {boolean || null}
+         */
+        this.IsDisabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.ToolId = 'ToolId' in params ? params.ToolId : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.InputList) {
+            this.InputList = new Array();
+            for (let z in params.InputList) {
+                let obj = new AgentToolInputParameter();
+                obj.deserialize(params.InputList[z]);
+                this.InputList.push(obj);
+            }
+        }
+
+        if (params.OutputList) {
+            this.OutputList = new Array();
+            for (let z in params.OutputList) {
+                let obj = new AgentToolOutputParameter();
+                obj.deserialize(params.OutputList[z]);
+                this.OutputList.push(obj);
+            }
+        }
+
+        if (params.HeaderParameterList) {
+            this.HeaderParameterList = new Array();
+            for (let z in params.HeaderParameterList) {
+                let obj = new AgentPluginParameter();
+                obj.deserialize(params.HeaderParameterList[z]);
+                this.HeaderParameterList.push(obj);
+            }
+        }
+
+        if (params.QueryParameterList) {
+            this.QueryParameterList = new Array();
+            for (let z in params.QueryParameterList) {
+                let obj = new AgentPluginParameter();
+                obj.deserialize(params.QueryParameterList[z]);
+                this.QueryParameterList.push(obj);
+            }
+        }
+        this.ToolSource = 'ToolSource' in params ? params.ToolSource : null;
+        this.IsDisabled = 'IsDisabled' in params ? params.IsDisabled : null;
+
+    }
+}
+
+/**
+ * DescribeConflictQA response structure.
+ * @class
+ */
+class DescribeConflictQAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>List of details of a conflict group</p>
+         * @type {Array.<ConflictQA> || null}
+         */
+        this.ConflictQaList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ConflictQaList) {
+            this.ConflictQaList = new Array();
+            for (let z in params.ConflictQaList) {
+                let obj = new ConflictQA();
+                obj.deserialize(params.ConflictQaList[z]);
+                this.ConflictQaList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Application status information - runtime status information (non-modifiable by users)
+ * @class
+ */
+class AppStatusInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application status</p><p>Enumeration values:</p><ul><li>1: not launched</li><li>2: running</li><li>3: disabled</li><li>4: importing</li></ul>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Status description.</p>
+         * @type {string || null}
+         */
+        this.StatusDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDescription = 'StatusDescription' in params ? params.StatusDescription : null;
+
+    }
+}
+
+/**
+ * ComplexBilling
+ * @class
+ */
+class ComplexBilling extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Composite Billing List</p>
+         * @type {Array.<ComplexBillingItem> || null}
+         */
+        this.ComplexList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ComplexList) {
+            this.ComplexList = new Array();
+            for (let z in params.ComplexList) {
+                let obj = new ComplexBillingItem();
+                obj.deserialize(params.ComplexList[z]);
+                this.ComplexList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Document search configuration
+ * @class
+ */
+class DocRetrievalConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Confidence threshold</p>
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * <p>Whether to enable</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * <p>Return the top N entries</p>
+         * @type {number || null}
+         */
+        this.TopN = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.TopN = 'TopN' in params ? params.TopN : null;
+
+    }
+}
+
+/**
+ * DescribeLabelSummaryList request structure.
+ * @class
+ */
+class DescribeLabelSummaryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the knowledge base it belongs to</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Common filter.</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Page number for pagination, starting from 0.</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Number of items per page. Default 10, maximum 100</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <p>Keyword search</p>
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * <p>Switch configuration</p>
+         * @type {SummaryListSwitch || null}
+         */
+        this.SummaryListSwitch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+
+        if (params.SummaryListSwitch) {
+            let obj = new SummaryListSwitch();
+            obj.deserialize(params.SummaryListSwitch)
+            this.SummaryListSwitch = obj;
+        }
+
+    }
+}
+
+/**
+ * SearchKnowledge response structure.
+ * @class
+ */
+class SearchKnowledgeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Search results list</p>
+         * @type {Array.<KnowledgeResult> || null}
+         */
+        this.KnowledgeList = null;
+
+        /**
+         * <p>token consumption statistics</p>
+         * @type {Array.<TokenUsage> || null}
+         */
+        this.TokenUsageList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.KnowledgeList) {
+            this.KnowledgeList = new Array();
+            for (let z in params.KnowledgeList) {
+                let obj = new KnowledgeResult();
+                obj.deserialize(params.KnowledgeList[z]);
+                this.KnowledgeList.push(obj);
+            }
+        }
+
+        if (params.TokenUsageList) {
+            this.TokenUsageList = new Array();
+            for (let z in params.TokenUsageList) {
+                let obj = new TokenUsage();
+                obj.deserialize(params.TokenUsageList[z]);
+                this.TokenUsageList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteConversation response structure.
+ * @class
+ */
+class DeleteConversationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCategoryList response structure.
+ * @class
+ */
+class DescribeCategoryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Classification list</p>
+         * @type {Array.<KBCategory> || null}
+         */
+        this.CategoryList = null;
+
+        /**
+         * <p>Total.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CategoryList) {
+            this.CategoryList = new Array();
+            for (let z in params.CategoryList) {
+                let obj = new KBCategory();
+                obj.deserialize(params.CategoryList[z]);
+                this.CategoryList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AppTriggerParamSchema
+ * @class
+ */
+class AppTriggerParamSchema extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Parameter name</p>
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>String</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>Integer</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>Floating-point number</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>Boolean value</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>Object</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>String array</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>Integer array</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>Floating-point number array</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>Boolean value array</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>Object array</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>Nested array</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>Null</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>Unspecified type, used for OneOf and AnyOf scenarios</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * <p>Required or optional</p>
+         * @type {boolean || null}
+         */
+        this.Required = null;
+
+        /**
+         * <p>Sub-parameter list</p>
+         * @type {Array.<AppTriggerParamSchema> || null}
+         */
+        this.SubParamList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+        this.Required = 'Required' in params ? params.Required : null;
+
+        if (params.SubParamList) {
+            this.SubParamList = new Array();
+            for (let z in params.SubParamList) {
+                let obj = new AppTriggerParamSchema();
+                obj.deserialize(params.SubParamList[z]);
+                this.SubParamList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * TimerPushConfig
+ * @class
+ */
+class TimerPushConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Enumeration values:<br>| uint | Description |<br>| --- | --- |<br>| 0 |  |<br>| 1 | Do not push |<br>| 2 | WeChat official account |<br>| 3 | WeCom AI chatbot |</p>
+         * @type {number || null}
+         */
+        this.PushChannel = null;
+
+        /**
+         * <p>Push session ID</p>
+         * @type {string || null}
+         */
+        this.PushTargetId = null;
+
+        /**
+         * <p>Enumeration values:<br>| uint | Description |<br>| --- | --- |<br>| 0 |  |<br>| 1 | User (WeChat official account openid) |<br>| 2 | Group chat (WeCom chatbot chat_id) |</p>
+         * @type {number || null}
+         */
+        this.PushTargetType = null;
+
+        /**
+         * <p>url for pushing webhook</p>
+         * @type {string || null}
+         */
+        this.PushWebhookUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PushChannel = 'PushChannel' in params ? params.PushChannel : null;
+        this.PushTargetId = 'PushTargetId' in params ? params.PushTargetId : null;
+        this.PushTargetType = 'PushTargetType' in params ? params.PushTargetType : null;
+        this.PushWebhookUrl = 'PushWebhookUrl' in params ? params.PushWebhookUrl : null;
+
+    }
+}
+
+/**
+ * Agent tool input parameter
+ * @class
+ */
+class AgentToolConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tool configuration</p>
+         * @type {AgentToolBasicConfig || null}
+         */
+        this.Config = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Config) {
+            let obj = new AgentToolBasicConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+
+    }
+}
+
+/**
+ * Additional information of the similar question
+ * @class
+ */
+class SimilarQuestionExtra extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Text content of the similar question</p>
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * <p>Similar question ID</p>
+         * @type {string || null}
+         */
+        this.SimilarQuestionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.SimilarQuestionId = 'SimilarQuestionId' in params ? params.SimilarQuestionId : null;
+
+    }
+}
+
+/**
+ * DeleteDocList request structure.
+ * @class
+ */
+class DeleteDocListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>List of document IDs to be deleted (quantity: 1-20)</p>
+         * @type {Array.<string> || null}
+         */
+        this.DocIdList = null;
+
+        /**
+         * <p>Associated knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DocIdList = 'DocIdList' in params ? params.DocIdList : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+    }
+}
+
+/**
+ * WeeklySchedule
+ * @class
+ */
+class WeeklySchedule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scheduled configuration (week)
+         * @type {Array.<WeeklyTime> || null}
+         */
+        this.Times = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Times) {
+            this.Times = new Array();
+            for (let z in params.Times) {
+                let obj = new WeeklyTime();
+                obj.deserialize(params.Times[z]);
+                this.Times.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Model parameters
  * @class
  */
@@ -651,7 +16736,7 @@ class ModelParams extends  AbstractModel {
         super();
 
         /**
-         * <p>Whether deep thinking is enabled</p>
+         * <p>Whether to enable deep thinking</p>
          * @type {string || null}
          */
         this.DeepThinking = null;
@@ -748,36 +16833,269 @@ class ModelParams extends  AbstractModel {
 }
 
 /**
- * Retrieve advanced configuration
+ * FileCollection file collection information
  * @class
  */
-class SearchAdvancedConfig extends  AbstractModel {
+class ConversationFileCollection extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Final ReRank Configuration</p>
-         * @type {FinalRerankConfig || null}
-         */
-        this.FinalRerankConfig = null;
-
-        /**
-         * <p>Search configuration of each knowledge base</p>
-         * @type {Array.<KBRetrievalConfig> || null}
-         */
-        this.KbRetrievalList = null;
-
-        /**
-         * <p>Retrieve knowledge type: 1=document and QA, 2=rejected question<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>SEARCH_KNOWLEDGE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SEARCH_KNOWLEDGE_TYPE_DOC_QA</td><td>1</td><td>Document and QA</td></tr><tr><td>SEARCH_KNOWLEDGE_TYPE_REJECTED_QUESTION</td><td>2</td><td>Rejected question</td></tr></tbody></table></p>
+         * <p>Maximum number of files</p>
          * @type {number || null}
          */
-        this.KnowledgeType = null;
+        this.MaxFileCount = null;
 
         /**
-         * <p>Number of final returned results</p>
+         * <p>Supported file type list</p>
+         * @type {Array.<string> || null}
+         */
+        this.SupportedFileTypeList = null;
+
+        /**
+         * <p>Supported file type list</p>
+         * @type {Array.<string> || null}
+         */
+        this.SupportedFileTypes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxFileCount = 'MaxFileCount' in params ? params.MaxFileCount : null;
+        this.SupportedFileTypeList = 'SupportedFileTypeList' in params ? params.SupportedFileTypeList : null;
+        this.SupportedFileTypes = 'SupportedFileTypes' in params ? params.SupportedFileTypes : null;
+
+    }
+}
+
+/**
+ * Agent input value. Supports direct assignment and reference.
+ * @class
+ */
+class AgentInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Input source type: 0 user input, 3 custom variable (API parameter)</p>
          * @type {number || null}
          */
-        this.RecallCount = null;
+        this.InputType = null;
+
+        /**
+         * <p>User handwriting input</p>
+         * @type {AgentUserInputValue || null}
+         */
+        this.UserInputValue = null;
+
+        /**
+         * <p>System parameter</p>
+         * @type {AgentSystemVariable || null}
+         */
+        this.SystemVariable = null;
+
+        /**
+         * <p>Custom Variable (API parameter)</p>
+         * @type {string || null}
+         */
+        this.CustomVariableId = null;
+
+        /**
+         * <p>Environment variable parameter</p>
+         * @type {string || null}
+         */
+        this.EnvVariableId = null;
+
+        /**
+         * <p>Application variable parameters</p>
+         * @type {string || null}
+         */
+        this.AppVariableId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputType = 'InputType' in params ? params.InputType : null;
+
+        if (params.UserInputValue) {
+            let obj = new AgentUserInputValue();
+            obj.deserialize(params.UserInputValue)
+            this.UserInputValue = obj;
+        }
+
+        if (params.SystemVariable) {
+            let obj = new AgentSystemVariable();
+            obj.deserialize(params.SystemVariable)
+            this.SystemVariable = obj;
+        }
+        this.CustomVariableId = 'CustomVariableId' in params ? params.CustomVariableId : null;
+        this.EnvVariableId = 'EnvVariableId' in params ? params.EnvVariableId : null;
+        this.AppVariableId = 'AppVariableId' in params ? params.AppVariableId : null;
+
+    }
+}
+
+/**
+ * Agent release preview information
+ * @class
+ */
+class AgentReleasePreview extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>AgentID</p>
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+        /**
+         * <p>Agent Name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Update time, unix timestamp in seconds (s)</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * <p>Status, status value: 1: Add new, 2: Modify, 3: Delete</p>
+         * @type {number || null}
+         */
+        this.Action = null;
+
+        /**
+         * <p>Action description.</p>
+         * @type {string || null}
+         */
+        this.ActionDescription = null;
+
+        /**
+         * <p>Publish a message</p>
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * <p>Release detail</p>
+         * @type {Array.<AgentRelease> || null}
+         */
+        this.ReleaseList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.ActionDescription = 'ActionDescription' in params ? params.ActionDescription : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.ReleaseList) {
+            this.ReleaseList = new Array();
+            for (let z in params.ReleaseList) {
+                let obj = new AgentRelease();
+                obj.deserialize(params.ReleaseList[z]);
+                this.ReleaseList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Agent tool output parameter
+ * @class
+ */
+class AgentToolOutputParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Parameter name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Variable description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Parameter type</p><p>Enumeration values:</p><ul><li>0: STRING</li><li>1: INT</li><li>2: FLOAT</li><li>3: BOOL</li><li>4: OBJECT</li><li>5: ARRAY_STRING</li><li>6: ARRAY_INT</li><li>7: ARRAY_FLOAT</li><li>8: ARRAY_BOOL</li><li>9: ARRAY_OBJECT</li><li>20: ARRAY_ARRAY</li><li>99: NULL</li></ul>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Sub-parameter, used only when the data type is OBJECT or ARRAY_OBJECT</p>
+         * @type {Array.<AgentToolOutputParameter> || null}
+         */
+        this.SubParameterList = null;
+
+        /**
+         * <p>Parsing method</p>
+         * @type {number || null}
+         */
+        this.RenderMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.SubParameterList) {
+            this.SubParameterList = new Array();
+            for (let z in params.SubParameterList) {
+                let obj = new AgentToolOutputParameter();
+                obj.deserialize(params.SubParameterList[z]);
+                this.SubParameterList.push(obj);
+            }
+        }
+        this.RenderMode = 'RenderMode' in params ? params.RenderMode : null;
+
+    }
+}
+
+/**
+ * CreateChannel request structure.
+ * @class
+ */
+class CreateChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
 
     }
 
@@ -789,51 +17107,835 @@ class SearchAdvancedConfig extends  AbstractModel {
             return;
         }
 
-        if (params.FinalRerankConfig) {
-            let obj = new FinalRerankConfig();
-            obj.deserialize(params.FinalRerankConfig)
-            this.FinalRerankConfig = obj;
-        }
+    }
+}
 
-        if (params.KbRetrievalList) {
-            this.KbRetrievalList = new Array();
-            for (let z in params.KbRetrievalList) {
-                let obj = new KBRetrievalConfig();
-                obj.deserialize(params.KbRetrievalList[z]);
-                this.KbRetrievalList.push(obj);
-            }
+/**
+ * Common identity information (supports two forms: numeric ID and string ID)
+ * @class
+ */
+class Identity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Digital ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * String ID
+         * @type {string || null}
+         */
+        this.StrId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.KnowledgeType = 'KnowledgeType' in params ? params.KnowledgeType : null;
-        this.RecallCount = 'RecallCount' in params ? params.RecallCount : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.StrId = 'StrId' in params ? params.StrId : null;
 
     }
 }
 
 /**
- * QA search configuration
+ * AccessKey authentication configuration
  * @class
  */
-class QARetrievalConfig extends  AbstractModel {
+class AccessKeyAuthConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Confidence threshold</p>
+         * <p>Access Key field configuration</p>
+         * @type {Array.<AccessKeyParamConfig> || null}
+         */
+        this.ParamList = null;
+
+        /**
+         * <p>Access Key passthrough configuration</p>
+         * @type {AccessKeyPassThroughConfig || null}
+         */
+        this.PassThroughConfig = null;
+
+        /**
+         * <p>Access Key usage mode</p><p>Enumeration values:</p><ul><li>1: Access Key pass-through</li></ul>
+         * @type {number || null}
+         */
+        this.UsageMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new AccessKeyParamConfig();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+
+        if (params.PassThroughConfig) {
+            let obj = new AccessKeyPassThroughConfig();
+            obj.deserialize(params.PassThroughConfig)
+            this.PassThroughConfig = obj;
+        }
+        this.UsageMode = 'UsageMode' in params ? params.UsageMode : null;
+
+    }
+}
+
+/**
+ * DescribeLabel response structure.
+ * @class
+ */
+class DescribeLabelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Basic information.</p>
+         * @type {LabelSummary || null}
+         */
+        this.Summary = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Summary) {
+            let obj = new LabelSummary();
+            obj.deserialize(params.Summary)
+            this.Summary = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAppTrigger response structure.
+ * @class
+ */
+class CreateAppTriggerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application trigger ID</p>
+         * @type {string || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteKB response structure.
+ * @class
+ */
+class DeleteKBResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Collection of writable attributes of the knowledge base (used in conjunction with update_mask)
+ * @class
+ */
+class KBSpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>ES configuration</p>
+         * @type {ESConfig || null}
+         */
+        this.EsConfig = null;
+
+        /**
+         * <p>Model configuration</p>
+         * @type {KBModelConfig || null}
+         */
+        this.ModelConfig = null;
+
+        /**
+         * <p>Knowledge base name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Owner ID</p>
+         * @type {string || null}
+         */
+        this.OwnerId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.EsConfig) {
+            let obj = new ESConfig();
+            obj.deserialize(params.EsConfig)
+            this.EsConfig = obj;
+        }
+
+        if (params.ModelConfig) {
+            let obj = new KBModelConfig();
+            obj.deserialize(params.ModelConfig)
+            this.ModelConfig = obj;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.OwnerId = 'OwnerId' in params ? params.OwnerId : null;
+
+    }
+}
+
+/**
+ * System variable
+ * @class
+ */
+class SystemVariable extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Variable Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Variable name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * DescribeQASummaryList response structure.
+ * @class
+ */
+class DescribeQASummaryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Not adopted count</p>
+         * @type {number || null}
+         */
+        this.NotAcceptedCount = null;
+
+        /**
+         * <p>Quantity to be checked</p>
+         * @type {number || null}
+         */
+        this.PendingVerifyCount = null;
+
+        /**
+         * <p>QA list</p>
+         * @type {Array.<QASummary> || null}
+         */
+        this.QaList = null;
+
+        /**
+         * <p>Total.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NotAcceptedCount = 'NotAcceptedCount' in params ? params.NotAcceptedCount : null;
+        this.PendingVerifyCount = 'PendingVerifyCount' in params ? params.PendingVerifyCount : null;
+
+        if (params.QaList) {
+            this.QaList = new Array();
+            for (let z in params.QaList) {
+                let obj = new QASummary();
+                obj.deserialize(params.QaList[z]);
+                this.QaList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAppTriggerInstance response structure.
+ * @class
+ */
+class DescribeAppTriggerInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application trigger instance</p>
+         * @type {AppTriggerInstance || null}
+         */
+        this.Instance = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Instance) {
+            let obj = new AppTriggerInstance();
+            obj.deserialize(params.Instance)
+            this.Instance = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSkillShare request structure.
+ * @class
+ */
+class CreateSkillShareRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Required. Application remarks (pop-up "Application Remarks")</p>
+         * @type {string || null}
+         */
+        this.ApplyRemark = null;
+
+        /**
+         * <p>Required. Original skill_id</p>
+         * @type {string || null}
+         */
+        this.SkillId = null;
+
+        /**
+         * <p>Space ID, required</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Required. id of the shared version (must exceed the shared version)</p>
+         * @type {string || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * <p>Shared configuration</p>
+         * @type {SkillCorpShareConfig || null}
+         */
+        this.CorpShareConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplyRemark = 'ApplyRemark' in params ? params.ApplyRemark : null;
+        this.SkillId = 'SkillId' in params ? params.SkillId : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+
+        if (params.CorpShareConfig) {
+            let obj = new SkillCorpShareConfig();
+            obj.deserialize(params.CorpShareConfig)
+            this.CorpShareConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * QA lifecycle information
+ * @class
+ */
+class QALifecycle extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Creation time (Unix seconds).</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Expiration policy (validity time and behavior after the validity period expires)</p>
+         * @type {ExpirationPolicy || null}
+         */
+        this.ExpirationPolicy = null;
+
+        /**
+         * <p>Status: 1=pending verification, 2=not adopted, 3=import failed, 4=under review, 5=review failed, 6=Learning, 7=learn failed, 8=import completed, 9=expired, 10=quota invalid, 11=quota recovering, 12=manual appeal in progress, 13=manual appeal failed<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>QA_STATUS_UNKNOWN</td><td>0</td><td></td></tr><tr><td>QA_STATUS_PENDING_VERIFY</td><td>1</td><td>Pending verification</td></tr><tr><td>QA_STATUS_NOT_ACCEPTED</td><td>2</td><td>Not adopted</td></tr><tr><td>QA_STATUS_IMPORT_FAIL</td><td>3</td><td>Import failed</td></tr><tr><td>QA_STATUS_AUDITING</td><td>4</td><td>Under review</td></tr><tr><td>QA_STATUS_AUDIT_FAIL</td><td>5</td><td>Review failed</td></tr><tr><td>QA_STATUS_LEARNING</td><td>6</td><td>Learning</td></tr><tr><td>QA_STATUS_LEARN_FAIL</td><td>7</td><td>Learn failed</td></tr><tr><td>QA_STATUS_IMPORTED</td><td>8</td><td>Import completed</td></tr><tr><td>QA_STATUS_EXPIRED</td><td>9</td><td>Expired</td></tr><tr><td>QA_STATUS_QUOTA_INVALID</td><td>10</td><td>Quota invalid</td></tr><tr><td>QA_STATUS_QUOTA_RECOVERING</td><td>11</td><td>Quota recovering</td></tr><tr><td>QA_STATUS_MANUAL_APPEALING</td><td>12</td><td>Manual appeal in progress</td></tr><tr><td>QA_STATUS_MANUAL_APPEAL_FAIL</td><td>13</td><td>Manual appeal failed</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Status description.</p>
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * <p>Status additional information</p>
+         * @type {string || null}
+         */
+        this.StatusMessage = null;
+
+        /**
+         * <p>Update time (Unix seconds).</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.ExpirationPolicy) {
+            let obj = new ExpirationPolicy();
+            obj.deserialize(params.ExpirationPolicy)
+            this.ExpirationPolicy = obj;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.StatusMessage = 'StatusMessage' in params ? params.StatusMessage : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * Category path information
+ * @class
+ */
+class CategoryPath extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Category ID</p>
+         * @type {string || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * <p>List of category IDs in the path from the root node</p>
+         * @type {Array.<string> || null}
+         */
+        this.CategoryIdPath = null;
+
+        /**
+         * <p>List of category names in the path from the root node</p>
+         * @type {Array.<string> || null}
+         */
+        this.CategoryNamePath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+        this.CategoryIdPath = 'CategoryIdPath' in params ? params.CategoryIdPath : null;
+        this.CategoryNamePath = 'CategoryNamePath' in params ? params.CategoryNamePath : null;
+
+    }
+}
+
+/**
+ * CreateSimilarQuestion request structure.
+ * @class
+ */
+class CreateSimilarQuestionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the knowledge base it belongs to</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Query</p>
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * <p>Answer</p>
+         * @type {string || null}
+         */
+        this.Answer = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.Answer = 'Answer' in params ? params.Answer : null;
+
+    }
+}
+
+/**
+ * Welcome message configuration
+ * @class
+ */
+class AppGreetingConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Welcome message content</p>
+         * @type {string || null}
+         */
+        this.Greeting = null;
+
+        /**
+         * <p>Opening problem list</p>
+         * @type {Array.<string> || null}
+         */
+        this.OpeningQuestionList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Greeting = 'Greeting' in params ? params.Greeting : null;
+        this.OpeningQuestionList = 'OpeningQuestionList' in params ? params.OpeningQuestionList : null;
+
+    }
+}
+
+/**
+ * DescribeAppTriggerSummaryList request structure.
+ * @class
+ */
+class DescribeAppTriggerSummaryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Parameter filter list</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Page number</p><p>Value range: [1, 1000000]</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Size per page</p><p>Value range: [1, 100]</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <p>Blurry query string</p>
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * AppTriggerScheduleConfig
+ * @class
+ */
+class AppTriggerScheduleConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Trigger scheduled configuration.</p>
+         * @type {TimerScheduleConfig || null}
+         */
+        this.Schedule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Schedule) {
+            let obj = new TimerScheduleConfig();
+            obj.deserialize(params.Schedule)
+            this.Schedule = obj;
+        }
+
+    }
+}
+
+/**
+ * A single retrieval result
+ * @class
+ */
+class KnowledgeResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Confidence degree</p>
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * <p>Whether to enable</p>
-         * @type {boolean || null}
-         */
-        this.Enabled = null;
-
-        /**
-         * <p>Return the top N entries</p>
+         * <p>Hit knowledge type: 1=QA, 2=document fragment, 3=database, 4=map<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_QA</td><td>1</td><td>QA</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_DOC</td><td>2</td><td>Document fragment</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_DB</td><td>3</td><td>Database</td></tr><tr><td>KNOWLEDGE_SOURCE_TYPE_GRAPH</td><td>4</td><td>Map</td></tr></tbody></table></p>
          * @type {number || null}
          */
-        this.TopN = null;
+        this.KnowledgeType = null;
+
+        /**
+         * <p>Recall type list</p>
+         * @type {Array.<number> || null}
+         */
+        this.RecallTypeList = null;
+
+        /**
+         * <p>Result payload</p>
+         * @type {SearchResultPayload || null}
+         */
+        this.ResultPayload = null;
+
+        /**
+         * <p>Result type<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>SEARCH_RESULT_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SEARCH_RESULT_TYPE_RETRIEVAL</td><td>1</td><td>Standard search result</td></tr><tr><td>SEARCH_RESULT_TYPE_TEXT_TO_SQL</td><td>2</td><td>text2sql result</td></tr><tr><td>SEARCH_RESULT_TYPE_IMAGE_SEARCH_IMAGE</td><td>3</td><td></td></tr><tr><td>SEARCH_RESULT_TYPE_TEXT_SEARCH_IMAGE</td><td>4</td><td></td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.ResultType = null;
+
+        /**
+         * <p>Additional information for similar questions.</p>
+         * @type {SimilarQuestionExtra || null}
+         */
+        this.SimilarQuestionExtra = null;
+
+        /**
+         * <p>Basic information of knowledge fragment</p>
+         * @type {KnowledgeSnippetProfile || null}
+         */
+        this.SnippetProfile = null;
+
+        /**
+         * <p>Knowledge source information</p>
+         * @type {KnowledgeSource || null}
+         */
+        this.SourceInfo = null;
 
     }
 
@@ -845,31 +17947,334 @@ class QARetrievalConfig extends  AbstractModel {
             return;
         }
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
-        this.TopN = 'TopN' in params ? params.TopN : null;
+        this.KnowledgeType = 'KnowledgeType' in params ? params.KnowledgeType : null;
+        this.RecallTypeList = 'RecallTypeList' in params ? params.RecallTypeList : null;
+
+        if (params.ResultPayload) {
+            let obj = new SearchResultPayload();
+            obj.deserialize(params.ResultPayload)
+            this.ResultPayload = obj;
+        }
+        this.ResultType = 'ResultType' in params ? params.ResultType : null;
+
+        if (params.SimilarQuestionExtra) {
+            let obj = new SimilarQuestionExtra();
+            obj.deserialize(params.SimilarQuestionExtra)
+            this.SimilarQuestionExtra = obj;
+        }
+
+        if (params.SnippetProfile) {
+            let obj = new KnowledgeSnippetProfile();
+            obj.deserialize(params.SnippetProfile)
+            this.SnippetProfile = obj;
+        }
+
+        if (params.SourceInfo) {
+            let obj = new KnowledgeSource();
+            obj.deserialize(params.SourceInfo)
+            this.SourceInfo = obj;
+        }
 
     }
 }
 
 /**
- * Retrieval billing information
+ * ModifyAppTrigger response structure.
  * @class
  */
-class SearchBilling extends  AbstractModel {
+class ModifyAppTriggerResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Billing tag list</p>
-         * @type {Array.<KVPair> || null}
-         */
-        this.BillingTagList = null;
-
-        /**
-         * <p>Billing sub-business type</p>
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.FinanceSubBusinessType = null;
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Employee information
+ * @class
+ */
+class AccountInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Employee sub-account id</p>
+         * @type {string || null}
+         */
+        this.AccountUin = null;
+
+        /**
+         * <p>Employee nickname</p>
+         * @type {string || null}
+         */
+        this.NickName = null;
+
+        /**
+         * <p>Employee avatar</p>
+         * @type {string || null}
+         */
+        this.Avatar = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountUin = 'AccountUin' in params ? params.AccountUin : null;
+        this.NickName = 'NickName' in params ? params.NickName : null;
+        this.Avatar = 'Avatar' in params ? params.Avatar : null;
+
+    }
+}
+
+/**
+ * CreateSkill request structure.
+ * @class
+ */
+class CreateSkillRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Skill creation method, required; only allow</p><p>Enumeration values:</p><ul><li>1: FILE_UPLOAD (file upload)</li><li>3: AIGC (AIGC generation)</li></ul>
+         * @type {number || null}
+         */
+        this.CreateType = null;
+
+        /**
+         * <p>skill package file address (zip); required for both FILE_UPLOAD and AIGC</p>
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * <p>Workspace ID</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>skill show description</p>
+         * @type {string || null}
+         */
+        this.DisplayDescription = null;
+
+        /**
+         * <p>skill display name</p>
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * <p>Icon address</p>
+         * @type {string || null}
+         */
+        this.IconUrl = null;
+
+        /**
+         * <p>Unique business identifier name of the skill (unique within the same enterprise); if not passed, it will be parsed from the skill package</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Version number</p>
+         * @type {string || null}
+         */
+        this.SkillVersion = null;
+
+        /**
+         * <p>Version change description</p>
+         * @type {string || null}
+         */
+        this.UpdateDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreateType = 'CreateType' in params ? params.CreateType : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.DisplayDescription = 'DisplayDescription' in params ? params.DisplayDescription : null;
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+        this.IconUrl = 'IconUrl' in params ? params.IconUrl : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SkillVersion = 'SkillVersion' in params ? params.SkillVersion : null;
+        this.UpdateDescription = 'UpdateDescription' in params ? params.UpdateDescription : null;
+
+    }
+}
+
+/**
+ * CreateAgent response structure.
+ * @class
+ */
+class CreateAgentResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Agent Id</p>
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Agent skill details
+ * @class
+ */
+class AgentSkill extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>skillId</p>
+         * @type {string || null}
+         */
+        this.SkillId = null;
+
+        /**
+         * <p>skill name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Skill description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>skill display name</p>
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * <p>Skill show description</p>
+         * @type {string || null}
+         */
+        this.DisplayDescription = null;
+
+        /**
+         * <p>skill icon url</p>
+         * @type {string || null}
+         */
+        this.IconUrl = null;
+
+        /**
+         * <p>Skill source</p>
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * <p>Skill version</p>
+         * @type {string || null}
+         */
+        this.CurrentVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SkillId = 'SkillId' in params ? params.SkillId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+        this.DisplayDescription = 'DisplayDescription' in params ? params.DisplayDescription : null;
+        this.IconUrl = 'IconUrl' in params ? params.IconUrl : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.CurrentVersion = 'CurrentVersion' in params ? params.CurrentVersion : null;
+
+    }
+}
+
+/**
+ * SearchKnowledge request structure.
+ * @class
+ */
+class SearchKnowledgeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Advanced search configuration</p>
+         * @type {SearchAdvancedConfig || null}
+         */
+        this.AdvancedConfig = null;
+
+        /**
+         * <p>Retrieval input</p>
+         * @type {SearchInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * <p>Retrieval context</p>
+         * @type {SearchContext || null}
+         */
+        this.Context = null;
+
+        /**
+         * <p>Billing information</p>
+         * @type {SearchBilling || null}
+         */
+        this.SearchBilling = null;
 
     }
 
@@ -881,15 +18286,4839 @@ class SearchBilling extends  AbstractModel {
             return;
         }
 
-        if (params.BillingTagList) {
-            this.BillingTagList = new Array();
-            for (let z in params.BillingTagList) {
-                let obj = new KVPair();
-                obj.deserialize(params.BillingTagList[z]);
-                this.BillingTagList.push(obj);
+        if (params.AdvancedConfig) {
+            let obj = new SearchAdvancedConfig();
+            obj.deserialize(params.AdvancedConfig)
+            this.AdvancedConfig = obj;
+        }
+
+        if (params.Input) {
+            let obj = new SearchInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Context) {
+            let obj = new SearchContext();
+            obj.deserialize(params.Context)
+            this.Context = obj;
+        }
+
+        if (params.SearchBilling) {
+            let obj = new SearchBilling();
+            obj.deserialize(params.SearchBilling)
+            this.SearchBilling = obj;
+        }
+
+    }
+}
+
+/**
+ * Database search configuration
+ * @class
+ */
+class DBRetrievalConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to enable</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * <p>Model badge (external, visible on the user end): ALL copywriting has been rendered as final displayed content, without exposing template parameters</p>
+ * @class
+ */
+class ModelBadge extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Display copy (rendered as final copy)</p>
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * <p>Style theme</p><table><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>MODEL_BADGE_THEME_UNSPECIFIED</td><td>0</td><td>Unspecified</td></tr><tr><td>MODEL_BADGE_THEME_INFO</td><td>1</td><td>Info (blue)</td></tr><tr><td>MODEL_BADGE_THEME_SUCCESS</td><td>2</td><td>Success (green)</td></tr><tr><td>MODEL_BADGE_THEME_WARNING</td><td>3</td><td>Warning (orange)</td></tr><tr><td>MODEL_BADGE_THEME_DANGER</td><td>4</td><td>Danger (red)</td></tr></table>
+         * @type {number || null}
+         */
+        this.Theme = null;
+
+        /**
+         * <p>tooltip copywriting (rendered as final copywriting). If it is empty, it is not displayed.</p>
+         * @type {string || null}
+         */
+        this.Tips = null;
+
+        /**
+         * <p>Badge type</p><table><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>MODEL_BADGE_TYPE_UNSPECIFIED</td><td>0</td><td>Unspecified</td></tr><tr><td>MODEL_BADGE_TYPE_FREE_TRIAL</td><td>1</td><td>Limited-time free</td></tr><tr><td>MODEL_BADGE_TYPE_DEPRECATING</td><td>2</td><td>About to go offline</td></tr><tr><td>MODEL_BADGE_TYPE_NEW</td><td>3</td><td>New model</td></tr><tr><td>MODEL_BADGE_TYPE_HOT</td><td>4</td><td>Popular</td></tr></table>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Theme = 'Theme' in params ? params.Theme : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * Token usage statistics
+ * @class
+ */
+class TokenUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Number of completion tokens</p>
+         * @type {number || null}
+         */
+        this.CompletionTokens = null;
+
+        /**
+         * <p>Model name</p>
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * <p>prompt token count</p>
+         * @type {number || null}
+         */
+        this.PromptTokens = null;
+
+        /**
+         * <p>Total token count</p>
+         * @type {number || null}
+         */
+        this.TotalTokens = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CompletionTokens = 'CompletionTokens' in params ? params.CompletionTokens : null;
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.PromptTokens = 'PromptTokens' in params ? params.PromptTokens : null;
+        this.TotalTokens = 'TotalTokens' in params ? params.TotalTokens : null;
+
+    }
+}
+
+/**
+ * Aggregated details of platform resource usage (exclusive to PLATFORM domain)
+ * @class
+ */
+class PlatformUsageSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>PLATFORM domain consumption measurement list (authoritative field): list each measurement type by unit + label, where label is the PlatformBizType enumeration name string; typical examples include unit=TIMES + label=PLATFORM_BIZ_TYPE_SECURITY_AUDIT/WEB_SEARCH/OPEN_CLAW/APP_INVOKE, unit=ITEM + label=PLATFORM_BIZ_TYPE_LONG_TERM_MEMORY</p>
+         * @type {Array.<ResourceConsumption> || null}
+         */
+        this.ResourceConsumptionList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResourceConsumptionList) {
+            this.ResourceConsumptionList = new Array();
+            for (let z in params.ResourceConsumptionList) {
+                let obj = new ResourceConsumption();
+                obj.deserialize(params.ResourceConsumptionList[z]);
+                this.ResourceConsumptionList.push(obj);
             }
         }
-        this.FinanceSubBusinessType = 'FinanceSubBusinessType' in params ? params.FinanceSubBusinessType : null;
+
+    }
+}
+
+/**
+ * DeleteLabelList response structure.
+ * @class
+ */
+class DeleteLabelListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Batch deletion result.</p>
+         * @type {Array.<OperationResult> || null}
+         */
+        this.ResultList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResultList) {
+            this.ResultList = new Array();
+            for (let z in params.ResultList) {
+                let obj = new OperationResult();
+                obj.deserialize(params.ResultList[z]);
+                this.ResultList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * System parameters
+ * @class
+ */
+class AgentSystemVariable extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>System parameter name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Configuration of dialogue history rounds; used only when Input is "dialogue history" in system variables;</p>
+         * @type {number || null}
+         */
+        this.DialogHistoryLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DialogHistoryLimit = 'DialogHistoryLimit' in params ? params.DialogHistoryLimit : null;
+
+    }
+}
+
+/**
+ * Document external link information
+ * @class
+ */
+class DocExternalLink extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>External URL</p>
+         * @type {string || null}
+         */
+        this.ExternalUrl = null;
+
+        /**
+         * <p>Whether to replace the original display</p>
+         * @type {boolean || null}
+         */
+        this.ReplaceOriginEnabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExternalUrl = 'ExternalUrl' in params ? params.ExternalUrl : null;
+        this.ReplaceOriginEnabled = 'ReplaceOriginEnabled' in params ? params.ReplaceOriginEnabled : null;
+
+    }
+}
+
+/**
+ * PluginProfile
+ * @class
+ */
+class PluginProfile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Plug-in author
+         * @type {string || null}
+         */
+        this.Author = null;
+
+        /**
+         * Plugin description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Plug-in icon url
+         * @type {string || null}
+         */
+        this.IconUrl = null;
+
+        /**
+         * Plugin name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Plug-in product type</p><p>Enumeration values:</p><ul><li>0: ordinary plug-in</li><li>1: connector plug-in</li></ul>
+         * @type {number || null}
+         */
+        this.PluginClass = null;
+
+        /**
+         * <p>Plugin type</p><p>Enumeration values:</p><ul><li>0: API</li><li>1: Code</li><li>2: MCP</li><li>3: Application</li></ul>
+         * @type {number || null}
+         */
+        this.PluginKind = null;
+
+        /**
+         * <p>Plug-in source</p><p>Enumeration values:</p><ul><li>0: custom plugin</li><li>1: official plug-in</li><li>2: third-party plugin</li></ul>
+         * @type {number || null}
+         */
+        this.PluginSource = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Author = 'Author' in params ? params.Author : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.IconUrl = 'IconUrl' in params ? params.IconUrl : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.PluginClass = 'PluginClass' in params ? params.PluginClass : null;
+        this.PluginKind = 'PluginKind' in params ? params.PluginKind : null;
+        this.PluginSource = 'PluginSource' in params ? params.PluginSource : null;
+
+    }
+}
+
+/**
+ * DescribePlugin response structure.
+ * @class
+ */
+class DescribePluginResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Plugin details</p>
+         * @type {Plugin || null}
+         */
+        this.Plugin = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Plugin) {
+            let obj = new Plugin();
+            obj.deserialize(params.Plugin)
+            this.Plugin = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Channel context timeout configuration clearing
+ * @class
+ */
+class ClawAgentChannelContextTimeoutConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to enable channel context timeout clearing</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * <p>Channel context timeout duration</p><p>Value range: [1, 99]</p>
+         * @type {number || null}
+         */
+        this.TimeoutHour = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.TimeoutHour = 'TimeoutHour' in params ? params.TimeoutHour : null;
+
+    }
+}
+
+/**
+ * DescribeAgentReleasePreviewList response structure.
+ * @class
+ */
+class DescribeAgentReleasePreviewListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Publish preview list</p>
+         * @type {Array.<AgentReleasePreview> || null}
+         */
+        this.ReleaseList = null;
+
+        /**
+         * <p>Total.</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReleaseList) {
+            this.ReleaseList = new Array();
+            for (let z in params.ReleaseList) {
+                let obj = new AgentReleasePreview();
+                obj.deserialize(params.ReleaseList[z]);
+                this.ReleaseList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSkillSummaryList response structure.
+ * @class
+ */
+class DescribeSkillSummaryListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Skill summary list
+         * @type {Array.<SkillSummary> || null}
+         */
+        this.SkillSummaryList = null;
+
+        /**
+         * Total number.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SkillSummaryList) {
+            this.SkillSummaryList = new Array();
+            for (let z in params.SkillSummaryList) {
+                let obj = new SkillSummary();
+                obj.deserialize(params.SkillSummaryList[z]);
+                this.SkillSummaryList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConversationMessageList request structure.
+ * @class
+ */
+class DescribeConversationMessageListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session ID.</p>
+         * @type {string || null}
+         */
+        this.ConversationId = null;
+
+        /**
+         * <p>Session type enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (unspecified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor trial), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share link)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Application key</p>
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * <p>Total number of returned records. Default: 10. Maximum: 50. When querying forward or backward, messages of the record specified by record_id are excluded. When querying from the center in both directions, the message of the record specified by record_id is included. The number of returned records is limit / 2 for each direction, rounded up.</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Sub-user Uin.</p>
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * <p>Root user Uin.</p>
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * <p>Query anchor record ID</p>
+         * @type {string || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * <p>Query direction relative to record_id. Enumeration values: 0-RECORD_QUERY_DIRECTION_UNSPECIFIED (not specified, compatible with legacy logic, query forward by default), 1-RECORD_QUERY_DIRECTION_BACKWARD (query earlier messages forward from record_id), 2-RECORD_QUERY_DIRECTION_FORWARD (query newer messages backward from record_id), 3-RECORD_QUERY_DIRECTION_BIDIRECTIONAL (query both forward and backward from record_id as the center)</p>
+         * @type {number || null}
+         */
+        this.RecordQueryDirection = null;
+
+        /**
+         * <p>Required when Type is CONVERSATION_TYPE_SHARE. Share code</p>
+         * @type {string || null}
+         */
+        this.ShareCode = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConversationId = 'ConversationId' in params ? params.ConversationId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.RecordQueryDirection = 'RecordQueryDirection' in params ? params.RecordQueryDirection : null;
+        this.ShareCode = 'ShareCode' in params ? params.ShareCode : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * Validity period.
+ * @class
+ */
+class EffectivePeriod extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Validity end time (Unix seconds. 0 indicates permanent validity).</p>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <p>Validity start time (Unix seconds)</p>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+
+    }
+}
+
+/**
+ * DeleteDocList response structure.
+ * @class
+ */
+class DeleteDocListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Batch deletion result.</p>
+         * @type {Array.<OperationResult> || null}
+         */
+        this.ResultList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResultList) {
+            this.ResultList = new Array();
+            for (let z in params.ResultList) {
+                let obj = new OperationResult();
+                obj.deserialize(params.ResultList[z]);
+                this.ResultList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReleaseList response structure.
+ * @class
+ */
+class DescribeReleaseListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * release_list
+         * @type {Array.<ReleaseRecord> || null}
+         */
+        this.ReleaseList = null;
+
+        /**
+         * total_count
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReleaseList) {
+            this.ReleaseList = new Array();
+            for (let z in params.ReleaseList) {
+                let obj = new ReleaseRecord();
+                obj.deserialize(params.ReleaseList[z]);
+                this.ReleaseList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAgent request structure.
+ * @class
+ */
+class DeleteAgentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>ID of the agent to delete</p>
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+        /**
+         * Collaboration mode; 0: Claw mode; 1: Multi-Agent mode
+         * @type {number || null}
+         */
+        this.CollaborationMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+        this.CollaborationMode = 'CollaborationMode' in params ? params.CollaborationMode : null;
+
+    }
+}
+
+/**
+ * RequestParam
+ * @class
+ */
+class RequestParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Parameters in types of AnyOf</p>
+         * @type {Array.<RequestParam> || null}
+         */
+        this.AnyOf = null;
+
+        /**
+         * <p>Default value.</p>
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * <p>Parameter description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Globally hidden and invisible (different from agent_hidden in the Agent scenario). true: globally hidden and invisible; false: visible</p>
+         * @type {boolean || null}
+         */
+        this.IsGlobalHidden = null;
+
+        /**
+         * <p>Required or optional</p>
+         * @type {boolean || null}
+         */
+        this.IsRequired = null;
+
+        /**
+         * <p>Parameter name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Parameters in types of OneOf</p>
+         * @type {Array.<RequestParam> || null}
+         */
+        this.OneOf = null;
+
+        /**
+         * <p>Sub-parameter, used only when ParamType is OBJECT or ARRAY&lt;&gt;</p>
+         * @type {Array.<RequestParam> || null}
+         */
+        this.SubParams = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>String</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>Integer</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>Floating-point number</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>Boolean value</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>Object</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>Array of strings</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>Array of integers</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>Array of floating-point numbers</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>Array of boolean values</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>Object array</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>Nested array</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>Null</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>Unspecified type, for OneOf and AnyOf scenarios</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AnyOf) {
+            this.AnyOf = new Array();
+            for (let z in params.AnyOf) {
+                let obj = new RequestParam();
+                obj.deserialize(params.AnyOf[z]);
+                this.AnyOf.push(obj);
+            }
+        }
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.IsGlobalHidden = 'IsGlobalHidden' in params ? params.IsGlobalHidden : null;
+        this.IsRequired = 'IsRequired' in params ? params.IsRequired : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.OneOf) {
+            this.OneOf = new Array();
+            for (let z in params.OneOf) {
+                let obj = new RequestParam();
+                obj.deserialize(params.OneOf[z]);
+                this.OneOf.push(obj);
+            }
+        }
+
+        if (params.SubParams) {
+            this.SubParams = new Array();
+            for (let z in params.SubParams) {
+                let obj = new RequestParam();
+                obj.deserialize(params.SubParams[z]);
+                this.SubParams.push(obj);
+            }
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * Description of a single dialogue failure
+ * @class
+ */
+class ConversationRecordErrorInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Failure error code of the dialogue</p>
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * <p>Dialogue failure error message</p>
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * DescribeUsageSummaryList request structure.
+ * @class
+ */
+class DescribeUsageSummaryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Resource type, limited to MODEL / PLUGIN / PLATFORM</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>Model usage</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>Plug-in usage (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_PLATFORM (reserved, not currently supported)</td><td>3</td><td>Platform feature usage (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>Model concurrency limit exceeded (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>Knowledge base capacity (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>Usage summary (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>Resource consumption (billing details) (reserved, not currently supported)</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * <p>Query time range (Unix seconds).</p>
+         * @type {TimeRange || null}
+         */
+        this.TimeRange = null;
+
+        /**
+         * <p>View scope: corporate view / space view / application view</p>
+         * @type {ViewScope || null}
+         */
+        this.ViewScope = null;
+
+        /**
+         * <p>Extended Filter (resource_type=MODEL). Filter combination rule: multiple items use AND, AND value_list within the same item uses OR. Supported Name: MODEL_Name (MODEL Name), user_id (uid), space_id (space id), resource_id/source_id (source id), metric_source_type (metric_source_type_* Enumeration Name OR integer)</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Page number, starting from 0.</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Number of items per page. Maximum: 100.</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+        if (params.TimeRange) {
+            let obj = new TimeRange();
+            obj.deserialize(params.TimeRange)
+            this.TimeRange = obj;
+        }
+
+        if (params.ViewScope) {
+            let obj = new ViewScope();
+            obj.deserialize(params.ViewScope)
+            this.ViewScope = obj;
+        }
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * Agent Deployment project detail
+ * @class
+ */
+class AgentRelease extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Name.</p>
+         * @type {string || null}
+         */
+        this.ItemName = null;
+
+        /**
+         * <p>Update time, unix timestamp in seconds (s)</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * <p>Action description.</p>
+         * @type {string || null}
+         */
+        this.ActionDescription = null;
+
+        /**
+         * <p>Change to test</p>
+         * @type {string || null}
+         */
+        this.ReleaseMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ItemName = 'ItemName' in params ? params.ItemName : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ActionDescription = 'ActionDescription' in params ? params.ActionDescription : null;
+        this.ReleaseMessage = 'ReleaseMessage' in params ? params.ReleaseMessage : null;
+
+    }
+}
+
+/**
+ * Agent tool input parameter definition
+ * @class
+ */
+class AgentToolInputParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tool name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Tool description</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Tool parameter type</p><p>Enumeration values:</p><ul><li>0: STRING</li><li>1: INT</li><li>2: FLOAT</li><li>3: BOOL</li><li>4: OBJECT</li><li>5: ARRAY_STRING</li><li>6: ARRAY_INT</li><li>7: ARRAY_FLOAT</li><li>8: ARRAY_BOOL</li><li>9: ARRAY_OBJECT</li><li>20: ARRAY_ARRAY</li><li>99: NULL</li></ul>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Required or not</p>
+         * @type {boolean || null}
+         */
+        this.IsRequired = null;
+
+        /**
+         * <p>Sub-parameter, used only when the data type is OBJECT or ARRAY&lt;&gt;</p>
+         * @type {Array.<AgentToolInputParameter> || null}
+         */
+        this.SubParameterList = null;
+
+        /**
+         * <p>Whether to hide from the model in mode</p>
+         * @type {boolean || null}
+         */
+        this.IsHidden = null;
+
+        /**
+         * <p>Parameters in types of OneOf</p>
+         * @type {Array.<AgentToolInputParameter> || null}
+         */
+        this.OneOfList = null;
+
+        /**
+         * <p>Parameters in types of AnyOf</p>
+         * @type {Array.<AgentToolInputParameter> || null}
+         */
+        this.AnyOfList = null;
+
+        /**
+         * <p>Source of parameter value</p>
+         * @type {AgentInput || null}
+         */
+        this.Input = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.IsRequired = 'IsRequired' in params ? params.IsRequired : null;
+
+        if (params.SubParameterList) {
+            this.SubParameterList = new Array();
+            for (let z in params.SubParameterList) {
+                let obj = new AgentToolInputParameter();
+                obj.deserialize(params.SubParameterList[z]);
+                this.SubParameterList.push(obj);
+            }
+        }
+        this.IsHidden = 'IsHidden' in params ? params.IsHidden : null;
+
+        if (params.OneOfList) {
+            this.OneOfList = new Array();
+            for (let z in params.OneOfList) {
+                let obj = new AgentToolInputParameter();
+                obj.deserialize(params.OneOfList[z]);
+                this.OneOfList.push(obj);
+            }
+        }
+
+        if (params.AnyOfList) {
+            this.AnyOfList = new Array();
+            for (let z in params.AnyOfList) {
+                let obj = new AgentToolInputParameter();
+                obj.deserialize(params.AnyOfList[z]);
+                this.AnyOfList.push(obj);
+            }
+        }
+
+        if (params.Input) {
+            let obj = new AgentInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+    }
+}
+
+/**
+ * RunAppTriggerNow response structure.
+ * @class
+ */
+class RunAppTriggerNowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application trigger instance ID.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConflictQA request structure.
+ * @class
+ */
+class DescribeConflictQARequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Conflict group ID</p>
+         * @type {string || null}
+         */
+        this.ConflictGroupId = null;
+
+        /**
+         * <p>Associated knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConflictGroupId = 'ConflictGroupId' in params ? params.ConflictGroupId : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+    }
+}
+
+/**
+ * DeleteAppTrigger request structure.
+ * @class
+ */
+class DeleteAppTriggerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Trigger ID.</p>
+         * @type {string || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * <p>Visitor ID.</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * QA operation permission information
+ * @class
+ */
+class QAPermission extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether verification is supported (adoption/non-adoption).</p>
+         * @type {boolean || null}
+         */
+        this.CanAccept = null;
+
+        /**
+         * <p>Whether it is deletable.</p>
+         * @type {boolean || null}
+         */
+        this.CanDelete = null;
+
+        /**
+         * <p>Whether it is editable</p>
+         * @type {boolean || null}
+         */
+        this.CanEdit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CanAccept = 'CanAccept' in params ? params.CanAccept : null;
+        this.CanDelete = 'CanDelete' in params ? params.CanDelete : null;
+        this.CanEdit = 'CanEdit' in params ? params.CanEdit : null;
+
+    }
+}
+
+/**
+ * CreateQAGenerationTask response structure.
+ * @class
+ */
+class CreateQAGenerationTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID list.</p>
+         * @type {Array.<string> || null}
+         */
+        this.TaskIdList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskIdList = 'TaskIdList' in params ? params.TaskIdList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Common operation result item
+ * @class
+ */
+class OperationResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Resource ID.</p>
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * <p>Failure reason (populated when succeeded=false)</p>
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * <p>Whether it is successful</p>
+         * @type {boolean || null}
+         */
+        this.Succeeded = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.Succeeded = 'Succeeded' in params ? params.Succeeded : null;
+
+    }
+}
+
+/**
+ * OnceSchedule
+ * @class
+ */
+class OnceSchedule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Trigger time.
+         * @type {string || null}
+         */
+        this.FireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FireTime = 'FireTime' in params ? params.FireTime : null;
+
+    }
+}
+
+/**
+ * Multimodal QA model configuration
+ * @class
+ */
+class MultiModalQAModel extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Model configuration
+         * @type {ModelDetailInfo || null}
+         */
+        this.Model = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Model) {
+            let obj = new ModelDetailInfo();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateSpace request structure.
+ * @class
+ */
+class CreateSpaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Workspace name. Maximum length: 30 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Space description. Maximum length: 150 characters.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * Corresponds to the MCP protocol _meta.ui, defining the meta information of the interactive interface for MCP Apps tools (this period only consumes resourceUri and visibility).
+ * @class
+ */
+class MCPToolUIMeta extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Associated UI resource URI in UI:// scheme, format: UI://&lt;plug-in flag&gt;/&lt;resource name&gt;-&lt;version&gt;. This field is the entry to the interactive UI of MCP Apps. If not empty, it means the tool supports Apps (shown as "text + interactive UI"). If empty, it is a plain text tool. It is automatically identified and filled based on the tool sync result and does not support manual editing.</p>
+         * @type {string || null}
+         */
+        this.ResourceUri = null;
+
+        /**
+         * <p>Visibility declaration for tool callers. Value range: model (callable by models), app (callable by UI). Multiple selections allowed, for example [&quot;model&quot;,&quot;app&quot;]. Independent of ResourceUri (SEP-1865) and can exist independently. For example, a backend app-only tool is [&quot;app&quot;]. When ResourceUri is non-empty and this field is not specified, it is normalized to [&quot;model&quot;,&quot;app&quot;] by default. Existing non-Apps tools remain empty.</p><p>Enumeration values:</p><ul><li>model: Supports model</li><li>app: Supports app</li></ul>
+         * @type {Array.<string> || null}
+         */
+        this.Visibility = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceUri = 'ResourceUri' in params ? params.ResourceUri : null;
+        this.Visibility = 'Visibility' in params ? params.Visibility : null;
+
+    }
+}
+
+/**
+ * Search filter
+ * @class
+ */
+class SearchFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Search filter type<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>SEARCH_FILTER_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SEARCH_FILTER_TYPE_CUSTOMER_LABEL_VALUE</td><td>1</td><td>User-customized tag value</td></tr><tr><td>SEARCH_FILTER_TYPE_CUSTOMER_LABEL_VALUE_ID</td><td>2</td><td>User-customized tag value ID</td></tr><tr><td>SEARCH_FILTER_TYPE_DOC_ID</td><td>3</td><td>Retrieve by specified document ID</td></tr><tr><td>SEARCH_FILTER_TYPE_DOC_CATEGORY_ID</td><td>4</td><td>Retrieve by specified document classification ID</td></tr><tr><td>SEARCH_FILTER_TYPE_DB_TABLE_ID</td><td>5</td><td>Retrieve by specified database table ID</td></tr><tr><td>SEARCH_FILTER_TYPE_KB_SCHEMA_ID</td><td>6</td><td>Specified knowledge base schema ID</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * <p>Filter value list. According to SearchFilterType, take value 1: pass a custom tag value; 2: pass a custom tag value ID; 3: pass a document ID; 4: pass a category ID</p>
+         * @type {Array.<string> || null}
+         */
+        this.FilterValueList = null;
+
+        /**
+         * <p>User-customized tag ID</p>
+         * @type {string || null}
+         */
+        this.LabelId = null;
+
+        /**
+         * <p>Logical operator: AND or OR<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>LOGIC_OPR_NOOP</td><td>0</td><td></td></tr><tr><td>LOGIC_OPR_AND</td><td>1</td><td></td></tr><tr><td>LOGIC_OPR_OR</td><td>2</td><td></td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.LogicOp = null;
+
+        /**
+         * <p>Nested search filter</p>
+         * @type {Array.<SearchFilter> || null}
+         */
+        this.SearchFilterList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.FilterValueList = 'FilterValueList' in params ? params.FilterValueList : null;
+        this.LabelId = 'LabelId' in params ? params.LabelId : null;
+        this.LogicOp = 'LogicOp' in params ? params.LogicOp : null;
+
+        if (params.SearchFilterList) {
+            this.SearchFilterList = new Array();
+            for (let z in params.SearchFilterList) {
+                let obj = new SearchFilter();
+                obj.deserialize(params.SearchFilterList[z]);
+                this.SearchFilterList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeCategoryList request structure.
+ * @class
+ */
+class DescribeCategoryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Associated knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Filter criteria (multiple Filters are in an AND relationship, and multiple Values of the same Filter are in an OR relationship): CategoryType - classification type, enumeration value, exact match (CATEGORY_TYPE_DOC=1/CATEGORY_TYPE_QA=2); ParentCategoryId - parent category ID, exact match</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Pagination page number, starting from 0</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * <p>Number of items per page. Default: 10. Maximum: 100</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <p>Keyword search</p>
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * <p>Switch configuration</p>
+         * @type {SummaryListSwitch || null}
+         */
+        this.SummaryListSwitch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+
+        if (params.SummaryListSwitch) {
+            let obj = new SummaryListSwitch();
+            obj.deserialize(params.SummaryListSwitch)
+            this.SummaryListSwitch = obj;
+        }
+
+    }
+}
+
+/**
+ * FieldMask
+ * @class
+ */
+class FieldMask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Parameter name</p><p>Parameter format: path of the specified field to get</p>
+         * @type {Array.<string> || null}
+         */
+        this.Paths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Paths = 'Paths' in params ? params.Paths : null;
+
+    }
+}
+
+/**
+ * AppTriggerWebhookParamSchemaConfig
+ * @class
+ */
+class AppTriggerWebhookParamSchemaConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Trigger API parameter list</p>
+         * @type {Array.<AppTriggerParamSchema> || null}
+         */
+        this.SchemaList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SchemaList) {
+            this.SchemaList = new Array();
+            for (let z in params.SchemaList) {
+                let obj = new AppTriggerParamSchema();
+                obj.deserialize(params.SchemaList[z]);
+                this.SchemaList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Message information
+ * @class
+ */
+class ConversationMessage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session ID.</p>
+         * @type {string || null}
+         */
+        this.ConversationId = null;
+
+        /**
+         * <p>Message icon</p>
+         * @type {string || null}
+         */
+        this.Icon = null;
+
+        /**
+         * <p>Message ID</p>
+         * @type {string || null}
+         */
+        this.MessageId = null;
+
+        /**
+         * <p>Message name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Record ID</p>
+         * @type {string || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * <p>Message role</p>
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * <p>Message status. pending: pending execution, processing: in processing, success: completed, failed: processing failure, stop: canceled</p>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Status description</p>
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * <p>Message title</p>
+         * @type {string || null}
+         */
+        this.Title = null;
+
+        /**
+         * <p>List of message contents</p>
+         * @type {Array.<ConversationContent> || null}
+         */
+        this.ContentList = null;
+
+        /**
+         * <p>Message content list</p>
+         * @type {Array.<ConversationContent> || null}
+         */
+        this.Contents = null;
+
+        /**
+         * <p>Type.</p>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConversationId = 'ConversationId' in params ? params.ConversationId : null;
+        this.Icon = 'Icon' in params ? params.Icon : null;
+        this.MessageId = 'MessageId' in params ? params.MessageId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.Title = 'Title' in params ? params.Title : null;
+
+        if (params.ContentList) {
+            this.ContentList = new Array();
+            for (let z in params.ContentList) {
+                let obj = new ConversationContent();
+                obj.deserialize(params.ContentList[z]);
+                this.ContentList.push(obj);
+            }
+        }
+
+        if (params.Contents) {
+            this.Contents = new Array();
+            for (let z in params.Contents) {
+                let obj = new ConversationContent();
+                obj.deserialize(params.Contents[z]);
+                this.Contents.push(obj);
+            }
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * CreateCategory response structure.
+ * @class
+ */
+class CreateCategoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>ID of the successfully created category</p>
+         * @type {string || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNodeBatchRun request structure.
+ * @class
+ */
+class DescribeNodeBatchRunRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Index Number</p>
+         * @type {number || null}
+         */
+        this.Index = null;
+
+        /**
+         * <p>Workflow Node ID</p>
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * <p>Associated node of the sub-workflow</p><p>node_id_a.node_id_b[1]</p>
+         * @type {string || null}
+         */
+        this.SubWorkflowNodePath = null;
+
+        /**
+         * <p>Workflow running ID</p>
+         * @type {string || null}
+         */
+        this.WorkflowRunId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.SubWorkflowNodePath = 'SubWorkflowNodePath' in params ? params.SubWorkflowNodePath : null;
+        this.WorkflowRunId = 'WorkflowRunId' in params ? params.WorkflowRunId : null;
+
+    }
+}
+
+/**
+ * DescribeVariableList request structure.
+ * @class
+ */
+class DescribeVariableListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Filter criteria (supported: VariableIdList - variable ID list, VariableType - variable type)
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * Module type. Enumeration values: 1: environment parameter, 2: application parameter, 3: system parameter, -1: ALL parameters.
+         * @type {number || null}
+         */
+        this.ModuleType = null;
+
+        /**
+         * Whether internal variables are required
+         * @type {boolean || null}
+         */
+        this.NeedInternalVariable = null;
+
+        /**
+         * Page number, starting from 0.
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Number of items per page. Maximum: 100.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Query keyword.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.ModuleType = 'ModuleType' in params ? params.ModuleType : null;
+        this.NeedInternalVariable = 'NeedInternalVariable' in params ? params.NeedInternalVariable : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Query = 'Query' in params ? params.Query : null;
+
+    }
+}
+
+/**
+ * Common operator information
+ * @class
+ */
+class Operator extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User ID.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Username
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+
+    }
+}
+
+/**
+ * ExportQA response structure.
+ * @class
+ */
+class ExportQAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Exported task ID (query the completion status via DescribeAsyncTaskStatus)</p>
+         * @type {string || null}
+         */
+        this.ExportTaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExportTaskId = 'ExportTaskId' in params ? params.ExportTaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QA meta information
+ * @class
+ */
+class QAMetadata extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Answer</p>
+         * @type {string || null}
+         */
+        this.Answer = null;
+
+        /**
+         * <p>QA characters</p>
+         * @type {string || null}
+         */
+        this.QaCharCount = null;
+
+        /**
+         * <p>QA size (byte, including similar questions)</p>
+         * @type {string || null}
+         */
+        this.QaSize = null;
+
+        /**
+         * <p>Query</p>
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * <p>Metadata reference field name list (for displaying which QA categories and attributes are set as metadata)</p>
+         * @type {Array.<string> || null}
+         */
+        this.RefFieldNameList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.QaCharCount = 'QaCharCount' in params ? params.QaCharCount : null;
+        this.QaSize = 'QaSize' in params ? params.QaSize : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.RefFieldNameList = 'RefFieldNameList' in params ? params.RefFieldNameList : null;
+
+    }
+}
+
+/**
+ * DescribeConversationMessageList response structure.
+ * @class
+ */
+class DescribeConversationMessageListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>First record ID</p>
+         * @type {string || null}
+         */
+        this.FirstRecordId = null;
+
+        /**
+         * <p>Whether there are more update message directions</p>
+         * @type {boolean || null}
+         */
+        this.HasMoreAfter = null;
+
+        /**
+         * <p>Earlier message orientation whether there is more</p>
+         * @type {boolean || null}
+         */
+        this.HasMoreBefore = null;
+
+        /**
+         * <p>Last record ID</p>
+         * @type {string || null}
+         */
+        this.LastRecordId = null;
+
+        /**
+         * <p>Message list</p>
+         * @type {Array.<ConversationMessage> || null}
+         */
+        this.MessageList = null;
+
+        /**
+         * <p>Message list</p>
+         * @type {Array.<ConversationMessage> || null}
+         */
+        this.Messages = null;
+
+        /**
+         * <p>Statistics list of records in a single dialogue, associated with message_list via record_id / related_record_id</p>
+         * @type {Array.<ConversationRecordSummary> || null}
+         */
+        this.RecordSummaryList = null;
+
+        /**
+         * <p>Last reset information</p>
+         * @type {ConversationResetInfo || null}
+         */
+        this.ResetInfo = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FirstRecordId = 'FirstRecordId' in params ? params.FirstRecordId : null;
+        this.HasMoreAfter = 'HasMoreAfter' in params ? params.HasMoreAfter : null;
+        this.HasMoreBefore = 'HasMoreBefore' in params ? params.HasMoreBefore : null;
+        this.LastRecordId = 'LastRecordId' in params ? params.LastRecordId : null;
+
+        if (params.MessageList) {
+            this.MessageList = new Array();
+            for (let z in params.MessageList) {
+                let obj = new ConversationMessage();
+                obj.deserialize(params.MessageList[z]);
+                this.MessageList.push(obj);
+            }
+        }
+
+        if (params.Messages) {
+            this.Messages = new Array();
+            for (let z in params.Messages) {
+                let obj = new ConversationMessage();
+                obj.deserialize(params.Messages[z]);
+                this.Messages.push(obj);
+            }
+        }
+
+        if (params.RecordSummaryList) {
+            this.RecordSummaryList = new Array();
+            for (let z in params.RecordSummaryList) {
+                let obj = new ConversationRecordSummary();
+                obj.deserialize(params.RecordSummaryList[z]);
+                this.RecordSummaryList.push(obj);
+            }
+        }
+
+        if (params.ResetInfo) {
+            let obj = new ConversationResetInfo();
+            obj.deserialize(params.ResetInfo)
+            this.ResetInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AppToolConfig
+ * @class
+ */
+class AppToolConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Input parameter</p>
+         * @type {Array.<RequestParam> || null}
+         */
+        this.Inputs = null;
+
+        /**
+         * <p>Output parameters</p>
+         * @type {Array.<ResponseParam> || null}
+         */
+        this.Outputs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Inputs) {
+            this.Inputs = new Array();
+            for (let z in params.Inputs) {
+                let obj = new RequestParam();
+                obj.deserialize(params.Inputs[z]);
+                this.Inputs.push(obj);
+            }
+        }
+
+        if (params.Outputs) {
+            this.Outputs = new Array();
+            for (let z in params.Outputs) {
+                let obj = new ResponseParam();
+                obj.deserialize(params.Outputs[z]);
+                this.Outputs.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * RollbackRelease response structure.
+ * @class
+ */
+class RollbackReleaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReleaseSummary request structure.
+ * @class
+ */
+class DescribeReleaseSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * app_id
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * release_id
+         * @type {string || null}
+         */
+        this.ReleaseId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ReleaseId = 'ReleaseId' in params ? params.ReleaseId : null;
+
+    }
+}
+
+/**
+ * Workflow configuration
+ * @class
+ */
+class AppWorkflowConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to use PDL
+         * @type {boolean || null}
+         */
+        this.EnablePDL = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnablePDL = 'EnablePDL' in params ? params.EnablePDL : null;
+
+    }
+}
+
+/**
+ * AgentTask Intelligent Agent task information
+ * @class
+ */
+class ConversationAgentTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task content</p>
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * <p>Task number</p>
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * <p>Task status. pending: to be executed, processing: processing, success: completed, failed: processing failure, stop: canceled</p>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * CheckLabel response structure.
+ * @class
+ */
+class CheckLabelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Validation result list</p>
+         * @type {Array.<LabelTermCheckResult> || null}
+         */
+        this.CheckList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CheckList) {
+            this.CheckList = new Array();
+            for (let z in params.CheckList) {
+                let obj = new LabelTermCheckResult();
+                obj.deserialize(params.CheckList[z]);
+                this.CheckList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AppTriggerScheduleStatus
+ * @class
+ */
+class AppTriggerScheduleStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Last trigger time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss</p>
+         * @type {string || null}
+         */
+        this.LastFireTime = null;
+
+        /**
+         * <p>Next trigger time</p><p>Parameter format: YYYY-MM-DD hh:mm:ss</p>
+         * @type {string || null}
+         */
+        this.NextFireTime = null;
+
+        /**
+         * <p>Trigger mode</p>
+         * @type {string || null}
+         */
+        this.PolicySummary = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LastFireTime = 'LastFireTime' in params ? params.LastFireTime : null;
+        this.NextFireTime = 'NextFireTime' in params ? params.NextFireTime : null;
+        this.PolicySummary = 'PolicySummary' in params ? params.PolicySummary : null;
+
+    }
+}
+
+/**
+ * Common key-value pair
+ * @class
+ */
+class KVPair extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DeleteSkill request structure.
+ * @class
+ */
+class DeleteSkillRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Skill ID, required</p>
+         * @type {string || null}
+         */
+        this.SkillId = null;
+
+        /**
+         * <p>Space ID. Required.</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SkillId = 'SkillId' in params ? params.SkillId : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+    }
+}
+
+/**
+ * DescribePlugin request structure.
+ * @class
+ */
+class DescribePluginRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Plugin id</p>
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * <p>Current space id</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Get the specified field</p>
+         * @type {FieldMask || null}
+         */
+        this.FieldMask = null;
+
+        /**
+         * <p>Plug-in display scenario. If not passed or set to 0, the scenario is not limited.</p><p>Enumeration values:</p><ul><li>0: Not limited</li><li>1: Agent Mode</li><li>2: Workflow</li><li>3: Intelligent workbench</li></ul>
+         * @type {number || null}
+         */
+        this.Module = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+        if (params.FieldMask) {
+            let obj = new FieldMask();
+            obj.deserialize(params.FieldMask)
+            this.FieldMask = obj;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+
+    }
+}
+
+/**
+ * BatchRunSummary
+ * @class
+ */
+class BatchRunSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 	Number of failures.
+         * @type {number || null}
+         */
+        this.FailedCount = null;
+
+        /**
+         * 	Number of successes.
+         * @type {number || null}
+         */
+        this.SuccessCount = null;
+
+        /**
+         * Total batches
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Failed subscript
+         * @type {Array.<number> || null}
+         */
+        this.FailedIndexList = null;
+
+        /**
+         * 	Batches completed in the previous round
+         * @type {Array.<number> || null}
+         */
+        this.JustCompletedIndexList = null;
+
+        /**
+         * Subscript in running
+         * @type {Array.<number> || null}
+         */
+        this.RunningIndexList = null;
+
+        /**
+         * Subscript of success
+         * @type {Array.<number> || null}
+         */
+        this.SuccessIndexList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FailedCount = 'FailedCount' in params ? params.FailedCount : null;
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.FailedIndexList = 'FailedIndexList' in params ? params.FailedIndexList : null;
+        this.JustCompletedIndexList = 'JustCompletedIndexList' in params ? params.JustCompletedIndexList : null;
+        this.RunningIndexList = 'RunningIndexList' in params ? params.RunningIndexList : null;
+        this.SuccessIndexList = 'SuccessIndexList' in params ? params.SuccessIndexList : null;
+
+    }
+}
+
+/**
+ * PortalShareConfig
+ * @class
+ */
+class PortalShareConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Business shared switch</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * PluginUserState
+ * @class
+ */
+class PluginUserState extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the plug-in has been bookmarked
+         * @type {boolean || null}
+         */
+        this.IsFavorite = null;
+
+        /**
+         * Whether it is in the plug-in allowlist
+         * @type {boolean || null}
+         */
+        this.IsInWhiteList = null;
+
+        /**
+         * <p>Allowlist type, used to represent whether the current user can use this plug-in directly.</p><p>Enumeration values:</p><ul><li>0: Not on the allowlist, fully available</li><li>1: Current user in allowlist</li><li>2: Current user not in allowlist, submit an application</li></ul>
+         * @type {number || null}
+         */
+        this.WhiteListType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsFavorite = 'IsFavorite' in params ? params.IsFavorite : null;
+        this.IsInWhiteList = 'IsInWhiteList' in params ? params.IsInWhiteList : null;
+        this.WhiteListType = 'WhiteListType' in params ? params.WhiteListType : null;
+
+    }
+}
+
+/**
+ * DuplexBilling
+ * @class
+ */
+class DuplexBilling extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>UNKNOW</td> <td>0</td> <td></td> </tr> <tr> <td>TOKEN</td> <td>1</td> <td>By token</td> </tr> <tr> <td>PAGE_COUNT</td> <td>2</td> <td>By page number</td> </tr> <tr> <td>TIMES</td> <td>3</td> <td>By count</td> </tr> <tr> <td>TIMES_THOUSAND</td> <td>4</td> <td>By thousand counts</td> </tr> <tr> <td>SECOND</td> <td>5</td> <td>By duration</td> </tr> <tr> <td>CHARACTER</td> <td>6</td> <td>By number of characters</td> </tr> <tr> <td>CHARACTER_THOUSAND</td> <td>7</td> <td>By thousand characters</td> </tr> <tr> <td>SHEET</td> <td>8</td> <td>By sheet</td> </tr> <tr> <td>NUMBER</td> <td>9</td> <td>By count</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.BillingUnit = null;
+
+        /**
+         * <p>Input cash price</p><p>Unit: CNY</p>
+         * @type {number || null}
+         */
+        this.InputCashPrice = null;
+
+        /**
+         * <p>Input PU price</p><p>Unit: pu</p>
+         * @type {number || null}
+         */
+        this.InputPuPrice = null;
+
+        /**
+         * <p>Output cash price</p><p>Unit: CNY</p>
+         * @type {number || null}
+         */
+        this.OutputCashPrice = null;
+
+        /**
+         * <p>Output PU price</p><p>Unit: pu</p>
+         * @type {number || null}
+         */
+        this.OutputPuPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BillingUnit = 'BillingUnit' in params ? params.BillingUnit : null;
+        this.InputCashPrice = 'InputCashPrice' in params ? params.InputCashPrice : null;
+        this.InputPuPrice = 'InputPuPrice' in params ? params.InputPuPrice : null;
+        this.OutputCashPrice = 'OutputCashPrice' in params ? params.OutputCashPrice : null;
+        this.OutputPuPrice = 'OutputPuPrice' in params ? params.OutputPuPrice : null;
+
+    }
+}
+
+/**
+ * Multimodal understanding model configuration
+ * @class
+ */
+class MultiModalUnderstandingModel extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Model configuration
+         * @type {ModelDetailInfo || null}
+         */
+        this.Model = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Model) {
+            let obj = new ModelDetailInfo();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeAppTrigger request structure.
+ * @class
+ */
+class DescribeAppTriggerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Application trigger ID.</p>
+         * @type {string || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * <p>Visitor ID.</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * Workflow running instance status information
+ * @class
+ */
+class WorkflowRunResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Running state. 1: Queuing; 2: running; 3: run successfully; 4: fail to run; 5: canceled
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error message
+         * @type {string || null}
+         */
+        this.FailMessage = null;
+
+        /**
+         * Total number of tokens consumed
+         * @type {number || null}
+         */
+        this.TotalTokens = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FailMessage = 'FailMessage' in params ? params.FailMessage : null;
+        this.TotalTokens = 'TotalTokens' in params ? params.TotalTokens : null;
+
+    }
+}
+
+/**
+ * PluginOperation
+ * @class
+ */
+class PluginOperation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether external calls are allowed
+         * @type {boolean || null}
+         */
+        this.AllowExternalAccess = null;
+
+        /**
+         * <p>Billing type.</p><p>Valid values:</p><ul><li>0: free</li><li>1: open beta</li><li>2: official fees</li></ul>
+         * @type {number || null}
+         */
+        this.BillingType = null;
+
+        /**
+         * Plug-in category identifier
+         * @type {string || null}
+         */
+        this.CategoryKey = null;
+
+        /**
+         * Plug-in overview
+         * @type {string || null}
+         */
+        this.Introduction = null;
+
+        /**
+         * Whether it is a selection
+         * @type {boolean || null}
+         */
+        this.IsRecommended = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllowExternalAccess = 'AllowExternalAccess' in params ? params.AllowExternalAccess : null;
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
+        this.CategoryKey = 'CategoryKey' in params ? params.CategoryKey : null;
+        this.Introduction = 'Introduction' in params ? params.Introduction : null;
+        this.IsRecommended = 'IsRecommended' in params ? params.IsRecommended : null;
+
+    }
+}
+
+/**
+ * CorpShareConfig
+ * @class
+ */
+class CorpShareConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Business shared switch</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * <p>Share scope type. 1: all business staff, 2: designated account, 3: designated space</p>
+         * @type {number || null}
+         */
+        this.ShareScope = null;
+
+        /**
+         * <p>Business shared application tag</p>
+         * @type {Array.<string> || null}
+         */
+        this.TagIdList = null;
+
+        /**
+         * <p>Shared range information (for users, StrId is uin and Name is username; for spaces, StrId is space ID and Name is space Name)</p>
+         * @type {Array.<Identity> || null}
+         */
+        this.ShareScopeList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.ShareScope = 'ShareScope' in params ? params.ShareScope : null;
+        this.TagIdList = 'TagIdList' in params ? params.TagIdList : null;
+
+        if (params.ShareScopeList) {
+            this.ShareScopeList = new Array();
+            for (let z in params.ShareScopeList) {
+                let obj = new Identity();
+                obj.deserialize(params.ShareScopeList[z]);
+                this.ShareScopeList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Application abstract - Application information returned by the list query
+ * @class
+ */
+class AppSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Application mode. Enumeration values: 1: standard mode, 2: Agent mode, 3: single workflow mode, 4: ClawAgent mode</p>
+         * @type {number || null}
+         */
+        this.AppMode = null;
+
+        /**
+         * <p>Application avatar</p>
+         * @type {string || null}
+         */
+        this.Avatar = null;
+
+        /**
+         * <p>Application name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Operation information</p>
+         * @type {AppOperation || null}
+         */
+        this.OperationInfo = null;
+
+        /**
+         * <p>Status information</p>
+         * @type {AppStatusInfo || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Sub-status information</p>
+         * @type {AppSubStatusInfo || null}
+         */
+        this.SubStatus = null;
+
+        /**
+         * <p>Resource operation permissions</p>
+         * @type {Array.<string> || null}
+         */
+        this.PermissionIdList = null;
+
+        /**
+         * <p>Application description information</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppMode = 'AppMode' in params ? params.AppMode : null;
+        this.Avatar = 'Avatar' in params ? params.Avatar : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.OperationInfo) {
+            let obj = new AppOperation();
+            obj.deserialize(params.OperationInfo)
+            this.OperationInfo = obj;
+        }
+
+        if (params.Status) {
+            let obj = new AppStatusInfo();
+            obj.deserialize(params.Status)
+            this.Status = obj;
+        }
+
+        if (params.SubStatus) {
+            let obj = new AppSubStatusInfo();
+            obj.deserialize(params.SubStatus)
+            this.SubStatus = obj;
+        }
+        this.PermissionIdList = 'PermissionIdList' in params ? params.PermissionIdList : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * AppTriggerSummary
+ * @class
+ */
+class AppTriggerSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED</td><td>0</td><td>Unspecified</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_PROMPT</td><td>1</td><td>Command execution</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_WORKFLOW</td><td>2</td><td>Workflow execution</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.ExecuteType = null;
+
+        /**
+         * <p>Number of failures</p>
+         * @type {string || null}
+         */
+        this.FailedCount = null;
+
+        /**
+         * <p>Last session id</p>
+         * @type {string || null}
+         */
+        this.LastSessionId = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table> <p>Value range: [0, 2]</p>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_STATUS_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_STATUS_ENABLED</td> <td>1</td> <td>Enablement</td> </tr> <tr> <td>APP_TRIGGER_STATUS_PAUSED</td> <td>2</td> <td>Suspension</td> </tr> <tr> <td>APP_TRIGGER_STATUS_DELETED</td> <td>3</td> <td>Deleted</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Number of successes</p>
+         * @type {string || null}
+         */
+        this.SuccessCount = null;
+
+        /**
+         * <p>Trigger id.</p>
+         * @type {string || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * <p>Trigger name</p>
+         * @type {string || null}
+         */
+        this.TriggerName = null;
+
+        /**
+         * <p>Trigger execution status</p>
+         * @type {TriggerStatus || null}
+         */
+        this.TriggerStatus = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_TYPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_TYPE_SCHEDULED</td> <td>1</td> <td>Scheduled trigger</td> </tr> <tr> <td>APP_TRIGGER_TYPE_WEBHOOK</td> <td>2</td> <td>Webhook trigger</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.TriggerType = null;
+
+        /**
+         * <p>The number of unread logs</p>
+         * @type {string || null}
+         */
+        this.UnreadRunLogCount = null;
+
+        /**
+         * <p>Visitor ID.</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ExecuteType = 'ExecuteType' in params ? params.ExecuteType : null;
+        this.FailedCount = 'FailedCount' in params ? params.FailedCount : null;
+        this.LastSessionId = 'LastSessionId' in params ? params.LastSessionId : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+
+        if (params.TriggerStatus) {
+            let obj = new TriggerStatus();
+            obj.deserialize(params.TriggerStatus)
+            this.TriggerStatus = obj;
+        }
+        this.TriggerType = 'TriggerType' in params ? params.TriggerType : null;
+        this.UnreadRunLogCount = 'UnreadRunLogCount' in params ? params.UnreadRunLogCount : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * Workspace spatial information
+ * @class
+ */
+class ConversationWorkspace extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Workspace ID</p>
+         * @type {string || null}
+         */
+        this.WorkspaceId = null;
+
+        /**
+         * <p>Storage type</p>
+         * @type {string || null}
+         */
+        this.StorageType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WorkspaceId = 'WorkspaceId' in params ? params.WorkspaceId : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+
+    }
+}
+
+/**
+ * Reference groups under the same SkillRefType (including total count + list of reference details). total_count is always based on the unfiltered original total amount. reference_summary_list is affected by the secondary authorization switch.
+ * @class
+ */
+class SkillReferenceGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Reference detail list under this type</p>
+         * @type {Array.<SkillReferenceSummary> || null}
+         */
+        this.ReferenceSummaryList = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>SKILL_REF_UNKNOWN</td> <td>0</td> <td>Placeholder</td> </tr> <tr> <td>SKILL_REF_OPENCLAW</td> <td>1</td> <td>openclaw</td> </tr> <tr> <td>SKILL_REF_AGENT</td> <td>2</td> <td>agent</td> </tr> <tr> <td>SKILL_REF_CORP_ASSISTANT</td> <td>3</td> <td>Business assistant</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.ReferenceType = null;
+
+        /**
+         * <p>Total number of references of this type</p>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReferenceSummaryList) {
+            this.ReferenceSummaryList = new Array();
+            for (let z in params.ReferenceSummaryList) {
+                let obj = new SkillReferenceSummary();
+                obj.deserialize(params.ReferenceSummaryList[z]);
+                this.ReferenceSummaryList.push(obj);
+            }
+        }
+        this.ReferenceType = 'ReferenceType' in params ? params.ReferenceType : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
+ * DeleteSpace response structure.
+ * @class
+ */
+class DeleteSpaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAppTriggerInstance request structure.
+ * @class
+ */
+class DescribeAppTriggerInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Trigger running instance ID.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Visitor ID.</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * Application key information
+ * @class
+ */
+class AppSecretInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application key
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
+ * Agent details
+ * @class
+ */
+class AgentDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Agent ID</p>
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+        /**
+         * <p>Agent Basic Configuration</p>
+         * @type {AgentProfile || null}
+         */
+        this.Profile = null;
+
+        /**
+         * <p>System prompt</p>
+         * @type {string || null}
+         */
+        this.Instructions = null;
+
+        /**
+         * <p>Model information</p>
+         * @type {AgentModelConfig || null}
+         */
+        this.Model = null;
+
+        /**
+         * <p>Tool details</p>
+         * @type {Array.<AgentTool> || null}
+         */
+        this.ToolList = null;
+
+        /**
+         * <p>Plug-in configuration</p>
+         * @type {Array.<AgentPlugin> || null}
+         */
+        this.PluginList = null;
+
+        /**
+         * <p>Skill details.</p>
+         * @type {Array.<AgentSkill> || null}
+         */
+        this.SkillList = null;
+
+        /**
+         * <p>Advanced configurations.</p>
+         * @type {AgentAdvancedConfig || null}
+         */
+        this.AdvancedConfig = null;
+
+        /**
+         * <p>List of Function Tools executed by the caller</p><p>Input parameter limit: only available in client user state Agent scenario. This field is ignored in business configuration state Agent</p>
+         * @type {Array.<AgentExternalToolConfig> || null}
+         */
+        this.ExternalToolList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+
+        if (params.Profile) {
+            let obj = new AgentProfile();
+            obj.deserialize(params.Profile)
+            this.Profile = obj;
+        }
+        this.Instructions = 'Instructions' in params ? params.Instructions : null;
+
+        if (params.Model) {
+            let obj = new AgentModelConfig();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
+
+        if (params.ToolList) {
+            this.ToolList = new Array();
+            for (let z in params.ToolList) {
+                let obj = new AgentTool();
+                obj.deserialize(params.ToolList[z]);
+                this.ToolList.push(obj);
+            }
+        }
+
+        if (params.PluginList) {
+            this.PluginList = new Array();
+            for (let z in params.PluginList) {
+                let obj = new AgentPlugin();
+                obj.deserialize(params.PluginList[z]);
+                this.PluginList.push(obj);
+            }
+        }
+
+        if (params.SkillList) {
+            this.SkillList = new Array();
+            for (let z in params.SkillList) {
+                let obj = new AgentSkill();
+                obj.deserialize(params.SkillList[z]);
+                this.SkillList.push(obj);
+            }
+        }
+
+        if (params.AdvancedConfig) {
+            let obj = new AgentAdvancedConfig();
+            obj.deserialize(params.AdvancedConfig)
+            this.AdvancedConfig = obj;
+        }
+
+        if (params.ExternalToolList) {
+            this.ExternalToolList = new Array();
+            for (let z in params.ExternalToolList) {
+                let obj = new AgentExternalToolConfig();
+                obj.deserialize(params.ExternalToolList[z]);
+                this.ExternalToolList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Application identifier
+ * @class
+ */
+class AppIdentity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Application name.</p>
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * <p>Application mode</p><p>Enumeration values:</p><ul><li>1: Standard mode</li><li>2: agent mode</li><li>3: Single workflow mode</li><li>4: ClawAgent mode</li></ul>
+         * @type {number || null}
+         */
+        this.AppMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.AppMode = 'AppMode' in params ? params.AppMode : null;
+
+    }
+}
+
+/**
+ * GraphRAG configuration
+ * @class
+ */
+class GraphRAG extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to enable</p>
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * ModifyQA response structure.
+ * @class
+ */
+class ModifyQAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateApp request structure.
+ * @class
+ */
+class CreateAppRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Space ID</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Application mode. Enumeration values: 1: Standard mode, 2: Agent mode, 3: Single workflow mode, 4: ClawAgent mode</p>
+         * @type {number || null}
+         */
+        this.AppMode = null;
+
+        /**
+         * <p>App avatar</p>
+         * @type {string || null}
+         */
+        this.Avatar = null;
+
+        /**
+         * <p>Application description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Application name.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.AppMode = 'AppMode' in params ? params.AppMode : null;
+        this.Avatar = 'Avatar' in params ? params.Avatar : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * DeleteApp response structure.
+ * @class
+ */
+class DeleteAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAppTrigger request structure.
+ * @class
+ */
+class CreateAppTriggerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Application trigger execution configuration</p>
+         * @type {ExecuteConfig || null}
+         */
+        this.ExecuteConfig = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_EXECUTE_TYPE_PROMPT</td> <td>1</td> <td>Command execution</td> </tr> <tr> <td>APP_TRIGGER_EXECUTE_TYPE_WORKFLOW</td> <td>2</td> <td>Workflow execution</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.ExecuteType = null;
+
+        /**
+         * <p>Third-party push configuration</p>
+         * @type {TimerPushConfig || null}
+         */
+        this.PushConfig = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Trigger configuration</p>
+         * @type {TriggerConfig || null}
+         */
+        this.TriggerConfig = null;
+
+        /**
+         * <p>Trigger name.</p>
+         * @type {string || null}
+         */
+        this.TriggerName = null;
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>APP_TRIGGER_TYPE_UNSPECIFIED</td><td>0</td><td>Unspecified</td></tr><tr><td>APP_TRIGGER_TYPE_SCHEDULED</td><td>1</td><td>Scheduled trigger</td></tr><tr><td>APP_TRIGGER_TYPE_WEBHOOK</td><td>2</td><td>Webhook trigger</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.TriggerType = null;
+
+        /**
+         * <p>Visitor ID.</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.ExecuteConfig) {
+            let obj = new ExecuteConfig();
+            obj.deserialize(params.ExecuteConfig)
+            this.ExecuteConfig = obj;
+        }
+        this.ExecuteType = 'ExecuteType' in params ? params.ExecuteType : null;
+
+        if (params.PushConfig) {
+            let obj = new TimerPushConfig();
+            obj.deserialize(params.PushConfig)
+            this.PushConfig = obj;
+        }
+        this.Scope = 'Scope' in params ? params.Scope : null;
+
+        if (params.TriggerConfig) {
+            let obj = new TriggerConfig();
+            obj.deserialize(params.TriggerConfig)
+            this.TriggerConfig = obj;
+        }
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+        this.TriggerType = 'TriggerType' in params ? params.TriggerType : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * AppTriggerWebhookStatus
+ * @class
+ */
+class AppTriggerWebhookStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Push Webbook address</p>
+         * @type {string || null}
+         */
+        this.WebhookUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WebhookUrl = 'WebhookUrl' in params ? params.WebhookUrl : null;
+
+    }
+}
+
+/**
+ * Access Key Field Configuration
+ * @class
+ */
+class AccessKeyParamConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Access Key field type. 1: AccessKeyId, 2: AccessKeySecret, 3: SessionToken</p>
+         * @type {number || null}
+         */
+        this.FieldType = null;
+
+        /**
+         * <p>Required or not</p>
+         * @type {boolean || null}
+         */
+        this.IsRequired = null;
+
+        /**
+         * <p>header/query field name</p>
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * <p>Default value of the AccessKey, which can be empty.</p>
+         * @type {string || null}
+         */
+        this.ParamValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FieldType = 'FieldType' in params ? params.FieldType : null;
+        this.IsRequired = 'IsRequired' in params ? params.IsRequired : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.ParamValue = 'ParamValue' in params ? params.ParamValue : null;
+
+    }
+}
+
+/**
+ * CategoryPermission
+ * @class
+ */
+class CategoryPermission extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether the current user can add subcategories</p>
+         * @type {boolean || null}
+         */
+        this.CanAdd = null;
+
+        /**
+         * <p>Whether the current user can delete the category</p>
+         * @type {boolean || null}
+         */
+        this.CanDelete = null;
+
+        /**
+         * <p>Whether the current user can edit this category</p>
+         * @type {boolean || null}
+         */
+        this.CanEdit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CanAdd = 'CanAdd' in params ? params.CanAdd : null;
+        this.CanDelete = 'CanDelete' in params ? params.CanDelete : null;
+        this.CanEdit = 'CanEdit' in params ? params.CanEdit : null;
+
+    }
+}
+
+/**
+ * ResetConversation request structure.
+ * @class
+ */
+class ResetConversationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Session ID</p>
+         * @type {string || null}
+         */
+        this.ConversationId = null;
+
+        /**
+         * <p>Session type enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (unspecified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor experience), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share a link)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Application key</p>
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * <p>Sub-user Uin</p>
+         * @type {string || null}
+         */
+        this.LoginSubAccountUin = null;
+
+        /**
+         * <p>Primary user Uin.</p>
+         * @type {string || null}
+         */
+        this.LoginUin = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_SHARE. Share code</p>
+         * @type {string || null}
+         */
+        this.ShareCode = null;
+
+        /**
+         * <p>Required when Type=CONVERSATION_TYPE_API. Visitor ID</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConversationId = 'ConversationId' in params ? params.ConversationId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.LoginSubAccountUin = 'LoginSubAccountUin' in params ? params.LoginSubAccountUin : null;
+        this.LoginUin = 'LoginUin' in params ? params.LoginUin : null;
+        this.ShareCode = 'ShareCode' in params ? params.ShareCode : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * OAuth 2.0 authorization information
+ * @class
+ */
+class OAuthConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * url address of the OAuth service provider authorization page
+         * @type {string || null}
+         */
+        this.AuthorizationUrl = null;
+
+        /**
+         * Client ID
+         * @type {string || null}
+         */
+        this.ClientId = null;
+
+        /**
+         * Client Key
+         * @type {string || null}
+         */
+        this.ClientSecret = null;
+
+        /**
+         * Data scope for the authorization request
+         * @type {Array.<string> || null}
+         */
+        this.ScopeList = null;
+
+        /**
+         * url address for obtaining the access token
+         * @type {string || null}
+         */
+        this.TokenUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuthorizationUrl = 'AuthorizationUrl' in params ? params.AuthorizationUrl : null;
+        this.ClientId = 'ClientId' in params ? params.ClientId : null;
+        this.ClientSecret = 'ClientSecret' in params ? params.ClientSecret : null;
+        this.ScopeList = 'ScopeList' in params ? params.ScopeList : null;
+        this.TokenUrl = 'TokenUrl' in params ? params.TokenUrl : null;
+
+    }
+}
+
+/**
+ * ToolBilling
+ * @class
+ */
+class ToolBilling extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Basic Billing Information</p>
+         * @type {BasicBilling || null}
+         */
+        this.BasicBilling = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>BILLING_TYPE_FREE</td> <td>0</td> <td>Free</td> </tr> <tr> <td>BILLING_TYPE_LIMITED_FREE</td> <td>1</td> <td>Limited-time free</td> </tr> <tr> <td>BILLING_TYPE_OFFICIAL_PAID</td> <td>2</td> <td>Official charges</td> </tr> <tr> <td>BILLING_TYPE_OFFICIAL_PAID_OLD_FREE</td> <td>3</td> <td>Official charges (fees for new/upgraded users, limited-time free for existing users)</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.BillingType = null;
+
+        /**
+         * <p>Composite type billing information</p>
+         * @type {ComplexBilling || null}
+         */
+        this.ComplexBilling = null;
+
+        /**
+         * <p>Bidirectional billing information</p>
+         * @type {DuplexBilling || null}
+         */
+        this.DuplexBilling = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BasicBilling) {
+            let obj = new BasicBilling();
+            obj.deserialize(params.BasicBilling)
+            this.BasicBilling = obj;
+        }
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
+
+        if (params.ComplexBilling) {
+            let obj = new ComplexBilling();
+            obj.deserialize(params.ComplexBilling)
+            this.ComplexBilling = obj;
+        }
+
+        if (params.DuplexBilling) {
+            let obj = new DuplexBilling();
+            obj.deserialize(params.DuplexBilling)
+            this.DuplexBilling = obj;
+        }
+
+    }
+}
+
+/**
+ * BasicBilling
+ * @class
+ */
+class BasicBilling extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>UNKNOW</td><td>0</td><td></td></tr><tr><td>TOKEN</td><td>1</td><td>By token</td></tr><tr><td>PAGE_COUNT</td><td>2</td><td>By page number</td></tr><tr><td>TIMES</td><td>3</td><td>By times</td></tr><tr><td>TIMES_THOUSAND</td><td>4</td><td>By thousand times</td></tr><tr><td>SECOND</td><td>5</td><td>By duration</td></tr><tr><td>CHARACTER</td><td>6</td><td>By number of characters</td></tr><tr><td>CHARACTER_THOUSAND</td><td>7</td><td>By thousand characters</td></tr><tr><td>SHEET</td><td>8</td><td>By sheet</td></tr><tr><td>NUMBER</td><td>9</td><td>By count</td></tr></tbody></table>
+         * @type {number || null}
+         */
+        this.BillingUnit = null;
+
+        /**
+         * <p>Cash price</p><p>Unit: CNY</p>
+         * @type {number || null}
+         */
+        this.CashPrice = null;
+
+        /**
+         * <p>PU price</p><p>Unit: pu</p>
+         * @type {number || null}
+         */
+        this.PuPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BillingUnit = 'BillingUnit' in params ? params.BillingUnit : null;
+        this.CashPrice = 'CashPrice' in params ? params.CashPrice : null;
+        this.PuPrice = 'PuPrice' in params ? params.PuPrice : null;
+
+    }
+}
+
+/**
+ * DescribeApp request structure.
+ * @class
+ */
+class DescribeAppRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Application domain: ADP_DOMAIN_DEV(1)=development domain, ADP_DOMAIN_PROD(2)=release domain. Enumeration values: 1: development domain, 2: production domain</p>
+         * @type {number || null}
+         */
+        this.Domain = null;
+
+        /**
+         * <p>Field mask, specify the fields to return (return all fields if Paths is empty). Paths enumeration values: AppConfig (application configuration), SecretInfo (application key info), ShareUrlInfo (sharing link information), SpecialStatusInfo (special status information), SearchResourceStatus (search resource status), SharedKbList (list of shared knowledge bases referenced by the application), CorpShareConfig (corporate shared configuration), FileVolumeMountList (cloud disk mount list)</p>
+         * @type {FieldMask || null}
+         */
+        this.FieldMask = null;
+
+        /**
+         * <p>Specific status type (required when FieldMask includes SpecialStatusInfo). Enumeration values: 1: rollback status, 2: first-time import status</p>
+         * @type {number || null}
+         */
+        this.StatusType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.FieldMask) {
+            let obj = new FieldMask();
+            obj.deserialize(params.FieldMask)
+            this.FieldMask = obj;
+        }
+        this.StatusType = 'StatusType' in params ? params.StatusType : null;
+
+    }
+}
+
+/**
+ * IntervalSchedule
+ * @class
+ */
+class IntervalSchedule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time.
+         * @type {string || null}
+         */
+        this.StartAt = null;
+
+        /**
+         * Enumeration values:
+| Enumeration value | uint |
+| --- | --- |
+| INTERVAL_UNIT_UNSPECIFIED | 0 |
+| INTERVAL_UNIT_HOUR | 1 |
+| INTERVAL_UNIT_DAY | 2 |
+         * @type {number || null}
+         */
+        this.Unit = null;
+
+        /**
+         * Value
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartAt = 'StartAt' in params ? params.StartAt : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeLatestRelease request structure.
+ * @class
+ */
+class DescribeLatestReleaseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * app_id
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+    }
+}
+
+/**
+ * DeleteChannel request structure.
+ * @class
+ */
+class DeleteChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * CronSchedule
+ * @class
+ */
+class CronSchedule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cron expression
+         * @type {string || null}
+         */
+        this.Expression = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Expression = 'Expression' in params ? params.Expression : null;
+
+    }
+}
+
+/**
+ * CopyAgentFromApp response structure.
+ * @class
+ */
+class CopyAgentFromAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Main Agent Id.</p>
+         * @type {string || null}
+         */
+        this.ParentAgentId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ParentAgentId = 'ParentAgentId' in params ? params.ParentAgentId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyQAList response structure.
+ * @class
+ */
+class ModifyQAListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Batch modification result.</p>
+         * @type {Array.<OperationResult> || null}
+         */
+        this.ResultList = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResultList) {
+            this.ResultList = new Array();
+            for (let z in params.ResultList) {
+                let obj = new OperationResult();
+                obj.deserialize(params.ResultList[z]);
+                this.ResultList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Conflicting QA (a single QA snapshot in a conflict group)
+ * @class
+ */
+class ConflictQA extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Answer</p>
+         * @type {string || null}
+         */
+        this.Answer = null;
+
+        /**
+         * <p>Knowledge application scope: 1=disabled, 2=development domain only, 3=release domain only, 4=global<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>Disabled</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>Development domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>Release domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>Global</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.EffectiveDomain = null;
+
+        /**
+         * <p>Associated document name.</p>
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * <p>Associated document type</p>
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * <p>QA ID</p>
+         * @type {string || null}
+         */
+        this.QaId = null;
+
+        /**
+         * <p>Query</p>
+         * @type {string || null}
+         */
+        this.Question = null;
+
+        /**
+         * <p>Source type: 1=documentation generation, 2=batch import, 3=manual entry<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>QA_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>QA_SOURCE_TYPE_DOC</td><td>1</td><td>Documentation generation</td></tr><tr><td>QA_SOURCE_TYPE_BATCH_IMPORT</td><td>2</td><td>Batch import</td></tr><tr><td>QA_SOURCE_TYPE_MANUAL</td><td>3</td><td>Manual entry</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * <p>Update time (Unix seconds, for sorting old and new)</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.EffectiveDomain = 'EffectiveDomain' in params ? params.EffectiveDomain : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.QaId = 'QaId' in params ? params.QaId : null;
+        this.Question = 'Question' in params ? params.Question : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * RetryRelease response structure.
+ * @class
+ */
+class RetryReleaseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Intelligent Call Configuration
+ * @class
+ */
+class AICallConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Digital human configuration
+         * @type {DigitalHumanConfig || null}
+         */
+        this.DigitalHuman = null;
+
+        /**
+         * Enable digital human
+         * @type {boolean || null}
+         */
+        this.EnableDigitalHuman = null;
+
+        /**
+         * Enable voice call
+         * @type {boolean || null}
+         */
+        this.EnableVoiceCall = null;
+
+        /**
+         * Enable voice interaction
+         * @type {boolean || null}
+         */
+        this.EnableVoiceInteract = null;
+
+        /**
+         * Voice type configuration
+         * @type {VoiceConfig || null}
+         */
+        this.Voice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DigitalHuman) {
+            let obj = new DigitalHumanConfig();
+            obj.deserialize(params.DigitalHuman)
+            this.DigitalHuman = obj;
+        }
+        this.EnableDigitalHuman = 'EnableDigitalHuman' in params ? params.EnableDigitalHuman : null;
+        this.EnableVoiceCall = 'EnableVoiceCall' in params ? params.EnableVoiceCall : null;
+        this.EnableVoiceInteract = 'EnableVoiceInteract' in params ? params.EnableVoiceInteract : null;
+
+        if (params.Voice) {
+            let obj = new VoiceConfig();
+            obj.deserialize(params.Voice)
+            this.Voice = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeNodeBatchRun response structure.
+ * @class
+ */
+class DescribeNodeBatchRunResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Error code</p>
+         * @type {string || null}
+         */
+        this.FailCode = null;
+
+        /**
+         * <p>Error description</p>
+         * @type {string || null}
+         */
+        this.FailMessage = null;
+
+        /**
+         * <p>Input parameter</p>
+         * @type {string || null}
+         */
+        this.Input = null;
+
+        /**
+         * <p>Input parameter: Cos address</p>
+         * @type {string || null}
+         */
+        this.InputRef = null;
+
+        /**
+         * <p>Output parameters</p>
+         * @type {string || null}
+         */
+        this.Output = null;
+
+        /**
+         * <p>Output parameter: Cos address</p>
+         * @type {string || null}
+         */
+        this.OutputRef = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>NODE_BATCH_RUN_STATUS_UNSPECIFIED</td> <td>0</td> <td>undefined</td> </tr> <tr> <td>NODE_BATCH_RUN_STATUS_INIT</td> <td>1</td> <td>initial status</td> </tr> <tr> <td>NODE_BATCH_RUN_STATUS_RUNNING</td> <td>2</td> <td>running</td> </tr> <tr> <td>NODE_BATCH_RUN_STATUS_SUCCESS</td> <td>3</td> <td>run successfully</td> </tr> <tr> <td>NODE_BATCH_RUN_STATUS_FAILED</td> <td>4</td> <td>execution failed</td> </tr> <tr> <td>NODE_BATCH_RUN_STATUS_CANCELED</td> <td>5</td> <td>canceled</td> </tr> <tr> <td>NODE_BATCH_RUN_STATUS_WAITING_INPUT</td> <td>6</td> <td>pending</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FailCode = 'FailCode' in params ? params.FailCode : null;
+        this.FailMessage = 'FailMessage' in params ? params.FailMessage : null;
+        this.Input = 'Input' in params ? params.Input : null;
+        this.InputRef = 'InputRef' in params ? params.InputRef : null;
+        this.Output = 'Output' in params ? params.Output : null;
+        this.OutputRef = 'OutputRef' in params ? params.OutputRef : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSkillShare response structure.
+ * @class
+ */
+class CreateSkillShareResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether the approval process is used (false indicates the shared task is created directly without approval)</p>
+         * @type {boolean || null}
+         */
+        this.NeedApproval = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NeedApproval = 'NeedApproval' in params ? params.NeedApproval : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -965,162 +23194,6 @@ class KnowledgeSource extends  AbstractModel {
 }
 
 /**
- * Search filter
- * @class
- */
-class SearchFilter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * <p>Search filter type<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>SEARCH_FILTER_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SEARCH_FILTER_TYPE_CUSTOMER_LABEL_VALUE</td><td>1</td><td>User-customized tag value</td></tr><tr><td>SEARCH_FILTER_TYPE_CUSTOMER_LABEL_VALUE_ID</td><td>2</td><td>User-customized tag value ID</td></tr><tr><td>SEARCH_FILTER_TYPE_DOC_ID</td><td>3</td><td>Retrieve by specified document ID</td></tr><tr><td>SEARCH_FILTER_TYPE_DOC_CATEGORY_ID</td><td>4</td><td>Retrieve by specified document classification ID</td></tr><tr><td>SEARCH_FILTER_TYPE_DB_TABLE_ID</td><td>5</td><td>Retrieve by specified database table ID</td></tr><tr><td>SEARCH_FILTER_TYPE_KB_SCHEMA_ID</td><td>6</td><td>Specified knowledge base schema ID</td></tr></tbody></table></p>
-         * @type {number || null}
-         */
-        this.FilterType = null;
-
-        /**
-         * <p>Filter value list. According to SearchFilterType, take value 1: pass a custom tag value; 2: pass a custom tag value ID; 3: pass a document ID; 4: pass a category ID</p>
-         * @type {Array.<string> || null}
-         */
-        this.FilterValueList = null;
-
-        /**
-         * <p>User-customized tag ID</p>
-         * @type {string || null}
-         */
-        this.LabelId = null;
-
-        /**
-         * <p>Logical operator: AND or OR<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>LOGIC_OPR_NOOP</td><td>0</td><td></td></tr><tr><td>LOGIC_OPR_AND</td><td>1</td><td></td></tr><tr><td>LOGIC_OPR_OR</td><td>2</td><td></td></tr></tbody></table></p>
-         * @type {number || null}
-         */
-        this.LogicOp = null;
-
-        /**
-         * <p>Nested search filter</p>
-         * @type {Array.<SearchFilter> || null}
-         */
-        this.SearchFilterList = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FilterType = 'FilterType' in params ? params.FilterType : null;
-        this.FilterValueList = 'FilterValueList' in params ? params.FilterValueList : null;
-        this.LabelId = 'LabelId' in params ? params.LabelId : null;
-        this.LogicOp = 'LogicOp' in params ? params.LogicOp : null;
-
-        if (params.SearchFilterList) {
-            this.SearchFilterList = new Array();
-            for (let z in params.SearchFilterList) {
-                let obj = new SearchFilter();
-                obj.deserialize(params.SearchFilterList[z]);
-                this.SearchFilterList.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * Rearrange the configuration
- * @class
- */
-class RerankConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * <p>Whether to enable</p>
-         * @type {boolean || null}
-         */
-        this.Enabled = null;
-
-        /**
-         * <p>Model name</p>
-         * @type {string || null}
-         */
-        this.ModelName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
-        this.ModelName = 'ModelName' in params ? params.ModelName : null;
-
-    }
-}
-
-/**
- * Optional retrieval configuration
- * @class
- */
-class RetrievalOption extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * <p>Timeliness retrieval enhancement configuration</p>
-         * @type {ExpirationAwareness || null}
-         */
-        this.ExpirationAwareness = null;
-
-        /**
-         * <p>GraphRAG Configuration</p>
-         * @type {GraphRAG || null}
-         */
-        this.GraphRag = null;
-
-        /**
-         * <p>Spreadsheet enhancement configuration</p>
-         * @type {TableEnhancement || null}
-         */
-        this.TableEnhancement = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ExpirationAwareness) {
-            let obj = new ExpirationAwareness();
-            obj.deserialize(params.ExpirationAwareness)
-            this.ExpirationAwareness = obj;
-        }
-
-        if (params.GraphRag) {
-            let obj = new GraphRAG();
-            obj.deserialize(params.GraphRag)
-            this.GraphRag = obj;
-        }
-
-        if (params.TableEnhancement) {
-            let obj = new TableEnhancement();
-            obj.deserialize(params.TableEnhancement)
-            this.TableEnhancement = obj;
-        }
-
-    }
-}
-
-/**
  * Basic information of knowledge fragment
  * @class
  */
@@ -1191,18 +23264,948 @@ class KnowledgeSnippetProfile extends  AbstractModel {
 }
 
 /**
- * Timeliness retrieval enhancement configuration
+ * DeleteAppTrigger response structure.
  * @class
  */
-class ExpirationAwareness extends  AbstractModel {
+class DeleteAppTriggerResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Whether to enable timeliness retrieval. Once enabled, retrieval results will be sorted based on the validity time of the knowledge</p>
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Universal list filter criteria (multiple Filters are in an AND relationship, while multiple value_list elements within the same Filter are in an OR relationship; for BETWEEN, value_list must contain exactly 2 elements, representing an inclusive interval [start, end])
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter field name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Operator, default IN (backward compatibility)<table><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>FILTER_OPERATOR_IN</td><td>0</td><td>Belongs to value_list (default value, backward compatibility; value_list cannot be empty)</td></tr><tr><td>FILTER_OPERATOR_NOT_IN</td><td>1</td><td>Does not belong to value_list (value_list cannot be empty)</td></tr><tr><td>FILTER_OPERATOR_BETWEEN</td><td>2</td><td>Between (inclusive interval [start, end]; value_list must contain exactly 2 elements, one of which can be empty to indicate a unilateral open interval)</td></tr></table>
+         * @type {number || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Filter value array
+         * @type {Array.<string> || null}
+         */
+        this.ValueList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.ValueList = 'ValueList' in params ? params.ValueList : null;
+
+    }
+}
+
+/**
+ * Tool information
+ * @class
+ */
+class ToolSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tool Id</p>
+         * @type {string || null}
+         */
+        this.ToolId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ToolId = 'ToolId' in params ? params.ToolId : null;
+
+    }
+}
+
+/**
+ * ModifyLabel request structure.
+ * @class
+ */
+class ModifyLabelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Modify field contents (required, use together with update_mask)</p>
+         * @type {LabelModifyFields || null}
+         */
+        this.Fields = null;
+
+        /**
+         * <p>Associated knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>ID of the tag to be modified</p>
+         * @type {string || null}
+         */
+        this.LabelId = null;
+
+        /**
+         * <p>Field mask: specifies the fields to be modified (supported Paths: Name, TermModifyList)</p>
+         * @type {FieldMask || null}
+         */
+        this.UpdateMask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Fields) {
+            let obj = new LabelModifyFields();
+            obj.deserialize(params.Fields)
+            this.Fields = obj;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.LabelId = 'LabelId' in params ? params.LabelId : null;
+
+        if (params.UpdateMask) {
+            let obj = new FieldMask();
+            obj.deserialize(params.UpdateMask)
+            this.UpdateMask = obj;
+        }
+
+    }
+}
+
+/**
+ * MsgRecordCategory
+ * @class
+ */
+class MsgRecordCategory extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Business ID of the category</p>
+         * @type {string || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * <p>Subcategory list, tree nesting</p>
+         * @type {Array.<MsgRecordCategory> || null}
+         */
+        this.Children = null;
+
+        /**
+         * <p>Category name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Operation permissions of the current user on this category.</p>
+         * @type {CategoryPermission || null}
+         */
+        this.Permission = null;
+
+        /**
+         * <p>The number of message records in this category</p>
+         * @type {string || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+
+        if (params.Children) {
+            this.Children = new Array();
+            for (let z in params.Children) {
+                let obj = new MsgRecordCategory();
+                obj.deserialize(params.Children[z]);
+                this.Children.push(obj);
+            }
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Permission) {
+            let obj = new CategoryPermission();
+            obj.deserialize(params.Permission)
+            this.Permission = obj;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
+ * Access Key passthrough configuration
+ * @class
+ */
+class AccessKeyPassThroughConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Unified injection position of the Access Key field. 0: Header, 1: Query</p>
+         * @type {number || null}
+         */
+        this.KeyLocation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyLocation = 'KeyLocation' in params ? params.KeyLocation : null;
+
+    }
+}
+
+/**
+ * DescribeSkillReferenceList request structure.
+ * @class
+ */
+class DescribeSkillReferenceListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Skill ID, required</p>
+         * @type {string || null}
+         */
+        this.SkillId = null;
+
+        /**
+         * <p>Space ID. Required.</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SkillId = 'SkillId' in params ? params.SkillId : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+    }
+}
+
+/**
+ * AppTriggerParamBindingConfig
+ * @class
+ */
+class AppTriggerParamBindingConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Bind parameter list</p>
+         * @type {Array.<AppTriggerParamBinding> || null}
+         */
+        this.ParamList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new AppTriggerParamBinding();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Model configuration of the knowledge base
+ * @class
+ */
+class KBModelConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Embedding model</p>
+         * @type {string || null}
+         */
+        this.EmbeddingModel = null;
+
+        /**
+         * <p>QA extraction model</p>
+         * @type {string || null}
+         */
+        this.QaExtractModel = null;
+
+        /**
+         * <p>Schema generative model</p>
+         * @type {string || null}
+         */
+        this.SchemaModel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EmbeddingModel = 'EmbeddingModel' in params ? params.EmbeddingModel : null;
+        this.QaExtractModel = 'QaExtractModel' in params ? params.QaExtractModel : null;
+        this.SchemaModel = 'SchemaModel' in params ? params.SchemaModel : null;
+
+    }
+}
+
+/**
+ * DescribeAuditLogList request structure.
+ * @class
+ */
+class DescribeAuditLogListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Space id</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Number of items per page</p><p>Value range: [1, 100]</p>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <p>Query start position of ES</p><p>The corresponding API returns SearchAfter</p>
+         * @type {Array.<string> || null}
+         */
+        this.SearchAfter = null;
+
+        /**
+         * <p>Parameter filtering</p><p>Supports Action, BizObject, Content<br>Supports SpaceId, AccountUin, AppId (up to 100)<br>Supports startTime, endTime (timestamp in seconds)</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchAfter = 'SearchAfter' in params ? params.SearchAfter : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * VoiceConfig
+ * @class
+ */
+class VoiceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Digital human tone key, which needs to align with the public cloud voice type id.
+         * @type {string || null}
+         */
+        this.TimbreKey = null;
+
+        /**
+         * Timbre name
+         * @type {string || null}
+         */
+        this.VoiceName = null;
+
+        /**
+         * Public cloud timbre id
+         * @type {number || null}
+         */
+        this.VoiceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimbreKey = 'TimbreKey' in params ? params.TimbreKey : null;
+        this.VoiceName = 'VoiceName' in params ? params.VoiceName : null;
+        this.VoiceType = 'VoiceType' in params ? params.VoiceType : null;
+
+    }
+}
+
+/**
+ * DeleteCategory request structure.
+ * @class
+ */
+class DeleteCategoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Category ID to be deleted</p>
+         * @type {string || null}
+         */
+        this.CategoryId = null;
+
+        /**
+         * <p>Classification type (cannot be 0. Value: 1=document classification, 2=QA classification)<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>CATEGORY_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>CATEGORY_TYPE_DOC</td><td>1</td><td>Document classification</td></tr><tr><td>CATEGORY_TYPE_QA</td><td>2</td><td>QA classification</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.CategoryType = null;
+
+        /**
+         * <p>Knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CategoryId = 'CategoryId' in params ? params.CategoryId : null;
+        this.CategoryType = 'CategoryType' in params ? params.CategoryType : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
+
+    }
+}
+
+/**
+ * DescribeConversation response structure.
+ * @class
+ */
+class DescribeConversationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>App ID</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Session ID.</p>
+         * @type {string || null}
+         */
+        this.ConversationId = null;
+
+        /**
+         * <p>Creation time.</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Session type. Enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (unspecified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor trial), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share a link)</p>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * <p>Update time.</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * <p>Workspace</p>
+         * @type {ConversationWorkspace || null}
+         */
+        this.Workspace = null;
+
+        /**
+         * <p>Session title.</p>
+         * @type {string || null}
+         */
+        this.Title = null;
+
+        /**
+         * <p>Client-side AgentId used for the session.</p>
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ConversationId = 'ConversationId' in params ? params.ConversationId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.Workspace) {
+            let obj = new ConversationWorkspace();
+            obj.deserialize(params.Workspace)
+            this.Workspace = obj;
+        }
+        this.Title = 'Title' in params ? params.Title : null;
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Spatial information
+ * @class
+ */
+class Space extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Space id</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * <p>Space name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Space description.</p>
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * <p>Space permissions</p>
+         * @type {Array.<string> || null}
+         */
+        this.PermissionIdList = null;
+
+        /**
+         * <p>Creation time.</p><p>Parameter format: timestamp in seconds</p>
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * <p>Update time</p><p>Parameter format: timestamp</p>
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.PermissionIdList = 'PermissionIdList' in params ? params.PermissionIdList : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * Aggregated details of plug-in resource usage (exclusive to the PLUGIN domain)
+ * @class
+ */
+class PluginUsageSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Number of calls (top-level count of API calls)</p>
+         * @type {number || null}
+         */
+        this.CallCount = null;
+
+        /**
+         * <p>Consumption measurement list for the PLUGIN domain (authoritative field): lists each measurement category by unit + label. When unit=TOKEN, label is case-sensitive for Token subcategories (input/output/avg_*). Being empty indicates total_tokens</p>
+         * @type {Array.<ResourceConsumption> || null}
+         */
+        this.ResourceConsumptionList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CallCount = 'CallCount' in params ? params.CallCount : null;
+
+        if (params.ResourceConsumptionList) {
+            this.ResourceConsumptionList = new Array();
+            for (let z in params.ResourceConsumptionList) {
+                let obj = new ResourceConsumption();
+                obj.deserialize(params.ResourceConsumptionList[z]);
+                this.ResourceConsumptionList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Application metadata - basic identification and description information
+ * @class
+ */
+class AppMetadata extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Application mode. Enumeration values: 1: Standard mode, 2: Agent mode, 3: Single workflow mode, 4: ClawAgent mode
+         * @type {number || null}
+         */
+        this.AppMode = null;
+
+        /**
+         * App avatar
+         * @type {string || null}
+         */
+        this.Avatar = null;
+
+        /**
+         * Creation time (Unix timestamp in seconds).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Application description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Superapp name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Space ID.
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+        /**
+         * Update time (Unix timestamp in seconds).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AppMode = 'AppMode' in params ? params.AppMode : null;
+        this.Avatar = 'Avatar' in params ? params.Avatar : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * CreateKB response structure.
+ * @class
+ */
+class CreateKBResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Knowledge base ID after creation</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * App plugin configuration message
+ * @class
+ */
+class AppPluginConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID for creating a plugin based on a published application
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+    }
+}
+
+/**
+ * <p>Model status</p>
+ * @class
+ */
+class ModelStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Number of exclusive concurrencies</p>
+         * @type {number || null}
+         */
+        this.Concurrency = null;
+
+        /**
+         * <p>Whether it is exclusive concurrency</p>
+         * @type {boolean || null}
+         */
+        this.IsExclusive = null;
+
+        /**
+         * <p>Whether direct experience in the intelligent workbench is supported (model plaza details page: dynamically determined based on space_id; when false, the frontend disables the "experience now" button)</p>
+         * @type {boolean || null}
+         */
+        this.IsExperienceSupported = null;
+
+        /**
+         * <p>Resource status</p><table><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>RESOURCE_STATUS_UNSPECIFIED</td><td>0</td><td>Not specified</td></tr><tr><td>RESOURCE_STATUS_AVAILABLE</td><td>1</td><td>Resource available</td></tr><tr><td>RESOURCE_STATUS_EXHAUSTED</td><td>2</td><td>Resource exhausted</td></tr></table>
+         * @type {number || null}
+         */
+        this.ResourceStatus = null;
+
+        /**
+         * <p>RPM call cap (current account dimension: use the configured value if available; otherwise, take default. 0 means not obtained)</p>
+         * @type {string || null}
+         */
+        this.RpmLimit = null;
+
+        /**
+         * <p>TPM call upper limit (at the current account level: use the configured value if available; otherwise, take default. 0 means failed to obtain)</p>
+         * @type {string || null}
+         */
+        this.TpmLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Concurrency = 'Concurrency' in params ? params.Concurrency : null;
+        this.IsExclusive = 'IsExclusive' in params ? params.IsExclusive : null;
+        this.IsExperienceSupported = 'IsExperienceSupported' in params ? params.IsExperienceSupported : null;
+        this.ResourceStatus = 'ResourceStatus' in params ? params.ResourceStatus : null;
+        this.RpmLimit = 'RpmLimit' in params ? params.RpmLimit : null;
+        this.TpmLimit = 'TpmLimit' in params ? params.TpmLimit : null;
+
+    }
+}
+
+/**
+ * Memory configuration
+ * @class
+ */
+class AppMemoryConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable long-term memory
          * @type {boolean || null}
          */
         this.Enabled = null;
+
+        /**
+         * Long memory duration
+         * @type {number || null}
+         */
+        this.LongMemoryDay = null;
+
+        /**
+         * Model configuration
+         * @type {ModelDetailInfo || null}
+         */
+        this.Model = null;
+
+        /**
+         * prompt content
+         * @type {string || null}
+         */
+        this.PromptContent = null;
+
+        /**
+         * Prompt word mode. Enumeration value: 1: custom
+         * @type {number || null}
+         */
+        this.PromptMode = null;
 
     }
 
@@ -1214,15 +24217,251 @@ class ExpirationAwareness extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.LongMemoryDay = 'LongMemoryDay' in params ? params.LongMemoryDay : null;
+
+        if (params.Model) {
+            let obj = new ModelDetailInfo();
+            obj.deserialize(params.Model)
+            this.Model = obj;
+        }
+        this.PromptContent = 'PromptContent' in params ? params.PromptContent : null;
+        this.PromptMode = 'PromptMode' in params ? params.PromptMode : null;
 
     }
 }
 
 /**
- * GraphRAG configuration
+ * TriggerStatus
  * @class
  */
-class GraphRAG extends  AbstractModel {
+class TriggerStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Timer status.</p>
+         * @type {AppTriggerScheduleStatus || null}
+         */
+        this.ScheduledStatus = null;
+
+        /**
+         * <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Visitor id</p>
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * <p>Webhook status</p>
+         * @type {AppTriggerWebhookStatus || null}
+         */
+        this.WebhookStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ScheduledStatus) {
+            let obj = new AppTriggerScheduleStatus();
+            obj.deserialize(params.ScheduledStatus)
+            this.ScheduledStatus = obj;
+        }
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+        if (params.WebhookStatus) {
+            let obj = new AppTriggerWebhookStatus();
+            obj.deserialize(params.WebhookStatus)
+            this.WebhookStatus = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeAgentSummaryList request structure.
+ * @class
+ */
+class DescribeAgentSummaryListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Query scope; 0-single application query; 1-across application query</p>
+         * @type {number || null}
+         */
+        this.Scope = null;
+
+        /**
+         * <p>Application Id. When Scope=0, it is the target application Id (required); when Scope=1, it is not required</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Filter criteria (name: "SearchWord", "SpaceId", "AgentSource", "AppId")</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.FilterList = null;
+
+        /**
+         * <p>Number of items per page.</p>
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * <p>Page number.</p>
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.FilterList) {
+            this.FilterList = new Array();
+            for (let z in params.FilterList) {
+                let obj = new Filter();
+                obj.deserialize(params.FilterList[z]);
+                this.FilterList.push(obj);
+            }
+        }
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+
+    }
+}
+
+/**
+ * AppTriggerParamBinding
+ * @class
+ */
+class AppTriggerParamBinding extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Parameter name.</p>
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * <p>Parameter type</p><p>Enumeration values:</p><ul><li>0: string</li><li>1: integer</li><li>2: floating-point number</li><li>4: object</li><li>5: string array</li><li>6: integer array</li><li>7: floating-point number array</li><li>8: boolean value array</li><li>3: boolean value</li><li>9: object array</li><li>10: file</li><li>11: document</li><li>12: image</li><li>13: audio</li><li>14: video</li><li>15: file array</li><li>16: document array</li><li>17: image array</li><li>18: audio array</li><li>19: video array</li><li>20: nested array</li><li>22: key</li><li>99: null</li><li>100: unspecified type, for OneOf and AnyOf scenarios</li></ul>
+         * @type {number || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * <p>Parameter value</p>
+         * @type {AppTriggerParamBindingValue || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+
+        if (params.Value) {
+            let obj = new AppTriggerParamBindingValue();
+            obj.deserialize(params.Value)
+            this.Value = obj;
+        }
+
+    }
+}
+
+/**
+ * Plug-in configuration
+ * @class
+ */
+class PluginConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API plug-in configuration
+         * @type {ApiPluginConfig || null}
+         */
+        this.ApiPluginConfig = null;
+
+        /**
+         * App plugin configuration
+         * @type {AppPluginConfig || null}
+         */
+        this.AppPluginConfig = null;
+
+        /**
+         * mcp plug-in configuration
+         * @type {MCPPluginConfig || null}
+         */
+        this.MCPPluginConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ApiPluginConfig) {
+            let obj = new ApiPluginConfig();
+            obj.deserialize(params.ApiPluginConfig)
+            this.ApiPluginConfig = obj;
+        }
+
+        if (params.AppPluginConfig) {
+            let obj = new AppPluginConfig();
+            obj.deserialize(params.AppPluginConfig)
+            this.AppPluginConfig = obj;
+        }
+
+        if (params.MCPPluginConfig) {
+            let obj = new MCPPluginConfig();
+            obj.deserialize(params.MCPPluginConfig)
+            this.MCPPluginConfig = obj;
+        }
+
+    }
+}
+
+/**
+ * Rearrange the configuration
+ * @class
+ */
+class RerankConfig extends  AbstractModel {
     constructor(){
         super();
 
@@ -1232,6 +24471,12 @@ class GraphRAG extends  AbstractModel {
          */
         this.Enabled = null;
 
+        /**
+         * <p>Model name</p>
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
     }
 
     /**
@@ -1242,41 +24487,48 @@ class GraphRAG extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
 
     }
 }
 
 /**
- * Model details
+ * Concurrency limit exceeded details
  * @class
  */
-class ModelDetailInfo extends  AbstractModel {
+class ConcurrencyLimitDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Model alias.
+         * <p>Call source (subject_type determines the meaning of subject_id/subject_name. For example, for APP, subject_id=app_id and subject_name=app_name)</p>
+         * @type {CallSource || null}
+         */
+        this.CallSource = null;
+
+        /**
+         * <p>Time when the limit was exceeded (Unix seconds)</p>
          * @type {string || null}
          */
-        this.Alias = null;
+        this.EventTime = null;
 
         /**
-         * Limit on number of historical conversations
-         * @type {number || null}
-         */
-        this.HistoryLimit = null;
-
-        /**
-         * Unique model ID
+         * <p>Model name</p>
          * @type {string || null}
          */
-        this.ModelId = null;
+        this.ModelName = null;
 
         /**
-         * Model parameters
-         * @type {ModelParams || null}
+         * <p>Request content (the original query text of the user request)</p>
+         * @type {string || null}
          */
-        this.ModelParams = null;
+        this.RequestQuery = null;
+
+        /**
+         * <p>Space ID</p>
+         * @type {string || null}
+         */
+        this.SpaceId = null;
 
     }
 
@@ -1287,44 +24539,193 @@ class ModelDetailInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Alias = 'Alias' in params ? params.Alias : null;
-        this.HistoryLimit = 'HistoryLimit' in params ? params.HistoryLimit : null;
-        this.ModelId = 'ModelId' in params ? params.ModelId : null;
 
-        if (params.ModelParams) {
-            let obj = new ModelParams();
-            obj.deserialize(params.ModelParams)
-            this.ModelParams = obj;
+        if (params.CallSource) {
+            let obj = new CallSource();
+            obj.deserialize(params.CallSource)
+            this.CallSource = obj;
         }
+        this.EventTime = 'EventTime' in params ? params.EventTime : null;
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.RequestQuery = 'RequestQuery' in params ? params.RequestQuery : null;
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
 
     }
 }
 
 /**
- * Document search configuration
+ * CreateMsgRecordCategory request structure.
  * @class
  */
-class DocRetrievalConfig extends  AbstractModel {
+class CreateMsgRecordCategoryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Confidence threshold</p>
-         * @type {number || null}
+         * <p>Category name</p>
+         * @type {string || null}
          */
-        this.Confidence = null;
+        this.Name = null;
 
         /**
-         * <p>Whether to enable</p>
+         * <p>App ID</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>Parent category business ID. 0 represents a first-level category (unclassified)</p>
+         * @type {string || null}
+         */
+        this.ParentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ParentId = 'ParentId' in params ? params.ParentId : null;
+
+    }
+}
+
+/**
+ * DescribeAppStatisticsOverview response structure.
+ * @class
+ */
+class DescribeAppStatisticsOverviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Average first tokens duration (ms)</p>
+         * @type {string || null}
+         */
+        this.AvgFirstTokenTime = null;
+
+        /**
+         * <p>Avg duration of total tokens (ms)</p>
+         * @type {string || null}
+         */
+        this.AvgTotalTokenTime = null;
+
+        /**
+         * <p>Application call success rate (percentage, 0-100)</p>
+         * @type {number || null}
+         */
+        this.CallSuccessRate = null;
+
+        /**
+         * <p>Reply type distribution list; statistics by app_type, all reply methods are completed and returned in a fixed sequence. For reply methods with no data, call_count is 0</p>
+         * @type {Array.<Distribution> || null}
+         */
+        this.ReplyTypeDistributionList = null;
+
+        /**
+         * <p>Total number of calls</p>
+         * @type {string || null}
+         */
+        this.TotalCallCount = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AvgFirstTokenTime = 'AvgFirstTokenTime' in params ? params.AvgFirstTokenTime : null;
+        this.AvgTotalTokenTime = 'AvgTotalTokenTime' in params ? params.AvgTotalTokenTime : null;
+        this.CallSuccessRate = 'CallSuccessRate' in params ? params.CallSuccessRate : null;
+
+        if (params.ReplyTypeDistributionList) {
+            this.ReplyTypeDistributionList = new Array();
+            for (let z in params.ReplyTypeDistributionList) {
+                let obj = new Distribution();
+                obj.deserialize(params.ReplyTypeDistributionList[z]);
+                this.ReplyTypeDistributionList.push(obj);
+            }
+        }
+        this.TotalCallCount = 'TotalCallCount' in params ? params.TotalCallCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAgentDetail request structure.
+ * @class
+ */
+class DescribeAgentDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Application ID.</p>
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * <p>AgentId</p>
+         * @type {string || null}
+         */
+        this.AgentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AgentId = 'AgentId' in params ? params.AgentId : null;
+
+    }
+}
+
+/**
+ * Agent plug-in parameter configuration
+ * @class
+ */
+class AgentPluginParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Parameter name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Required or not</p>
          * @type {boolean || null}
          */
-        this.Enabled = null;
+        this.IsRequired = null;
 
         /**
-         * <p>Return the top N entries</p>
-         * @type {number || null}
+         * <p>Input value</p>
+         * @type {AgentInput || null}
          */
-        this.TopN = null;
+        this.Input = null;
 
     }
 
@@ -1335,32 +24736,115 @@ class DocRetrievalConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
-        this.TopN = 'TopN' in params ? params.TopN : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.IsRequired = 'IsRequired' in params ? params.IsRequired : null;
+
+        if (params.Input) {
+            let obj = new AgentInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
 
     }
 }
 
 /**
- * SearchKnowledge response structure.
+ * CopyApp request structure.
  * @class
  */
-class SearchKnowledgeResponse extends  AbstractModel {
+class CopyAppRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <p>Search results list</p>
-         * @type {Array.<KnowledgeResult> || null}
+         * app_id
+         * @type {string || null}
          */
-        this.KnowledgeList = null;
+        this.AppId = null;
 
         /**
-         * <p>token consumption statistics</p>
-         * @type {Array.<TokenUsage> || null}
+         * target_space_id
+         * @type {string || null}
          */
-        this.TokenUsageList = null;
+        this.TargetSpaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.TargetSpaceId = 'TargetSpaceId' in params ? params.TargetSpaceId : null;
+
+    }
+}
+
+/**
+ * CreateCategory request structure.
+ * @class
+ */
+class CreateCategoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Classification type (0 is not allowed. Value: 1=document classification, 2=QA classification)<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>CATEGORY_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>CATEGORY_TYPE_DOC</td><td>1</td><td>Document classification</td></tr><tr><td>CATEGORY_TYPE_QA</td><td>2</td><td>QA classification</td></tr></tbody></table></p>
+         * @type {number || null}
+         */
+        this.CategoryType = null;
+
+        /**
+         * <p>Associated knowledge base ID</p>
+         * @type {string || null}
+         */
+        this.KbId = null;
+
+        /**
+         * <p>Category name (length: 1–64 characters)</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Parent category ID</p>
+         * @type {string || null}
+         */
+        this.ParentCategoryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CategoryType = 'CategoryType' in params ? params.CategoryType : null;
+        this.KbId = 'KbId' in params ? params.KbId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ParentCategoryId = 'ParentCategoryId' in params ? params.ParentCategoryId : null;
+
+    }
+}
+
+/**
+ * DescribeAgentDetail response structure.
+ * @class
+ */
+class DescribeAgentDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Agent information</p>
+         * @type {AgentDetail || null}
+         */
+        this.Agent = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1378,55 +24862,1224 @@ class SearchKnowledgeResponse extends  AbstractModel {
             return;
         }
 
-        if (params.KnowledgeList) {
-            this.KnowledgeList = new Array();
-            for (let z in params.KnowledgeList) {
-                let obj = new KnowledgeResult();
-                obj.deserialize(params.KnowledgeList[z]);
-                this.KnowledgeList.push(obj);
-            }
-        }
-
-        if (params.TokenUsageList) {
-            this.TokenUsageList = new Array();
-            for (let z in params.TokenUsageList) {
-                let obj = new TokenUsage();
-                obj.deserialize(params.TokenUsageList[z]);
-                this.TokenUsageList.push(obj);
-            }
+        if (params.Agent) {
+            let obj = new AgentDetail();
+            obj.deserialize(params.Agent)
+            this.Agent = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
+/**
+ * Node operation content
+ * @class
+ */
+class NodeRunContent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input variable information
+         * @type {string || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output variable information
+         * @type {string || null}
+         */
+        this.Output = null;
+
+        /**
+         * Original output information. Only partial nodes have a value, such as tool nodes and code nodes.
+         * @type {string || null}
+         */
+        this.OriginalOutput = null;
+
+        /**
+         * URLs of the complete node Input content. (This field has a value only when the Input content exceeds the limit.)
+         * @type {string || null}
+         */
+        this.InputRef = null;
+
+        /**
+         * URLs of the complete node Output. This field has a value only when the Output exceeds the limit.
+         * @type {string || null}
+         */
+        this.OutputRef = null;
+
+        /**
+         * URLs of the complete original output content of the task. (This field has a value only when the TaskOutput content exceeds the limit.)
+         * @type {string || null}
+         */
+        this.OriginalOutputRef = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Input = 'Input' in params ? params.Input : null;
+        this.Output = 'Output' in params ? params.Output : null;
+        this.OriginalOutput = 'OriginalOutput' in params ? params.OriginalOutput : null;
+        this.InputRef = 'InputRef' in params ? params.InputRef : null;
+        this.OutputRef = 'OutputRef' in params ? params.OutputRef : null;
+        this.OriginalOutputRef = 'OriginalOutputRef' in params ? params.OriginalOutputRef : null;
+
+    }
+}
+
+/**
+ * Optional retrieval configuration
+ * @class
+ */
+class RetrievalOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Timeliness retrieval enhancement configuration</p>
+         * @type {ExpirationAwareness || null}
+         */
+        this.ExpirationAwareness = null;
+
+        /**
+         * <p>GraphRAG Configuration</p>
+         * @type {GraphRAG || null}
+         */
+        this.GraphRag = null;
+
+        /**
+         * <p>Spreadsheet enhancement configuration</p>
+         * @type {TableEnhancement || null}
+         */
+        this.TableEnhancement = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ExpirationAwareness) {
+            let obj = new ExpirationAwareness();
+            obj.deserialize(params.ExpirationAwareness)
+            this.ExpirationAwareness = obj;
+        }
+
+        if (params.GraphRag) {
+            let obj = new GraphRAG();
+            obj.deserialize(params.GraphRag)
+            this.GraphRag = obj;
+        }
+
+        if (params.TableEnhancement) {
+            let obj = new TableEnhancement();
+            obj.deserialize(params.TableEnhancement)
+            this.TableEnhancement = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteSpace request structure.
+ * @class
+ */
+class DeleteSpaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Space id.
+         * @type {string || null}
+         */
+        this.SpaceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpaceId = 'SpaceId' in params ? params.SpaceId : null;
+
+    }
+}
+
+/**
+ * [Data structure definition] Release record
+ * @class
+ */
+class ReleaseRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether it can be exported
+         * @type {boolean || null}
+         */
+        this.CanExport = null;
+
+        /**
+         * Whether it can be rolled back
+         * @type {boolean || null}
+         */
+        this.CanRollback = null;
+
+        /**
+         * Release description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Number of release failures
+         * @type {number || null}
+         */
+        this.FailCount = null;
+
+        /**
+         * Failure cause.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * Release ID
+         * @type {string || null}
+         */
+        this.ReleaseId = null;
+
+        /**
+         * Release version
+         * @type {string || null}
+         */
+        this.ReleaseVersion = null;
+
+        /**
+         * Publishing status. Enumeration values: 1: To be released, 2: Releasing, 3: Released successfully, 4: Release failure, 5: Under review, 6: Review successful, 7: Review failed, 8: Release success callback processing, 9: Release suspended, 10: Appeal under review, 11: Appeal review passed, 12: Appeal review not approved
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Status description.
+         * @type {string || null}
+         */
+        this.StatusDescription = null;
+
+        /**
+         * Number of successful releases
+         * @type {number || null}
+         */
+        this.SuccessCount = null;
+
+        /**
+         * Update time (Unix timestamp in seconds).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Releaser
+         * @type {string || null}
+         */
+        this.Updater = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CanExport = 'CanExport' in params ? params.CanExport : null;
+        this.CanRollback = 'CanRollback' in params ? params.CanRollback : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.FailCount = 'FailCount' in params ? params.FailCount : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.ReleaseId = 'ReleaseId' in params ? params.ReleaseId : null;
+        this.ReleaseVersion = 'ReleaseVersion' in params ? params.ReleaseVersion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDescription = 'StatusDescription' in params ? params.StatusDescription : null;
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Updater = 'Updater' in params ? params.Updater : null;
+
+    }
+}
+
+/**
+ * token consumption information of a single dialogue
+ * @class
+ */
+class ConversationRecordTokenUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Total input token count</p>
+         * @type {string || null}
+         */
+        this.InputTokens = null;
+
+        /**
+         * <p>Total output token count</p>
+         * @type {string || null}
+         */
+        this.OutputTokens = null;
+
+        /**
+         * <p>Total token consumption</p>
+         * @type {string || null}
+         */
+        this.TotalTokens = null;
+
+        /**
+         * <p>Total number of cache hit tokens</p>
+         * @type {string || null}
+         */
+        this.CachedTokens = null;
+
+        /**
+         * <p>Total number of reasoning tokens</p>
+         * @type {string || null}
+         */
+        this.ReasoningTokens = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputTokens = 'InputTokens' in params ? params.InputTokens : null;
+        this.OutputTokens = 'OutputTokens' in params ? params.OutputTokens : null;
+        this.TotalTokens = 'TotalTokens' in params ? params.TotalTokens : null;
+        this.CachedTokens = 'CachedTokens' in params ? params.CachedTokens : null;
+        this.ReasoningTokens = 'ReasoningTokens' in params ? params.ReasoningTokens : null;
+
+    }
+}
+
+/**
+ * SkillAnalysisInfo: Skill security scan information.
+ * @class
+ */
+class SkillAnalysisInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Safety detection status
+
+Enumeration values:
+| uint | Description |
+| --- | --- |
+| 0 | To be checked |
+| 1 | detecting |
+| 2 | Available |
+| 3 | Unavailable |
+| 4 | Detection failed |
+         * @type {number || null}
+         */
+        this.AnalysisStatus = null;
+
+        /**
+         * Risk description
+         * @type {string || null}
+         */
+        this.RiskDescription = null;
+
+        /**
+         * Risk level
+
+Enumeration values:
+| uint | Description |
+| --- | --- |
+| 0 | risk-free |
+| 1 | Low risk |
+| 2 | Medium-risk |
+| 3 | High-risk |
+         * @type {number || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * Security report redirection url
+         * @type {string || null}
+         */
+        this.SecurityReportUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AnalysisStatus = 'AnalysisStatus' in params ? params.AnalysisStatus : null;
+        this.RiskDescription = 'RiskDescription' in params ? params.RiskDescription : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.SecurityReportUrl = 'SecurityReportUrl' in params ? params.SecurityReportUrl : null;
+
+    }
+}
+
+/**
+ * AppTriggerWorkflowExecuteConfig
+ * @class
+ */
+class AppTriggerWorkflowExecuteConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Workflow API parameter binding</p>
+         * @type {AppTriggerParamBindingConfig || null}
+         */
+        this.ParamBindingsApi = null;
+
+        /**
+         * <p>Workflow parameter binding</p>
+         * @type {AppTriggerParamBindingConfig || null}
+         */
+        this.ParamBindingsWorkflow = null;
+
+        /**
+         * <p>Workflow ID</p>
+         * @type {string || null}
+         */
+        this.WorkflowId = null;
+
+        /**
+         * <p>Workflow name</p>
+         * @type {string || null}
+         */
+        this.WorkflowName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ParamBindingsApi) {
+            let obj = new AppTriggerParamBindingConfig();
+            obj.deserialize(params.ParamBindingsApi)
+            this.ParamBindingsApi = obj;
+        }
+
+        if (params.ParamBindingsWorkflow) {
+            let obj = new AppTriggerParamBindingConfig();
+            obj.deserialize(params.ParamBindingsWorkflow)
+            this.ParamBindingsWorkflow = obj;
+        }
+        this.WorkflowId = 'WorkflowId' in params ? params.WorkflowId : null;
+        this.WorkflowName = 'WorkflowName' in params ? params.WorkflowName : null;
+
+    }
+}
+
+/**
+ * Tag reference identifier (input parameter)
+ * @class
+ */
+class LabelRefIdentity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tag ID</p>
+         * @type {string || null}
+         */
+        this.LabelId = null;
+
+        /**
+         * <p>Tag standard term ID list</p>
+         * @type {Array.<string> || null}
+         */
+        this.LabelTermIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LabelId = 'LabelId' in params ? params.LabelId : null;
+        this.LabelTermIdList = 'LabelTermIdList' in params ? params.LabelTermIdList : null;
+
+    }
+}
+
+/**
+ * ModifyAgent response structure.
+ * @class
+ */
+class ModifyAgentResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * <p>Basic model provider info (deprecated, please use ModelProviderProfile)</p>
+ * @class
+ */
+class ModelProviderBasic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Model provider alias</p>
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * <p>Model provider name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Model provider type</p><table><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>MODEL_PROVIDER_TYPE_UNSPECIFIED</td><td>0</td><td>Unspecified</td></tr><tr><td>MODEL_PROVIDER_TYPE_SELF</td><td>1</td><td>Self-owned provider</td></tr><tr><td>MODEL_PROVIDER_TYPE_CUSTOM</td><td>2</td><td>Custom model provider</td></tr><tr><td>MODEL_PROVIDER_TYPE_THIRD</td><td>3</td><td>Third-party model provider</td></tr></table>
+         * @type {number || null}
+         */
+        this.ProviderType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ProviderType = 'ProviderType' in params ? params.ProviderType : null;
+
+    }
+}
+
+/**
+ * Statistics of similar questions in Q&A
+ * @class
+ */
+class SimilarQuestionStat extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Number of similar questions</p>
+         * @type {number || null}
+         */
+        this.SimilarQuestionCount = null;
+
+        /**
+         * <p>Similar question prompt (show a similar question example)</p>
+         * @type {string || null}
+         */
+        this.SimilarQuestionTips = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SimilarQuestionCount = 'SimilarQuestionCount' in params ? params.SimilarQuestionCount : null;
+        this.SimilarQuestionTips = 'SimilarQuestionTips' in params ? params.SimilarQuestionTips : null;
+
+    }
+}
+
+/**
+ * Advanced app configuration
+ * @class
+ */
+class AppAdvancedConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to enable context rewrite</p>
+         * @type {boolean || null}
+         */
+        this.EnableContextRewrite = null;
+
+        /**
+         * <p>Whether to enable image and text retrieval.</p>
+         * @type {boolean || null}
+         */
+        this.EnableImageTextRetrieval = null;
+
+        /**
+         * <p>Reply flexibility</p>
+         * @type {number || null}
+         */
+        this.ReplyFlexibility = null;
+
+        /**
+         * <p>Custom configuration on the dialogue side (shared across all modes, with permission to modify configuration dynamically during a dialogue)</p>
+         * @type {DialogCustomConfig || null}
+         */
+        this.DialogCustomConfig = null;
+
+        /**
+         * <p>Intent attainment priority</p>
+         * @type {Array.<IntentAchievementInfo> || null}
+         */
+        this.IntentAchievement = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnableContextRewrite = 'EnableContextRewrite' in params ? params.EnableContextRewrite : null;
+        this.EnableImageTextRetrieval = 'EnableImageTextRetrieval' in params ? params.EnableImageTextRetrieval : null;
+        this.ReplyFlexibility = 'ReplyFlexibility' in params ? params.ReplyFlexibility : null;
+
+        if (params.DialogCustomConfig) {
+            let obj = new DialogCustomConfig();
+            obj.deserialize(params.DialogCustomConfig)
+            this.DialogCustomConfig = obj;
+        }
+
+        if (params.IntentAchievement) {
+            this.IntentAchievement = new Array();
+            for (let z in params.IntentAchievement) {
+                let obj = new IntentAchievementInfo();
+                obj.deserialize(params.IntentAchievement[z]);
+                this.IntentAchievement.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * PauseAppTrigger response structure.
+ * @class
+ */
+class PauseAppTriggerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyKB response structure.
+ * @class
+ */
+class ModifyKBResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Special status information.
+ * @class
+ */
+class SpecialStatusInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Status (0: not in a special status, 1: in a special status). Enumeration value: 1: in a special status
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
 module.exports = {
-    SearchResultPayload: SearchResultPayload,
-    SearchContext: SearchContext,
-    KVPair: KVPair,
-    KnowledgeResult: KnowledgeResult,
+    DeleteSkillShareRequest: DeleteSkillShareRequest,
+    ToolConfig: ToolConfig,
+    SkillClassification: SkillClassification,
     SearchInput: SearchInput,
+    AgentAdvancedConfig: AgentAdvancedConfig,
     FinalRerankConfig: FinalRerankConfig,
+    PluginStatistics: PluginStatistics,
+    IntentAchievementInfo: IntentAchievementInfo,
+    RollbackReleaseRequest: RollbackReleaseRequest,
+    CustomVariable: CustomVariable,
+    DescribeModelListResponse: DescribeModelListResponse,
+    AppModelConfig: AppModelConfig,
+    Plugin: Plugin,
+    ApiKeyAuthConfig: ApiKeyAuthConfig,
+    AgentPluginCredentialParam: AgentPluginCredentialParam,
+    DescribeConversationRequest: DescribeConversationRequest,
+    Conversation: Conversation,
+    AuthConfig: AuthConfig,
+    AppShareAccessControl: AppShareAccessControl,
+    KBCategory: KBCategory,
+    DialogCustomConfig: DialogCustomConfig,
+    DescribeAppSummaryListRequest: DescribeAppSummaryListRequest,
+    ExecuteConfig: ExecuteConfig,
+    CreateLabelResponse: CreateLabelResponse,
+    TriggerConfig: TriggerConfig,
+    DescribeModelListRequest: DescribeModelListRequest,
+    DescribeMsgRecordCategoryListResponse: DescribeMsgRecordCategoryListResponse,
+    DeleteVariableResponse: DeleteVariableResponse,
+    DescribeLabelSummaryListResponse: DescribeLabelSummaryListResponse,
+    AgentExternalToolConfig: AgentExternalToolConfig,
+    ApiPluginConfig: ApiPluginConfig,
+    AppealingStatus: AppealingStatus,
+    DescribeVariableResponse: DescribeVariableResponse,
+    CreateLabelRequest: CreateLabelRequest,
+    CodeToolConfig: CodeToolConfig,
+    SkillCorpShareConfig: SkillCorpShareConfig,
+    WeeklyTime: WeeklyTime,
+    UsageSummary: UsageSummary,
+    FileVolumeMount: FileVolumeMount,
+    SkillReferenceSummary: SkillReferenceSummary,
+    BillingAttribute: BillingAttribute,
+    DescribeConcurrencyLimitDetailListResponse: DescribeConcurrencyLimitDetailListResponse,
+    ModifyLabelResponse: ModifyLabelResponse,
+    AgentSpec: AgentSpec,
+    ClawAgentConfig: ClawAgentConfig,
+    ModelLimit: ModelLimit,
+    Distribution: Distribution,
+    CreatePluginRequest: CreatePluginRequest,
+    ThinkModel: ThinkModel,
+    DeleteAgentResponse: DeleteAgentResponse,
+    ModifyConversationResponse: ModifyConversationResponse,
+    RetryReleaseRequest: RetryReleaseRequest,
+    AppConfig: AppConfig,
+    AppAuxiliaryInfo: AppAuxiliaryInfo,
+    ModifyConversationRequest: ModifyConversationRequest,
+    CreateChannelResponse: CreateChannelResponse,
+    DescribeNodeRunDetailRequest: DescribeNodeRunDetailRequest,
+    DeleteCategoryResponse: DeleteCategoryResponse,
+    SearchResultPayload: SearchResultPayload,
+    QAQuery: QAQuery,
+    DescribeAppTriggerResponse: DescribeAppTriggerResponse,
+    CallMCPToolRequest: CallMCPToolRequest,
+    ModifyVariableResponse: ModifyVariableResponse,
+    AgentSkillConfig: AgentSkillConfig,
+    ModifyAgentRequest: ModifyAgentRequest,
+    NodeRunDetail: NodeRunDetail,
+    AppWebSearchConfig: AppWebSearchConfig,
+    AgentProfile: AgentProfile,
+    SearchAdvancedConfig: SearchAdvancedConfig,
+    KnowledgeScope: KnowledgeScope,
+    RunAppTriggerNowRequest: RunAppTriggerNowRequest,
+    AppTriggerWebhookConfig: AppTriggerWebhookConfig,
+    CreateVariableResponse: CreateVariableResponse,
+    AppShareURLInfo: AppShareURLInfo,
+    ModelProperty: ModelProperty,
+    CreateReleaseResponse: CreateReleaseResponse,
+    DescribeConflictQASummaryListResponse: DescribeConflictQASummaryListResponse,
+    DescribeConversationListRequest: DescribeConversationListRequest,
+    ModelDetailInfo: ModelDetailInfo,
+    ModifyVariableRequest: ModifyVariableRequest,
+    DescribeConcurrencyLimitDetailListRequest: DescribeConcurrencyLimitDetailListRequest,
+    DescribeNodeRunDetailResponse: DescribeNodeRunDetailResponse,
+    MCPPluginConfig: MCPPluginConfig,
+    DescribeAppStatisticsOverviewRequest: DescribeAppStatisticsOverviewRequest,
+    CreateMsgRecordCategoryResponse: CreateMsgRecordCategoryResponse,
+    CreateQAListRequest: CreateQAListRequest,
+    DeleteVariableRequest: DeleteVariableRequest,
+    ReleaseSkillResponse: ReleaseSkillResponse,
+    AppTriggerInstance: AppTriggerInstance,
+    ModifyDocListRequest: ModifyDocListRequest,
+    DescribeWorkflowRunResponse: DescribeWorkflowRunResponse,
+    DeleteConversationRequest: DeleteConversationRequest,
+    DescribeConflictQASummaryListRequest: DescribeConflictQASummaryListRequest,
+    DescribeSkillSummaryListRequest: DescribeSkillSummaryListRequest,
+    CopyAppResponse: CopyAppResponse,
+    AgentPluginCredentialConfig: AgentPluginCredentialConfig,
+    CallMCPToolResponse: CallMCPToolResponse,
+    ComplexBillingItem: ComplexBillingItem,
+    BackgroundImage: BackgroundImage,
+    TimerScheduleConfig: TimerScheduleConfig,
+    Model: Model,
+    DigitalHumanConfig: DigitalHumanConfig,
+    SearchResourceStatusInfo: SearchResourceStatusInfo,
+    CreateQAGenerationTaskRequest: CreateQAGenerationTaskRequest,
+    DescribeSpaceListRequest: DescribeSpaceListRequest,
+    AppTriggerRunLog: AppTriggerRunLog,
+    ConversationContent: ConversationContent,
+    CamAuthConfig: CamAuthConfig,
+    DescribeSkillReferenceListResponse: DescribeSkillReferenceListResponse,
+    CreateKBRequest: CreateKBRequest,
+    CreateWorkflowRunResponse: CreateWorkflowRunResponse,
+    DeleteMsgRecordCategoryResponse: DeleteMsgRecordCategoryResponse,
+    GenerateModel: GenerateModel,
+    SkillShare: SkillShare,
+    AppShareWhitelistItem: AppShareWhitelistItem,
+    ModifyKBRequest: ModifyKBRequest,
+    CreateWebSocketTokenRequest: CreateWebSocketTokenRequest,
+    CreateWorkflowRunRequest: CreateWorkflowRunRequest,
+    NodeRunExecution: NodeRunExecution,
+    DescribeQARequest: DescribeQARequest,
+    DeleteSkillResponse: DeleteSkillResponse,
+    SkillNotice: SkillNotice,
+    DescribeAgentReleasePreviewListRequest: DescribeAgentReleasePreviewListRequest,
+    DocSwitch: DocSwitch,
+    PauseAppTriggerRequest: PauseAppTriggerRequest,
+    MetaValue: MetaValue,
+    LabelTermModifyItem: LabelTermModifyItem,
+    CopyAgentFromAppRequest: CopyAgentFromAppRequest,
+    QACreateSpec: QACreateSpec,
+    ModelParameter: ModelParameter,
+    ModifyAppResponse: ModifyAppResponse,
+    ExpirationPolicy: ExpirationPolicy,
+    DescribeAccountListRequest: DescribeAccountListRequest,
+    DescribeConversationListResponse: DescribeConversationListResponse,
+    MultiAgentConfig: MultiAgentConfig,
+    CreateWebSocketTokenResponse: CreateWebSocketTokenResponse,
+    Statistic: Statistic,
+    QASegmentHighlight: QASegmentHighlight,
+    DescribeSkillCategoryListResponse: DescribeSkillCategoryListResponse,
+    TimeRange: TimeRange,
+    ConflictQASummary: ConflictQASummary,
+    ESConfig: ESConfig,
+    AppOperation: AppOperation,
+    ClawAgentAgentTeamConfig: ClawAgentAgentTeamConfig,
+    DescribeSystemVariableListResponse: DescribeSystemVariableListResponse,
+    WorkflowRunMetadata: WorkflowRunMetadata,
+    AgentPlugin: AgentPlugin,
+    SimilarQuestionModifySpec: SimilarQuestionModifySpec,
+    SearchBilling: SearchBilling,
+    DeleteQAListResponse: DeleteQAListResponse,
+    NodeRun: NodeRun,
+    ConversationResetInfo: ConversationResetInfo,
+    QASourceInfo: QASourceInfo,
+    CheckResult: CheckResult,
+    ConversationQuoteInfo: ConversationQuoteInfo,
+    DeleteLabelListRequest: DeleteLabelListRequest,
+    DescribeSpaceListResponse: DescribeSpaceListResponse,
+    ConversationRecordSummary: ConversationRecordSummary,
+    ConversationRecordTimeUsage: ConversationRecordTimeUsage,
+    App: App,
+    AppTriggerParamBindingValue: AppTriggerParamBindingValue,
+    DescribeAppTriggerRunLogListResponse: DescribeAppTriggerRunLogListResponse,
+    FileParseModel: FileParseModel,
+    AppAppeal: AppAppeal,
+    DescribeSkillCategoryListRequest: DescribeSkillCategoryListRequest,
+    LabelTermCheckResult: LabelTermCheckResult,
+    DescribeLatestReleaseResponse: DescribeLatestReleaseResponse,
+    SearchContext: SearchContext,
+    ResponseParam: ResponseParam,
+    SingleWorkflowConfig: SingleWorkflowConfig,
+    CreatePluginResponse: CreatePluginResponse,
+    CreateSimilarQuestionResponse: CreateSimilarQuestionResponse,
+    WorkflowRunTime: WorkflowRunTime,
+    QAModifyFields: QAModifyFields,
+    AgentPluginConfig: AgentPluginConfig,
+    PluginSummary: PluginSummary,
+    ModifyDocListResponse: ModifyDocListResponse,
+    DescribeQASummaryListRequest: DescribeQASummaryListRequest,
+    CreateWorkspaceCredentialResponse: CreateWorkspaceCredentialResponse,
+    ConversationMcpApp: ConversationMcpApp,
+    DescribeAccountListResponse: DescribeAccountListResponse,
+    DeleteChannelResponse: DeleteChannelResponse,
+    PluginParam: PluginParam,
+    AgentUserInputValue: AgentUserInputValue,
+    SkillProfile: SkillProfile,
+    ApiToolConfig: ApiToolConfig,
+    ToolExample: ToolExample,
+    DescribeAppTriggerRunLogListRequest: DescribeAppTriggerRunLogListRequest,
+    ResourceConsumption: ResourceConsumption,
+    ModelBasic: ModelBasic,
+    ModifyAppRequest: ModifyAppRequest,
+    DeleteQAListRequest: DeleteQAListRequest,
+    MCPToolMeta: MCPToolMeta,
+    CreateSpaceResponse: CreateSpaceResponse,
+    CreateVariableRequest: CreateVariableRequest,
+    ExportQARequest: ExportQARequest,
+    DescribeSystemVariableListRequest: DescribeSystemVariableListRequest,
+    DescribeReleaseSummaryResponse: DescribeReleaseSummaryResponse,
+    QASummary: QASummary,
+    MCPToolConfig: MCPToolConfig,
+    SkillSummary: SkillSummary,
+    DescribeLabelRequest: DescribeLabelRequest,
+    AgentCollaborationConfig: AgentCollaborationConfig,
+    SummaryListSwitch: SummaryListSwitch,
+    CheckLabelRequest: CheckLabelRequest,
+    RoleConfig: RoleConfig,
+    DescribeAuditLogListResponse: DescribeAuditLogListResponse,
+    DescribeUsageSummaryListResponse: DescribeUsageSummaryListResponse,
+    DescribeAppResponse: DescribeAppResponse,
+    DeleteAppRequest: DeleteAppRequest,
+    DescribeAppSummaryListResponse: DescribeAppSummaryListResponse,
+    ClawAgentLongMemoryConfig: ClawAgentLongMemoryConfig,
+    AgentSummary: AgentSummary,
+    SupportedFileType: SupportedFileType,
+    SkillCategory: SkillCategory,
+    AgentTool: AgentTool,
+    ReleaseSkillRequest: ReleaseSkillRequest,
+    DescribeVariableRequest: DescribeVariableRequest,
+    WorkflowRunProfile: WorkflowRunProfile,
+    AuditLog: AuditLog,
+    WorkflowRunOutput: WorkflowRunOutput,
+    InputBoxConfig: InputBoxConfig,
+    AppTrigger: AppTrigger,
+    DescribeAgentSummaryListResponse: DescribeAgentSummaryListResponse,
+    DeleteKBRequest: DeleteKBRequest,
+    SkillVersion: SkillVersion,
+    AppModeConfig: AppModeConfig,
+    ReplyMessage: ReplyMessage,
+    Tool: Tool,
+    ModelUsageSummary: ModelUsageSummary,
+    DescribeQAResponse: DescribeQAResponse,
+    DescribeVariableListResponse: DescribeVariableListResponse,
+    LabelTerm: LabelTerm,
+    ModifyQARequest: ModifyQARequest,
+    LabelSummary: LabelSummary,
+    DescribeReleaseListRequest: DescribeReleaseListRequest,
+    ModifySpaceResponse: ModifySpaceResponse,
+    ConversationReference: ConversationReference,
+    LabelModifyFields: LabelModifyFields,
+    DeleteMsgRecordCategoryRequest: DeleteMsgRecordCategoryRequest,
+    ConversationWidget: ConversationWidget,
+    WorkflowRun: WorkflowRun,
+    DescribeWorkflowRunRequest: DescribeWorkflowRunRequest,
+    AgentModelConfig: AgentModelConfig,
+    ModifyQAListRequest: ModifyQAListRequest,
+    CreateConversationResponse: CreateConversationResponse,
+    NodeRunLog: NodeRunLog,
+    Variable: Variable,
+    ExpirationAwareness: ExpirationAwareness,
+    AppSharedKbInfo: AppSharedKbInfo,
+    ResetConversationResponse: ResetConversationResponse,
+    DailySchedule: DailySchedule,
+    PromptRewriteModel: PromptRewriteModel,
+    ManualOnlySchedule: ManualOnlySchedule,
+    ModifySpaceRequest: ModifySpaceRequest,
+    DescribePluginSummaryListRequest: DescribePluginSummaryListRequest,
+    AppFileVolumeMount: AppFileVolumeMount,
+    CreateAppResponse: CreateAppResponse,
+    KBModifyExtendFields: KBModifyExtendFields,
+    QARetrievalConfig: QARetrievalConfig,
+    CreateQAListResponse: CreateQAListResponse,
+    ModelDeveloperBasic: ModelDeveloperBasic,
+    AppExperienceConfig: AppExperienceConfig,
+    ReplyContent: ReplyContent,
+    QAOperator: QAOperator,
+    LabelRefIdentityList: LabelRefIdentityList,
+    CreateReleaseRequest: CreateReleaseRequest,
+    CreateWorkspaceCredentialRequest: CreateWorkspaceCredentialRequest,
+    ModifyAppTriggerRequest: ModifyAppTriggerRequest,
+    DescribeAppTriggerSummaryListResponse: DescribeAppTriggerSummaryListResponse,
+    CreateAgentRequest: CreateAgentRequest,
+    ConversationExperience: ConversationExperience,
+    DeletePluginResponse: DeletePluginResponse,
+    DeletePluginRequest: DeletePluginRequest,
+    AIOptimizeModel: AIOptimizeModel,
+    SearchFilterConfig: SearchFilterConfig,
+    LabelRef: LabelRef,
+    KBRetrievalConfig: KBRetrievalConfig,
+    DescribePluginSummaryListResponse: DescribePluginSummaryListResponse,
+    AppSubStatusInfo: AppSubStatusInfo,
+    ViewScope: ViewScope,
+    CreateConversationRequest: CreateConversationRequest,
+    CreateSkillResponse: CreateSkillResponse,
+    DescribeMsgRecordCategoryListRequest: DescribeMsgRecordCategoryListRequest,
+    CallSource: CallSource,
+    AppTriggerPromptExecuteConfig: AppTriggerPromptExecuteConfig,
+    DeleteSkillShareResponse: DeleteSkillShareResponse,
+    WorkflowRunSummary: WorkflowRunSummary,
+    ReleaseSummary: ReleaseSummary,
+    SimilarQuestion: SimilarQuestion,
+    AgentToolBasicConfig: AgentToolBasicConfig,
+    DescribeConflictQAResponse: DescribeConflictQAResponse,
+    AppStatusInfo: AppStatusInfo,
+    ComplexBilling: ComplexBilling,
+    DocRetrievalConfig: DocRetrievalConfig,
+    DescribeLabelSummaryListRequest: DescribeLabelSummaryListRequest,
+    SearchKnowledgeResponse: SearchKnowledgeResponse,
+    DeleteConversationResponse: DeleteConversationResponse,
+    DescribeCategoryListResponse: DescribeCategoryListResponse,
+    AppTriggerParamSchema: AppTriggerParamSchema,
+    TimerPushConfig: TimerPushConfig,
+    AgentToolConfig: AgentToolConfig,
     SimilarQuestionExtra: SimilarQuestionExtra,
+    DeleteDocListRequest: DeleteDocListRequest,
+    WeeklySchedule: WeeklySchedule,
+    ModelParams: ModelParams,
+    ConversationFileCollection: ConversationFileCollection,
+    AgentInput: AgentInput,
+    AgentReleasePreview: AgentReleasePreview,
+    AgentToolOutputParameter: AgentToolOutputParameter,
+    CreateChannelRequest: CreateChannelRequest,
+    Identity: Identity,
+    AccessKeyAuthConfig: AccessKeyAuthConfig,
+    DescribeLabelResponse: DescribeLabelResponse,
+    CreateAppTriggerResponse: CreateAppTriggerResponse,
+    DeleteKBResponse: DeleteKBResponse,
+    KBSpec: KBSpec,
+    SystemVariable: SystemVariable,
+    DescribeQASummaryListResponse: DescribeQASummaryListResponse,
+    DescribeAppTriggerInstanceResponse: DescribeAppTriggerInstanceResponse,
+    CreateSkillShareRequest: CreateSkillShareRequest,
+    QALifecycle: QALifecycle,
+    CategoryPath: CategoryPath,
+    CreateSimilarQuestionRequest: CreateSimilarQuestionRequest,
+    AppGreetingConfig: AppGreetingConfig,
+    DescribeAppTriggerSummaryListRequest: DescribeAppTriggerSummaryListRequest,
+    AppTriggerScheduleConfig: AppTriggerScheduleConfig,
+    KnowledgeResult: KnowledgeResult,
+    ModifyAppTriggerResponse: ModifyAppTriggerResponse,
+    AccountInfo: AccountInfo,
+    CreateSkillRequest: CreateSkillRequest,
+    CreateAgentResponse: CreateAgentResponse,
+    AgentSkill: AgentSkill,
     SearchKnowledgeRequest: SearchKnowledgeRequest,
     DBRetrievalConfig: DBRetrievalConfig,
-    SearchFilterConfig: SearchFilterConfig,
+    ModelBadge: ModelBadge,
     TokenUsage: TokenUsage,
-    KBRetrievalConfig: KBRetrievalConfig,
-    ModelParams: ModelParams,
-    SearchAdvancedConfig: SearchAdvancedConfig,
-    QARetrievalConfig: QARetrievalConfig,
-    SearchBilling: SearchBilling,
+    PlatformUsageSummary: PlatformUsageSummary,
+    DeleteLabelListResponse: DeleteLabelListResponse,
+    AgentSystemVariable: AgentSystemVariable,
+    DocExternalLink: DocExternalLink,
+    PluginProfile: PluginProfile,
+    DescribePluginResponse: DescribePluginResponse,
+    ClawAgentChannelContextTimeoutConfig: ClawAgentChannelContextTimeoutConfig,
+    DescribeAgentReleasePreviewListResponse: DescribeAgentReleasePreviewListResponse,
+    DescribeSkillSummaryListResponse: DescribeSkillSummaryListResponse,
+    DescribeConversationMessageListRequest: DescribeConversationMessageListRequest,
+    EffectivePeriod: EffectivePeriod,
+    DeleteDocListResponse: DeleteDocListResponse,
+    DescribeReleaseListResponse: DescribeReleaseListResponse,
+    DeleteAgentRequest: DeleteAgentRequest,
+    RequestParam: RequestParam,
+    ConversationRecordErrorInfo: ConversationRecordErrorInfo,
+    DescribeUsageSummaryListRequest: DescribeUsageSummaryListRequest,
+    AgentRelease: AgentRelease,
+    AgentToolInputParameter: AgentToolInputParameter,
+    RunAppTriggerNowResponse: RunAppTriggerNowResponse,
+    DescribeConflictQARequest: DescribeConflictQARequest,
+    DeleteAppTriggerRequest: DeleteAppTriggerRequest,
+    QAPermission: QAPermission,
+    CreateQAGenerationTaskResponse: CreateQAGenerationTaskResponse,
+    OperationResult: OperationResult,
+    OnceSchedule: OnceSchedule,
+    MultiModalQAModel: MultiModalQAModel,
+    CreateSpaceRequest: CreateSpaceRequest,
+    MCPToolUIMeta: MCPToolUIMeta,
+    SearchFilter: SearchFilter,
+    DescribeCategoryListRequest: DescribeCategoryListRequest,
+    FieldMask: FieldMask,
+    AppTriggerWebhookParamSchemaConfig: AppTriggerWebhookParamSchemaConfig,
+    ConversationMessage: ConversationMessage,
+    CreateCategoryResponse: CreateCategoryResponse,
+    DescribeNodeBatchRunRequest: DescribeNodeBatchRunRequest,
+    DescribeVariableListRequest: DescribeVariableListRequest,
+    Operator: Operator,
+    ExportQAResponse: ExportQAResponse,
+    QAMetadata: QAMetadata,
+    DescribeConversationMessageListResponse: DescribeConversationMessageListResponse,
+    AppToolConfig: AppToolConfig,
+    RollbackReleaseResponse: RollbackReleaseResponse,
+    DescribeReleaseSummaryRequest: DescribeReleaseSummaryRequest,
+    AppWorkflowConfig: AppWorkflowConfig,
+    ConversationAgentTask: ConversationAgentTask,
+    CheckLabelResponse: CheckLabelResponse,
+    AppTriggerScheduleStatus: AppTriggerScheduleStatus,
+    KVPair: KVPair,
+    DeleteSkillRequest: DeleteSkillRequest,
+    DescribePluginRequest: DescribePluginRequest,
+    BatchRunSummary: BatchRunSummary,
+    PortalShareConfig: PortalShareConfig,
+    PluginUserState: PluginUserState,
+    DuplexBilling: DuplexBilling,
+    MultiModalUnderstandingModel: MultiModalUnderstandingModel,
+    DescribeAppTriggerRequest: DescribeAppTriggerRequest,
+    WorkflowRunResult: WorkflowRunResult,
+    PluginOperation: PluginOperation,
+    CorpShareConfig: CorpShareConfig,
+    AppSummary: AppSummary,
+    AppTriggerSummary: AppTriggerSummary,
+    ConversationWorkspace: ConversationWorkspace,
+    SkillReferenceGroup: SkillReferenceGroup,
+    DeleteSpaceResponse: DeleteSpaceResponse,
+    DescribeAppTriggerInstanceRequest: DescribeAppTriggerInstanceRequest,
+    AppSecretInfo: AppSecretInfo,
+    AgentDetail: AgentDetail,
+    AppIdentity: AppIdentity,
+    GraphRAG: GraphRAG,
+    ModifyQAResponse: ModifyQAResponse,
+    CreateAppRequest: CreateAppRequest,
+    DeleteAppResponse: DeleteAppResponse,
+    CreateAppTriggerRequest: CreateAppTriggerRequest,
+    AppTriggerWebhookStatus: AppTriggerWebhookStatus,
+    AccessKeyParamConfig: AccessKeyParamConfig,
+    CategoryPermission: CategoryPermission,
+    ResetConversationRequest: ResetConversationRequest,
+    OAuthConfig: OAuthConfig,
+    ToolBilling: ToolBilling,
+    BasicBilling: BasicBilling,
+    DescribeAppRequest: DescribeAppRequest,
+    IntervalSchedule: IntervalSchedule,
+    DescribeLatestReleaseRequest: DescribeLatestReleaseRequest,
+    DeleteChannelRequest: DeleteChannelRequest,
+    CronSchedule: CronSchedule,
+    CopyAgentFromAppResponse: CopyAgentFromAppResponse,
+    ModifyQAListResponse: ModifyQAListResponse,
+    ConflictQA: ConflictQA,
+    RetryReleaseResponse: RetryReleaseResponse,
+    AICallConfig: AICallConfig,
+    DescribeNodeBatchRunResponse: DescribeNodeBatchRunResponse,
+    CreateSkillShareResponse: CreateSkillShareResponse,
     TableEnhancement: TableEnhancement,
     KnowledgeSource: KnowledgeSource,
-    SearchFilter: SearchFilter,
-    RerankConfig: RerankConfig,
-    RetrievalOption: RetrievalOption,
     KnowledgeSnippetProfile: KnowledgeSnippetProfile,
-    ExpirationAwareness: ExpirationAwareness,
-    GraphRAG: GraphRAG,
-    ModelDetailInfo: ModelDetailInfo,
-    DocRetrievalConfig: DocRetrievalConfig,
-    SearchKnowledgeResponse: SearchKnowledgeResponse,
+    DeleteAppTriggerResponse: DeleteAppTriggerResponse,
+    Filter: Filter,
+    ToolSummary: ToolSummary,
+    ModifyLabelRequest: ModifyLabelRequest,
+    MsgRecordCategory: MsgRecordCategory,
+    AccessKeyPassThroughConfig: AccessKeyPassThroughConfig,
+    DescribeSkillReferenceListRequest: DescribeSkillReferenceListRequest,
+    AppTriggerParamBindingConfig: AppTriggerParamBindingConfig,
+    KBModelConfig: KBModelConfig,
+    DescribeAuditLogListRequest: DescribeAuditLogListRequest,
+    VoiceConfig: VoiceConfig,
+    DeleteCategoryRequest: DeleteCategoryRequest,
+    DescribeConversationResponse: DescribeConversationResponse,
+    Space: Space,
+    PluginUsageSummary: PluginUsageSummary,
+    AppMetadata: AppMetadata,
+    CreateKBResponse: CreateKBResponse,
+    AppPluginConfig: AppPluginConfig,
+    ModelStatus: ModelStatus,
+    AppMemoryConfig: AppMemoryConfig,
+    TriggerStatus: TriggerStatus,
+    DescribeAgentSummaryListRequest: DescribeAgentSummaryListRequest,
+    AppTriggerParamBinding: AppTriggerParamBinding,
+    PluginConfig: PluginConfig,
+    RerankConfig: RerankConfig,
+    ConcurrencyLimitDetail: ConcurrencyLimitDetail,
+    CreateMsgRecordCategoryRequest: CreateMsgRecordCategoryRequest,
+    DescribeAppStatisticsOverviewResponse: DescribeAppStatisticsOverviewResponse,
+    DescribeAgentDetailRequest: DescribeAgentDetailRequest,
+    AgentPluginParameter: AgentPluginParameter,
+    CopyAppRequest: CopyAppRequest,
+    CreateCategoryRequest: CreateCategoryRequest,
+    DescribeAgentDetailResponse: DescribeAgentDetailResponse,
+    NodeRunContent: NodeRunContent,
+    RetrievalOption: RetrievalOption,
+    DeleteSpaceRequest: DeleteSpaceRequest,
+    ReleaseRecord: ReleaseRecord,
+    ConversationRecordTokenUsage: ConversationRecordTokenUsage,
+    SkillAnalysisInfo: SkillAnalysisInfo,
+    AppTriggerWorkflowExecuteConfig: AppTriggerWorkflowExecuteConfig,
+    LabelRefIdentity: LabelRefIdentity,
+    ModifyAgentResponse: ModifyAgentResponse,
+    ModelProviderBasic: ModelProviderBasic,
+    SimilarQuestionStat: SimilarQuestionStat,
+    AppAdvancedConf: AppAdvancedConf,
+    PauseAppTriggerResponse: PauseAppTriggerResponse,
+    ModifyKBResponse: ModifyKBResponse,
+    SpecialStatusInfo: SpecialStatusInfo,
 
 }

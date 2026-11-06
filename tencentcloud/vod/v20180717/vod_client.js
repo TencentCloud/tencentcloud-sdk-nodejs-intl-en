@@ -709,6 +709,7 @@ const DescribeAigcQuotasResponse = models.DescribeAigcQuotasResponse;
 const CreateAdaptiveDynamicStreamingTemplateResponse = models.CreateAdaptiveDynamicStreamingTemplateResponse;
 const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
 const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
+const AigcModelQuota = models.AigcModelQuota;
 const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
 const DescribeStorageDataResponse = models.DescribeStorageDataResponse;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
@@ -1411,9 +1412,9 @@ The designated file must be in hls format. All playlist files should preferably 
     }
 
     /**
-     * This API is used to edit AIGC quota configuration. Quota usage starts accumulating when the quota feature is enabled. Once the quota is reached, AIGC features will no longer be usable.
+     * This API is used to edit AIGC quota configuration. Quota usage accumulates from the start of quota enablement. Once the quota is reached, AIGC features will no longer be usable.
 
-Since AGC content generation is an async task, real-time usage data cannot be obtained. Therefore, quota limits result in some errors, and precise control over the set limit cannot be achieved.
+Since content generation in AGC is an asynchronous task, real-time usage data cannot be obtained. Therefore, quota limits may result in some errors, and precise control over the set limit cannot be achieved.
      * @param {ModifyAigcQuotaRequest} req
      * @param {function(string, ModifyAigcQuotaResponse):void} cb
      * @public
@@ -2562,11 +2563,11 @@ This API is used to create a video rebirth template.
     }
 
     /**
-     * This API is used to create and enable AIGC quota configuration. Quota usage starts accumulating from the enablement of the quota feature. Once the quota is reached, AIGC features will no longer be usable.
+     * This API is used to create and enable AIGC quota configuration. Quota usage starts accumulating when the quota feature is enabled. Once the quota is reached, AIGC features will no longer be usable.
 
-If the quota is deleted and re-enabled, the amount will be cleared and recalculated.
+If the quota is deleted and re-enabled, the amount will be zero and recalculated.
 
-Since AGC content generation is an asynchronous task, real-time usage data cannot be obtained. Therefore, quota limits may result in some errors, and completely precise control over the set limit cannot be achieved.
+Since content generation in AGC is an asynchronous task, real-time usage data cannot be obtained. Therefore, quota limits may result in some errors, and full precise control over the set limit cannot be achieved.
      * @param {CreateAigcQuotaRequest} req
      * @param {function(string, CreateAigcQuotaResponse):void} cb
      * @public

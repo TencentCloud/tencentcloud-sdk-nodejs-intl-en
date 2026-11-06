@@ -403,7 +403,7 @@ The API request rate is limited to 20 requests/sec by default.
     }
 
     /**
-     * This interface supports identification of the front and back of Brazilian ID license. The identification fields include name, driver's license category, number, validity period, etc.
+     * This interface supports recognition of both the front and back sides of Brazilian ID cards. Default API request rate limit: 5 requests per second.
      * @param {RecognizeBrazilIDCardOCRRequest} req
      * @param {function(string, RecognizeBrazilIDCardOCRResponse):void} cb
      * @public

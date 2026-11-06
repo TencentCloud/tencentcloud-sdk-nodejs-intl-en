@@ -29852,7 +29852,7 @@ class CreateAigcQuotaRequest extends  AbstractModel {
         super();
 
         /**
-         * <p><strong>VOD application ID. From December 25, 2023, customers who activate on-demand services must fill in this field with the app ID when accessing resources in on-demand applications, whether it is the default application or a newly created application.</strong></p>
+         * <p><strong>VOD application ID. From December 25, 2023, customers who activate on-demand services must fill in this field with the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</strong></p>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -29864,16 +29864,40 @@ class CreateAigcQuotaRequest extends  AbstractModel {
         this.QuotaType = null;
 
         /**
-         * <p>Number of task quotas.</p><p>Unit: images/seconds/tokens.</p><ul><li>When QuotaType is Image, the unit is images;</li><li>When QuotaType is Video, the unit is seconds;</li><li>When QuotaType is Text, the unit is tokens.</li></ul>
+         * <p>Number of quotas for the task.</p><p>Unit: images/second/tokens.</p><ul><li>When QuotaType is Image, the unit is images;</li><li>When QuotaType is Video, the unit is seconds;</li><li>When QuotaType is Text, the unit is tokens.</li></ul>
          * @type {number || null}
          */
         this.QuotaLimit = null;
 
         /**
-         * <p>Valid only when QuotaType is Text. It is used to select the ApiToken that needs a quota limit.</p>
+         * <p>Valid only when QuotaType=Text, used to select the ApiToken that requires quota limit</p>
          * @type {string || null}
          */
         this.ApiToken = null;
+
+        /**
+         * <p>Quota reset cycle.</p><p>Enumeration values:</p><ul><li>Day: Reset every day.</li><li>Month: Reset on a specified date each month.</li><li>Total: Never reset. The QuotaLimit parameter is the total quota.</li></ul>
+         * @type {string || null}
+         */
+        this.QuotaPeriod = null;
+
+        /**
+         * <p>Reset date of the per month quota. Valid only when QuotaPeriod=Month.</p><p>If the selected date does not exist in the current month, the reset is postponed to 00:00 on the 1st of the next month.</p>
+         * @type {number || null}
+         */
+        this.ResetDay = null;
+
+        /**
+         * <p>Whether to set specified quotas for each model</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul>
+         * @type {string || null}
+         */
+        this.ModelQuotaSwitch = null;
+
+        /**
+         * <p>Quota set for each model, valid only when ModelQuotaSwitch=ON.</p>
+         * @type {Array.<AigcModelQuota> || null}
+         */
+        this.ModelQuotas = null;
 
     }
 
@@ -29888,6 +29912,18 @@ class CreateAigcQuotaRequest extends  AbstractModel {
         this.QuotaType = 'QuotaType' in params ? params.QuotaType : null;
         this.QuotaLimit = 'QuotaLimit' in params ? params.QuotaLimit : null;
         this.ApiToken = 'ApiToken' in params ? params.ApiToken : null;
+        this.QuotaPeriod = 'QuotaPeriod' in params ? params.QuotaPeriod : null;
+        this.ResetDay = 'ResetDay' in params ? params.ResetDay : null;
+        this.ModelQuotaSwitch = 'ModelQuotaSwitch' in params ? params.ModelQuotaSwitch : null;
+
+        if (params.ModelQuotas) {
+            this.ModelQuotas = new Array();
+            for (let z in params.ModelQuotas) {
+                let obj = new AigcModelQuota();
+                obj.deserialize(params.ModelQuotas[z]);
+                this.ModelQuotas.push(obj);
+            }
+        }
 
     }
 }
@@ -40583,6 +40619,48 @@ class AiAnalysisTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * AIGC single-quota model.
+ * @class
+ */
+class AigcModelQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Model name.</p>
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * <p>Quota quantity of tasks.</p><p>Unit: frames/second.</p><ul><li>When QuotaType is Image, the unit is frames;</li><li>When QuotaType is Video, the unit is seconds;</li></ul>
+         * @type {number || null}
+         */
+        this.QuotaLimit = null;
+
+        /**
+         * <p>Model version.</p>
+         * @type {string || null}
+         */
+        this.ModelVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.QuotaLimit = 'QuotaLimit' in params ? params.QuotaLimit : null;
+        this.ModelVersion = 'ModelVersion' in params ? params.ModelVersion : null;
 
     }
 }
@@ -61376,7 +61454,7 @@ class ModifyAigcQuotaRequest extends  AbstractModel {
         super();
 
         /**
-         * <p><strong>VOD application ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</strong></p>
+         * <p><strong>VOD application ID. For customers who activate on-demand services after December 25, 2023, this field must be filled in with the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</strong></p>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -61394,10 +61472,34 @@ class ModifyAigcQuotaRequest extends  AbstractModel {
         this.QuotaLimit = null;
 
         /**
-         * <p>Valid only when QuotaType=Text. Used to select the ApiToken that needs a quota limit.</p>
+         * <p>Valid only when QuotaType=Text, used to select the ApiToken that requires quota limit</p>
          * @type {string || null}
          */
         this.ApiToken = null;
+
+        /**
+         * <p>Quota reset cycle.</p><p>Enumeration values:</p><ul><li>Day: Reset daily.</li><li>Month: Reset on a specified date per month.</li><li>Total: Never reset. The QuotaLimit parameter is the total quota.</li></ul>
+         * @type {string || null}
+         */
+        this.QuotaPeriod = null;
+
+        /**
+         * <p>Reset date of the monthly quota. Valid only when QuotaPeriod=Month.</p><p>If the selected date does not exist in the current month, the reset will be postponed to 00:00 on the 1st of the next month.</p>
+         * @type {number || null}
+         */
+        this.ResetDay = null;
+
+        /**
+         * <p>Whether to set specified quotas for each model</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul>
+         * @type {string || null}
+         */
+        this.ModelQuotaSwitch = null;
+
+        /**
+         * <p>Quota set for each model, valid only when ModelQuotaSwitch=ON.</p>
+         * @type {Array.<AigcModelQuota> || null}
+         */
+        this.ModelQuotas = null;
 
     }
 
@@ -61412,6 +61514,18 @@ class ModifyAigcQuotaRequest extends  AbstractModel {
         this.QuotaType = 'QuotaType' in params ? params.QuotaType : null;
         this.QuotaLimit = 'QuotaLimit' in params ? params.QuotaLimit : null;
         this.ApiToken = 'ApiToken' in params ? params.ApiToken : null;
+        this.QuotaPeriod = 'QuotaPeriod' in params ? params.QuotaPeriod : null;
+        this.ResetDay = 'ResetDay' in params ? params.ResetDay : null;
+        this.ModelQuotaSwitch = 'ModelQuotaSwitch' in params ? params.ModelQuotaSwitch : null;
+
+        if (params.ModelQuotas) {
+            this.ModelQuotas = new Array();
+            for (let z in params.ModelQuotas) {
+                let obj = new AigcModelQuota();
+                obj.deserialize(params.ModelQuotas[z]);
+                this.ModelQuotas.push(obj);
+            }
+        }
 
     }
 }
@@ -70661,6 +70775,7 @@ module.exports = {
     CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
     DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
     AiAnalysisTaskInput: AiAnalysisTaskInput,
+    AigcModelQuota: AigcModelQuota,
     MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
     DescribeStorageDataResponse: DescribeStorageDataResponse,
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,

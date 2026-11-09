@@ -124,6 +124,7 @@ const UpdateRoleConsoleLoginResponse = models.UpdateRoleConsoleLoginResponse;
 const AttachRolePolicyRequest = models.AttachRolePolicyRequest;
 const GetPasswordRulesResponse = models.GetPasswordRulesResponse;
 const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
+const GenerateOIDCAccessTokenResponse = models.GenerateOIDCAccessTokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
 const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
 const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse;
@@ -153,6 +154,7 @@ const GetServiceLinkedRoleDeletionStatusRequest = models.GetServiceLinkedRoleDel
 const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse;
 const GroupMemberInfo = models.GroupMemberInfo;
 const CreatePolicyRequest = models.CreatePolicyRequest;
+const GenerateOIDCAccessTokenRequest = models.GenerateOIDCAccessTokenRequest;
 const ListAttachedUserAllPoliciesRequest = models.ListAttachedUserAllPoliciesRequest;
 const DeletePolicyVersionRequest = models.DeletePolicyVersionRequest;
 const CreateUserSAMLConfigRequest = models.CreateUserSAMLConfigRequest;
@@ -707,6 +709,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * This API is used to update a user group.
+     * @param {UpdateGroupRequest} req
+     * @param {function(string, UpdateGroupResponse):void} cb
+     * @public
+     */
+    UpdateGroup(req, cb) {
+        let resp = new UpdateGroupResponse();
+        this.request("UpdateGroup", req, resp, cb);
+    }
+
+    /**
      * This API is used to update an access key for a CAM user.
      * @param {UpdateAccessKeyRequest} req
      * @param {function(string, UpdateAccessKeyResponse):void} cb
@@ -839,14 +852,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update a user group.
-     * @param {UpdateGroupRequest} req
-     * @param {function(string, UpdateGroupResponse):void} cb
+     * Generate an OIDC access token. This feature is in grayscale stage. Contact Tencent Cloud if needed.
+     * @param {GenerateOIDCAccessTokenRequest} req
+     * @param {function(string, GenerateOIDCAccessTokenResponse):void} cb
      * @public
      */
-    UpdateGroup(req, cb) {
-        let resp = new UpdateGroupResponse();
-        this.request("UpdateGroup", req, resp, cb);
+    GenerateOIDCAccessToken(req, cb) {
+        let resp = new GenerateOIDCAccessTokenResponse();
+        this.request("GenerateOIDCAccessToken", req, resp, cb);
     }
 
     /**

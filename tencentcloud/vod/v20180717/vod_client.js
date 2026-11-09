@@ -2250,7 +2250,7 @@ When the current storage type of a media file is DEEP_ARCHIVE, it can be modifie
     }
 
     /**
-     * Creates a Token for invoking AIGC APIs. Data sync has a delay once created. It can be queried or deleted after about 30 seconds.
+     * Update the Token for AIGC API calls. Data synchronization has a delay of about 30 seconds after the update.
      * @param {UpdateAigcApiTokenRequest} req
      * @param {function(string, UpdateAigcApiTokenResponse):void} cb
      * @public

@@ -17112,25 +17112,25 @@ class UpdateAigcApiTokenRequest extends  AbstractModel {
         super();
 
         /**
-         * <p><b>Video-on-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be filled in as the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * <p>To update the Api Key</p>
          * @type {string || null}
          */
         this.ApiToken = null;
 
         /**
-         * <p>Merge (default, merge the ExtInfo JSON by top-level key), Overwrite (direct overwrite)</p>
+         * <p><b>On-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * <p>Merge (default, merge ExtInfo JSON by top-level key), Overwrite (direct overwrite)</p>
          * @type {string || null}
          */
         this.ActionType = null;
 
         /**
-         * <p>Extended information of the token</p>
+         * <p>The ip allowlist and model allowlist are stored in ExtInfo in json format, with the following fields:</p><p>(1) ip allowlist<br>&quot;ip&quot;: {&quot;127.0.0.1&quot;:true}<br>Not enabled: &quot;ip&quot;: {}<br>Multiple groups: {&quot;&#39;11.12.112.90&quot;:true,&quot;15.12.112.90&quot;:true}</p><p>(2) model allowlist<br>&quot;model&quot;: {&quot;deepseek-v4-pro&quot;:true}<br>Not enabled: &quot;model&quot;: {}</p><p>(3) name<br>&quot;name&quot;: &quot;test&quot;</p>
          * @type {string || null}
          */
         this.ExtInfo = null;
@@ -17144,8 +17144,8 @@ class UpdateAigcApiTokenRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.ApiToken = 'ApiToken' in params ? params.ApiToken : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 

@@ -239,37 +239,37 @@ class CreateKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique alias that makes a key more recognizable and understandable. This parameter cannot be empty, can contain 1-60 letters, digits, `-`, and `_`, and must begin with a letter or digit. The `kms-` prefix is used for Tencent Cloud products.
+         * <p>Alias that makes the key easier to identify and understand. It cannot be empty and must contain 1-60 alphanumeric characters, hyphens (-), or underscores (_), and start with a letter or digit. Aliases prefixed with kms- are reserved for cloud services. The alias must be unique.</p>
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * CMK description of up to 1,024 bytes in length
+         * <p>Description of the CMK. Maximum length: 1024 bytes.</p>
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Specifies the key purpose, defaults to "ENCRYPT_DECRYPT" indicating the creation of a symmetric encryption/decryption key. other supported purposes include "ASYMMETRIC_DECRYPT_RSA_2048" for RSA2048 ASYMMETRIC keys used to ENCRYPT and DECRYPT, "ASYMMETRIC_DECRYPT_SM2" for SM2 ASYMMETRIC keys used to ENCRYPT and DECRYPT, "ASYMMETRIC_SIGN_VERIFY_SM2" for SM2 ASYMMETRIC keys used for signature verification, "ASYMMETRIC_SIGN_VERIFY_ECC" for ECC ASYMMETRIC keys used for signature verification, "ASYMMETRIC_SIGN_VERIFY_RSA_2048" for RSA_2048 ASYMMETRIC keys used for signature verification, and "ASYMMETRIC_SIGN_VERIFY_ECDSA384" for ECDSA384 ASYMMETRIC keys used for signature verification. the complete list of key purposes and algorithm support can be obtained through the ListAlgorithms api.
+         * <p>Specifies the purpose of the key. The default value is "ENCRYPT_DECRYPT", which indicates creating a symmetric encryption/decryption key. Other supported purposes: "ASYMMETRIC_DECRYPT_RSA_2048" indicates creating an RSA2048 asymmetric key for encryption/decryption; "ASYMMETRIC_DECRYPT_RSA_3072" indicates creating an RSA3072 asymmetric key for encryption/decryption; "ASYMMETRIC_DECRYPT_RSA_4096" indicates creating an RSA4096 asymmetric key for encryption/decryption; "ASYMMETRIC_DECRYPT_SM2" indicates creating an SM2 asymmetric key for encryption/decryption; "ASYMMETRIC_SIGN_VERIFY_SM2" indicates creating an SM2 asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_ECC" indicates creating an ECC asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_RSA_2048" indicates creating an RSA_2048 asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_RSA_3072" indicates creating an RSA_3072 asymmetric key for signature generation and verification; <br>"ASYMMETRIC_SIGN_VERIFY_RSA_4096" indicates creating an RSA_4096 asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_ECDSA384" indicates creating an ECDSA384 asymmetric key for signature generation and verification. For the complete list of key purposes and supported algorithms, call the ListAlgorithms API.</p>
          * @type {string || null}
          */
         this.KeyUsage = null;
 
         /**
-         * Specifies the key type. Default value: 1. Valid value: 1 - default type, indicating that the CMK is created by KMS; 2 - EXTERNAL type, indicating that you need to import key material. For more information, please see the `GetParametersForImport` and `ImportKeyMaterial` API documents.
+         * <p>Specifies the key type. The default value is 1. 1 indicates the default type, where the CMK is created by KMS. 2 indicates the EXTERNAL type, where you need to import the key material. For more information, see the GetParametersForImport and ImportKeyMaterial APIs.</p>
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Tag list
+         * <p>Tag list.</p>
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
 
         /**
-         * ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+         * <p>HSM cluster ID corresponding to KMS Advanced Edition (valid only for KMS exclusive/managed service instances).</p>
          * @type {string || null}
          */
         this.HsmClusterId = null;
@@ -1255,7 +1255,7 @@ class GenerateDataKeyRequest extends  AbstractModel {
         this.EncryptionPublicKey = null;
 
         /**
-         * Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned)`, `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
+         * Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned), `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
          * @type {string || null}
          */
         this.EncryptionAlgorithm = null;
@@ -1717,7 +1717,7 @@ class VerifyByAsymmetricKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether the signature is valid. `true`: the signature is valid; `false`: the signature is invalid.
+         * <p>Whether the signature is valid. true: valid; false: invalid.</p>
          * @type {boolean || null}
          */
         this.SignatureValid = null;
@@ -1909,6 +1909,75 @@ If `EncryptionPublicKey` is specified, this field will return the Base64-encoded
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateKmsInstance request structure.
+ * @class
+ */
+class CreateKmsInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance billing type (PREPAID).</p>
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * <p>Version type.</p><p>Valid values:</p><ul><li>professional: Professional Edition</li></ul>
+         * @type {string || null}
+         */
+        this.ProductVersion = null;
+
+        /**
+         * <p>Prepaid instance information.</p>
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+        /**
+         * <p>Reentrant client ID.</p>
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * <p>Instance tag.</p>
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.ProductVersion = 'ProductVersion' in params ? params.ProductVersion : null;
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2811,31 +2880,31 @@ class VerifyByAsymmetricKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of a key
+         * <p>Unique identifier of the key</p>
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * Signature value, which is generated by calling the KMS signature API.
+         * <p>Signature value, generated by calling the KMS signing API</p>
          * @type {string || null}
          */
         this.SignatureValue = null;
 
         /**
-         * Full message or message abstract. Before Base64 encoding, an original message can contain up to 4,096 bytes while a message abstract must be 32 bytes.
+         * <p>Message original text or message digest. If the message original text is provided, its length (before Base64 encoding) cannot exceed 4096 bytes. If the message digest is provided, its length (before Base64 encoding) must be 32 bytes.</p>
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * Signature algorithm. The valid values include `SM2DSA`, `ECC_P256_R1`, `RSA_PSS_SHA_256`, and `RSA_PKCS1_SHA_256`, etc. You can get a full list of supported algorithms using the ListAlgorithms API.
+         * <p>Signature algorithm. Supported algorithms: SM2DSA, ECC_P256_R1, ECDSA384_SHA384, RSA_PSS_SHA_256, RSA_PKCS1_SHA_256, RSA_PSS_SHA_384, RSA_PKCS1_SHA_384, RSA_PSS_SHA_512, RSA_PKCS1_SHA_512, etc. For more supported algorithms, query them through the ListAlgorithms API.</p>
          * @type {string || null}
          */
         this.Algorithm = null;
 
         /**
-         * Message type. Valid values: `RAW` (indicating an original message; used by default if the parameter is not passed in) and `DIGEST`.
+         * <p>Message type: RAW or DIGEST. If not specified, RAW is used by default, indicating the message original text.</p>
          * @type {string || null}
          */
         this.MessageType = null;
@@ -3108,6 +3177,41 @@ class DeleteWhiteBoxKeyRequest extends  AbstractModel {
 }
 
 /**
+ * PostQuantumCryptoSign response structure.
+ * @class
+ */
+class PostQuantumCryptoSignResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64-encoded signature You can use PostQuantumCryptoVerify to verify the signature value.
+         * @type {string || null}
+         */
+        this.Signature = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Signature = 'Signature' in params ? params.Signature : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Algorithm name and ID
  * @class
  */
@@ -3241,18 +3345,18 @@ class ExclusiveHSM extends  AbstractModel {
 }
 
 /**
- * CancelKeyDeletion request structure.
+ * GetDataKeyCiphertextBlob request structure.
  * @class
  */
-class CancelKeyDeletionRequest extends  AbstractModel {
+class GetDataKeyCiphertextBlobRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of the CMK for which to cancel schedule deletion
+         * Unique id of a data key.
          * @type {string || null}
          */
-        this.KeyId = null;
+        this.DataKeyId = null;
 
         /**
          * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
@@ -3269,7 +3373,7 @@ class CancelKeyDeletionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.DataKeyId = 'DataKeyId' in params ? params.DataKeyId : null;
 
         if (params.MemberAccount) {
             let obj = new MemberAccount();
@@ -3698,55 +3802,55 @@ class CreateKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * Globally unique CMK ID
+         * <p>Globally unique identifier of the CMK</p>
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * Alias that makes a key more recognizable and understandable
+         * <p>Alias that makes the key easier to identify and understand</p>
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * Key creation time in UNIX timestamp format
+         * <p>Key creation time, unix timestamp</p>
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * Specifies the description of the CMK.
+         * <p>Description of the CMK</p>
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * CMK status
+         * <p>Status of the CMK</p>
          * @type {string || null}
          */
         this.KeyState = null;
 
         /**
-         * CMK usage
+         * <p>Purpose of the CMK</p>
          * @type {string || null}
          */
         this.KeyUsage = null;
 
         /**
-         * Return code of Tag operation. `0`: success; `1`: cls internal error; `2`: business processing error.
+         * <p>Return code of the tag operation. 0: Success; 1: Internal error; 2: Business processing error</p>
          * @type {number || null}
          */
         this.TagCode = null;
 
         /**
-         * Response information of Tag operation.
+         * <p>Return message of the tag operation</p>
          * @type {string || null}
          */
         this.TagMsg = null;
 
         /**
-         * HSM cluster ID (valid only for exclusive or managed version KMS service instances).
+         * <p>HSM cluster ID (valid only for KMS exclusive/managed service instances)</p>
          * @type {string || null}
          */
         this.HsmClusterId = null;
@@ -3921,18 +4025,18 @@ class GetDataKeyPlaintextRequest extends  AbstractModel {
 }
 
 /**
- * GetDataKeyCiphertextBlob request structure.
+ * CancelKeyDeletion request structure.
  * @class
  */
-class GetDataKeyCiphertextBlobRequest extends  AbstractModel {
+class CancelKeyDeletionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique id of a data key.
+         * Unique ID of the CMK for which to cancel schedule deletion
          * @type {string || null}
          */
-        this.DataKeyId = null;
+        this.KeyId = null;
 
         /**
          * Trusted service member account information. valid at that time when the current account is admin or delegated admin.
@@ -3949,7 +4053,7 @@ class GetDataKeyCiphertextBlobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DataKeyId = 'DataKeyId' in params ? params.DataKeyId : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
         if (params.MemberAccount) {
             let obj = new MemberAccount();
@@ -4219,6 +4323,18 @@ class GetServiceStatusResponse extends  AbstractModel {
         this.ResourceRegion = null;
 
         /**
+         * <p>Multi-account activation limit</p><p>Unit: count</p>
+         * @type {number || null}
+         */
+        this.MultiAccountLimit = null;
+
+        /**
+         * <p>Multi-account enablement count</p><p>Unit: count</p>
+         * @type {number || null}
+         */
+        this.MultiAccountUsedCount = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4280,6 +4396,8 @@ class GetServiceStatusResponse extends  AbstractModel {
         }
         this.ResourceZone = 'ResourceZone' in params ? params.ResourceZone : null;
         this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
+        this.MultiAccountLimit = 'MultiAccountLimit' in params ? params.MultiAccountLimit : null;
+        this.MultiAccountUsedCount = 'MultiAccountUsedCount' in params ? params.MultiAccountUsedCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5058,30 +5176,30 @@ class CancelKeyArchiveResponse extends  AbstractModel {
 }
 
 /**
- * GetPublicKey response structure.
+ * CreateKmsInstance response structure.
  * @class
  */
-class GetPublicKeyResponse extends  AbstractModel {
+class CreateKmsInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique CMK ID.
+         * <p>Instance ID.</p>
          * @type {string || null}
          */
-        this.KeyId = null;
+        this.InstanceId = null;
 
         /**
-         * Base64-encoded public key content.
+         * <p>Billing order number</p>
          * @type {string || null}
          */
-        this.PublicKey = null;
+        this.DealName = null;
 
         /**
-         * Public key content in PEM format.
+         * <p>Billing freeze serial number</p>
          * @type {string || null}
          */
-        this.PublicKeyPem = null;
+        this.BillId = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5098,9 +5216,9 @@ class GetPublicKeyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
-        this.PublicKeyPem = 'PublicKeyPem' in params ? params.PublicKeyPem : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5605,25 +5723,25 @@ class SignByAsymmetricKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * Signature algorithm. The valid values include `SM2DSA`, `ECC_P256_R1`, `RSA_PSS_SHA_256`, and `RSA_PKCS1_SHA_256`, etc. You can get a full list of supported algorithms using the ListAlgorithms API.
+         * <p>Signature algorithm. Supported algorithms: SM2DSA, ECC_P256_R1, ECDSA384_SHA384, RSA_PSS_SHA_256, RSA_PKCS1_SHA_256, RSA_PSS_SHA_384, RSA_PKCS1_SHA_384, RSA_PSS_SHA_512, RSA_PKCS1_SHA_512, etc. For more supported algorithms, query them through the ListAlgorithms API.</p>
          * @type {string || null}
          */
         this.Algorithm = null;
 
         /**
-         * Full message or message abstract. Before Base64 encoding, an original message can contain up to 4,096 bytes while a message abstract must be 32 bytes.
+         * <p>Message original text or message digest. If the message original text is provided, its length (before Base64 encoding) cannot exceed 4096 bytes. If the message digest is provided, its length (before Base64 encoding) must be 32 bytes.</p>
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * Unique ID of a key
+         * <p>Unique identifier of the key</p>
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * Message type. Valid values: `RAW` (indicating an original message; used by default if the parameter is not passed in) and `DIGEST`.
+         * <p>Message type: RAW or DIGEST. If not specified, RAW is used by default, indicating the message original text.</p>
          * @type {string || null}
          */
         this.MessageType = null;
@@ -6170,18 +6288,30 @@ class GetDataKeyCiphertextBlobResponse extends  AbstractModel {
 }
 
 /**
- * PostQuantumCryptoSign response structure.
+ * GetPublicKey response structure.
  * @class
  */
-class PostQuantumCryptoSignResponse extends  AbstractModel {
+class GetPublicKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Base64-encoded signature You can use PostQuantumCryptoVerify to verify the signature value.
+         * Unique CMK ID.
          * @type {string || null}
          */
-        this.Signature = null;
+        this.KeyId = null;
+
+        /**
+         * Base64-encoded public key content.
+         * @type {string || null}
+         */
+        this.PublicKey = null;
+
+        /**
+         * Public key content in PEM format.
+         * @type {string || null}
+         */
+        this.PublicKeyPem = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6198,7 +6328,9 @@ class PostQuantumCryptoSignResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Signature = 'Signature' in params ? params.Signature : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
+        this.PublicKeyPem = 'PublicKeyPem' in params ? params.PublicKeyPem : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6213,7 +6345,7 @@ class SignByAsymmetricKeyResponse extends  AbstractModel {
         super();
 
         /**
-         * Base64-encoded signature
+         * <p>Signature, Base64-encoded.</p>
          * @type {string || null}
          */
         this.Signature = null;
@@ -6591,6 +6723,41 @@ class DescribeKeyResponse extends  AbstractModel {
 }
 
 /**
+ * Prepaid billing information.
+ * @class
+ */
+class InstanceChargePrepaid extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Purchase duration in months (1-100).</p>
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * <p>Renewal flag (0: not set by the user; 1: auto-renewal; 2: no auto-renewal).</p>
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+    }
+}
+
+/**
  * CancelKeyArchive request structure.
  * @class
  */
@@ -6752,6 +6919,7 @@ module.exports = {
     DescribeWhiteBoxKeyRequest: DescribeWhiteBoxKeyRequest,
     GetParametersForImportResponse: GetParametersForImportResponse,
     DecryptResponse: DecryptResponse,
+    CreateKmsInstanceRequest: CreateKmsInstanceRequest,
     ListDataKeyDetailResponse: ListDataKeyDetailResponse,
     CreateWhiteBoxKeyResponse: CreateWhiteBoxKeyResponse,
     ImportKeyMaterialRequest: ImportKeyMaterialRequest,
@@ -6775,11 +6943,12 @@ module.exports = {
     ImportDataKeyRequest: ImportDataKeyRequest,
     ListKeyDetailRequest: ListKeyDetailRequest,
     DeleteWhiteBoxKeyRequest: DeleteWhiteBoxKeyRequest,
+    PostQuantumCryptoSignResponse: PostQuantumCryptoSignResponse,
     AlgorithmInfo: AlgorithmInfo,
     GetRegionsResponse: GetRegionsResponse,
     UpdateDataKeyDescriptionResponse: UpdateDataKeyDescriptionResponse,
     ExclusiveHSM: ExclusiveHSM,
-    CancelKeyDeletionRequest: CancelKeyDeletionRequest,
+    GetDataKeyCiphertextBlobRequest: GetDataKeyCiphertextBlobRequest,
     EnableDataKeysResponse: EnableDataKeysResponse,
     GenerateDataKeyResponse: GenerateDataKeyResponse,
     EnableDataKeysRequest: EnableDataKeysRequest,
@@ -6794,7 +6963,7 @@ module.exports = {
     ReEncryptResponse: ReEncryptResponse,
     EncryptResponse: EncryptResponse,
     GetDataKeyPlaintextRequest: GetDataKeyPlaintextRequest,
-    GetDataKeyCiphertextBlobRequest: GetDataKeyCiphertextBlobRequest,
+    CancelKeyDeletionRequest: CancelKeyDeletionRequest,
     DeleteImportedKeyMaterialRequest: DeleteImportedKeyMaterialRequest,
     EnableKeyResponse: EnableKeyResponse,
     ImportDataKeyResponse: ImportDataKeyResponse,
@@ -6813,7 +6982,7 @@ module.exports = {
     DataKey: DataKey,
     KeyMetadata: KeyMetadata,
     CancelKeyArchiveResponse: CancelKeyArchiveResponse,
-    GetPublicKeyResponse: GetPublicKeyResponse,
+    CreateKmsInstanceResponse: CreateKmsInstanceResponse,
     DecryptRequest: DecryptRequest,
     DescribeWhiteBoxKeyDetailsRequest: DescribeWhiteBoxKeyDetailsRequest,
     PostQuantumCryptoSignRequest: PostQuantumCryptoSignRequest,
@@ -6843,7 +7012,7 @@ module.exports = {
     EnableDataKeyRequest: EnableDataKeyRequest,
     BindCloudResourceRequest: BindCloudResourceRequest,
     GetDataKeyCiphertextBlobResponse: GetDataKeyCiphertextBlobResponse,
-    PostQuantumCryptoSignResponse: PostQuantumCryptoSignResponse,
+    GetPublicKeyResponse: GetPublicKeyResponse,
     SignByAsymmetricKeyResponse: SignByAsymmetricKeyResponse,
     PostQuantumCryptoVerifyResponse: PostQuantumCryptoVerifyResponse,
     DescribeWhiteBoxDecryptKeyResponse: DescribeWhiteBoxDecryptKeyResponse,
@@ -6854,6 +7023,7 @@ module.exports = {
     UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
     UnbindCloudResourceResponse: UnbindCloudResourceResponse,
     DescribeKeyResponse: DescribeKeyResponse,
+    InstanceChargePrepaid: InstanceChargePrepaid,
     CancelKeyArchiveRequest: CancelKeyArchiveRequest,
     Tag: Tag,
     DisableKeyRotationRequest: DisableKeyRotationRequest,

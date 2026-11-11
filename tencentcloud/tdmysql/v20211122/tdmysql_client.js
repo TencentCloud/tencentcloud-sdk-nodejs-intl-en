@@ -24,6 +24,7 @@ const DescribeSaleZonesInfo = models.DescribeSaleZonesInfo;
 const BackupMethodStatisticsOutPut = models.BackupMethodStatisticsOutPut;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
+const ModifyDBInstanceRequest = models.ModifyDBInstanceRequest;
 const ModifyInstanceNetworkResponse = models.ModifyInstanceNetworkResponse;
 const ModifyInstanceSSLStatusResponse = models.ModifyInstanceSSLStatusResponse;
 const DescribeDBEnginesRequest = models.DescribeDBEnginesRequest;
@@ -144,6 +145,7 @@ const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const DescribeFlowRequest = models.DescribeFlowRequest;
 const ModifyDBSBackupSetCommentResponse = models.ModifyDBSBackupSetCommentResponse;
 const AutoScalingConfig = models.AutoScalingConfig;
+const ModifyDBInstanceResponse = models.ModifyDBInstanceResponse;
 const DatabaseProcedure = models.DatabaseProcedure;
 const DescribeDBEnginesResponse = models.DescribeDBEnginesResponse;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
@@ -758,6 +760,17 @@ class TdmysqlClient extends AbstractClient {
     DescribeFlowTypes(req, cb) {
         let resp = new DescribeFlowTypesResponse();
         this.request("DescribeFlowTypes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify instance configurations. It combines the ability to vertically and horizontally modify instances, and supports composite modifications of CPU, memory, disk, number of nodes, availability zone, and storage type. It supports DryRun precheck mode, allowing you to obtain the modification plan without actual execution.
+     * @param {ModifyDBInstanceRequest} req
+     * @param {function(string, ModifyDBInstanceResponse):void} cb
+     * @public
+     */
+    ModifyDBInstance(req, cb) {
+        let resp = new ModifyDBInstanceResponse();
+        this.request("ModifyDBInstance", req, resp, cb);
     }
 
     /**

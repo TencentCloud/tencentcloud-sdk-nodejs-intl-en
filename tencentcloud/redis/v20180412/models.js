@@ -31,7 +31,7 @@ class UpgradeProxyVersionRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Current proxy version. Call the [DescribeInstances](https://www.tencentcloud.com/document/product/239/20018?from_cn_redirect=1) API to obtain the current proxy version for the instance.
+         * Current Proxy version. Get the current Proxy version of an instance through the [DescribeInstances](https://www.tencentcloud.com/document/product/239/20018?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.CurrentProxyVersion = null;
@@ -195,13 +195,13 @@ class UpgradeSmallVersionRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Current Redis minor version. For minor version information, see [Upgrading Instance Version](https://www.tencentcloud.com/document/product/239/37710).
+         * Current Redis minor version. For minor version information, please see Upgrade Instance Version (https://www.tencentcloud.com/document/product/239/46457?from_cn_redirect=1).
          * @type {string || null}
          */
         this.CurrentRedisVersion = null;
 
         /**
-         * Upgraded Redis minor version. For minor version information, see [Upgrading Instance Version](https://www.tencentcloud.com/document/product/239/37710).
+         * Redis minor version upgrade. For minor version information, please refer to upgrade instance version (https://www.tencentcloud.com/document/product/239/46457?from_cn_redirect=1).
          * @type {string || null}
          */
         this.UpgradeRedisVersion = null;
@@ -426,8 +426,8 @@ class ModifyInstanceAvailabilityZonesRequest extends  AbstractModel {
         this.SwitchOption = null;
 
         /**
-         * Instance node information includes the node ID, node type, and node availability zone ID, and so on. For specific information, please see [RedisNodeInfo ](https://intl.cloud.tencent.com/document/product/239/20022?from_cn_redirect=1).
-For instances in a single availability zone, there is no need to configure the NodeId. For instances in multiple availability zones, the NodeId is required to configure.
+         * Node information of the instance, including node ID, node type, and node availability zone ID. For details, see [RedisNodeInfo](https://www.tencentcloud.com/document/product/239/20022?from_cn_redirect=1).
+For a single-AZ instance, no need to pass in NodeId. For a multi-AZ instance, NodeId is required.
          * @type {Array.<RedisNodeInfo> || null}
          */
         this.NodeSet = null;
@@ -704,25 +704,25 @@ class ModifyAutoBackupConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Automatic backup type.  Valid value:  `1` (scheduled backup).
+         * <p>Automatic backup type. Currently, it can only be configured as: 1, scheduled backup.</p>
          * @type {number || null}
          */
         this.AutoBackupType = null;
 
         /**
-         * Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`.
+         * <p>Automatic backup cycle. Value: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.</p>
          * @type {Array.<string> || null}
          */
         this.WeekDays = null;
 
         /**
-         * Time period for automatic scheduled backup  in the format of  “00:00-01:00, 01:00-02:00...... 23:00-00:00”.
+         * <p>Automatic scheduled backup time period. Format: 00:00-01:00, 01:00-02:00...... 23:00-00:00.</p>
          * @type {string || null}
          */
         this.TimePeriod = null;
 
         /**
-         * Retention time of full backup files in days
+         * <p>Number of days to save full backup files, in days.</p>
          * @type {number || null}
          */
         this.BackupStorageDays = null;
@@ -766,7 +766,7 @@ class RestoreInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Backup ID, which can be obtained through the response parameter RedisBackupSet of the [DescribeInstanceBackups](https://www.tencentcloud.com/document/product/239/20011?from_cn_redirect=1) API.
+         * Backup ID, which can be obtained through the RedisBackupSet parameter in the API response of [DescribeInstanceBackups](https://www.tencentcloud.com/document/product/239/20011?from_cn_redirect=1).
          * @type {string || null}
          */
         this.BackupId = null;
@@ -943,13 +943,13 @@ class CreateInstancesRequest extends  AbstractModel {
         this.TypeId = null;
 
         /**
-         * <p>Memory capacity, measured in MB, must be a multiple of 1024. For specific specifications, query the sales specifications for all regions via the <a href="https://www.tencentcloud.com/document/api/239/30600?from_cn_redirect=1">DescribeProductInfo</a> API.</p><ul><li>When <strong>TypeId</strong> is standard architecture, <strong>MemSize</strong> is the total memory capacity of the instance.</li><li>When <strong>TypeId</strong> is cluster architecture, <strong>MemSize</strong> is the sharded memory capacity.</li></ul>
+         * <p>Memory capacity, measured in MB. The value must be an integral multiple of 1024. For detailed parameter information, query the sales specifications for all regions through the <a href="https://www.tencentcloud.com/document/api/239/30600?from_cn_redirect=1">DescribeProductInfo</a> API.</p><ul><li>When <strong>TypeId</strong> is the standard architecture, <strong>MemSize</strong> is the total memory capacity of the instance.</li><li>When <strong>TypeId</strong> is the cluster architecture, <strong>MemSize</strong> is the sharded memory capacity.</li></ul>
          * @type {number || null}
          */
         this.MemSize = null;
 
         /**
-         * <p>Instance count. Number of instances to purchase at a time. For details, query sales specifications in all regions via the <a href="https://www.tencentcloud.com/document/api/239/30600?from_cn_redirect=1">DescribeProductInfo</a> API.</p>
+         * <p>Instance count. The number of instances to purchase at a time. For details, use the <a href="https://www.tencentcloud.com/document/api/239/30600?from_cn_redirect=1">DescribeProductInfo</a> API to query the sales specifications in all regions.</p>
          * @type {number || null}
          */
         this.GoodsNum = null;
@@ -1003,7 +1003,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.AutoRenew = null;
 
         /**
-         * <p>Security group ID array.</p><ul><li>A security group is a virtual firewall that controls network access to a cloud database instance. When creating an instance, it is recommended to bind the corresponding security group.</li><li>Get the security group ID of an instance through the <a href="https://www.tencentcloud.com/document/product/239/34447?from_cn_redirect=1">DescribeInstanceSecurityGroup</a> API.</li></ul>
+         * <p>Security group ID array.</p><ul><li>A security group is a virtual firewall to control network access to cloud database instances. It is recommended to bind the corresponding security group when creating an instance.</li><li>Obtain the security group ID of an instance through the <a href="https://www.tencentcloud.com/document/product/239/34447?from_cn_redirect=1">DescribeInstanceSecurityGroup</a> API.</li></ul>
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIdList = null;
@@ -1045,7 +1045,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.NoAuth = null;
 
         /**
-         * <p>Node information of instance, including node ID, node type, node availability zone ID. For details, please see <a href="https://www.tencentcloud.com/document/product/239/20022?from_cn_redirect=1">RedisNodeInfo</a>.<br>Currently support inputting node type (primary node or replica node) and availability zone. When this parameter is not specified, in regions that support multi-availability zone deployment, the system defaults to creating instances with multi-availability zone architecture.</p>
+         * <p>Node information of the instance, including node ID, node type, and node availability zone ID. For details, see <a href="https://www.tencentcloud.com/document/product/239/20022?from_cn_redirect=1">RedisNodeInfo </a>.<br>Currently supports inputting the node type (primary node or replica node) and the availability zone of the node. If this parameter is not specified, the system defaults to creating a multi-availability zone architecture instance in regions that support multi-availability zone deployment.</p>
          * @type {Array.<RedisNodeInfo> || null}
          */
         this.NodeSet = null;
@@ -1057,13 +1057,13 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ResourceTags = null;
 
         /**
-         * <p>Specify the name of the AZ to which the instance belongs. For details, see <a href="https://www.tencentcloud.com/document/product/239/4106?from_cn_redirect=1">Regions and AZs</a>.</p>
+         * <p>Specify the name of the availability zone to which the instance belongs. For details, see <a href="https://www.tencentcloud.com/document/product/239/4106?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
          * @type {string || null}
          */
         this.ZoneName = null;
 
         /**
-         * <p>Parameter template ID of the specified instance.</p><ul><li>If this parameter is not configured, the system will automatically adapt to the corresponding default template based on the selected compatible version and architecture.</li><li>Query the parameter template list of the instance through the <a href="https://www.tencentcloud.com/document/product/239/58750?from_cn_redirect=1">DescribeParamTemplates</a> API to obtain the template ID number.</li></ul>
+         * <p>Parameter template ID associated with the specified instance.</p><ul><li>If this parameter is not configured, the system will automatically adapt the corresponding default template based on the selected compatible version and architecture.</li><li>Query the parameter template list of the instance through the <a href="https://www.tencentcloud.com/document/product/239/58750?from_cn_redirect=1">DescribeParamTemplates</a> API to obtain the template ID number.</li></ul>
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -1081,7 +1081,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ProductVersion = null;
 
         /**
-         * <p>Dedicated cluster ID.</p><ul><li>When <strong>ProductVersion</strong> is set to <strong>cdc</strong>, this parameter must be set.</li><li>Get cluster ID through the API <a href="https://www.tencentcloud.com/document/product/239/109628?from_cn_redirect=1">DescribeRedisClusters</a>.</li></ul>
+         * <p>Dedicated cluster ID.</p><ul><li>When <strong>ProductVersion</strong> is set to <strong>cdc</strong>, this parameter must be set.</li><li>Get the cluster ID through the API <a href="https://www.tencentcloud.com/document/product/239/109628?from_cn_redirect=1">DescribeRedisClusters</a>.</li></ul>
          * @type {string || null}
          */
         this.RedisClusterId = null;
@@ -1486,7 +1486,7 @@ class ModifyNetworkConfigResponse extends  AbstractModel {
         this.Vip = null;
 
         /**
-         * Task ID. Obtain **taskId** and query the task execution status through the API [DescribeTaskInfo](https://intl.cloud.tencent.com/document/product/239/30601?from_cn_redirect=1).
+         * Task ID. Obtain **taskId** and query the task execution status through the API [DescribeTaskInfo](https://www.tencentcloud.com/document/product/239/30601?from_cn_redirect=1).
          * @type {number || null}
          */
         this.TaskId = null;
@@ -2163,7 +2163,7 @@ class RedisNodeInfo extends  AbstractModel {
         this.NodeType = null;
 
         /**
-         * ID of the master or replica node <ul><li>This parameter is optional when the [CreateInstances](https://intl.cloud.tencent.com/document/product/239/20026?from_cn_redirect=1) API is used to create a TencentDB for Redis instance, but it is required when the [UpgradeInstance](https://intl.cloud.tencent.com/document/product/239/20013?from_cn_redirect=1) API is used to adjust the configuration of an instance by deleting a replica.  </li><li>You can use the [DescribeInstances](https://intl.cloud.tencent.com/document/product/239/20018?from_cn_redirect=1) API to get the node ID of integer type. </li></ul> </li></ul>
+         * ID of the primary or replica node.<ul><li>This parameter does not need to be set for the Create Redis Instance API [CreateInstances](https://www.tencentcloud.com/document/product/239/20026?from_cn_redirect=1), but needs to be set when deleting replicas through the instance configuration change API [UpgradeInstance](https://www.tencentcloud.com/document/product/239/20013?from_cn_redirect=1).</li><li>This parameter can be used to obtain the Integer type node ID through the API [DescribeInstances](https://www.tencentcloud.com/document/product/239/20018?from_cn_redirect=1).</li></ul>
          * @type {number || null}
          */
         this.NodeId = null;
@@ -2304,13 +2304,13 @@ class DescribeInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of instances
+         * <p>Total number of instances.</p>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List of instance details
+         * <p>Instance detail list.</p>
          * @type {Array.<InstanceSet> || null}
          */
         this.InstanceSet = null;
@@ -3488,32 +3488,31 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-
+         * <p>Specifies the instance ID. Example: crs-xjhsdj****. Log in to the <a href="https://console.cloud.tencent.com/redis">Redis console</a> and copy the instance ID in the instance list.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter currently cannot be modified.
+         * <p>Set the automatic backup cycle. It can be set to Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday. This parameter cannot be modified for the moment.</p>
          * @type {Array.<string> || null}
          */
         this.WeekDays = null;
 
         /**
-         * Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
+         * <p>Backup time period. It can be set to every full hour. Format: 00:00-01:00, 01:00-02:00...... 23:00-00:00.</p>
          * @type {string || null}
          */
         this.TimePeriod = null;
 
         /**
-         * Automatic backup type.  Valid value:  `1` (scheduled backup).
+         * <p>Automatic backup type. Currently, it can only be configured as: 1, scheduled backup.</p>
          * @type {number || null}
          */
         this.AutoBackupType = null;
 
         /**
-         * Retention days for full backup files. Only support setting to 7, unit: day. If needed for longer period, please submit a ticket (https://console.cloud.tencent.com/workorder/category) to apply.
+         * <p>Number of days to save full backup files. Only support setting to 7, unit: days. For a longer period, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</p>
          * @type {number || null}
          */
         this.BackupStorageDays = null;
@@ -3545,52 +3544,82 @@ class InstanceMultiParam extends  AbstractModel {
         super();
 
         /**
-         * Parameter name
+         * <p>Parameter name.</p>
          * @type {string || null}
          */
         this.ParamName = null;
 
         /**
-         * Parameter Type such as  `MULTI`
+         * <p>Parameter type. For example: multi.</p>
          * @type {string || null}
          */
         this.ValueType = null;
 
         /**
-         * Whether to restart the database after modifying the parameter. Valid values:  - `true` (required) - `false` (not required)
+         * <p>Whether restart is required after parameter modification.</p><ul><li>true: required.</li><li>false: not required.</li></ul>
          * @type {string || null}
          */
         this.NeedRestart = null;
 
         /**
-         * Default value of the parameter
+         * <p>Default parameter value.</p>
          * @type {string || null}
          */
         this.DefaultValue = null;
 
         /**
-         * Current value
+         * <p>Current running parameter value.</p>
          * @type {string || null}
          */
         this.CurrentValue = null;
 
         /**
-         * Description
+         * <p>Parameter description.</p>
          * @type {string || null}
          */
         this.Tips = null;
 
         /**
-         * Parameter enumeration value.
+         * <p>Parameter enumeration value.</p>
          * @type {Array.<string> || null}
          */
         this.EnumValue = null;
 
         /**
-         * Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
+         * <p>Parameter modification status.</p><ul><li>1: Modifying.</li><li>2: Modified.</li></ul>
          * @type {number || null}
          */
         this.Status = null;
+
+        /**
+         * <p>Parameter type</p><p>Enumeration values:</p><ul><li>redis: parameters supported by cache nodes</li><li>redis-interface: parameters supported by proxy</li><li>tendis: parameters supported by tendis</li></ul>
+         * @type {string || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * <p>Whether the current instance supports this feature</p>
+         * @type {boolean || null}
+         */
+        this.FeatureSupported = null;
+
+        /**
+         * <p>New feature launch date</p><p>Parameter format: time format YYYY-MM-DD</p>
+         * @type {string || null}
+         */
+        this.NewFeatureOnlineTime = null;
+
+        /**
+         * <p>Regular expression validation rule</p>
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * <p>Input format description</p>
+         * @type {string || null}
+         */
+        this.InputDescription = null;
 
     }
 
@@ -3609,6 +3638,11 @@ class InstanceMultiParam extends  AbstractModel {
         this.Tips = 'Tips' in params ? params.Tips : null;
         this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+        this.FeatureSupported = 'FeatureSupported' in params ? params.FeatureSupported : null;
+        this.NewFeatureOnlineTime = 'NewFeatureOnlineTime' in params ? params.NewFeatureOnlineTime : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.InputDescription = 'InputDescription' in params ? params.InputDescription : null;
 
     }
 }
@@ -3622,7 +3656,7 @@ class DescribeInstanceDealDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Order number, which is the output parameter DealId of [CreateInstances](https://www.tencentcloud.com/document/api/239/20026?from_cn_redirect=1), with the maximum array length of 10.
+         * Order ID, which is the output parameter DealId of [CreateInstances](https://www.tencentcloud.com/document/api/239/20026?from_cn_redirect=1), with the maximum array length of 10.
          * @type {Array.<string> || null}
          */
         this.DealIds = null;
@@ -3757,7 +3791,7 @@ class DescribeProjectSecurityGroupRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Security group ID, which can be obtained through the sub-parameter **SecurityGroupId** of the response parameter **InstanceSecurityGroupsDetail** of the API [DescribeInstanceSecurityGroup](https://intl.cloud.tencent.com/document/product/239/34447?from_cn_redirect=1).
+         * Security group ID, which can be obtained through the sub-parameter **SecurityGroupId** of the response parameter **InstanceSecurityGroupsDetail** of the API [DescribeInstanceSecurityGroup](https://www.tencentcloud.com/document/product/239/34447?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SecurityGroupId = null;
@@ -4746,7 +4780,7 @@ class ChangeReplicaToMasterRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * <p>Replica node group ID. Use the interface <a href="https://www.tencentcloud.com/document/product/239/50312?from_cn_redirect=1">DescribeInstanceZoneInfo</a> to obtain the id information of the multi-AZ replica node group. For a single AZ, no need to configure this parameter.</p>
+         * <p>Replica node group ID. Use the interface <a href="https://www.tencentcloud.com/document/product/239/50312?from_cn_redirect=1">DescribeInstanceZoneInfo</a> to obtain the ID information of the multi-AZ replica node group. For single AZ, no need to configure this parameter.</p>
          * @type {number || null}
          */
         this.GroupId = null;
@@ -5436,6 +5470,18 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
          */
         this.EncryptPassword = null;
 
+        /**
+         * <p>Disabled command configuration at the account level.</p><ul><li>Default value: [] (empty array, meaning no commands are disabled)</li><li>Input parameter limitation: Only the following specified database commands can be configured (multiple selections are supported)<br>flushall, flushdb, keys, hgetall, eval, evalsha, script, scan, psetex, set, hmset, hset, lpush, rpush, sadd, zadd, del, mget, mset, bitop, exists, msetnx, blpop, brpop, rpoplpush, brpoplpush, smove, sunion, sinter, sdiff, sunionstore, sinterstore, sdiffstore, zunionstore, zinterstore, pfmerge, pfcount, pfadd.</li></ul><p>Default value: ""</p>
+         * @type {Array.<string> || null}
+         */
+        this.DisableCommands = null;
+
+        /**
+         * <p>Whether to modify the command disablement configuration at the account level. Pass in only when the command list needs to be updated.</p><ul><li>true: Modify (an overwrite update will be performed based on the new command list passed in).</li><li>false: Do not modify (default value).</li></ul>
+         * @type {boolean || null}
+         */
+        this.ModifyDisableCommands = null;
+
     }
 
     /**
@@ -5453,6 +5499,8 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
         this.Privilege = 'Privilege' in params ? params.Privilege : null;
         this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
         this.EncryptPassword = 'EncryptPassword' in params ? params.EncryptPassword : null;
+        this.DisableCommands = 'DisableCommands' in params ? params.DisableCommands : null;
+        this.ModifyDisableCommands = 'ModifyDisableCommands' in params ? params.ModifyDisableCommands : null;
 
     }
 }
@@ -5544,7 +5592,7 @@ class DescribeParamTemplateInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * The parameter template ID for query. Get parameter template list information through the [DescribeParamTemplates](https://intl.cloud.tencent.com/document/product/239/58750?from_cn_redirect=1) API.
+         * Parameter template ID specified for query. Get the parameter template list through the API [DescribeParamTemplates](https://www.tencentcloud.com/document/product/239/58750?from_cn_redirect=1).
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -6288,7 +6336,7 @@ class DescribeBackupDetailRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * <p>Backup ID, which can be obtained through the response parameter <strong>RedisBackupSet</strong> of the API <a href="https://www.tencentcloud.com/document/product/239/20011?from_cn_redirect=1">DescribeInstanceBackups</a>.</p>
+         * <p>Backup ID, which can be obtained through the <strong>RedisBackupSet</strong> parameter in the API response of <a href="https://www.tencentcloud.com/document/product/239/20011?from_cn_redirect=1">DescribeInstanceBackups</a>.</p>
          * @type {string || null}
          */
         this.BackupId = null;
@@ -6445,64 +6493,94 @@ class InstanceIntegerParam extends  AbstractModel {
         super();
 
         /**
-         * Parameter name
+         * <p>Parameter name</p>
          * @type {string || null}
          */
         this.ParamName = null;
 
         /**
-         * Parameter type: Integer
+         * <p>Parameter type: integer</p>
          * @type {string || null}
          */
         this.ValueType = null;
 
         /**
-         * Whether restart is required after a modification is made. Valid values: true, false
+         * <p>Whether restart is required after modification: true, false</p>
          * @type {string || null}
          */
         this.NeedRestart = null;
 
         /**
-         * Default value of the parameter
+         * <p>Default parameter value</p>
          * @type {string || null}
          */
         this.DefaultValue = null;
 
         /**
-         * Current value
+         * <p>Current running parameter value</p>
          * @type {string || null}
          */
         this.CurrentValue = null;
 
         /**
-         * Parameter description
+         * <p>Parameter description</p>
          * @type {string || null}
          */
         this.Tips = null;
 
         /**
-         * Minimum value of the parameter
+         * <p>Minimum parameter value</p>
          * @type {string || null}
          */
         this.Min = null;
 
         /**
-         * Maximum value of the parameter
+         * <p>Maximum parameter value</p>
          * @type {string || null}
          */
         this.Max = null;
 
         /**
-         * Parameter status. 1: modifying; 2: modified
+         * <p>Parameter status. 1: modifying, 2: modified</p>
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Parameter unit.
+         * <p>Parameter unit</p>
          * @type {string || null}
          */
         this.Unit = null;
+
+        /**
+         * <p>Parameter type</p><p>Enumeration values:</p><ul><li>redis: parameters supported by cache nodes</li><li>redis-interface: parameters supported by proxy</li><li>tendis: parameters supported by tendis</li></ul>
+         * @type {string || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * <p>Whether the current instance supports this feature</p>
+         * @type {boolean || null}
+         */
+        this.FeatureSupported = null;
+
+        /**
+         * <p>New feature launch date</p><p>Parameter format: time format YYYY-MM-DD</p>
+         * @type {string || null}
+         */
+        this.NewFeatureOnlineTime = null;
+
+        /**
+         * <p>Regular expression validation rule</p>
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * <p>Input format description</p>
+         * @type {string || null}
+         */
+        this.InputDescription = null;
 
     }
 
@@ -6523,6 +6601,11 @@ class InstanceIntegerParam extends  AbstractModel {
         this.Max = 'Max' in params ? params.Max : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Unit = 'Unit' in params ? params.Unit : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+        this.FeatureSupported = 'FeatureSupported' in params ? params.FeatureSupported : null;
+        this.NewFeatureOnlineTime = 'NewFeatureOnlineTime' in params ? params.NewFeatureOnlineTime : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.InputDescription = 'InputDescription' in params ? params.InputDescription : null;
 
     }
 }
@@ -6808,8 +6891,7 @@ class KillMasterGroupRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * Sharded cluster ID, which can be obtained through **ClusterId** of the response parameter 
- **Redis** of the API [DescribeInstanceNodeInfo](https://intl.cloud.tencent.com/document/product/239/48603?from_cn_redirect=1).
+         * Shard ID. Obtain it from the **ClusterId** field in the **Redis** response parameter through the [DescribeInstanceNodeInfo](https://www.tencentcloud.com/document/product/239/48603?from_cn_redirect=1) API.
          * @type {Array.<number> || null}
          */
         this.ShardIds = null;
@@ -7245,52 +7327,82 @@ class InstanceTextParam extends  AbstractModel {
         super();
 
         /**
-         * Parameter name
+         * <p>Parameter name.</p>
          * @type {string || null}
          */
         this.ParamName = null;
 
         /**
-         * Parameter type such as  `Text`.
+         * <p>Parameter type. For example: text.</p>
          * @type {string || null}
          */
         this.ValueType = null;
 
         /**
-         * Whether to restart the database after modifying the parameter. Valid values:  - `true` (required) - `false` (not required)
+         * <p>Whether restart is required after parameter modification.</p><ul><li>true: required.</li><li>false: not required.</li></ul>
          * @type {string || null}
          */
         this.NeedRestart = null;
 
         /**
-         * Default value of the parameter
+         * <p>Default parameter value.</p>
          * @type {string || null}
          */
         this.DefaultValue = null;
 
         /**
-         * Current value
+         * <p>Current value of the parameter.</p>
          * @type {string || null}
          */
         this.CurrentValue = null;
 
         /**
-         * Description
+         * <p>Parameter description.</p>
          * @type {string || null}
          */
         this.Tips = null;
 
         /**
-         * Acceptable values of the parameter
+         * <p>Available values of the parameter.</p>
          * @type {Array.<string> || null}
          */
         this.TextValue = null;
 
         /**
-         * Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
+         * <p>Parameter modification status.</p><ul><li>1: Modifying.</li><li>2: Modified.</li></ul>
          * @type {number || null}
          */
         this.Status = null;
+
+        /**
+         * <p>Parameter type</p><p>Enumeration values:</p><ul><li>redis: parameters supported by cache nodes</li><li>redis-interface: parameters supported by proxy</li><li>tendis: parameters supported by tendis</li></ul>
+         * @type {string || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * <p>Whether the current instance supports this feature</p>
+         * @type {boolean || null}
+         */
+        this.FeatureSupported = null;
+
+        /**
+         * <p>New feature launch date</p><p>Parameter format: time format YYYY-MM-DD</p>
+         * @type {string || null}
+         */
+        this.NewFeatureOnlineTime = null;
+
+        /**
+         * <p>Regular expression validation rule</p>
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * <p>Input format description</p>
+         * @type {string || null}
+         */
+        this.InputDescription = null;
 
     }
 
@@ -7309,6 +7421,11 @@ class InstanceTextParam extends  AbstractModel {
         this.Tips = 'Tips' in params ? params.Tips : null;
         this.TextValue = 'TextValue' in params ? params.TextValue : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+        this.FeatureSupported = 'FeatureSupported' in params ? params.FeatureSupported : null;
+        this.NewFeatureOnlineTime = 'NewFeatureOnlineTime' in params ? params.NewFeatureOnlineTime : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.InputDescription = 'InputDescription' in params ? params.InputDescription : null;
 
     }
 }
@@ -7918,7 +8035,7 @@ class DescribeTaskInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Task ID, which can be obtained through the sub-parameter **TaskId** of the response parameter **Tasks** of the API [DescribeTaskList](https://intl.cloud.tencent.com/document/product/239/39374?from_cn_redirect=1).
+         * Task ID, which can be obtained through the sub-parameter **TaskId** of the response parameter **Tasks** of the API [DescribeTaskList](https://www.tencentcloud.com/document/product/239/39374?from_cn_redirect=1).
          * @type {number || null}
          */
         this.TaskId = null;
@@ -7958,7 +8075,7 @@ class CloneInstancesRequest extends  AbstractModel {
         this.GoodsNum = null;
 
         /**
-         * <p>Availability zone ID of the cloned instance. For supported AZ IDs, see <a href="https://www.tencentcloud.com/document/product/239/4106?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
+         * <p>Availability zone ID of the clone instance. For supported availability zone IDs, see <a href="https://www.tencentcloud.com/document/product/239/4106?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -7982,7 +8099,7 @@ class CloneInstancesRequest extends  AbstractModel {
         this.SecurityGroupIdList = null;
 
         /**
-         * <p>Backup ID used to clone an instance. Use the interface <a href="https://www.tencentcloud.com/document/product/239/20011?from_cn_redirect=1">DescribeInstanceBackups</a> to obtain the backup ID.</p>
+         * <p>Backup ID used for cloning an instance. Obtain the backup ID through the API <a href="https://www.tencentcloud.com/document/product/239/20011?from_cn_redirect=1">DescribeInstanceBackups</a>.</p>
          * @type {string || null}
          */
         this.BackupId = null;
@@ -8030,7 +8147,7 @@ class CloneInstancesRequest extends  AbstractModel {
         this.VPort = null;
 
         /**
-         * <p>Node information of instance.<ul><li>Currently supports configuring node type (primary node or replica node) and its availability zone info. For details, please refer to <a href="https://www.tencentcloud.com/document/product/239/20022?from_cn_redirect=1#RedisNodeInfo">RedisNodeInfo</a>.</li><li>This parameter can be left blank for single-AZ deployment.</li></ul></p>
+         * <p>Node information of the instance.<ul><li>Currently, you can configure the node type (primary node or replica node) and its availability zone info. For details, see <a href="https://www.tencentcloud.com/document/product/239/20022?from_cn_redirect=1#RedisNodeInfo">RedisNodeInfo</a>.</li><li>This parameter can be left blank for single-AZ deployment.</li></ul></p>
          * @type {Array.<RedisNodeInfo> || null}
          */
         this.NodeSet = null;
@@ -8048,7 +8165,7 @@ class CloneInstancesRequest extends  AbstractModel {
         this.ResourceTags = null;
 
         /**
-         * <p>Specify the parameter template ID related to the cloned instance.</p><ul><li>If this parameter is not configured, the system will automatically adapt the corresponding default template based on the selected compatible version and architecture.</li><li>Query the parameter template list of the instance through the <a href="https://www.tencentcloud.com/document/product/239/58750?from_cn_redirect=1">DescribeParamTemplates</a> API to obtain the template ID number.</li></ul>
+         * <p>Specify the parameter template ID for cloning an instance.</p><ul><li>If this parameter is not configured, the system will automatically adapt the corresponding default template based on the selected compatible version and architecture.</li><li>Query the parameter template list of the instance through the <a href="https://www.tencentcloud.com/document/product/239/58750?from_cn_redirect=1">DescribeParamTemplates</a> API to obtain the template ID number.</li></ul>
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -8442,6 +8559,48 @@ class DescribeInstanceMonitorTopNCmdRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyValkeyModule request structure.
+ * @class
+ */
+class ModifyValkeyModuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Specifies the instance ID. Example: crs-xjhsdj****. Log in to the <a href="https://console.cloud.tencent.com/redis">Redis console</a> and copy the instance ID from the instance list.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Specify the extension module to be modified.</p><p>Enumeration values:</p><ul><li>ValkeyBloom: Refers to the Bloom module, which can efficiently judge whether an element exists in a collection.</li><li>ValkeyJSON: Refers to the JSON module, which allows Redis to natively support the JSON data format, facilitating the storage and manipulation of JSON Objects.</li><li>ValkeySearch: Refers to the Search module, which provides a full-text search feature, enabling efficient search operations on data stored in Redis.</li></ul>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Set the enable status of the extension module. Only support setting to ON to enable the extension module.</p>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * CreateExportTask request structure.
  * @class
  */
@@ -8809,11 +8968,10 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
         this.Product = null;
 
         /**
-         * Replaces with the new security group ID list, which is an array of one or more security group IDs.
-- To configure a security group for an instance for the first time, call the API [AssociateSecurityGroups](https://www.tencentcloud.com/document/product/239/41260?from_cn_redirect=1) to bind a security group first.
+         * Security group ID list. Replace it with a new one, which is an array of one or more security group IDs.
+- To configure a security group for an instance for the first time, bind the security group through the API [AssociateSecurityGroups](https://www.tencentcloud.com/document/product/239/41260?from_cn_redirect=1) first.
 - To replace the security group, obtain the security group ID on the [security group](https://console.tencentcloud.com/vpc/security-group) page of the console.
-
-**Note:** This input parameter performs a full replacement on all existing collections but not an incremental update. To modify it, import the expected full collections.
+  **Note:** This input parameter performs a full replacement on all existing collections but not an incremental update. To modify it, import the expected full collections.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
@@ -9013,31 +9171,31 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * This parameter is retained due to compatibility and can be ignored.
+         * <p>This parameter is temporarily reserved due to compatibility issues. Ignore it.</p>
          * @type {number || null}
          */
         this.AutoBackupType = null;
 
         /**
-         * Backup cycle, which will be daily by default. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`.
+         * <p>Backup cycle. Automatic backup is performed every day by default: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.</p>
          * @type {Array.<string> || null}
          */
         this.WeekDays = null;
 
         /**
-         * Time period for backup task initialization
+         * <p>Backup task initiation time range.</p>
          * @type {string || null}
          */
         this.TimePeriod = null;
 
         /**
-         * Retention time of full backup files in days.  Default value: `7`.  To retain the files for more days, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.
+         * <p>Number of days to save full backup files. Default value: 7 days. To save for more days, please <a href="https://console.cloud.tencent.com/workorder/category">submit a ticket</a> to apply.</p>
          * @type {number || null}
          */
         this.BackupStorageDays = null;
 
         /**
-         * This parameter has been disused.
+         * <p>This parameter is no longer in use. Ignore it.</p>
          * @type {number || null}
          */
         this.BinlogStorageDays = null;
@@ -9355,6 +9513,12 @@ class LogResult extends  AbstractModel {
          */
         this.ErrMsg = null;
 
+        /**
+         * <p>Node ID of the proxy</p>
+         * @type {string || null}
+         */
+        this.Node = null;
+
     }
 
     /**
@@ -9373,6 +9537,7 @@ class LogResult extends  AbstractModel {
         this.CacheCode = 'CacheCode' in params ? params.CacheCode : null;
         this.CommandDetail = 'CommandDetail' in params ? params.CommandDetail : null;
         this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.Node = 'Node' in params ? params.Node : null;
 
     }
 }
@@ -10681,6 +10846,41 @@ class ModifyReplicationGroupRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateSSLCert response structure.
+ * @class
+ */
+class UpdateSSLCertResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID.</p>
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Replication group info
  * @class
  */
@@ -10794,198 +10994,163 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Number of instances returned per page. Default value: `20`. Maximum value: `1000`.
+         * <p>Number of instances output per page. Default parameter value: 20. Maximum value: 1000.</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
+         * <p>Pagination offset, which is an integer multiple of Limit. Calculation formula: offset=limit*(page number-1).</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-
-
+         * <p>Specifies the instance ID. Example: crs-xjhsdj****. Log in to the <a href="https://console.cloud.tencent.com/redis">Redis console</a> and copy the instance ID from the instance list.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * The instance list is sorted according to the following enumeration valid values:
-- projectId: By project ID.- createtime: By the creation time of instances.- instancename: By the name of instances.- type: By the type of instances.- curDeadline: By the expiration time of instances.
+         * <p>Instance list sorting criteria. Enumeration values are as follows:</p><ul><li>projectId: by project ID.</li><li>createtime: sort by instance creation time.</li><li>instancename: by instance name sorting.</li><li>type: by instance type.</li><li>curDeadline: by instance expiration time.</li></ul>
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * For instance sorting order, the default is descending order.
-- 1: Descending order.
-- 0: Ascending order.
+         * <p>Instance sorting order, with a default value of reverse sorting.</p><ul><li>1: Reverse order.</li><li>0: Sequential order.</li></ul>
          * @type {number || null}
          */
         this.OrderType = null;
 
         /**
-         * Array of VPC IDs such as 47525. If this parameter is not passed in or the array is empty, the classic network will be selected by default. This parameter is retained and can be ignored. It is set based on `UniqVpcIds` parameter format.
+         * <p>VPC ID array. If this parameter is not configured or the array is empty, the basic network is selected by default. For example: 47525. This parameter is temporarily reserved and can be ignored. Set the VPC ID array according to the format of the UniqVpcIds parameter.</p>
          * @type {Array.<string> || null}
          */
         this.VpcIds = null;
 
         /**
-         * Array of VPC subnet IDs such as 56854. This parameter is retained and can be ignored. It is set based on `UniqSubnetIds` parameter format.
+         * <p>Array of subnet IDs belonging to the private network, for example: 56854. This parameter is temporarily reserved and can be ignored. Set the private network subnet ID array according to the format of the UniqSubnetIds parameter.</p>
          * @type {Array.<string> || null}
          */
         this.SubnetIds = null;
 
         /**
-         * Setting keywords field for fuzzy query, only instance names support fuzzy query.
+         * <p>Set the key field for fuzzy query. Only instance names support fuzzy query.</p>
          * @type {string || null}
          */
         this.SearchKey = null;
 
         /**
-         * Array of project IDs
+         * <p>Array of project IDs.</p>
          * @type {Array.<number> || null}
          */
         this.ProjectIds = null;
 
         /**
-         * Instance name
+         * <p>Instance name.</p>
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Array of VPC IDs such as vpc-sad23jfdfk. If this parameter is not passed in or or the array is empty, the classic network will be selected by default.
+         * <p>VPC ID array. If this parameter is not configured or the array is empty, the basic network is selected by default, for example: vpc-sad23jfdfk.</p>
          * @type {Array.<string> || null}
          */
         this.UniqVpcIds = null;
 
         /**
-         * Array of VPC subnet IDs such as subnet-fdj24n34j2
+         * <p>Subnet ID array belonging to the private network, for example: subnet-fdj24n34j2.</p>
          * @type {Array.<string> || null}
          */
         this.UniqSubnetIds = null;
 
         /**
-         * Array of region IDs (disused). The corresponding region can be queried through the common parameter `Region`.
+         * <p>Region ID array. This parameter has been deprecated. Use the common parameter Region to query the corresponding region.</p>
          * @type {Array.<number> || null}
          */
         this.RegionIds = null;
 
         /**
-         * Instance status.
-- 0: To be initialized.
-- 1: In process.
-- 2: Running.
-- -2: Isolated.
-- -3: Pending Delete.
+         * <p>Instance status.</p><ul><li>0: pending initialization.</li><li>1: in process.</li><li>2: running.</li><li>-2: isolated.</li><li>-3: pending deletion.</li></ul>
          * @type {Array.<number> || null}
          */
         this.Status = null;
 
         /**
-         * Instance architecture version.
-- 1: Single-node edition.
-- 2: Master-replica edition.- 3: Cluster edition.
+         * <p>Instance architecture version.</p><ul><li>1: standalone edition.</li><li>2: primary/secondary edition.</li><li>3: cluster version.</li></ul>
          * @type {number || null}
          */
         this.TypeVersion = null;
 
         /**
-         * Storage engine information. Valid values: `Redis-2.8`, `Redis-4.0`, `Redis-5.0`, `Redis-6.0` or `CKV`.
+         * <p>Storage engine info. It can be set to Redis-2.8, Redis-4.0, Redis-5.0, Redis-6.0, or CKV.</p>
          * @type {string || null}
          */
         this.EngineName = null;
 
         /**
-         * Renewal pattern.
-- 0: Manual renewal.
-- 1: Automatic renewal.
-- 2: No renewal after expiry.
+         * <p>Renewal mode.</p><ul><li>0: Manual renewal.</li><li>1: Automatic renewal.</li><li>2: No renewal after expiry.</li></ul>
          * @type {Array.<number> || null}
          */
         this.AutoRenew = null;
 
         /**
-         * Billing mode.
-- postpaid: pay-as-you-go.
-- prepaid: monthly subscription.
+         * <p>Billing mode.</p><ul><li>postpaid: pay-as-you-go billing.</li><li>prepaid: annual/monthly subscription.</li></ul>
          * @type {string || null}
          */
         this.BillingMode = null;
 
         /**
-         * Instance type.
-
-- 2: Redis 2.8 memory edition (standard architecture).
-- 3: CKV 3.2 memory edition (standard architecture).
-- 4: CKV 3.2 memory edition (cluster architecture).
-- 5: Redis 2.8 memory edition (standalone).
-- 6: Redis 4.0 memory edition (standard architecture).
-- 7: Redis 4.0 memory edition (cluster architecture).
-- 8: Redis 5.0 memory edition (standard architecture).
-- 9: Redis 5.0 memory edition (cluster architecture).
-- 15: Redis 6.2 memory edition (standard architecture).
-- 16: Redis 6.2 memory edition (cluster architecture).
-- 17: Redis 7.0 memory edition (standard architecture).
-- 18: Redis 7.0 memory edition (cluster architecture).
-- 200: Memcached 1.6 memory edition (cluster architecture).
+         * <p>Instance type.</p><ul><li>2: Redis 2.8 memory edition (standard architecture).</li><li>3: CKV 3.2 memory edition (standard architecture).</li><li>4: CKV 3.2 memory edition (cluster architecture).</li><li>5: Redis 2.8 memory edition (standalone).</li><li>6: Redis 4.0 memory edition (standard architecture).</li><li>7: Redis 4.0 memory edition (cluster architecture).</li><li>8: Redis 5.0 memory edition (standard architecture).</li><li>9: Redis 5.0 memory edition (cluster architecture).</li><li>15: Redis 6.2 memory edition (standard architecture).</li><li>16: Redis 6.2 memory edition (cluster architecture).</li><li>17: Redis 7.0 memory edition (standard architecture).</li><li>18: Redis 7.0 memory edition (cluster architecture).</li><li>200: Memcached 1.6 memory edition (cluster architecture).</li></ul>
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * This parameter is of array type and supports the configuration of instance names, instance IDs, and IP addresses. Among these, the instance name is fuzzy matching while the instance ID and IP address are precise matching.
-- Each element in the array is used for a union-based matching query.- When both **InstanceId** and **SearchKeys** are configured simultaneously, their intersection will be used for the matching query.
+         * <p>This parameter is an array type and supports configuring instance name, instance ID, and IP address. Among them, instance name uses fuzzy matching, while instance ID and IP address use exact matching.</p><ul><li>Each element in the array uses union for match query.</li><li>If <strong>InstanceId</strong> and <strong>SearchKeys</strong> are configured concurrently, their intersection is used for matching query.</li></ul>
          * @type {Array.<string> || null}
          */
         this.SearchKeys = null;
 
         /**
-         * Internal parameter, which can be ignored.
+         * <p>Internal parameter, which can be ignored.</p>
          * @type {Array.<number> || null}
          */
         this.TypeList = null;
 
         /**
-         * Internal parameter, which can be ignored.
+         * <p>Internal parameter, which can be ignored.</p>
          * @type {string || null}
          */
         this.MonitorVersion = null;
 
         /**
-         * Resources filter by tag key and value. If this parameter is not specified or is an empty array, resources will not be filtered.
+         * <p>Filter resources by tag Key and Value. If this parameter is not configured or the array is set to empty, no tag-based filtering is applied.</p>
          * @type {Array.<InstanceTagInfo> || null}
          */
         this.InstanceTags = null;
 
         /**
-         * Resources filter by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
+         * <p>Filter resources by tag Key. If this parameter is not configured or the array is set to empty, no filtering by tag Key is performed.</p>
          * @type {Array.<string> || null}
          */
         this.TagKeys = null;
 
         /**
-         * The product version of the instance. If this parameter is not configured or the array is set to empty, instances will not be filtered based on this parameter by default.
-- local: local Disk Edition.- cdc: Cluster dedicated edition.
-
+         * <p>Deployment type of the instance. If this parameter is not configured or the array is set to empty, instances will not be filtered based on this parameter by default.</p><p>Enumeration values:</p><ul><li>local: Common I.</li><li>localv2: Common II.</li><li>cdc: Dedicated cluster.</li></ul>
          * @type {Array.<string> || null}
          */
         this.ProductVersions = null;
 
         /**
-         * Batch query of the specified instances ID. The number of results returned is based on `Limit`.
+         * <p>Batch query the specified instance IDs. The returned results are mainly limited by Limit.</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Availability zone mode.
-- singleaz: Single availability zone.- multiaz: Multiple availability zones.
+         * <p>Availability zone mode.</p><ul><li>singleaz: single availability zone.</li><li>multiaz: multi-availability zone.</li></ul>
          * @type {string || null}
          */
         this.AzMode = null;
@@ -11039,24 +11204,24 @@ class DescribeInstancesRequest extends  AbstractModel {
 }
 
 /**
- * Access command
+ * ModifyValkeyModule response structure.
  * @class
  */
-class SourceCommand extends  AbstractModel {
+class ModifyValkeyModuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Command name.
-         * @type {string || null}
-         */
-        this.Cmd = null;
-
-        /**
-         * Number of executions.
+         * <p>Task ID.</p>
          * @type {number || null}
          */
-        this.Count = null;
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -11067,8 +11232,8 @@ class SourceCommand extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Cmd = 'Cmd' in params ? params.Cmd : null;
-        this.Count = 'Count' in params ? params.Count : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11431,7 +11596,7 @@ class DescribeAutoBackupConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
+         * <p>Specifies the instance ID. Example: crs-xjhsdj****. Log in to the <a href="https://console.cloud.tencent.com/redis">Redis console</a> and copy the instance ID from the instance list.</p>
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -11465,7 +11630,7 @@ class DescribeBackupUrlRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Backup ID, which can be obtained through the `RedisBackupSet` parameter returned by the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
+         * Backup ID, which can be obtained through the RedisBackupSet parameter in the API response of [DescribeInstanceBackups](https://www.tencentcloud.com/document/product/239/20011?from_cn_redirect=1).
          * @type {string || null}
          */
         this.BackupId = null;
@@ -11649,7 +11814,7 @@ class DeleteInstanceAccountRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Sub-account name. Log in to the [Redis console](https://console.tencentcloud.com/redis) and switch to the **Account Management** page to obtain it. For details, see [Managing Account](https://www.tencentcloud.com/document/product/239/34590).
+         * Sub-account name. Log in to the [Redis console](https://console.cloud.tencent.com/redis), switch to the **Account Management** page to get it. For details, see [Managing Accounts](https://www.tencentcloud.com/document/product/239/36710?from_cn_redirect=1).
          * @type {string || null}
          */
         this.AccountName = null;
@@ -12017,7 +12182,7 @@ class ModifyParamTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Source parameter template ID, which can be obtained through the response parameter **TemplateId** of the API [DescribeParamTemplateInfo](https://intl.cloud.tencent.com/document/product/239/58748?from_cn_redirect=1).
+         * Source parameter template ID, which can be obtained through the response parameter **TemplateId** of the API [DescribeParamTemplateInfo](https://www.tencentcloud.com/document/product/239/58748?from_cn_redirect=1).
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -12691,9 +12856,9 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.NodeSet = null;
 
         /**
-         * Switch time.
- - 1: Perform the operation within the maintenance window: Specification upgrade is executed within the set maintenance window. Use the API [DescribeMaintenanceWindow](https://intl.cloud.tencent.com/document/product/239/46336?from_cn_redirect=1) to query the time period of the set maintenance window. Replica addition/removal, shard addition/removal, and memory capacity expansion/shrinkage are supported within the maintenance window. Specification upgrade within the maintenance window is being gradually tested and published by region. It is already supported in some regions. For urgent integration in regions that do not support it, [submit a ticket](https://console.cloud.tencent.com/workorder/category) to apply for an allowlist.
- -2: Perform the operation immediately: The operation will be performed immediately, without the need to wait for the maintenance window. Operations will be performed immediately by default for the system.
+         * Switch time. 
+- 1: Perform the operation within the maintenance window: Specification upgrade is executed within the set maintenance window. Use the API [DescribeMaintenanceWindow](https://www.tencentcloud.com/document/product/239/46336?from_cn_redirect=1) to query the time period of the set maintenance window. Replica addition/removal, shard addition/removal, and memory capacity expansion/shrinkage are supported within the maintenance window. Specification upgrade within the maintenance window is being gradually tested and published by region. It is already supported in some regions. For urgent integration in regions that do not support it, [submit a ticket](https://console.cloud.tencent.com/workorder/category) to apply for an allowlist.
+-2: Perform the operation immediately: The operation will be performed immediately, without the need to wait for the maintenance window. Operations will be performed immediately by default for the system.
          * @type {number || null}
          */
         this.SwitchOption = null;
@@ -12790,7 +12955,7 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
         this.TypeId = null;
 
         /**
-         * <p>Memory capacity, measured in MB, must be a multiple of 1024. For specific specifications, refer to the specifications returned by <a href="https://www.tencentcloud.com/document/api/239/30600?from_cn_redirect=1">query product sales specifications</a>. When TypeId is standard architecture, MemSize is the total memory capacity of the instance. When TypeId is cluster architecture, MemSize is the sharded memory capacity.</p>
+         * <p>Memory capacity, measured in MB. The value must be a multiple of 1024. The specific specifications are subject to those returned by <a href="https://www.tencentcloud.com/document/api/239/30600?from_cn_redirect=1">Query Product Sales Specifications</a>. When TypeId is standard architecture, MemSize is the total memory capacity of the instance; when TypeId is cluster architecture, MemSize is the memory capacity of a single shard.</p>
          * @type {number || null}
          */
         this.MemSize = null;
@@ -12814,7 +12979,7 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
         this.BillingMode = null;
 
         /**
-         * <p>ID of the AZ to which the instance belongs. See <a href="https://www.tencentcloud.com/document/product/239/4106?from_cn_redirect=1">Regions and AZs</a>.<strong>Note</strong>: Please specify at least one parameter in <strong>ZoneId</strong> and <strong>ZoneName</strong>.</p>
+         * <p>ID of the AZ to which the instance belongs. See <a href="https://www.tencentcloud.com/document/product/239/4106?from_cn_redirect=1">Regions and AZs</a>. <strong>Description</strong>: Please specify at least one of <strong>ZoneId</strong> and <strong>ZoneName</strong>.</p>
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -12838,7 +13003,7 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
         this.ReplicasReadonly = null;
 
         /**
-         * <p>Name of the availability zone to which the instance belongs. See <a href="https://www.tencentcloud.com/document/product/239/4106?from_cn_redirect=1">Regions and Availability Zones</a>. <strong>Description</strong>: Please specify at least one parameter in <strong>ZoneId</strong> and <strong>ZoneName</strong>.</p>
+         * <p>Name of the AZ to which the instance belongs. See <a href="https://www.tencentcloud.com/document/product/239/4106?from_cn_redirect=1">Regions and AZs</a>. <strong>Description</strong>: Please specify at least one of <strong>ZoneId</strong> and <strong>ZoneName</strong>.</p>
          * @type {string || null}
          */
         this.ZoneName = null;
@@ -13057,6 +13222,12 @@ class DescribeSSLStatusRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * <p>Certificate download format type. Defaults to nginx if not passed. Only applicable to custom certificates (CertSource=1)</p><p>Enumeration values:</p><ul><li>nginx: nginx available</li><li>apache: apache available</li><li>tomcat: tomcat available</li><li>iis: iis available</li></ul>
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
     }
 
     /**
@@ -13067,6 +13238,7 @@ class DescribeSSLStatusRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
 
     }
 }
@@ -13091,6 +13263,36 @@ class OpenSSLRequest extends  AbstractModel {
          */
         this.AddressType = null;
 
+        /**
+         * <p>Key type.</p><p>Enumeration values:</p><ul><li>0: Tencent Cloud provides</li><li>1: User-defined certificate</li></ul><p>Default value: 0</p>
+         * @type {number || null}
+         */
+        this.CertSource = null;
+
+        /**
+         * <p>Switch time. (This parameter is deprecated and no longer effective.)</p><p>Enumeration values:</p><ul><li>1: Operate within the maintenance window: SSL encryption will be enabled and executed within the set maintenance window. Use the DescribeMaintenanceWindow interface to query the set maintenance time period.</li><li>2: Immediate operation: The operation will be executed immediately with no waiting for the maintenance window. The system default setting is immediate operation.</li></ul>
+         * @type {number || null}
+         */
+        this.SwitchOption = null;
+
+        /**
+         * <p>Certificate ID of the SSL certificate service. Required when CertSource=1</p>
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * <p>Min TLS version</p><p>Enumeration values:</p><ul><li>TLSv1.0: TLSv1.0</li><li>TLSv1.1: TLSv1.1</li><li>TLSv1.2: TLSv1.2</li></ul>
+         * @type {string || null}
+         */
+        this.SSLMinVersion = null;
+
+        /**
+         * <p>Target encryption mode</p><p>Enumeration values:</p><ul><li>required: Enforced encryption</li><li>flexible: Compatible mode</li></ul><p>Default value: flexible</p>
+         * @type {string || null}
+         */
+        this.EncryptionMode = null;
+
     }
 
     /**
@@ -13102,6 +13304,11 @@ class OpenSSLRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.AddressType = 'AddressType' in params ? params.AddressType : null;
+        this.CertSource = 'CertSource' in params ? params.CertSource : null;
+        this.SwitchOption = 'SwitchOption' in params ? params.SwitchOption : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.SSLMinVersion = 'SSLMinVersion' in params ? params.SSLMinVersion : null;
+        this.EncryptionMode = 'EncryptionMode' in params ? params.EncryptionMode : null;
 
     }
 }
@@ -13375,7 +13582,7 @@ class AddReplicationInstanceRequest extends  AbstractModel {
 
         /**
          * Instance ID.
-- There are region and AZ limitations for adding a replication group instance. For detailed information, see [Use Limits](https://www.tencentcloud.com/document/product/239/71934?from_cn_redirect=1).
+- There are region and AZ limitations for adding a replication group instance. For detailed information, see [Usage Limits](https://www.tencentcloud.com/document/product/239/71934?from_cn_redirect=1).
 - Currently, only Redis 4.0 and 5.0 cluster architecture instances support being added to the replication groups.
 - Log in to the [Redis console](https://console.cloud.tencent.com/redis/instance/list), and copy the ID of the instance that needs to be added to the replication group in the instance list.
          * @type {string || null}
@@ -13567,6 +13774,54 @@ class DescribeSSLStatusResponse extends  AbstractModel {
         this.EncryptAddress = null;
 
         /**
+         * <p>Key source</p><p>Enumeration values:</p><ul><li>0: Tencent Cloud provides</li><li>1: Custom certificate</li></ul>
+         * @type {number || null}
+         */
+        this.CertSource = null;
+
+        /**
+         * <p>Certificate validity</p><p>Enumeration values:</p><ul><li>0: valid</li><li>1: expiring soon (within 30 days)</li><li>2: expired</li><li>404: cert deleted</li><li>500: query exception</li></ul>
+         * @type {number || null}
+         */
+        this.CertStatus = null;
+
+        /**
+         * <p>Certificate ID of the SSL certificate service. Required when CertSource=1</p>
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * <p>Cert alias</p>
+         * @type {string || null}
+         */
+        this.CertAlias = null;
+
+        /**
+         * <p>Certificate expiration time</p><p>Parameter format: time format YYYY-MM-DD hh:mm:ss</p>
+         * @type {string || null}
+         */
+        this.CertExpireTime = null;
+
+        /**
+         * <p>Certificate-associated domain name (SAN)</p><p>Includes IP</p>
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * <p>Minimum TLS version</p><p>Enumeration values:</p><ul><li>TLSv1.0: TLSv1.0</li><li>TLSv1.1: TLSv1.1</li><li>TLSv1.2: TLSv1.2</li></ul>
+         * @type {string || null}
+         */
+        this.SSLMinVersion = null;
+
+        /**
+         * <p>Current encryption mode</p><p>Enumeration values:</p><ul><li>required: Enforced encryption</li><li>flexible: Compatible mode</li></ul>
+         * @type {string || null}
+         */
+        this.EncryptionMode = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -13588,6 +13843,14 @@ class DescribeSSLStatusResponse extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.AddressType = 'AddressType' in params ? params.AddressType : null;
         this.EncryptAddress = 'EncryptAddress' in params ? params.EncryptAddress : null;
+        this.CertSource = 'CertSource' in params ? params.CertSource : null;
+        this.CertStatus = 'CertStatus' in params ? params.CertStatus : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.CertAlias = 'CertAlias' in params ? params.CertAlias : null;
+        this.CertExpireTime = 'CertExpireTime' in params ? params.CertExpireTime : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SSLMinVersion = 'SSLMinVersion' in params ? params.SSLMinVersion : null;
+        this.EncryptionMode = 'EncryptionMode' in params ? params.EncryptionMode : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -14143,7 +14406,7 @@ class InstanceSet extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * <p>Monitoring version.<ul><li>1m: 1-minute granularity monitoring. This monitoring granularity is deprecated. For details, please see <a href="https://www.tencentcloud.com/document/product/239/80653?from_cn_redirect=1">TencentDB for Redis 1-minute granularity deprecation notice</a>.</li><li>5s: 5-second granularity monitoring.</li></ul></p>
+         * <p>Monitoring version.<ul><li>1m: 1-minute granularity monitoring. This monitoring granularity has been deprecated. For details, see <a href="https://www.tencentcloud.com/document/product/239/80653?from_cn_redirect=1">TencentDB for Redis 1-Minute Granularity Deprecation Notice</a>.</li><li>5s: 5-second granularity monitoring.</li></ul></p>
          * @type {string || null}
          */
         this.MonitorVersion = null;
@@ -14516,6 +14779,41 @@ class DescribeInstanceMonitorBigKeyRequest extends  AbstractModel {
 }
 
 /**
+ * ModifySSLEncryptionMode response structure.
+ * @class
+ */
+class ModifySSLEncryptionModeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Task ID.</p>
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBackupDownloadRestriction request structure.
  * @class
  */
@@ -14683,13 +14981,13 @@ class SwitchProxyRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Proxy ID of an instance, which can be obtained through NodeId of the response parameter **Proxy** of the API [DescribeInstanceNodeInfo](https://intl.cloud.tencent.com/document/product/239/48603?from_cn_redirect=1).
+         * Instance ProxyID. Obtain it through the NodeId in the Proxy response parameter of the DescribeInstanceNodeInfo interface (https://www.tencentcloud.com/document/product/239/48603?from_cn_redirect=1).
          * @type {string || null}
          */
         this.ProxyID = null;
 
         /**
-         * Instance proxy ID list. Call the API [DescribeInstanceNodeInfo](https://www.tencentcloud.com/document/product/239/48603?from_cn_redirect=1) to obtain IDs from **NodeId** in the **Proxy** response parameter.
+         * List of instance ProxyIDs. Obtain it through the NodeId in the Proxy response parameter of the DescribeInstanceNodeInfo interface (https://www.tencentcloud.com/document/product/239/48603?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.ProxyIDList = null;
@@ -14706,6 +15004,41 @@ class SwitchProxyRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.ProxyID = 'ProxyID' in params ? params.ProxyID : null;
         this.ProxyIDList = 'ProxyIDList' in params ? params.ProxyIDList : null;
+
+    }
+}
+
+/**
+ * Access command
+ * @class
+ */
+class SourceCommand extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Command name.
+         * @type {string || null}
+         */
+        this.Cmd = null;
+
+        /**
+         * Number of executions.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cmd = 'Cmd' in params ? params.Cmd : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
     }
 }
@@ -14844,6 +15177,41 @@ class BackupLimitVpcItem extends  AbstractModel {
 }
 
 /**
+ * ModifySSLEncryptionMode request structure.
+ * @class
+ */
+class ModifySSLEncryptionModeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Specifies the instance ID. Example: crs-xjhsdj****. Log in to the <a href="https://console.cloud.tencent.com/redis">Redis console</a> and copy the instance ID from the instance list.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Target encryption mode</p><p>Enumeration values:</p><ul><li>required: Enforced encryption</li><li>flexible: Compatible mode</li></ul>
+         * @type {string || null}
+         */
+        this.EncryptionMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EncryptionMode = 'EncryptionMode' in params ? params.EncryptionMode : null;
+
+    }
+}
+
+/**
  * DisassociateSecurityGroups request structure.
  * @class
  */
@@ -14858,7 +15226,7 @@ class DisassociateSecurityGroupsRequest extends  AbstractModel {
         this.Product = null;
 
         /**
-         * Security group ID, which can be obtained through the sub-parameter **SecurityGroupId** of the response parameter InstanceSecurityGroupsDetail of the API [DescribeInstanceSecurityGroup](https://intl.cloud.tencent.com/document/product/239/34447?from_cn_redirect=1).
+         * Security group ID, which can be obtained through the sub-parameter **SecurityGroupId** of the response parameter InstanceSecurityGroupsDetail of the API [DescribeInstanceSecurityGroup](https://www.tencentcloud.com/document/product/239/34447?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SecurityGroupId = null;
@@ -15061,52 +15429,82 @@ class InstanceEnumParam extends  AbstractModel {
         super();
 
         /**
-         * Parameter name
+         * <p>Parameter name.</p>
          * @type {string || null}
          */
         this.ParamName = null;
 
         /**
-         * Parameter type, such as `Enum`.
+         * <p>Parameter type. For example: Enum.</p>
          * @type {string || null}
          */
         this.ValueType = null;
 
         /**
-         * Whether to restart the database after modifying the parameters. Valid values: - `true` (required) - `false` (not required)
+         * <p>Whether restart is required after parameter values are modified.</p><ul><li>true: required.</li><li>false: not required.</li></ul>
          * @type {string || null}
          */
         this.NeedRestart = null;
 
         /**
-         * Default value of the parameter
+         * <p>Default parameter value.</p>
          * @type {string || null}
          */
         this.DefaultValue = null;
 
         /**
-         * Current value
+         * <p>Current value of the parameter.</p>
          * @type {string || null}
          */
         this.CurrentValue = null;
 
         /**
-         * Description
+         * <p>Parameter description.</p>
          * @type {string || null}
          */
         this.Tips = null;
 
         /**
-         * Acceptable values for the parameter
+         * <p>Available values of the parameter.</p>
          * @type {Array.<string> || null}
          */
         this.EnumValue = null;
 
         /**
-         * Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
+         * <p>Parameter modification status.</p><ul><li>1: Modifying.</li><li>2: Modified.</li></ul>
          * @type {number || null}
          */
         this.Status = null;
+
+        /**
+         * <p>Parameter type</p><p>Enumeration values:</p><ul><li>redis: parameters supported by cache nodes</li><li>redis-interface: parameters supported by proxy</li><li>tendis: parameters supported by tendis</li></ul>
+         * @type {string || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * <p>Whether the current instance supports this feature</p>
+         * @type {boolean || null}
+         */
+        this.FeatureSupported = null;
+
+        /**
+         * <p>New feature launch date</p><p>Parameter format: time format YYYY-MM-DD</p>
+         * @type {string || null}
+         */
+        this.NewFeatureOnlineTime = null;
+
+        /**
+         * <p>Regular expression validation rule</p>
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * <p>Input format description</p>
+         * @type {string || null}
+         */
+        this.InputDescription = null;
 
     }
 
@@ -15125,6 +15523,11 @@ class InstanceEnumParam extends  AbstractModel {
         this.Tips = 'Tips' in params ? params.Tips : null;
         this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+        this.FeatureSupported = 'FeatureSupported' in params ? params.FeatureSupported : null;
+        this.NewFeatureOnlineTime = 'NewFeatureOnlineTime' in params ? params.NewFeatureOnlineTime : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.InputDescription = 'InputDescription' in params ? params.InputDescription : null;
 
     }
 }
@@ -15841,13 +16244,13 @@ class ModifyInstanceLogDeliveryRequest extends  AbstractModel {
         this.Enabled = null;
 
         /**
-         * ID of the shipped logset. It can be obtained through the API [DescribeLogsets](https://intl.cloud.tencent.com/document/api/614/58624?from_cn_redirect=1).
+         * ID of the shipped logset. It can be obtained through the API [DescribeLogsets](https://www.tencentcloud.com/document/api/614/58624?from_cn_redirect=1).
          * @type {string || null}
          */
         this.LogsetId = null;
 
         /**
-         * ID of the shipped log topic. It can be obtained through the API [DescribeTopics](https://intl.cloud.tencent.com/document/api/614/56454?from_cn_redirect=1).
+         * ID of the shipped log topic. It can be obtained through the API [DescribeTopics](https://www.tencentcloud.com/document/api/614/56454?from_cn_redirect=1).
          * @type {string || null}
          */
         this.TopicId = null;
@@ -16016,7 +16419,7 @@ class ModifyBackupEncryptRequest extends  AbstractModel {
         this.KmsKeyId = null;
 
         /**
-         * <p>Regional information.</p><p>Parameter format: ap-xxxx</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/573/34406?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">Supported region list for KMS</a></p>
+         * <p>Regional information.</p><p>Parameter format: ap-xxxx</p><p>For parameter values, see <a href="https://www.tencentcloud.com/document/api/573/34406?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">KMS supported region list</a></p>
          * @type {string || null}
          */
         this.KmsRegion = null;
@@ -16164,11 +16567,11 @@ class UpgradeInstanceVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * Target instance type after the change, which is the same as the `TypeId` of the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
-- For Redis 4.0 or later, a standard architecture instance can be upgraded to a cluster architecture instance on the same version; for example, you can upgrade from Redis 4.0 Standard Architecture to Redis 4.0 Cluster Architecture.
-- Cross-version architecture upgrade is not supported; for example, you cannot upgrade from Redis 4.0 Standard Architecture to Redis 5.0 Cluster Architecture.
-- The architecture of Redis 2.8 cannot be upgraded.
-- Cluster architecture cannot be downgraded to standard architecture.
+         * Target instance type, same as **TypeId** in [CreateInstances](https://www.tencentcloud.com/document/api/239/20026?from_cn_redirect=1), which is the target type to change the instance to.
+- For Redis 4.0 or higher, instances of the same version support upgrading from standard architecture to cluster architecture. For example, Redis 4.0 standard architecture can be upgraded to Redis 4.0 cluster architecture.
+-Cross-version architecture upgrade is not supported, for example, upgrading from Redis 4.0 standard architecture to Redis 5.0 cluster architecture.
+-Architecture upgrade from Redis 2.8 is not supported.
+-Downgrade from cluster architecture to standard architecture is not supported.
 
          * @type {string || null}
          */
@@ -16627,13 +17030,13 @@ class InstanceParam extends  AbstractModel {
         super();
 
         /**
-         * Parameter name, such as “timeout”. For supported custom parameters, see <a href="https://www.tencentcloud.com/document/product/239/39796">Setting Instance Parameters</a>
+         * Parameter name. For example, timeout. For customizable parameters, see <a href="https://www.tencentcloud.com/document/product/239/49925?from_cn_redirect=1">Parameter Configuration</a>.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Current parameter value. For example, if you set the current value of “timeout” to 120 (in seconds), the client connections that remain idle longer than 120 seconds will be closed. For more information on parameter values, see <a href="https://www.tencentcloud.com/document/product/239/39796">Setting Instance Parameters</a>
+         * Set the running value corresponding to the parameter name. For example, the running value corresponding to timeout can be set to 120, in seconds (s). When the client connection idle time reaches 120 s, the connection closed. For more parameter value information, please refer to <a href="https://www.tencentcloud.com/document/product/239/49925?from_cn_redirect=1">parameter configuration</a>.
          * @type {string || null}
          */
         this.Value = null;
@@ -16712,6 +17115,90 @@ class ClearInstanceResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateSSLCert request structure.
+ * @class
+ */
+class UpdateSSLCertRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Specifies the instance ID. Example: crs-xjhsdj****. Log in to the <a href="https://console.cloud.tencent.com/redis">Redis console</a> and copy the instance ID from the instance list.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Key type.</p><p>Enumeration value:</p><ul><li>0: Tencent Cloud provides</li><li>1: User-customized KMS</li></ul>
+         * @type {number || null}
+         */
+        this.CertSource = null;
+
+        /**
+         * <p>Switch time. (This parameter is deprecated and no longer effective.)</p><p>Enumeration values:</p><ul><li>1: Maintenance window operation: SSL encryption is enabled and executed within the set maintenance window. Use the DescribeMaintenanceWindow API to query the set maintenance time window period.</li><li>2: Immediate operation: The operation will be executed immediately with no waiting for the maintenance window. The system default setting is immediate operation.</li></ul>
+         * @type {number || null}
+         */
+        this.SwitchOption = null;
+
+        /**
+         * <p>SSL address type.</p><p>Enumeration value:</p><ul><li>0: Unlimited.</li><li>1: Private IPv4 address.</li><li>2: Private IPv6 address.</li><li>3: Public network.</li><li>-1: Unspecified.</li></ul>
+         * @type {number || null}
+         */
+        this.AddressType = null;
+
+        /**
+         * <p>Key ID of KMS. (This parameter is deprecated and no longer effective)</p><p>Parameter format: xxxxxxx-xxxx-xxxx-xxxx-xxxxxxx</p>
+         * @type {string || null}
+         */
+        this.KmsKeyId = null;
+
+        /**
+         * <p>KMS regional information. (This parameter is deprecated and no longer effective.)</p><p>Parameter format: ap-xxxx</p><p>For parameter values, see <a href="https://www.tencentcloud.com/document/api/573/34406?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">KMS supported region list</a></p>
+         * @type {string || null}
+         */
+        this.KmsRegion = null;
+
+        /**
+         * <p>Certificate ID of the SSL certificate service. Required when CertSource=1</p>
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * <p>Min TLS version</p><p>Enumeration values:</p><ul><li>TLSv1.0: TLSv1.0</li><li>TLSv1.1: TLSv1.1</li><li>TLSv1.2: TLSv1.2</li></ul>
+         * @type {string || null}
+         */
+        this.SSLMinVersion = null;
+
+        /**
+         * <p>Targeted encryption mode</p><p>Enumeration values:</p><ul><li>required: Enforced encryption</li><li>flexible: Compatible mode</li></ul>
+         * @type {string || null}
+         */
+        this.EncryptionMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CertSource = 'CertSource' in params ? params.CertSource : null;
+        this.SwitchOption = 'SwitchOption' in params ? params.SwitchOption : null;
+        this.AddressType = 'AddressType' in params ? params.AddressType : null;
+        this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
+        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.SSLMinVersion = 'SSLMinVersion' in params ? params.SSLMinVersion : null;
+        this.EncryptionMode = 'EncryptionMode' in params ? params.EncryptionMode : null;
 
     }
 }
@@ -17003,6 +17490,7 @@ module.exports = {
     DescribeInstanceSupportFeatureRequest: DescribeInstanceSupportFeatureRequest,
     RedisNodes: RedisNodes,
     DescribeInstanceMonitorTopNCmdRequest: DescribeInstanceMonitorTopNCmdRequest,
+    ModifyValkeyModuleRequest: ModifyValkeyModuleRequest,
     CreateExportTaskRequest: CreateExportTaskRequest,
     DescribeInstanceSecurityGroupRequest: DescribeInstanceSecurityGroupRequest,
     InstanceParamHistory: InstanceParamHistory,
@@ -17045,9 +17533,10 @@ module.exports = {
     CleanUpInstanceRequest: CleanUpInstanceRequest,
     DescribeInstanceDealDetailResponse: DescribeInstanceDealDetailResponse,
     ModifyReplicationGroupRequest: ModifyReplicationGroupRequest,
+    UpdateSSLCertResponse: UpdateSSLCertResponse,
     Groups: Groups,
     DescribeInstancesRequest: DescribeInstancesRequest,
-    SourceCommand: SourceCommand,
+    ModifyValkeyModuleResponse: ModifyValkeyModuleResponse,
     ModfiyInstancePasswordRequest: ModfiyInstancePasswordRequest,
     DescribeSlowLogRequest: DescribeSlowLogRequest,
     Filter: Filter,
@@ -17112,13 +17601,16 @@ module.exports = {
     ModifyInstanceReadOnlyRequest: ModifyInstanceReadOnlyRequest,
     DescribeInstanceAccountResponse: DescribeInstanceAccountResponse,
     DescribeInstanceMonitorBigKeyRequest: DescribeInstanceMonitorBigKeyRequest,
+    ModifySSLEncryptionModeResponse: ModifySSLEncryptionModeResponse,
     DescribeBackupDownloadRestrictionRequest: DescribeBackupDownloadRestrictionRequest,
     TendisNodes: TendisNodes,
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     SwitchProxyRequest: SwitchProxyRequest,
+    SourceCommand: SourceCommand,
     DescribeInstanceSpecBandwidthRequest: DescribeInstanceSpecBandwidthRequest,
     SwitchInstanceVipResponse: SwitchInstanceVipResponse,
     BackupLimitVpcItem: BackupLimitVpcItem,
+    ModifySSLEncryptionModeRequest: ModifySSLEncryptionModeRequest,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     ModifyNetworkConfigRequest: ModifyNetworkConfigRequest,
     HotKeyInfo: HotKeyInfo,
@@ -17151,6 +17643,7 @@ module.exports = {
     InstanceParam: InstanceParam,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     ClearInstanceResponse: ClearInstanceResponse,
+    UpdateSSLCertRequest: UpdateSSLCertRequest,
     DescribeTendisSlowLogRequest: DescribeTendisSlowLogRequest,
     InstanceSlowlogDetail: InstanceSlowlogDetail,
 

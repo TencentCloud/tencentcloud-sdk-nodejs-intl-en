@@ -611,6 +611,111 @@ class DescribeDBParametersRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstance request structure.
+ * @class
+ */
+class ModifyDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Instance ID.</p>
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <p>Whether to only perform pre-check without actually executing the configuration change. true: only return the configuration change plan and pre-check result; false: actually execute the configuration change (default)</p>
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * <p>Number of CPU cores of peer nodes. If not passed, maintain current value unchanged</p>
+         * @type {number || null}
+         */
+        this.HybridNodeCpu = null;
+
+        /**
+         * <p>Peer-to-peer node memory size in GB. If not passed, maintain current value unchanged</p>
+         * @type {number || null}
+         */
+        this.HybridNodeMem = null;
+
+        /**
+         * <p>Number of peer nodes. If not passed, maintain current value unchanged</p>
+         * @type {number || null}
+         */
+        this.HybridNodeNum = null;
+
+        /**
+         * <p>Peer-to-peer node disk capacity in GB. If not passed, maintain current value unchanged</p>
+         * @type {number || null}
+         */
+        this.Disk = null;
+
+        /**
+         * <p>Storage type. Available values: CLOUD_HSSD (enhanced SSD cloud disk), CLOUD_TCS (local disk), CLOUD_BSSD (universal SSD cloud disk). If not specified, the current value remains unchanged.</p>
+         * @type {string || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * <p>Specification code, for example, 4c8g, 16c32g</p>
+         * @type {string || null}
+         */
+        this.SpecCode = null;
+
+        /**
+         * <p>Target AZ list. If not passed, maintain current value unchanged</p>
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * <p>Availability zone mode. 1: single availability zone. 3: multi-availability zone primary AZ mode</p>
+         * @type {number || null}
+         */
+        this.AZMode = null;
+
+        /**
+         * <p>Primary AZ. This parameter is valid only when AZMode is 3</p>
+         * @type {string || null}
+         */
+        this.PrimaryAZ = null;
+
+        /**
+         * <p>Number of replicas, value ranges from 1 to 3</p>
+         * @type {number || null}
+         */
+        this.FullReplications = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.HybridNodeCpu = 'HybridNodeCpu' in params ? params.HybridNodeCpu : null;
+        this.HybridNodeMem = 'HybridNodeMem' in params ? params.HybridNodeMem : null;
+        this.HybridNodeNum = 'HybridNodeNum' in params ? params.HybridNodeNum : null;
+        this.Disk = 'Disk' in params ? params.Disk : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.AZMode = 'AZMode' in params ? params.AZMode : null;
+        this.PrimaryAZ = 'PrimaryAZ' in params ? params.PrimaryAZ : null;
+        this.FullReplications = 'FullReplications' in params ? params.FullReplications : null;
+
+    }
+}
+
+/**
  * ModifyInstanceNetwork response structure.
  * @class
  */
@@ -7848,6 +7953,69 @@ class AutoScalingConfig extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstance response structure.
+ * @class
+ */
+class ModifyDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Asynchronous task ID, returned when DryRun=false. You can call the Query Task API with this ID to get task status.</p>
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * <p>Order number, returned in prepaid scenarios</p>
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * <p>Whether to perform in-place configuration changes. Returned when DryRun=true.</p>
+         * @type {boolean || null}
+         */
+        this.IsInPlaceModification = null;
+
+        /**
+         * <p>Whether to perform configuration adjustment. Returned when DryRun=true</p>
+         * @type {boolean || null}
+         */
+        this.IsMigrateModification = null;
+
+        /**
+         * <p>Configuration change plan description. Returned when DryRun=true, describing the sub-process orchestration to be executed</p>
+         * @type {string || null}
+         */
+        this.ModifyPlan = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.IsInPlaceModification = 'IsInPlaceModification' in params ? params.IsInPlaceModification : null;
+        this.IsMigrateModification = 'IsMigrateModification' in params ? params.IsMigrateModification : null;
+        this.ModifyPlan = 'ModifyPlan' in params ? params.ModifyPlan : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Database stored procedure information.
  * @class
  */
@@ -9701,6 +9869,7 @@ module.exports = {
     BackupMethodStatisticsOutPut: BackupMethodStatisticsOutPut,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
+    ModifyDBInstanceRequest: ModifyDBInstanceRequest,
     ModifyInstanceNetworkResponse: ModifyInstanceNetworkResponse,
     ModifyInstanceSSLStatusResponse: ModifyInstanceSSLStatusResponse,
     DescribeDBEnginesRequest: DescribeDBEnginesRequest,
@@ -9821,6 +9990,7 @@ module.exports = {
     DescribeFlowRequest: DescribeFlowRequest,
     ModifyDBSBackupSetCommentResponse: ModifyDBSBackupSetCommentResponse,
     AutoScalingConfig: AutoScalingConfig,
+    ModifyDBInstanceResponse: ModifyDBInstanceResponse,
     DatabaseProcedure: DatabaseProcedure,
     DescribeDBEnginesResponse: DescribeDBEnginesResponse,
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,

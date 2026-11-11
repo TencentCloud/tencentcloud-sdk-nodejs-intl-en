@@ -176,6 +176,7 @@ const DescribeReplicationGroupRequest = models.DescribeReplicationGroupRequest;
 const DescribeInstanceSupportFeatureRequest = models.DescribeInstanceSupportFeatureRequest;
 const RedisNodes = models.RedisNodes;
 const DescribeInstanceMonitorTopNCmdRequest = models.DescribeInstanceMonitorTopNCmdRequest;
+const ModifyValkeyModuleRequest = models.ModifyValkeyModuleRequest;
 const CreateExportTaskRequest = models.CreateExportTaskRequest;
 const DescribeInstanceSecurityGroupRequest = models.DescribeInstanceSecurityGroupRequest;
 const InstanceParamHistory = models.InstanceParamHistory;
@@ -218,9 +219,10 @@ const DeleteReplicationInstanceResponse = models.DeleteReplicationInstanceRespon
 const CleanUpInstanceRequest = models.CleanUpInstanceRequest;
 const DescribeInstanceDealDetailResponse = models.DescribeInstanceDealDetailResponse;
 const ModifyReplicationGroupRequest = models.ModifyReplicationGroupRequest;
+const UpdateSSLCertResponse = models.UpdateSSLCertResponse;
 const Groups = models.Groups;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const SourceCommand = models.SourceCommand;
+const ModifyValkeyModuleResponse = models.ModifyValkeyModuleResponse;
 const ModfiyInstancePasswordRequest = models.ModfiyInstancePasswordRequest;
 const DescribeSlowLogRequest = models.DescribeSlowLogRequest;
 const Filter = models.Filter;
@@ -285,13 +287,16 @@ const DescribeProxySlowLogResponse = models.DescribeProxySlowLogResponse;
 const ModifyInstanceReadOnlyRequest = models.ModifyInstanceReadOnlyRequest;
 const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
 const DescribeInstanceMonitorBigKeyRequest = models.DescribeInstanceMonitorBigKeyRequest;
+const ModifySSLEncryptionModeResponse = models.ModifySSLEncryptionModeResponse;
 const DescribeBackupDownloadRestrictionRequest = models.DescribeBackupDownloadRestrictionRequest;
 const TendisNodes = models.TendisNodes;
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
 const SwitchProxyRequest = models.SwitchProxyRequest;
+const SourceCommand = models.SourceCommand;
 const DescribeInstanceSpecBandwidthRequest = models.DescribeInstanceSpecBandwidthRequest;
 const SwitchInstanceVipResponse = models.SwitchInstanceVipResponse;
 const BackupLimitVpcItem = models.BackupLimitVpcItem;
+const ModifySSLEncryptionModeRequest = models.ModifySSLEncryptionModeRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const ModifyNetworkConfigRequest = models.ModifyNetworkConfigRequest;
 const HotKeyInfo = models.HotKeyInfo;
@@ -324,6 +329,7 @@ const DescribeInstanceMonitorHotKeyResponse = models.DescribeInstanceMonitorHotK
 const InstanceParam = models.InstanceParam;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const ClearInstanceResponse = models.ClearInstanceResponse;
+const UpdateSSLCertRequest = models.UpdateSSLCertRequest;
 const DescribeTendisSlowLogRequest = models.DescribeTendisSlowLogRequest;
 const InstanceSlowlogDetail = models.InstanceSlowlogDetail;
 
@@ -350,7 +356,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
+     * TencentDB for Redis decommissioned the API for querying large keys in instances on October 31, 2022. For the specific announcement, please refer to the decommissioning announcement of the API for querying large keys in instances.
      * @param {DescribeInstanceMonitorBigKeySizeDistRequest} req
      * @param {function(string, DescribeInstanceMonitorBigKeySizeDistResponse):void} cb
      * @public
@@ -372,7 +378,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to remove a replication group member. Note: This API is being deprecated. Use [RemoveReplicationInstance](https://intl.cloud.tencent.com/document/product/239/90099?from_cn_redirect=1) instead.
+     * This API is used to remove replication group members. Note: This API is offline. Please use RemoveReplicationInstance.
      * @param {DeleteReplicationInstanceRequest} req
      * @param {function(string, DeleteReplicationInstanceResponse):void} cb
      * @public
@@ -900,6 +906,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to update SSL key information.
+     * @param {UpdateSSLCertRequest} req
+     * @param {function(string, UpdateSSLCertResponse):void} cb
+     * @public
+     */
+    UpdateSSLCert(req, cb) {
+        let resp = new UpdateSSLCertResponse();
+        this.request("UpdateSSLCert", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeInstanceSupportFeature) is used to query the supported features of the instance.
      * @param {DescribeInstanceSupportFeatureRequest} req
      * @param {function(string, DescribeInstanceSupportFeatureResponse):void} cb
@@ -922,7 +939,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
+     * TencentDB for Redis decommissioned the API for querying large keys in instances on October 31, 2022. For the specific announcement, please refer to the decommissioning announcement of the API for querying large keys in instances.
      * @param {DescribeInstanceMonitorBigKeyTypeDistRequest} req
      * @param {function(string, DescribeInstanceMonitorBigKeyTypeDistResponse):void} cb
      * @public
@@ -1164,7 +1181,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is no longer used. Please use the TencentDB for DBbrain API [DescribeProxyProcessStatistics](https://intl.cloud.tencent.com/document/product/1130/84544?from_cn_redirect=1) to obtain the instance access source.
+     * This API is no longer used. Please use the TencentDB for DBbrain API [DescribeProxyProcessStatistics](https://www.tencentcloud.com/document/product/1130/84544?from_cn_redirect=1) to obtain the instance access source.
      * @param {DescribeInstanceMonitorSIPRequest} req
      * @param {function(string, DescribeInstanceMonitorSIPResponse):void} cb
      * @public
@@ -1197,7 +1214,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to change the instance access password. Due to a spelling error in the original API name, it has been corrected to [ModifyInstancePassword](https://intl.cloud.tencent.com/document/product/239/111555?from_cn_redirect=1). It is recommended to use the corrected API.
+     * This API is used to change the instance access password. As the API name contains a spelling error, it has been corrected to [ModifyInstancePassword](https://www.tencentcloud.com/document/product/239/111555?from_cn_redirect=1). The corrected API is recommended for use.
      * @param {ModfiyInstancePasswordRequest} req
      * @param {function(string, ModfiyInstancePasswordResponse):void} cb
      * @public
@@ -1274,7 +1291,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
+     * Tencent Cloud Database Redis decommissioned the API for querying large keys of instances on October 31, 2022. For the specific notice, please refer to the decommissioning announcement of the API for querying large keys of instances.
      * @param {DescribeInstanceMonitorBigKeyRequest} req
      * @param {function(string, DescribeInstanceMonitorBigKeyResponse):void} cb
      * @public
@@ -1428,6 +1445,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the enable status of the Valkey instance extension module.
+     * @param {ModifyValkeyModuleRequest} req
+     * @param {function(string, ModifyValkeyModuleResponse):void} cb
+     * @public
+     */
+    ModifyValkeyModule(req, cb) {
+        let resp = new ModifyValkeyModuleResponse();
+        this.request("ModifyValkeyModule", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a log download task.
      * @param {CreateExportTaskRequest} req
      * @param {function(string, CreateExportTaskResponse):void} cb
@@ -1483,14 +1511,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a replication group.
-     * @param {RemoveReplicationGroupRequest} req
-     * @param {function(string, RemoveReplicationGroupResponse):void} cb
+     * This API is used to change the SSL encryption mode.
+     * @param {ModifySSLEncryptionModeRequest} req
+     * @param {function(string, ModifySSLEncryptionModeResponse):void} cb
      * @public
      */
-    RemoveReplicationGroup(req, cb) {
-        let resp = new RemoveReplicationGroupResponse();
-        this.request("RemoveReplicationGroup", req, resp, cb);
+    ModifySSLEncryptionMode(req, cb) {
+        let resp = new ModifySSLEncryptionModeResponse();
+        this.request("ModifySSLEncryptionMode", req, resp, cb);
     }
 
     /**
@@ -1612,6 +1640,17 @@ class RedisClient extends AbstractClient {
     ChangeMasterInstance(req, cb) {
         let resp = new ChangeMasterInstanceResponse();
         this.request("ChangeMasterInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a replication group.
+     * @param {RemoveReplicationGroupRequest} req
+     * @param {function(string, RemoveReplicationGroupResponse):void} cb
+     * @public
+     */
+    RemoveReplicationGroup(req, cb) {
+        let resp = new RemoveReplicationGroupResponse();
+        this.request("RemoveReplicationGroup", req, resp, cb);
     }
 
     /**

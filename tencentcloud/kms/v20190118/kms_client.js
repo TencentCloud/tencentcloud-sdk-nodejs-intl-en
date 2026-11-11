@@ -62,6 +62,7 @@ const DescribeDataKeysResponse = models.DescribeDataKeysResponse;
 const DescribeWhiteBoxKeyRequest = models.DescribeWhiteBoxKeyRequest;
 const GetParametersForImportResponse = models.GetParametersForImportResponse;
 const DecryptResponse = models.DecryptResponse;
+const CreateKmsInstanceRequest = models.CreateKmsInstanceRequest;
 const ListDataKeyDetailResponse = models.ListDataKeyDetailResponse;
 const CreateWhiteBoxKeyResponse = models.CreateWhiteBoxKeyResponse;
 const ImportKeyMaterialRequest = models.ImportKeyMaterialRequest;
@@ -85,11 +86,12 @@ const DisableWhiteBoxKeysRequest = models.DisableWhiteBoxKeysRequest;
 const ImportDataKeyRequest = models.ImportDataKeyRequest;
 const ListKeyDetailRequest = models.ListKeyDetailRequest;
 const DeleteWhiteBoxKeyRequest = models.DeleteWhiteBoxKeyRequest;
+const PostQuantumCryptoSignResponse = models.PostQuantumCryptoSignResponse;
 const AlgorithmInfo = models.AlgorithmInfo;
 const GetRegionsResponse = models.GetRegionsResponse;
 const UpdateDataKeyDescriptionResponse = models.UpdateDataKeyDescriptionResponse;
 const ExclusiveHSM = models.ExclusiveHSM;
-const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
+const GetDataKeyCiphertextBlobRequest = models.GetDataKeyCiphertextBlobRequest;
 const EnableDataKeysResponse = models.EnableDataKeysResponse;
 const GenerateDataKeyResponse = models.GenerateDataKeyResponse;
 const EnableDataKeysRequest = models.EnableDataKeysRequest;
@@ -104,7 +106,7 @@ const CreateKeyResponse = models.CreateKeyResponse;
 const ReEncryptResponse = models.ReEncryptResponse;
 const EncryptResponse = models.EncryptResponse;
 const GetDataKeyPlaintextRequest = models.GetDataKeyPlaintextRequest;
-const GetDataKeyCiphertextBlobRequest = models.GetDataKeyCiphertextBlobRequest;
+const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
 const DeleteImportedKeyMaterialRequest = models.DeleteImportedKeyMaterialRequest;
 const EnableKeyResponse = models.EnableKeyResponse;
 const ImportDataKeyResponse = models.ImportDataKeyResponse;
@@ -123,7 +125,7 @@ const DescribeWhiteBoxDecryptKeyRequest = models.DescribeWhiteBoxDecryptKeyReque
 const DataKey = models.DataKey;
 const KeyMetadata = models.KeyMetadata;
 const CancelKeyArchiveResponse = models.CancelKeyArchiveResponse;
-const GetPublicKeyResponse = models.GetPublicKeyResponse;
+const CreateKmsInstanceResponse = models.CreateKmsInstanceResponse;
 const DecryptRequest = models.DecryptRequest;
 const DescribeWhiteBoxKeyDetailsRequest = models.DescribeWhiteBoxKeyDetailsRequest;
 const PostQuantumCryptoSignRequest = models.PostQuantumCryptoSignRequest;
@@ -153,7 +155,7 @@ const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
 const EnableDataKeyRequest = models.EnableDataKeyRequest;
 const BindCloudResourceRequest = models.BindCloudResourceRequest;
 const GetDataKeyCiphertextBlobResponse = models.GetDataKeyCiphertextBlobResponse;
-const PostQuantumCryptoSignResponse = models.PostQuantumCryptoSignResponse;
+const GetPublicKeyResponse = models.GetPublicKeyResponse;
 const SignByAsymmetricKeyResponse = models.SignByAsymmetricKeyResponse;
 const PostQuantumCryptoVerifyResponse = models.PostQuantumCryptoVerifyResponse;
 const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
@@ -164,6 +166,7 @@ const DisableDataKeysRequest = models.DisableDataKeysRequest;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
 const UnbindCloudResourceResponse = models.UnbindCloudResourceResponse;
 const DescribeKeyResponse = models.DescribeKeyResponse;
+const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const CancelKeyArchiveRequest = models.CancelKeyArchiveRequest;
 const Tag = models.Tag;
 const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
@@ -277,6 +280,17 @@ Key material can only be imported into CMKs in `Enabled` and `PendingImport` sta
     GetPublicKey(req, cb) {
         let resp = new GetPublicKeyResponse();
         this.request("GetPublicKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the description of the specified CMK. CMKs in `PendingDelete` status cannot be modified.
+     * @param {UpdateKeyDescriptionRequest} req
+     * @param {function(string, UpdateKeyDescriptionResponse):void} cb
+     * @public
+     */
+    UpdateKeyDescription(req, cb) {
+        let resp = new UpdateKeyDescriptionResponse();
+        this.request("UpdateKeyDescription", req, resp, cb);
     }
 
     /**
@@ -578,14 +592,14 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
-     * This API is used to batch enable data keys.
-     * @param {EnableDataKeysRequest} req
-     * @param {function(string, EnableDataKeysResponse):void} cb
+     * This API is used to return the key attribute information list.
+     * @param {DescribeDataKeysRequest} req
+     * @param {function(string, DescribeDataKeysResponse):void} cb
      * @public
      */
-    EnableDataKeys(req, cb) {
-        let resp = new EnableDataKeysResponse();
-        this.request("EnableDataKeys", req, resp, cb);
+    DescribeDataKeys(req, cb) {
+        let resp = new DescribeDataKeysResponse();
+        this.request("DescribeDataKeys", req, resp, cb);
     }
 
     /**
@@ -666,14 +680,14 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
-     * This API is used to return the key attribute information list.
-     * @param {DescribeDataKeysRequest} req
-     * @param {function(string, DescribeDataKeysResponse):void} cb
+     * This API is used to purchase and activate the KMS service.
+     * @param {CreateKmsInstanceRequest} req
+     * @param {function(string, CreateKmsInstanceResponse):void} cb
      * @public
      */
-    DescribeDataKeys(req, cb) {
-        let resp = new DescribeDataKeysResponse();
-        this.request("DescribeDataKeys", req, resp, cb);
+    CreateKmsInstance(req, cb) {
+        let resp = new CreateKmsInstanceResponse();
+        this.request("CreateKmsInstance", req, resp, cb);
     }
 
     /**
@@ -864,14 +878,14 @@ Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `AS
     }
 
     /**
-     * This API is used to modify the description of the specified CMK. CMKs in `PendingDelete` status cannot be modified.
-     * @param {UpdateKeyDescriptionRequest} req
-     * @param {function(string, UpdateKeyDescriptionResponse):void} cb
+     * This API is used to batch enable data keys.
+     * @param {EnableDataKeysRequest} req
+     * @param {function(string, EnableDataKeysResponse):void} cb
      * @public
      */
-    UpdateKeyDescription(req, cb) {
-        let resp = new UpdateKeyDescriptionResponse();
-        this.request("UpdateKeyDescription", req, resp, cb);
+    EnableDataKeys(req, cb) {
+        let resp = new EnableDataKeysResponse();
+        this.request("EnableDataKeys", req, resp, cb);
     }
 
     /**

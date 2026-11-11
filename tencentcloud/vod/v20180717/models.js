@@ -4871,7 +4871,7 @@ class OverrideTranscodeParameter extends  AbstractModel {
         this.Container = null;
 
         /**
-         * <p>Indicates whether to remove video data. Valid values:<br>&lt;li&gt;0: Data is reserved;&lt;\li&gt;<br>&lt;li&gt;1: Data is removed.&lt;\li&gt;</p>
+         * <p>Indicates whether to remove video data. Parameter value:<br>&lt;li&gt;0: Data is reserved;&lt;\li&gt;<br>&lt;li&gt;1: Data is removed.&lt;\li&gt;</p>
          * @type {number || null}
          */
         this.RemoveVideo = null;
@@ -4895,7 +4895,7 @@ class OverrideTranscodeParameter extends  AbstractModel {
         this.AudioTemplate = null;
 
         /**
-         * <p>Top Speed Codec transcoding configuration parameters.</p>
+         * <p>TSC transcoding configuration parameters.</p>
          * @type {TEHDConfigForUpdate || null}
          */
         this.TEHDConfig = null;
@@ -7131,7 +7131,7 @@ class CreateCDNDomainResponse extends  AbstractModel {
 }
 
 /**
- * Audio stream configuration parameters
+ * Audio stream configuration parameters.
  * @class
  */
 class AudioTemplateInfoForUpdate extends  AbstractModel {
@@ -7145,7 +7145,7 @@ class AudioTemplateInfoForUpdate extends  AbstractModel {
         this.Codec = null;
 
         /**
-         * <p>Audio stream bitrate, in kbps. Value range: 0 and [26, 256]. When the value is 0, it means VOD automatically sets the bitrate.</p>
+         * <p>Audio stream bitrate. Value range: 0 and [26, 256]. Unit: kbps. When the value is 0, it means VOD automatically sets the bitrate.</p>
          * @type {number || null}
          */
         this.Bitrate = null;
@@ -7157,13 +7157,13 @@ class AudioTemplateInfoForUpdate extends  AbstractModel {
         this.SampleRate = null;
 
         /**
-         * <p>Audio channel. Available values:</p><li>1: single channel</li><li>2: dual-channel</li><li>6: stereo</li><li>0: the number of audio channels remains consistent with the original audio</li>When the media encapsulation format is an audio format (flac, ogg, mp3, m4a), the number of sound channels cannot be set to stereo.
+         * <p>Audio channel. Valid values:</p><li>1: Single channel</li><li>2: Two channels</li><li>6: Stereo</li><li>0: The number of audio channels remains the same as the original audio.</li>When the media encapsulation format is an audio format (flac, ogg, mp3, m4a), the number of audio channels cannot be set to stereo.
          * @type {number || null}
          */
         this.AudioChannel = null;
 
         /**
-         * <p>Specifies the retained audio tracks for output. All source tracks are retained by default.</p><p>This parameter is valid only when specified in OverrideParameter. In other cases, it does not take effect.</p>
+         * <p>Specifies the retained audio tracks for output. All source tracks are retained by default.</p><p>This parameter is valid only when specified in the OverrideParameter parameter. In other cases, it does not take effect.</p>
          * @type {Array.<number> || null}
          */
         this.StreamSelects = null;
@@ -7407,7 +7407,7 @@ class CreateAigcAudioCloneTask extends  AbstractModel {
 }
 
 /**
- * Input parameter type for audio/video moderation in the task flow template.
+ * Input parameter type for audio/video moderation in a task flow template.
  * @class
  */
 class ProcedureReviewAudioVideoTaskInput extends  AbstractModel {
@@ -7424,7 +7424,7 @@ class ProcedureReviewAudioVideoTaskInput extends  AbstractModel {
          * Content for review. Available values:
 <li>Media: original audio/video;</li>
 <li>Cover: cover.</li>
-If this parameter is not specified or is set to an empty array, Media is reviewed by default.
+If this parameter is not specified or is set to an empty array, Media is used for review by default.
          * @type {Array.<string> || null}
          */
         this.ReviewContents = null;
@@ -7679,7 +7679,7 @@ class AiRecognitionTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Video intelligent identification template ID.
+         * Intelligent video identification template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -10552,13 +10552,13 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Task flow name (support Chinese, up to 20 characters).</p>
+         * <p>Task flow name (supports Chinese, up to 20 characters).</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * <p><b>On-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</b></p>
+         * <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services on or after December 25, 2023, this field must be set to the app ID when accessing resources in VOD applications, whether in the default application or a newly created application.</b></p>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -10576,7 +10576,7 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
         this.MediaProcessTask = null;
 
         /**
-         * <p>AI content moderation type task parameter *.<br><font color="red">*: This parameter is used to initiate legacy review and is not recommended. It is recommended to use the ReviewAudioVideoTask parameter to initiate review.</font></p>
+         * <p>AI content review type task parameter *. <font color="red">*This parameter is used to initiate legacy review and is not recommended. It is recommended to use the ReviewAudioVideoTask parameter to initiate review.</font></p>
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
@@ -10588,7 +10588,7 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
         this.AiAnalysisTask = null;
 
         /**
-         * <p>Parameters for the AI content recognition type task.</p>
+         * <p>Parameters for the AI content recognition task.</p>
          * @type {Array.<AiRecognitionTaskInput> || null}
          */
         this.AiRecognitionTaskSet = null;
@@ -15720,7 +15720,7 @@ class LLMComprehendAsrForUpdate extends  AbstractModel {
 }
 
 /**
- * Watermark parameters for source tracing
+ * Traceability watermark parameters
  * @class
  */
 class TraceWatermarkInput extends  AbstractModel {
@@ -15730,7 +15730,7 @@ class TraceWatermarkInput extends  AbstractModel {
         /**
          * Traceability watermark task switch. Required. Available values:
 <li>ON: enable traceability watermark</li>
-<li>OFF: disables traceability watermark.</li>
+<li>OFF: Disable traceability watermark.</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -24923,7 +24923,7 @@ class CreateAigcAudioTaskRequest extends  AbstractModel {
 }
 
 /**
- * Task input parameter type for screencapturing for cover image of a video
+ * Task input parameter type for screencapturing for cover image in a video
  * @class
  */
 class CoverBySnapshotTaskInput extends  AbstractModel {
@@ -24938,7 +24938,7 @@ class CoverBySnapshotTaskInput extends  AbstractModel {
 
         /**
          * Screenshot type. Valid values:
-<li>Time: time point screencapturing</li>
+<li>Time: screenshot by time point</li>
 <li>Percent: screenshot by percentage</li>
          * @type {string || null}
          */
@@ -24946,8 +24946,8 @@ class CoverBySnapshotTaskInput extends  AbstractModel {
 
         /**
          * Screenshot position:
-<li>For time point screenshot taking, this value indicates the second of the specified video to use as the cover</li>
-<li>For percentage-based screenshots, this value indicates the percentage of the video used as the cover.</li>
+<li>For time point screenshots, this value indicates the second of the specified video to use as the cover</li>
+<li>For screenshot by percentage, this value indicates the percentage of the video used as the cover.</li>
          * @type {number || null}
          */
         this.PositionValue = null;
@@ -30423,7 +30423,7 @@ class TextToSpeechSyncResponse extends  AbstractModel {
 }
 
 /**
- * Task input parameter type of sprite sheet capture in a video
+ * Task input parameter type for generating a sprite sheet from a video
  * @class
  */
 class ImageSpriteTaskInput extends  AbstractModel {
@@ -30431,7 +30431,7 @@ class ImageSpriteTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Image sprite template ID.
+         * Sprite screenshot template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -35440,7 +35440,7 @@ class ProcessImageAsyncInputExtendedParameter extends  AbstractModel {
 }
 
 /**
- * Type of rotating image tasks
+ * Rotating image task type
  * @class
  */
 class AnimatedGraphicTaskInput extends  AbstractModel {
@@ -35455,18 +35455,18 @@ class AnimatedGraphicTaskInput extends  AbstractModel {
 
         /**
          * Start time offset of the GIF in the video, in seconds.
-<li>If not set or set to 0, it starts from the starting position of the video.</li>
-<li>When the value is greater than 0 (assume it is n), it means starting from the nth second of the video;</li>
+<li>If not set or set to 0, it starts from the beginning of the video.</li>
+<li>When the value is greater than 0 (assuming n), it means starting from the nth second of the video;</li>
 <li>When the value is less than 0 (assuming -n), it means starting from the position n seconds before the video ends.</li>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * End time offset of an animated image in the video, in seconds.
+         * End time offset of the GIF in the video, in seconds.
 <li>If not set or set to 0, it will last until the end of a video.</li>
-<li>When the value is greater than 0 (assuming n), it means it will last until the nth second of the video and then terminate;</li>
-<li>When the value is less than 0 (assuming -n), it means the video will terminate n seconds before the end.</li>
+<li>When the value is greater than 0 (assuming n), it means the video ends at the nth second.</li>
+<li>When the value is less than 0 (assuming -n), it means termination n seconds before the video ends.</li>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -35515,14 +35515,14 @@ Default value: 0px.
         /**
          * Vertical position of the mosaic origin relative to the origin of coordinates of the video image. Supports two formats: % and px.
 <li>If a string ends with %, it indicates that the `YPos` of a mosaic is a specified percentage of a video's height. For example, `10%` means that `YPos` is 10% of a video's height.</li>
-<li>If a string ends with px, it means the mosaic YPos is specified in pixels. For example, 100px means the YPos is 100 pixels.</li>
+<li>If a string ends with px, it means the mosaic YPos is specified in pixels. For example, 100px means YPos is 100 pixels.</li>
 Default value: 0px.
          * @type {string || null}
          */
         this.YPos = null;
 
         /**
-         * Width of the mosaic, supporting two formats: % and px.
+         * Width of a mosaic, supporting two formats: % and px.
 <li>If a string ends with %, it indicates that the `Width` of a mosaic is a percentage of a video's width. For example, `10%` means that `Width` is 10% of a video's width.</li>
 <li>If a string ends with px, it means the mosaic Width unit is pixel. For example, 100px means the Width is 100 pixels.</li>
 Default value: 10%.
@@ -35531,7 +35531,7 @@ Default value: 10%.
         this.Width = null;
 
         /**
-         * Height of a mosaic, supporting two formats: % and px.
+         * Height of the mosaic, supporting two formats: % and px.
 <li>If a string ends with %, it indicates that the `Height` of a mosaic is a percentage of a video's height. For example, `10%` means that `Height` is 10% of a video's height.</li>
 <li>If a string ends with px, it means the mosaic Height unit is pixel. For example, 100px means the Height is 100 pixels.</li>
 Default value: 10%.
@@ -35541,8 +35541,8 @@ Default value: 10%.
 
         /**
          * Start time offset of a mosaic, in seconds. If not set or set to 0, a mosaic starts appearing when a video starts.
-<li>If not set or set to 0, a mosaic appears when a video starts.</li>
-<li>If the value is greater than 0 (for example, n), a mosaic will appear at second n of a frame.</li>
+<li>If not set or set to 0, a mosaic starts appearing when a video starts.</li>
+<li>If the value is greater than 0 (for example, n), a mosaic will appear at second n of a video.</li>
 <li>When the value is less than 0 (assuming -n), it means the mosaic appears n seconds before the end of a video.</li>
          * @type {number || null}
          */
@@ -35550,8 +35550,8 @@ Default value: 10%.
 
         /**
          * End time offset of a mosaic, in seconds.
-<li>If not set or set to 0, mosaic will last until the end of a frame.</li>
-<li>If the value is greater than 0 (for example, n), a mosaic will disappear at second n.</li>
+<li>If not set or set to 0, a mosaic will last until the end of a frame.</li>
+<li>If the value is greater than 0 (for example, n), the mosaic will disappear at second n.</li>
 <li>When the value is less than 0 (assuming -n), it means the mosaic lasts until n seconds before the end of a video.</li>
          * @type {number || null}
          */
@@ -38822,13 +38822,13 @@ class MediaProcessTaskInput extends  AbstractModel {
         this.TranscodeTaskSet = null;
 
         /**
-         * List of video-to-GIF tasks.
+         * List of video-to-animated-image tasks.
          * @type {Array.<AnimatedGraphicTaskInput> || null}
          */
         this.AnimatedGraphicTaskSet = null;
 
         /**
-         * List of time point screenshot tasks for videos.
+         * List of time point screencapturing tasks for videos.
          * @type {Array.<SnapshotByTimeOffsetTaskInput> || null}
          */
         this.SnapshotByTimeOffsetTaskSet = null;
@@ -38846,7 +38846,7 @@ class MediaProcessTaskInput extends  AbstractModel {
         this.ImageSpriteTaskSet = null;
 
         /**
-         * Task list of screencapturing for cover images from videos.
+         * Task list of screencapturing for cover images of videos.
          * @type {Array.<CoverBySnapshotTaskInput> || null}
          */
         this.CoverBySnapshotTaskSet = null;
@@ -40448,7 +40448,7 @@ class AiAnalysisTaskCoverOutput extends  AbstractModel {
 }
 
 /**
- * Type of the audio/video moderation task
+ * Audio/video moderation task type
  * @class
  */
 class AiContentReviewTaskInput extends  AbstractModel {
@@ -41146,7 +41146,7 @@ class ProcessImageAsyncOutput extends  AbstractModel {
 }
 
 /**
- * Task input parameter type for screenshot taking at specified time points for a video.
+ * Task input parameter type for screenshot taking at specified time points in a video
  * @class
  */
 class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
@@ -41166,7 +41166,7 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
         this.ExtTimeOffsetSet = null;
 
         /**
-         * <p>List of screenshot time points, in <font color="red">ms</font>. This parameter is not recommended. We recommend that you use the ExtTimeOffsetSet parameter.</p>
+         * <p>List of screencapturing time points, unit: <font color="red">ms</font>. This parameter is no longer recommended. We recommend that you use the ExtTimeOffsetSet parameter.</p>
          * @type {Array.<number> || null}
          */
         this.TimeOffsetSet = null;
@@ -45309,13 +45309,13 @@ class TranscodeTaskInput extends  AbstractModel {
         this.MosaicSet = null;
 
         /**
-         * <p>Opening and ending content list. Up to 10 opening and ending contents are supported.</p>
+         * <p>Opening and ending content list. Up to 10 supported.</p>
          * @type {Array.<HeadTailTaskInput> || null}
          */
         this.HeadTailSet = null;
 
         /**
-         * <p>Start time offset of the transcoded video, in seconds.</p><li>If not specified or set to 0, the transcoded video starts from the start position of the original video;</li><li>If the value is greater than 0 (assuming n), the transcoded video starts from the position at the nth second of the original video;</li><li>If the value is less than 0 (assuming -n), the transcoded video starts from the position n seconds before the end of the original video.</li>
+         * <p>Start time offset of the transcoded video, in seconds.</p><li>If not specified or set to 0, the transcoded video starts from the start position of the original video;</li><li>If the value is greater than 0 (assuming n), the transcoded video starts from the nth second of the original video;</li><li>If the value is less than 0 (assuming -n), the transcoded video starts from the position n seconds before the end of the original video.</li>
          * @type {number || null}
          */
         this.StartTimeOffset = null;
@@ -45333,7 +45333,7 @@ class TranscodeTaskInput extends  AbstractModel {
         this.OverrideParameter = null;
 
         /**
-         * <p>Subtitle suppression information list. Up to 2 are supported.</p>
+         * <p>Subtitle suppression information list. Up to 2 supported.</p>
          * @type {Array.<SubtitleInfoInput> || null}
          */
         this.SubtitleInfoSet = null;
@@ -48153,7 +48153,7 @@ class SpecificationDataItem extends  AbstractModel {
 }
 
 /**
- * Top Speed Codec parameter configuration.
+ * Parameter configuration for top speed Codec.
  * @class
  */
 class TEHDConfigForUpdate extends  AbstractModel {
@@ -48161,13 +48161,13 @@ class TEHDConfigForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Top speed Codec type. Available values: <li>TEHD-100: top speed Codec-100;</li> <li>OFF: disables top speed Codec.</li> If not specified, no modification is made.
+         * Top speed Codec type. Available values: <li>TEHD-100 means top speed Codec-100;</li> <li>OFF means disabling top speed Codec.</li> If not specified, no modification is made.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Maximum video bitrate. If not specified, no modification is made.
+         * Maximum video bitrate. If this parameter is not specified, no modification is made.
          * @type {number || null}
          */
         this.MaxVideoBitrate = null;
@@ -50484,7 +50484,7 @@ class WatermarkInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * Text content, up to 100 characters. This field is required only when the watermark type is text.
+         * Text content, up to 100 characters. Fill in only when the watermark type is text watermark.
 Text watermarks do not support watermarking screenshots.
          * @type {string || null}
          */
@@ -50492,7 +50492,7 @@ Text watermarks do not support watermarking screenshots.
 
         /**
          * SVG content. Length not exceeding 2,000,000 characters. Fill in only when the watermark type is SVG watermark.
-SVG watermark does not support watermarking screenshots.
+SVG watermark does not support screenshot watermarking.
          * @type {string || null}
          */
         this.SvgContent = null;
@@ -50510,7 +50510,7 @@ SVG watermark does not support watermarking screenshots.
          * End time offset of a watermark, in seconds.
 <li>If not set or set to 0, a watermark will last until the end of a video.</li>
 <li>If the value is greater than 0 (for example, n), a watermark will disappear at second n.</li>
-<li>When the value is less than 0 (assuming -n), the watermark persists until n seconds before the end of the video.</li>
+<li>When the value is less than 0 (assuming -n), the watermark persists until n seconds before the end of a video.</li>
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -51699,7 +51699,7 @@ class AigcImageTaskInput extends  AbstractModel {
 }
 
 /**
- * Video stream configuration parameters
+ * Video stream configuration parameters.
  * @class
  */
 class VideoTemplateInfoForUpdate extends  AbstractModel {
@@ -51725,7 +51725,7 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         this.Bitrate = null;
 
         /**
-         * <p>Resolution adaptation. Available values:</p><li>open: enable. At this point, Width represents the long side of the video, and Height represents the short side.</li><li>close: disable. At this point, Width represents the width of the video, and Height represents the height.</li>
+         * <p>Resolution adaptation. Available values:</p><li>open: enable. At this point, Width represents the long side of the video, and Height represents the short side of the video.</li><li>close: disable. At this point, Width represents the width of the video, and Height represents the height of the video.</li>
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -51743,7 +51743,7 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         this.Height = null;
 
         /**
-         * <p>Filling method. When the video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the processing method for transcoding is "fill". Optional filling modes:</p><li>stretch: stretch each frame to fill the entire screen, which may cause the transcoded video to be "squashed" or "stretched";</li><li>black: keep the video aspect ratio unchanged, with the rest of the edges filled with black.</li><li>white: keep the video aspect ratio unchanged, with the rest of the edges filled with white.</li><li>gauss: Gaussian blur. Keep the video aspect ratio unchanged, with the rest of the edges filled using Gaussian blur.</li>
+         * <p>Filling method. When the video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the processing method for transcoding is "filling". Optional filling methods:</p><li>stretch: Stretch each frame to fill the entire screen, which may cause the transcoded video to be "squashed" or "stretched";</li><li>black: Keep the video aspect ratio unchanged and fill the rest of the edges with black.</li><li>white: Keep the video aspect ratio unchanged and fill the rest of the edges with white.</li><li>gauss: Gaussian blur. Keep the video aspect ratio unchanged and use Gaussian blur filling for the rest of the edges.</li>
          * @type {string || null}
          */
         this.FillType = null;
@@ -51779,7 +51779,7 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         this.GopUnit = null;
 
         /**
-         * <p>Bitrate control mode.</p><p>Enumeration values:</p><ul><li>VBR: Variable Bit Rate. It dynamically adjusts the output bitrate based on the complexity of the video image to ensure higher image quality. It is suitable for storage scenarios and applications with high image quality requirements.</li><li>ABR: Average Bit Rate. It tries to stabilize the average bitrate of the output video as much as possible while allowing short-term bitrate fluctuation. It is suitable for scenarios where minimizing overall bitrate is needed while maintaining a certain image quality.</li><li>CBR: Constant Bit Rate. It maintains a constant output bitrate during video encoding regardless of changes in image complexity. It is suitable for scenarios with strict network bandwidth requirements, such as live streaming.</li><li>VCRF: Constant Rate Factor. It controls video quality by setting a quality factor to achieve constant quality encoding of videos. The bitrate adjusts automatically based on content complexity. It is suitable for scenarios where maintaining a certain image quality is desired.</li></ul><p>Default value: VBR</p>
+         * <p>Bitrate control mode.</p><p>Enumeration values:</p><ul><li>VBR: Variable Bit Rate. The output bitrate is adjusted based on the complexity of the video image to ensure higher image quality. It is suitable for storage scenarios and applications with high image quality requirements.</li><li>ABR: Average Bit Rate. It tries to stabilize the average bitrate of the output video as much as possible while allowing short-term bitrate fluctuation. It is suitable for scenarios where minimizing overall bitrate is needed while maintaining a certain image quality.</li><li>CBR: Constant Bit Rate. The output bitrate remains constant during video encoding, regardless of image complexity. It is suitable for scenarios with strict network bandwidth requirements, such as live streaming.</li><li>VCRF: Constant Rate Factor. A quality factor is set for video quality control to achieve constant quality encoding of videos. The bitrate is adjusted based on content complexity. It is suitable for scenarios where maintaining a certain image quality is desired.</li></ul><p>Default value: VBR</p>
          * @type {string || null}
          */
         this.Mode = null;
@@ -51791,13 +51791,13 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         this.Bframes = null;
 
         /**
-         * <p>Average shard duration. 0 or left empty means auto, which will automatically choose an appropriate shard duration based on video features such as GOP.</p><p>Value range: [0, 10]</p><p>Unit: seconds</p><p>Supports only transcoding templates, not adaptive bitrate stream templates.</p>
+         * <p>Average duration of slices. 0 or left empty means auto, which will choose an appropriate segment duration based on video features such as GOP.</p><p>Value range: [0, 10]</p><p>Unit: seconds</p><p>Supports only transcoding templates, not adaptive bitrate templates.</p>
          * @type {number || null}
          */
         this.HlsTime = null;
 
         /**
-         * <p>A predefined combination of encoding tools or features allowed in a video encoding standard, suitable for different scenarios.</p><p>Enumeration values:</p><ul><li>baseline: Supports only I/p frames and non-interlaced scenarios, suitable for video calls, mobile video, and other scenarios.</li><li>main: Mainstream Profile, provides I-frames, p-frames, and B-frames, and supports both interlaced and non-interlaced modes. Mainly used in mainstream audio and video consumption products such as video players and streaming media transmission devices.</li><li>high: Highest encoding level, adds 8X8 prediction on top of the main Profile, and supports custom quantification. Widely used in Blu-ray storage, HDTV, and other scenarios.</li><li>default: Automatic filling along with the original video.  </li></ul><p>default value: default</p><p>This configuration item is valid only when Codec is libx264.</p>
+         * <p>A predefined combination of encoding tools or features allowed in video encoding standards, suitable for different scenarios.</p><p>Enumeration values:</p><ul><li>baseline: Supports only I/p frames and non-interlaced scenarios, suitable for video calls, mobile video, and other scenarios.</li><li>main: Mainstream Profile that provides I, p, and B frames, and supports both interlaced and non-interlaced modes. It is mainly used in mainstream audio and video consumption products such as video players and streaming media transmission devices.</li><li>high: Highest encoding level. It adds 8X8 prediction on top of the main Profile and supports custom quantification. It is widely used in Blu-ray storage, HDTV, and other scenarios.</li><li>default: Automatic filling along with the original video.  </li></ul><p>default value: default</p><p>This configuration item is valid only when Codec is libx264.</p>
          * @type {string || null}
          */
         this.VideoProfile = null;
@@ -52074,7 +52074,7 @@ class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
         this.BlindWatermark = null;
 
         /**
-         * <p>External subtitle file. Elements are subtitle IDs. Supports multiple subtitles, up to 16.</p>
+         * <p>External subtitle list. The element is Subtitle ID. Supports multiple subtitles, up to 16.</p>
          * @type {Array.<string> || null}
          */
         this.SubtitleSet = null;
@@ -52086,7 +52086,7 @@ class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
         this.SubtitleInfoSet = null;
 
         /**
-         * <p>Third-party DRM encryption information. It is not currently supported to initiate tasks using third-party DRM info via task flow.</p>
+         * <p>Third-party DRM encryption information. It is not currently supported to initiate tasks using third-party DRM information via task flow.</p>
          * @type {ThirdPartyDrmInfo || null}
          */
         this.DrmInfo = null;
@@ -58786,7 +58786,7 @@ When SrcLanguage is fr (French), value range:
 }
 
 /**
- * Input parameter type for importing an intelligent media assets knowledge base in a task flow template.
+ * Input parameter type for importing a task flow template into the Intelligent Media Assets knowledge base.
  * @class
  */
 class ImportMediaKnowledgeTaskInput extends  AbstractModel {
@@ -58800,7 +58800,7 @@ class ImportMediaKnowledgeTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * <p>List of knowledge base IDs. Leave empty to use the default knowledge base.</p>
+         * <p>List of knowledge base IDs. If left empty, the default knowledge base will be used.</p>
          * @type {Array.<string> || null}
          */
         this.KnowledgeBaseIds = null;
@@ -61320,7 +61320,7 @@ class RemoveWatermarkRequest extends  AbstractModel {
 }
 
 /**
- * Encryption information of a third-party DRM manufacturer.
+ * Encryption information of the external DRM vendor.
  * @class
  */
 class SPEKEDrm extends  AbstractModel {
@@ -61328,13 +61328,13 @@ class SPEKEDrm extends  AbstractModel {
         super();
 
         /**
-         * <p>Resource tagging. The field content is user-customized. It supports 1-128 characters, including numbers, letters, underscores (_), and hyphens (-). This field corresponds to the cid field in the Speke request. Note: Different DRM manufacturers have different restrictions on this field (for example, SDMC does not support underscores in this field). For specific rules, please confirm with the DRM manufacturer.</p>
+         * <p>Resource tagging. The field content is user-customized. It supports 1-128 characters, including numbers, letters, underscores (_), and hyphens (-). This field corresponds to the cid field in the Speke request. Note: Different DRM manufacturers have differences in the limits for this field (for example, SDMC does not support underscores in this field). For specific rules, please contact the DRM manufacturer for confirmation.</p>
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * <p>DRM manufacturer access address. This field content is obtained from the DRM manufacturer. Note: Different DRM manufacturers have different limits on the number of substreams. For example, PallyCon cannot exceed 5 substreams, and DRMtoday supports stream encryption for a maximum of 9 substreams.</p>
+         * <p>DRM manufacturer access address. This field content is obtained from the DRM manufacturer. Note: Different DRM manufacturers have different limits on the number of substreams. For example, PallyCon allows no more than 5 substreams, while DRMtoday supports up to 9 substreams for encryption.</p>
          * @type {string || null}
          */
         this.KeyServerUrl = null;
@@ -61346,7 +61346,7 @@ class SPEKEDrm extends  AbstractModel {
         this.Vector = null;
 
         /**
-         * <p>Encryption method. Available values:<br>cbcs: PlayReady, Widevine, FairPlay, Widevine+FairPlay, Widevine+PlayReady, PlayReady+FairPlay, Widevine+PlayReady+FairPlay supported;<br>cenc: PlayReady, Widevine, Widevine+PlayReady supported;<br>If left blank, cbcs is used by default for FairPlay;<br>cenc is used by default for PlayReady and Widevine;<br>cbcs is used by default for Widevine+FairPlay, PlayReady+FairPlay, Widevine+PlayReady+FairPlay;<br>cenc is used by default for Widevine+PlayReady;</p>
+         * <p>Encryption method. Available values:<br>cbcs: PlayReady, Widevine, FairPlay, Widevine+FairPlay, Widevine+PlayReady, PlayReady+FairPlay, Widevine+PlayReady+FairPlay are supported;<br>cenc: PlayReady, Widevine, Widevine+PlayReady are supported;<br>If left blank, cbcs is used for FairPlay by default;<br>cenc is used for PlayReady and Widevine by default;<br>cbcs is used for Widevine+FairPlay, PlayReady+FairPlay, Widevine+PlayReady+FairPlay by default;<br>cenc is used for Widevine+PlayReady by default;</p>
          * @type {string || null}
          */
         this.EncryptionMethod = null;
@@ -61358,7 +61358,7 @@ class SPEKEDrm extends  AbstractModel {
         this.EncryptionPreset = null;
 
         /**
-         * <p>DRM manufacturer request method.</p><p>Enumeration values:</p><ul><li>POST: Most DRM manufacturers use the POST method for requests.</li><li>GET: Some DRM manufacturers support the GET method for requests. When using this method, request information needs to be included in the KeyServerUrl field.</li></ul><p>Default value: POST</p>
+         * <p>Request method of the DRM manufacturer.</p><p>Enumeration values:</p><ul><li>POST: Most DRM manufacturers use the POST method for requests.</li><li>GET: Some DRM manufacturers support the GET method for requests. When using this method, request information needs to be included in the KeyServerUrl field.</li></ul><p>Default value: POST</p>
          * @type {string || null}
          */
         this.KeyAcquireMode = null;
@@ -66750,7 +66750,7 @@ The number of tags can be up to 10, and each tag can contain up to 16 characters
 }
 
 /**
- * Task input parameter type for sampling screenshot taking of a video
+ * Task input parameter type for sampling screenshot taking in a video
  * @class
  */
 class SampleSnapshotTaskInput extends  AbstractModel {
@@ -68102,7 +68102,7 @@ class SubtitleFormatsOperation extends  AbstractModel {
 }
 
 /**
- * Third-party Drm encryption information.
+ * Encryption information of the external Drm vendor.
  * @class
  */
 class ThirdPartyDrmInfo extends  AbstractModel {
@@ -68116,7 +68116,7 @@ class ThirdPartyDrmInfo extends  AbstractModel {
         this.DrmTypes = null;
 
         /**
-         * <p>Third-party DRM vendor information.</p>
+         * <p>External DRM vendor information.</p>
          * @type {SPEKEDrm || null}
          */
         this.SPEKEDrm = null;
@@ -69242,13 +69242,13 @@ class SubtitleInfoInput extends  AbstractModel {
         this.Id = null;
 
         /**
-         * <p>Specifies the subtitle track index to be suppressed into the video. The value starts from 0, where 0 indicates usage of the first subtitle track in the source video. This parameter is valid only when Id is SUBTITLE_ID_PLACE_HOLDER. StreamIndex must be consistent with the subtitle track index in the source file. For example, if the subtitle track in the source file is stream#0:3, StreamIndex should be 3. Otherwise, task processing failed.</p>
+         * <p>Specifies the subtitle track index to be suppressed into the video. The value starts from 0, where 0 indicates using the first subtitle track in the source video. This parameter is valid only when Id is SUBTITLE_ID_PLACE_HOLDER. StreamIndex must be consistent with the subtitle track index in the source file. For example, if the subtitle track in the source file is stream#0:3, StreamIndex should be 3. Otherwise, task processing may fail.</p>
          * @type {number || null}
          */
         this.StreamIndex = null;
 
         /**
-         * <p>Font type.</p><p>Enumeration values:</p><ul><li>hei.ttf: Heiti</li><li>song.ttf: Song Typeface</li><li>kai.ttf (recommended) or simkai.ttf: KaiTi</li><li>msyh.ttf: Microsoft YaHei</li><li>msyhbd.ttf: Microsoft YaHei in bold</li><li>hkjgt.ttf: Hwakangangtai</li><li>dhttx.ttf: Dianheiti Ultra Light</li><li>xqgdzt.ttf: Xique Ancient Dictionary</li><li>qpcyt.ttf: Smart Splice Super Round Body</li><li>arial.ttf: only supports English</li><li>dinalternate.ttf: DIN Alternate Bold</li><li>helveticalt.ttf: Helvetica</li><li>helveticains.ttf: Helvetica Inserat</li><li>trajanpro.ttf: TrajanPro-Bold</li><li>korean.ttf: Korean</li><li>japanese.ttf: Japanese</li><li>thai.ttf: Thai</li><li>roboto.ttf: Roboto</li><li>notosans.ttf: NotoSans</li><li>notosansthai.ttf: Thai NotoSansThai</li><li>sarabun.ttf: Thai Sarabun</li><li>kanit.ttf: Thai Kanit</li><li>charmonman.ttf: Thai Charmonman</li><li>notonaskharabic.ttf: Arabic NotoNaskhArabic</li><li>notosansdevanagari.ttf: India NotoSansDevanagari</li><li>notosanstc.ttf: Cantonese Source Han Sans NotoSansTC</li><li>notosanskr.ttf: Korean NotoSansKR</li><li>gothica1.ttf: Korean GothicA1</li><li>nanummyeongjo.ttf: Korean NanumMyeongjo</li><li>notosansjp.ttf: Japanese NotoSansJP</li><li>notoserifjp.ttf: Japanese NotoSerifJP</li><li>shipporimincho.ttf: Japanese ShipporiMincho</li></ul><p>Default value: hei.ttf Heiti</p>
+         * <p>Font type.</p><p>Enumeration values:</p><ul><li>hei.ttf: Heiti</li><li>song.ttf: Song Typeface</li><li>kai.ttf (recommended) or simkai.ttf: KaiTi</li><li>msyh.ttf: Microsoft YaHei</li><li>msyhbd.ttf: Microsoft YaHei in bold</li><li>hkjgt.ttf: Hwakangangtai</li><li>dhttx.ttf: Dianheiti Ultra Light</li><li>xqgdzt.ttf: Xique Ancient Dictionary</li><li>qpcyt.ttf: Smart Splice Super Round Body</li><li>arial.ttf: only supports English</li><li>dinalternate.ttf: DIN Alternate Bold</li><li>helveticalt.ttf: Helvetica</li><li>helveticains.ttf: Helvetica Inserat</li><li>trajanpro.ttf: TrajanPro-Bold</li><li>korean.ttf: Korean</li><li>japanese.ttf: Japanese</li><li>thai.ttf: Thai</li><li>roboto.ttf: Roboto</li><li>notosans.ttf: NotoSans</li><li>notosansthai.ttf: Thai NotoSansThai</li><li>sarabun.ttf: Thai Sarabun</li><li>kanit.ttf: Thai Kanit</li><li>charmonman.ttf: Thai Charmonman</li><li>notonaskharabic.ttf: Arabic NotoNaskhArabic</li><li>notosansdevanagari.ttf: India NotoSansDevanagari</li><li>notosanstc.ttf: Cantonese NotoSansTC</li><li>notosanskr.ttf: Korean NotoSansKR</li><li>gothica1.ttf: Korean GothicA1</li><li>nanummyeongjo.ttf: Korean NanumMyeongjo</li><li>notosansjp.ttf: Japanese NotoSansJP</li><li>notoserifjp.ttf: Japanese NotoSerifJP</li><li>shipporimincho.ttf: Japanese ShipporiMincho</li></ul><p>Default value: hei.ttf Heiti</p>
          * @type {string || null}
          */
         this.FontType = null;
@@ -69260,7 +69260,7 @@ class SubtitleInfoInput extends  AbstractModel {
         this.FontSize = null;
 
         /**
-         * <p>Text color, format: 0xRRGGBB.</p><p>Default value: 0xFFFFFF (white).</p>
+         * <p>Font color. Format: 0xRRGGBB.</p><p>Default value: 0xFFFFFF (white).</p>
          * @type {string || null}
          */
         this.FontColor = null;
@@ -69272,19 +69272,19 @@ class SubtitleInfoInput extends  AbstractModel {
         this.FontAlpha = null;
 
         /**
-         * <p>Subtitle Y-coordinate position. Specify this parameter to ignore the built-in coordinates in the subtitle file. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [0,4096].</li><li>Percentage: N%, where N ranges from [0,100]. For example, 10% means the subtitle Y-coordinate = 10%<em>source video height. Default value: source video height</em>4%.<br>Note: The coordinate axis origin is at the bottom of the central axis of the source video, and the subtitle reference point is at the bottom of the central axis of the subtitle. Refer to the figure below:<img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></li></ul>
+         * <p>Subtitle Y-coordinate position. Specify this parameter to ignore the built-in coordinates in the subtitle file. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [0,4096].</li><li>Percentage: N%, where N ranges from [0,100]. For example, 10% means the subtitle Y-coordinate = 10% <em>source video height. Default value: source video height</em>4%.<br>Note: The coordinate axis origin is at the bottom of the central axis of the source video, and the subtitle reference point is at the bottom of the central axis of the subtitle. Refer to the figure below:<img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></li></ul>
          * @type {string || null}
          */
         this.YPos = null;
 
         /**
-         * <p>Y-coordinate position of the subtitle background base plate. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [0,4096].</li><li>Percentage: N%, where N ranges from [0,100]. For example, 10% means the subtitle background base plate Y-coordinate = 10% * source video height. If not specified, the subtitle background base plate is disabled.<br>Note: The coordinate axis origin is located at the bottom of the central axis of the source video, and the reference point of the subtitle background base plate is at the bottom of its central axis. See the following diagram:<img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></li></ul>
+         * <p>Y-coordinate position of the subtitle background plate. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [0,4096].</li><li>Percentage: N%, where N ranges from [0,100]. For example, 10% means the subtitle background plate Y-coordinate = 10% * source video height. If not specified, the subtitle background plate is disabled.<br>Note: The coordinate axis origin is located at the bottom of the central axis of the source video, and the reference point of the subtitle background plate is at the bottom of its central axis. See the following diagram:<img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></li></ul>
          * @type {string || null}
          */
         this.BoardY = null;
 
         /**
-         * <p>Width of the base plate, a positive integer.</p><ul><li>Pixel: Npx, N value range: [0,4096].</li><li>Percentage: N%, N value range: [0, 100]. If background is enabled and this parameter is not specified, the default width is 90% of the source video width.</li></ul>
+         * <p>Base plate width, positive integer.</p><ul><li>Pixel: Npx, N value range: [0,4096].</li><li>Percentage: N%, N value range: [0, 100]. If base plate is enabled and this parameter is not specified, the default width is 90% of the source video width.</li></ul>
          * @type {string || null}
          */
         this.BoardWidth = null;
@@ -69308,13 +69308,13 @@ class SubtitleInfoInput extends  AbstractModel {
         this.BoardAlpha = null;
 
         /**
-         * <p>Alignment mode.</p><p>Enumeration values:</p><ul><li>top: Top alignment. The top position of subtitles is fixed, while the bottom position changes according to the number of lines. </li><li>bottom: Bottom alignment. The bottom position of subtitles is fixed, while the top position changes according to the number of lines. </li></ul><p>Default value: bottom</p>
+         * <p>Alignment mode.</p><p>Enumeration values:</p><ul><li>top: Top alignment. The top position of subtitles is fixed, while the bottom position changes according to the number of lines.</li><li>bottom: Bottom alignment. The bottom position of subtitles is fixed, while the top position changes according to the number of lines.</li></ul><p>Default value: bottom</p>
          * @type {string || null}
          */
         this.Alignment = null;
 
         /**
-         * <p>Stroke width. Floating-point number.</p><ul><li>Pixel: Npx, N value range: [0, 1000].</li><li>Percentage: N%, N value range: [0, 100].</li></ul><p>By default if left blank, it is 0.3% of the source video height.</p>
+         * <p>Stroke width. Floating-point number.</p><ul><li>Pixel: Npx, N value range: [0, 1000].</li><li>Percentage: N%, N value range: [0, 100].</li></ul><p>By default if left blank, 0.3% of the source video height.</p>
          * @type {string || null}
          */
         this.OutlineWidth = null;
@@ -69344,7 +69344,7 @@ class SubtitleInfoInput extends  AbstractModel {
         this.ShadowColor = null;
 
         /**
-         * <p>Shadow transparency. The value should be a positive floating-point number in the range of (0, 1].</p><ul><li>0: completely transparent;</li><li>1: completely opaque.</li></ul><p>Default value: 1, which means completely opaque, with shadow configured.</p>
+         * <p>Shadow transparency. The value should be a positive floating-point number in the range of (0, 1].</p><ul><li>0: completely transparent;</li><li>1: completely opaque.</li></ul><p>Default value: 1, which means completely opaque (with shadow configured).</p>
          * @type {number || null}
          */
         this.ShadowAlpha = null;

@@ -8244,7 +8244,7 @@ class SiteFailover extends  AbstractModel {
 }
 
 /**
- * Describes the returned site information.
+ * Back to site information
  * @class
  */
 class ZoneInfo extends  AbstractModel {
@@ -8264,8 +8264,8 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneName = null;
 
         /**
-         * Whether to disable the site. valid values: <li>false: not disabled;</li>.
-<li>true: disabled.</li>.
+         * Whether to disable the site. Valid values: <li>false: not disabled;</li>
+<li>true: Disable.</li>
          * @type {boolean || null}
          */
         this.Paused = null;
@@ -30101,7 +30101,7 @@ Note: This field may return null, which indicates a failure to obtain a valid va
 }
 
 /**
- * Package information.
+ * Plan information
  * @class
  */
 class Plan extends  AbstractModel {
@@ -30109,142 +30109,127 @@ class Plan extends  AbstractModel {
         super();
 
         /**
-         * Package type. valid values:.
-<Li>`Plan-Trial`: trial plan</li>.
-<Li>`Plan-Personal`: personal plan</li>.
-<Li>`Plan-Basic`: basic plan</li>.
-<Li>`Plan-Standard`: standard edition plan</li>.
-<li>plan-enterprise-v2: enterprise plan;</li>.
-<li>plan-enterprise-model-a: enterprise edition model a package.</li>.
-<Li>Plan-Enterprise: legacy enterprise plan.</li>.
+         * <p>Plan type. Valid values:</p><li>plan-trial: Trial Edition plan;</li><li>plan-personal: Personal Edition plan;</li><li>plan-basic: Basic Edition plan;</li><li>plan-standard: Standard Edition plan;</li><li>plan-enterprise-v2: Enterprise Edition plan;</li><li>plan-enterprise-model-a: Enterprise Edition Model A plan;</li><li>plan-enterprise: Legacy Enterprise Edition plan;</li><li>plan-makers-pro: Makers Pro Edition plan;</li><li>plan-makers-business: Makers Business Edition plan;</li><p>Valid values:</p><ul><li>plan-trial: Trial Edition plan</li><li>plan-personal: Personal Edition plan</li><li>plan-basic: Basic Edition plan</li><li>plan-standard: Standard Edition plan</li><li>plan-enterprise-v2: Enterprise Edition plan</li><li>plan-enterprise-model-a: Enterprise Edition Model A plan</li><li>plan-enterprise: Legacy Enterprise Edition plan</li><li>plan-makers-pro: Makers Pro Edition plan</li><li>plan-makers-business: Makers Business Edition plan</li></ul>
          * @type {string || null}
          */
         this.PlanType = null;
 
         /**
-         * Package ID. such as edgeone-2y041pblwaxe.
+         * <p>Plan ID, in the format of edgeone-2y041pblwaxe.</p>
          * @type {string || null}
          */
         this.PlanId = null;
 
         /**
-         * Service area. valid values:.
-<Li>`Mainland`: chinese mainland</li>.
-<li>`overseas`: global (chinese mainland not included)</li>.
-<Li>`Global`: global (chinese mainland included)</li>.
+         * <p>Service region. Valid values:</p><li>mainland: Chinese mainland;</li><li>overseas: Global (excluding the Chinese mainland);</li><li>global: Global (including the Chinese mainland).</li>
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * Auto-Renew switch. valid values:.
-<li>true: automatic renewal is enabled.</li>.
-<li>false: automatic renewal is not enabled.</li>.
+         * <p>Auto-renewal switch. Valid values:</p><li>true: Auto-renewal enabled;</li><li>false: Auto-renewal disabled.</li>
          * @type {boolean || null}
          */
         this.AutoRenewal = null;
 
         /**
-         * Package status. valid values:.
-<Li>Normal: indicates the normal status.</li>.
-<li>`expiring-soon`: will expire soon;</li>.
-<li>`expired`: expiration status;</li>.
-<Li>`Isolated`: isolated state</li>.
-<li>`overdue-isolated`: arrears isolated state.</li>.
+         * <p>Plan status. Valid values:</p><li>normal: Normal;</li><li>expiring-soon: Expiring soon;</li><li>expired: Expired;</li><li>isolated: Isolated;</li><li>overdue-isolated: Isolated due to overdue payment.</li>
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Payment type. valid values:.
-<Li>0: postpaid;</li>.
-<Li>1: prepaid.</li>.
+         * <p>Billing type. Valid values:</p><li>0: Postpaid;</li><li>1: Prepaid.</li>
          * @type {number || null}
          */
         this.PayMode = null;
 
         /**
-         * Describes the site information bound to the package, including the site id, site name, and site status.
+         * <p>Information of the sites bound to the plan, including site id, site name, and site status.</p>
          * @type {Array.<ZoneInfo> || null}
          */
         this.ZonesInfo = null;
 
         /**
-         * Smart acceleration request quantity in the package, unit: times.
+         * <p>Quota of smart acceleration requests in the plan, in the unit of requests.</p>
          * @type {number || null}
          */
         this.SmartRequestCapacity = null;
 
         /**
-         * Specifies the VAU specification in the package. measurement unit: unit.
+         * <p>VAU quota in the plan, in the unit of VAUs.</p>
          * @type {number || null}
          */
         this.VAUCapacity = null;
 
         /**
-         * Specifies the content acceleration traffic specification in the package, measurement unit: byte.
+         * <p>Quota of content acceleration traffic in the plan, in the unit of bytes.</p>
          * @type {number || null}
          */
         this.AccTrafficCapacity = null;
 
         /**
-         * Specifies the smart acceleration traffic specification in the package. measurement unit: byte.
+         * <p>Quota of client authentication traffic in the plan, in the unit of bytes.</p>
+         * @type {number || null}
+         */
+        this.ClientAuthTrafficCapacity = null;
+
+        /**
+         * <p>Quota of smart acceleration traffic in the plan, in the unit of bytes.</p>
          * @type {number || null}
          */
         this.SmartTrafficCapacity = null;
 
         /**
-         * Specifies the DDoS protection traffic specification in the package, measurement unit: byte.
+         * <p>Quota of DDoS protection traffic in the plan, in the unit of bytes.</p>
          * @type {number || null}
          */
         this.DDoSTrafficCapacity = null;
 
         /**
-         * Security traffic specification in the package. measurement unit: byte.
+         * <p>Quota of security traffic in the plan, in the unit of bytes.</p>
          * @type {number || null}
          */
         this.SecTrafficCapacity = null;
 
         /**
-         * Security requests in the package, unit: times.
+         * <p>Quota of security requests in the plan, in the unit of requests.</p>
          * @type {number || null}
          */
         this.SecRequestCapacity = null;
 
         /**
-         * Specifies the layer 4 acceleration traffic specification in the package, measurement unit: byte.
+         * <p>Quota of L4 acceleration traffic in the plan, in the unit of bytes.</p>
          * @type {number || null}
          */
         this.L4TrafficCapacity = null;
 
         /**
-         * Specifies the network optimization traffic specification in the package for the chinese mainland, measurement unit: byte.
+         * <p>Quota of network optimization traffic for the Chinese mainland in the plan, in the unit of bytes.</p>
          * @type {number || null}
          */
         this.CrossMLCTrafficCapacity = null;
 
         /**
-         * Specifies whether the package allows binding to new sites. valid values:.
-<li>true: allows binding a new site.</li>.
-<li>`false`: cannot bind new sites.</li>.
+         * <p>Whether the plan allows binding new sites. Valid values:</p><li>true: Allows binding new sites;</li><li>false: Does not allow binding new sites.</li>
          * @type {string || null}
          */
         this.Bindable = null;
 
         /**
-         * Package activation time.
+         * <p>Time when the plan takes effect.</p>
          * @type {string || null}
          */
         this.EnabledTime = null;
 
         /**
-         * Plan expiration time.
+         * <p>Expiration time of the plan.</p>
          * @type {string || null}
          */
         this.ExpiredTime = null;
 
         /**
-         * Supported features of the package include: <li>ContentAcceleration: content acceleration feature;</li> <li>SmartAcceleration: intelligent acceleration feature;</li> <li>L4: L4 acceleration feature;</li> <li>Waf: advanced Web protection;</li> <li>QUIC: QUIC feature;</li> <li>CrossMLC: network optimization in the chinese mainland;</li> <li>ProcessMedia: media processing feature;</li> <li>L4DDoS: L4 DDoS protection feature;</li> L7DDoS feature will only appear in one of the following specifications: <li>L7DDoS.CM30G; layer-7 DDoS protection feature - 30G guaranteed minimum bandwidth specification in the chinese mainland;</li> <li>L7DDoS.CM60G; layer-7 DDoS protection feature - 60G guaranteed minimum bandwidth specification in the chinese mainland;</li> <li>L7DDoS.CM100G; layer-7 DDoS protection feature - 100G guaranteed minimum bandwidth specification in the chinese mainland;</li> <li>L7DDoS.Anycast300G; layer-7 DDoS protection feature - 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.AnycastUnlimited; layer-7 DDoS protection feature - unlimited Anycast full protection outside the chinese mainland;</li> <li>L7DDoS.CM30G_Anycast300G; layer-7 DDoS protection feature - 30G guaranteed minimum bandwidth specification in the chinese mainland and 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.CM60G_Anycast300G; layer-7 DDoS protection feature - 60G guaranteed minimum bandwidth specification in the chinese mainland and 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.CM100G_Anycast300G; layer-7 DDoS protection feature - 100G guaranteed minimum bandwidth specification in the chinese mainland and 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.CM30G_AnycastUnlimited; layer-7 DDoS protection feature - 30G guaranteed minimum bandwidth specification in the chinese mainland and unlimited Anycast full protection outside the chinese mainland;</li> <li>L7DDoS.CM60G_AnycastUnlimited; layer-7 DDoS protection feature - 60G guaranteed minimum bandwidth specification in the chinese mainland and unlimited Anycast full protection outside the chinese mainland;</li> <li>L7DDoS.CM100G_AnycastUnlimited; layer-7 DDoS protection feature - 100G guaranteed minimum bandwidth specification in the chinese mainland and unlimited Anycast full protection outside the chinese mainland;</li>.
+         * <p>Features supported by the plan. Valid values: <li>ContentAcceleration: content acceleration;</li><li>SmartAcceleration: smart acceleration;</li><li>L4: L4 acceleration;</li><li>Waf: advanced Web protection;</li><li>QUIC: QUIC;</li><li>CrossMLC: network optimization for the Chinese mainland;</li><li>ProcessMedia: media processing;</li><li>L4DDoS: L4 DDoS protection.</li>Only one of the following L7DDoS specifications can appear: <li>L7DDoS.CM30G: L7 DDoS protection - 30 Gbps guaranteed bandwidth in the Chinese mainland;</li><li>L7DDoS.CM60G: L7 DDoS protection - 60 Gbps guaranteed bandwidth in the Chinese mainland;</li><li>L7DDoS.CM100G: L7 DDoS protection - 100 Gbps guaranteed bandwidth in the Chinese mainland;</li><li>L7DDoS.Anycast300G: L7 DDoS protection - 300 Gbps Anycast guaranteed bandwidth outside the Chinese mainland;</li><li>L7DDoS.AnycastUnlimited: L7 DDoS protection - unlimited Anycast full protection outside the Chinese mainland;</li><li>L7DDoS.CM30G_Anycast300G: L7 DDoS protection - 30 Gbps guaranteed bandwidth in the Chinese mainland and 300 Gbps Anycast guaranteed bandwidth outside the Chinese mainland;</li><li>L7DDoS.CM60G_Anycast300G: L7 DDoS protection - 60 Gbps guaranteed bandwidth in the Chinese mainland and 300 Gbps Anycast guaranteed bandwidth outside the Chinese mainland;</li><li>L7DDoS.CM100G_Anycast300G: L7 DDoS protection - 100 Gbps guaranteed bandwidth in the Chinese mainland and 300 Gbps Anycast guaranteed bandwidth outside the Chinese mainland;</li><li>L7DDoS.CM30G_AnycastUnlimited: L7 DDoS protection - 30 Gbps guaranteed bandwidth in the Chinese mainland and unlimited Anycast full protection outside the Chinese mainland;</li><li>L7DDoS.CM60G_AnycastUnlimited: L7 DDoS protection - 60 Gbps guaranteed bandwidth in the Chinese mainland and unlimited Anycast full protection outside the Chinese mainland;</li><li>L7DDoS.CM100G_AnycastUnlimited: L7 DDoS protection - 100 Gbps guaranteed bandwidth in the Chinese mainland and unlimited Anycast full protection outside the Chinese mainland.</li></p>
          * @type {Array.<string> || null}
          */
         this.Features = null;
@@ -30276,6 +30261,7 @@ class Plan extends  AbstractModel {
         this.SmartRequestCapacity = 'SmartRequestCapacity' in params ? params.SmartRequestCapacity : null;
         this.VAUCapacity = 'VAUCapacity' in params ? params.VAUCapacity : null;
         this.AccTrafficCapacity = 'AccTrafficCapacity' in params ? params.AccTrafficCapacity : null;
+        this.ClientAuthTrafficCapacity = 'ClientAuthTrafficCapacity' in params ? params.ClientAuthTrafficCapacity : null;
         this.SmartTrafficCapacity = 'SmartTrafficCapacity' in params ? params.SmartTrafficCapacity : null;
         this.DDoSTrafficCapacity = 'DDoSTrafficCapacity' in params ? params.DDoSTrafficCapacity : null;
         this.SecTrafficCapacity = 'SecTrafficCapacity' in params ? params.SecTrafficCapacity : null;

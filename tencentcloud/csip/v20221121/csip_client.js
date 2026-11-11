@@ -139,6 +139,7 @@ const ModifyDspmAssetLogDeliverySwitchRequest = models.ModifyDspmAssetLogDeliver
 const DescribePortScanTaskCountResponse = models.DescribePortScanTaskCountResponse;
 const DeleteImageRegistryTimedScanTaskConfigRequest = models.DeleteImageRegistryTimedScanTaskConfigRequest;
 const CreateRiskCenterScanTaskRequest = models.CreateRiskCenterScanTaskRequest;
+const BaselinePolicyBrief = models.BaselinePolicyBrief;
 const ModifyEDRRuleStatusResponse = models.ModifyEDRRuleStatusResponse;
 const DescribeBanStatusResponse = models.DescribeBanStatusResponse;
 const DescribeDynamicAssetsResponse = models.DescribeDynamicAssetsResponse;
@@ -162,6 +163,7 @@ const PortDetectInfo = models.PortDetectInfo;
 const ModifyImageRegistryTimedScanTaskConfigRequest = models.ModifyImageRegistryTimedScanTaskConfigRequest;
 const DescribeModifyMachinesLoginTypeTasksRequest = models.DescribeModifyMachinesLoginTypeTasksRequest;
 const ModifyDspmAssetAccountPrivilegesResponse = models.ModifyDspmAssetAccountPrivilegesResponse;
+const AssetBaselineRisk = models.AssetBaselineRisk;
 const DeleteDspmIdentifyComplianceCategoryRelationRequest = models.DeleteDspmIdentifyComplianceCategoryRelationRequest;
 const DescribeUebaRuleResponse = models.DescribeUebaRuleResponse;
 const DescribeAssetTreeResponse = models.DescribeAssetTreeResponse;
@@ -209,13 +211,13 @@ const ModifyImageVulWhitelistResponse = models.ModifyImageVulWhitelistResponse;
 const SourceIPVpcInfo = models.SourceIPVpcInfo;
 const DspmRiskStrategy = models.DspmRiskStrategy;
 const DescribeClusterInstallCommandResponse = models.DescribeClusterInstallCommandResponse;
-const ImageLayer = models.ImageLayer;
+const DescribeHostVulRiskEventListResponse = models.DescribeHostVulRiskEventListResponse;
 const CreateDspmAuditFilterStrategyRequest = models.CreateDspmAuditFilterStrategyRequest;
 const UserCSPMInfo = models.UserCSPMInfo;
 const DescribeAssetTagsResponse = models.DescribeAssetTagsResponse;
 const UninstallKeySandboxSkillResponse = models.UninstallKeySandboxSkillResponse;
 const DescribeVulScanTaskDetailResponse = models.DescribeVulScanTaskDetailResponse;
-const AssetViewVULRisk = models.AssetViewVULRisk;
+const DeleteLoginWhiteCustomEDRResponse = models.DeleteLoginWhiteCustomEDRResponse;
 const HostInfo = models.HostInfo;
 const DescribeCosAuditPayInfoRequest = models.DescribeCosAuditPayInfoRequest;
 const ModifyNFSScanConfRequest = models.ModifyNFSScanConfRequest;
@@ -293,6 +295,7 @@ const TaskInfo = models.TaskInfo;
 const KeySandboxCredential = models.KeySandboxCredential;
 const DeleteDomainAndIpRequest = models.DeleteDomainAndIpRequest;
 const ModifyDspmApplyingIdentifyComplianceGroupRequest = models.ModifyDspmApplyingIdentifyComplianceGroupRequest;
+const DescribeHostVulScanStatusRequest = models.DescribeHostVulScanStatusRequest;
 const DescribeComplianceStandardTermTreeResponse = models.DescribeComplianceStandardTermTreeResponse;
 const ImageScanAssetTarget = models.ImageScanAssetTarget;
 const TaskIdListKey = models.TaskIdListKey;
@@ -321,6 +324,7 @@ const DescribeAssetRiskListResponse = models.DescribeAssetRiskListResponse;
 const CreateDspmIdentifyCategoryResponse = models.CreateDspmIdentifyCategoryResponse;
 const AccessCredentialOutput = models.AccessCredentialOutput;
 const DescribeEdrLogCollectPathsResponse = models.DescribeEdrLogCollectPathsResponse;
+const DescribeClusterBaselineRiskPolicyListRequest = models.DescribeClusterBaselineRiskPolicyListRequest;
 const DescribeMalwareTimingScanSettingRequest = models.DescribeMalwareTimingScanSettingRequest;
 const ScanTaskInfo = models.ScanTaskInfo;
 const TrafficPluginState = models.TrafficPluginState;
@@ -432,7 +436,7 @@ const LogDeliveryCkafkaConfig = models.LogDeliveryCkafkaConfig;
 const DescribeClusterSuperNodeInfoResponse = models.DescribeClusterSuperNodeInfoResponse;
 const DescribeComplianceOverviewResponse = models.DescribeComplianceOverviewResponse;
 const DescribeClusterServiceListRequest = models.DescribeClusterServiceListRequest;
-const DescribePodContainerListRequest = models.DescribePodContainerListRequest;
+const DescribeBaselineSyncConfRequest = models.DescribeBaselineSyncConfRequest;
 const DescribeSkillScanPayInfoRequest = models.DescribeSkillScanPayInfoRequest;
 const DescribeAgentRunPolicyResponse = models.DescribeAgentRunPolicyResponse;
 const ModifyAssetTagResponse = models.ModifyAssetTagResponse;
@@ -460,6 +464,7 @@ const LicenseBindFilter = models.LicenseBindFilter;
 const SensitiveDetail = models.SensitiveDetail;
 const CreateDspmIdentifyComplianceGroupCopyResponse = models.CreateDspmIdentifyComplianceGroupCopyResponse;
 const DescribeClbListenerRulesResponse = models.DescribeClbListenerRulesResponse;
+const DspmIdentifyLevelItem = models.DspmIdentifyLevelItem;
 const CreateDspmIdentifyComplianceGroupCopyRequest = models.CreateDspmIdentifyComplianceGroupCopyRequest;
 const SkillRuleCatalogItem = models.SkillRuleCatalogItem;
 const CosRiskTrendInfo = models.CosRiskTrendInfo;
@@ -520,6 +525,7 @@ const DescribeTaskLogListRequest = models.DescribeTaskLogListRequest;
 const DspmAssetAccessTopologyItem = models.DspmAssetAccessTopologyItem;
 const Filters = models.Filters;
 const DescribeDspmIdentifyCategoryListRequest = models.DescribeDspmIdentifyCategoryListRequest;
+const HostVulScanStatus = models.HostVulScanStatus;
 const ExposeRuleItem = models.ExposeRuleItem;
 const ClusterWithAppIdItem = models.ClusterWithAppIdItem;
 const ModifyAgentRunPolicyResponse = models.ModifyAgentRunPolicyResponse;
@@ -529,11 +535,13 @@ const ModifyPayConfigResponse = models.ModifyPayConfigResponse;
 const ModifyPolicyStatusRequest = models.ModifyPolicyStatusRequest;
 const DescribeDspmSupportedAssetTypeRequest = models.DescribeDspmSupportedAssetTypeRequest;
 const DescribeBaselineFixRecordListResponse = models.DescribeBaselineFixRecordListResponse;
+const DescribeLoginWhiteCustomListEDRResponse = models.DescribeLoginWhiteCustomListEDRResponse;
 const ClusterContainerListItem = models.ClusterContainerListItem;
 const TaskAdvanceCFG = models.TaskAdvanceCFG;
 const KBUpdateMachineItem = models.KBUpdateMachineItem;
 const CycleScanConf = models.CycleScanConf;
 const ImageVul = models.ImageVul;
+const HostVulRiskEventItem = models.HostVulRiskEventItem;
 const ModifyAIScheduleResponse = models.ModifyAIScheduleResponse;
 const DescribePreventUninstallHostResponse = models.DescribePreventUninstallHostResponse;
 const DescribeClusterContainerWebServiceListRequest = models.DescribeClusterContainerWebServiceListRequest;
@@ -556,6 +564,7 @@ const TrafficSandboxACLURLRule = models.TrafficSandboxACLURLRule;
 const CreateAccessKeyCheckTaskResponse = models.CreateAccessKeyCheckTaskResponse;
 const DeleteDspmCkafkaConfigRequest = models.DeleteDspmCkafkaConfigRequest;
 const DescribeRaspLicenseListRequest = models.DescribeRaspLicenseListRequest;
+const DescribeAssetLastSyncTimeRequest = models.DescribeAssetLastSyncTimeRequest;
 const EdrAlertTarget = models.EdrAlertTarget;
 const DescribeDspmRiskResponse = models.DescribeDspmRiskResponse;
 const DescribeHostVulRiskListRequest = models.DescribeHostVulRiskListRequest;
@@ -611,7 +620,7 @@ const SkillScanRuleHit = models.SkillScanRuleHit;
 const ModifyImageVirusWhitelistRequest = models.ModifyImageVirusWhitelistRequest;
 const CreateCloudFunctionExportJobResponse = models.CreateCloudFunctionExportJobResponse;
 const VerifyDspmAssetLoginCodeResponse = models.VerifyDspmAssetLoginCodeResponse;
-const ExpiringProduct = models.ExpiringProduct;
+const DeleteLoginWhiteLearnEDRRequest = models.DeleteLoginWhiteLearnEDRRequest;
 const DescribeAccessKeyAlarmRequest = models.DescribeAccessKeyAlarmRequest;
 const CosAssetInfo = models.CosAssetInfo;
 const DescribeCosRiskEvidenceRequest = models.DescribeCosRiskEvidenceRequest;
@@ -733,6 +742,7 @@ const DescribeSecurityScoreRuleRequest = models.DescribeSecurityScoreRuleRequest
 const DescribeRiskScanCronConfigRequest = models.DescribeRiskScanCronConfigRequest;
 const CreateExposureAutoTagRuleResponse = models.CreateExposureAutoTagRuleResponse;
 const EDRScanRecordItem = models.EDRScanRecordItem;
+const ModifyBaselineIgnorePolicyResponse = models.ModifyBaselineIgnorePolicyResponse;
 const InstanceIDWithAppIdItem = models.InstanceIDWithAppIdItem;
 const AddNewBindRoleUserResponse = models.AddNewBindRoleUserResponse;
 const BatchModifyImageVulWhitelistRequest = models.BatchModifyImageVulWhitelistRequest;
@@ -765,7 +775,7 @@ const DescribeClusterSummaryRequest = models.DescribeClusterSummaryRequest;
 const RiskCallRecord = models.RiskCallRecord;
 const ModifyAgentConfigSettingRequest = models.ModifyAgentConfigSettingRequest;
 const ModifyBruteAttackRulesRequest = models.ModifyBruteAttackRulesRequest;
-const DspmIdentifyLevelItem = models.DspmIdentifyLevelItem;
+const DeleteLoginWhiteCustomEDRRequest = models.DeleteLoginWhiteCustomEDRRequest;
 const ModifyDspmAuditFilterStrategyRequest = models.ModifyDspmAuditFilterStrategyRequest;
 const Filter = models.Filter;
 const ModifyCSIPRaspLicenseUnBindsResponse = models.ModifyCSIPRaspLicenseUnBindsResponse;
@@ -779,7 +789,7 @@ const CreateCosPolicyRequest = models.CreateCosPolicyRequest;
 const StandardItem = models.StandardItem;
 const DescribeSandboxLLMAuditSystemRuleListResponse = models.DescribeSandboxLLMAuditSystemRuleListResponse;
 const DescribeVulFixableMachineListResponse = models.DescribeVulFixableMachineListResponse;
-const DescribeAssetLastSyncTimeRequest = models.DescribeAssetLastSyncTimeRequest;
+const DescribeLoginWhiteLearnListEDRRequest = models.DescribeLoginWhiteLearnListEDRRequest;
 const DescribeImageSensitiveWhitelistResponse = models.DescribeImageSensitiveWhitelistResponse;
 const UpdateAccessKeyAlarmStatusResponse = models.UpdateAccessKeyAlarmStatusResponse;
 const CategoryItem = models.CategoryItem;
@@ -828,6 +838,7 @@ const DescribeHostVulOverviewRequest = models.DescribeHostVulOverviewRequest;
 const DescribeSecurityGroupPolicyRequest = models.DescribeSecurityGroupPolicyRequest;
 const CopyBaselinePolicyRequest = models.CopyBaselinePolicyRequest;
 const ScanEDRTaskAgainRequest = models.ScanEDRTaskAgainRequest;
+const DescribeBaselineIgnorePolicyListRequest = models.DescribeBaselineIgnorePolicyListRequest;
 const CosRiskBucketInfo = models.CosRiskBucketInfo;
 const LogValueInfo = models.LogValueInfo;
 const DescribeDspmAccessTopologyIpsRequest = models.DescribeDspmAccessTopologyIpsRequest;
@@ -848,6 +859,7 @@ const DspmRiskCount = models.DspmRiskCount;
 const DescribeClusterContainerProcessListRequest = models.DescribeClusterContainerProcessListRequest;
 const DescribeDspmAssetAccountRecycledPrivilegesResponse = models.DescribeDspmAssetAccountRecycledPrivilegesResponse;
 const DescribeAIAgentCredentialListResponse = models.DescribeAIAgentCredentialListResponse;
+const Location = models.Location;
 const ModifyBaselinePolicyResponse = models.ModifyBaselinePolicyResponse;
 const DescribeDspmCkafkaTopicListResponse = models.DescribeDspmCkafkaTopicListResponse;
 const CreateAssetFilterViewRequest = models.CreateAssetFilterViewRequest;
@@ -884,6 +896,7 @@ const AKInfo = models.AKInfo;
 const ExportJobItem = models.ExportJobItem;
 const DescribeAlertListResponse = models.DescribeAlertListResponse;
 const UpdateAlertStatusListRequest = models.UpdateAlertStatusListRequest;
+const DeleteBaselineIgnorePolicyResponse = models.DeleteBaselineIgnorePolicyResponse;
 const DescribeLoginWhiteCombinedListRequest = models.DescribeLoginWhiteCombinedListRequest;
 const DescribeVulRiskRelateComponentRequest = models.DescribeVulRiskRelateComponentRequest;
 const CreateCSIPManualMalwareScanRequest = models.CreateCSIPManualMalwareScanRequest;
@@ -891,6 +904,7 @@ const DescribeDspmSyncUsersStatusRequest = models.DescribeDspmSyncUsersStatusReq
 const DescribeLighthouseFirewallRulesResponse = models.DescribeLighthouseFirewallRulesResponse;
 const NotifyAssetConfigItem = models.NotifyAssetConfigItem;
 const ModifyMachinesLoginTypeRequest = models.ModifyMachinesLoginTypeRequest;
+const DescribeHostVulScanStatusResponse = models.DescribeHostVulScanStatusResponse;
 const CredentialEffectScope = models.CredentialEffectScope;
 const AIAgentCredentialLocation = models.AIAgentCredentialLocation;
 const DescribeTaskLogListResponse = models.DescribeTaskLogListResponse;
@@ -899,13 +913,14 @@ const DescribeClusterContainerComponentListResponse = models.DescribeClusterCont
 const DescribeCustomRiskRulesRequest = models.DescribeCustomRiskRulesRequest;
 const DescribeNotifySettingAlertResponse = models.DescribeNotifySettingAlertResponse;
 const CosPermissionInfo = models.CosPermissionInfo;
-const DescribeDspmDictionaryListResponse = models.DescribeDspmDictionaryListResponse;
+const DomainInfo = models.DomainInfo;
 const DescribeMalwareTimingScanSettingResponse = models.DescribeMalwareTimingScanSettingResponse;
 const Tag = models.Tag;
 const DescribeCSIPMalwareScanTaskDetailResponse = models.DescribeCSIPMalwareScanTaskDetailResponse;
 const DescribeDspmAuditFilterStrategy = models.DescribeDspmAuditFilterStrategy;
 const DescribeCFGRiskStatisticsRequest = models.DescribeCFGRiskStatisticsRequest;
 const DescribeDspmAssetSecurityAnalyseStatusResponse = models.DescribeDspmAssetSecurityAnalyseStatusResponse;
+const DeleteBaselineIgnorePolicyRequest = models.DeleteBaselineIgnorePolicyRequest;
 const ModifySandboxFileRuleRequest = models.ModifySandboxFileRuleRequest;
 const ImageIDWithAppIdItem = models.ImageIDWithAppIdItem;
 const MultiAttackStageItem = models.MultiAttackStageItem;
@@ -927,11 +942,13 @@ const ModifyBaselineUserOtherConfResponse = models.ModifyBaselineUserOtherConfRe
 const ModifyWebhookPolicyStatusRequest = models.ModifyWebhookPolicyStatusRequest;
 const DownloadDspmExportLogResponse = models.DownloadDspmExportLogResponse;
 const DescribeSourceIPDetailResponse = models.DescribeSourceIPDetailResponse;
+const CreateBaselineMainTaskExportJobResponse = models.CreateBaselineMainTaskExportJobResponse;
 const DescribeBaselineAggregatedPolicyListRequest = models.DescribeBaselineAggregatedPolicyListRequest;
 const DescribeCheckViewRisksRequest = models.DescribeCheckViewRisksRequest;
 const DescribeDspmAssetFieldListRequest = models.DescribeDspmAssetFieldListRequest;
 const BaselineSubCategory = models.BaselineSubCategory;
 const DescribeExposureAutoTagRulesResponse = models.DescribeExposureAutoTagRulesResponse;
+const DescribeHostVulRiskEventListRequest = models.DescribeHostVulRiskEventListRequest;
 const DescribeNotifyAgentOfflineDurationRequest = models.DescribeNotifyAgentOfflineDurationRequest;
 const CreateVulRisksExportJobRequest = models.CreateVulRisksExportJobRequest;
 const CreateAssetProcessExportJobResponse = models.CreateAssetProcessExportJobResponse;
@@ -950,6 +967,7 @@ const DescribeUserAKInfoListRequest = models.DescribeUserAKInfoListRequest;
 const DspmAssetIdentifyInfo = models.DspmAssetIdentifyInfo;
 const ModifyBanModeResponse = models.ModifyBanModeResponse;
 const DescribeSandboxLLMAuditRuleListRequest = models.DescribeSandboxLLMAuditRuleListRequest;
+const ModifyLoginWhiteLearnEDRRequest = models.ModifyLoginWhiteLearnEDRRequest;
 const DescribeDspmAssetAccountIdentifyRequest = models.DescribeDspmAssetAccountIdentifyRequest;
 const CreateDspmAuditFilterStrategyResponse = models.CreateDspmAuditFilterStrategyResponse;
 const RiskRuleInfo = models.RiskRuleInfo;
@@ -971,7 +989,7 @@ const DescribeAIScheduleStatsRequest = models.DescribeAIScheduleStatsRequest;
 const DescribeTaskPredictCostQuotaRequest = models.DescribeTaskPredictCostQuotaRequest;
 const DescribeVulHostRelateComponentResponse = models.DescribeVulHostRelateComponentResponse;
 const CreateImageSensitiveInfoListExportJobRequest = models.CreateImageSensitiveInfoListExportJobRequest;
-const Location = models.Location;
+const DescribeAssetBaselineRiskListRequest = models.DescribeAssetBaselineRiskListRequest;
 const DeleteDspmIdentifyComplianceGroupRequest = models.DeleteDspmIdentifyComplianceGroupRequest;
 const ModifyAlarmRiskStatusResponse = models.ModifyAlarmRiskStatusResponse;
 const OperateRiskResponse = models.OperateRiskResponse;
@@ -1085,6 +1103,7 @@ const ModifyDspmApproveStatusRequest = models.ModifyDspmApproveStatusRequest;
 const BaselineAggregatedCategory = models.BaselineAggregatedCategory;
 const DeleteDspmRiskStrategyResponse = models.DeleteDspmRiskStrategyResponse;
 const DescribeMachineClearHistoryRequest = models.DescribeMachineClearHistoryRequest;
+const ModifyAssetTagsResponse = models.ModifyAssetTagsResponse;
 const DescribeRiskRulesResponse = models.DescribeRiskRulesResponse;
 const DescribeTaskPredictCostQuotaResponse = models.DescribeTaskPredictCostQuotaResponse;
 const DescribeScanTaskListRequest = models.DescribeScanTaskListRequest;
@@ -1145,6 +1164,7 @@ const ModifyCosAuditBucketMonitorStatusResponse = models.ModifyCosAuditBucketMon
 const DspmDictionary = models.DspmDictionary;
 const CosDictionary = models.CosDictionary;
 const DescribeWebhookPolicyListResponse = models.DescribeWebhookPolicyListResponse;
+const LoginWhitePlaceInput = models.LoginWhitePlaceInput;
 const DescribeMandatoryVulSetResponse = models.DescribeMandatoryVulSetResponse;
 const DescribeBaselinePolicyItemListRequest = models.DescribeBaselinePolicyItemListRequest;
 const VulHostBriefInfo = models.VulHostBriefInfo;
@@ -1197,12 +1217,13 @@ const CreateIaCAccessTokenRequest = models.CreateIaCAccessTokenRequest;
 const SyncImageRegistryResponse = models.SyncImageRegistryResponse;
 const CosIdentifyLevelDetail = models.CosIdentifyLevelDetail;
 const ModifySandboxLLMAuditRuleStatusRequest = models.ModifySandboxLLMAuditRuleStatusRequest;
-const DomainInfo = models.DomainInfo;
+const DescribeDspmDictionaryListResponse = models.DescribeDspmDictionaryListResponse;
 const DescribeAgentRunPolicyRequest = models.DescribeAgentRunPolicyRequest;
 const DescribeIaCFileListResponse = models.DescribeIaCFileListResponse;
 const DescribeBaselineAggregatedPolicyListResponse = models.DescribeBaselineAggregatedPolicyListResponse;
 const DescribeAccessKeyWhiteListRequest = models.DescribeAccessKeyWhiteListRequest;
 const DescribeLoginTypeGlobalConfRequest = models.DescribeLoginTypeGlobalConfRequest;
+const BaselineIgnorePolicy = models.BaselineIgnorePolicy;
 const ComponentDetailItem = models.ComponentDetailItem;
 const DescribeCLSLogIndexV3Request = models.DescribeCLSLogIndexV3Request;
 const DescribeUserInfoRequest = models.DescribeUserInfoRequest;
@@ -1258,6 +1279,7 @@ const BatchModifyImageVulWhitelistResponse = models.BatchModifyImageVulWhitelist
 const DescribeCosPolicyRequest = models.DescribeCosPolicyRequest;
 const DescribeCWPMachinesRequest = models.DescribeCWPMachinesRequest;
 const BatchModifyBaselinePolicyRequest = models.BatchModifyBaselinePolicyRequest;
+const ModifyLoginWhiteCustomEDRResponse = models.ModifyLoginWhiteCustomEDRResponse;
 const DspmIdentifyComplianceRuleRelation = models.DspmIdentifyComplianceRuleRelation;
 const OrderQuotaInfo = models.OrderQuotaInfo;
 const LogSearchInfos = models.LogSearchInfos;
@@ -1297,6 +1319,7 @@ const ModifyDspmIdentifyRuleStatusRequest = models.ModifyDspmIdentifyRuleStatusR
 const CkafkaInstance = models.CkafkaInstance;
 const CreateComplianceRiskExportJobRequest = models.CreateComplianceRiskExportJobRequest;
 const VulInfoListItem = models.VulInfoListItem;
+const ImageLayer = models.ImageLayer;
 const CosAssetDataScanDetail = models.CosAssetDataScanDetail;
 const DescribeImageVirusListResponse = models.DescribeImageVirusListResponse;
 const DescribeSCFAliasListRequest = models.DescribeSCFAliasListRequest;
@@ -1320,6 +1343,8 @@ const PublicAssetInfo = models.PublicAssetInfo;
 const DescribeDspmIdentifyComplianceGroupListResponse = models.DescribeDspmIdentifyComplianceGroupListResponse;
 const DescribeExposureTrendRequest = models.DescribeExposureTrendRequest;
 const AssetViewCFGRisk = models.AssetViewCFGRisk;
+const AssetViewVULRisk = models.AssetViewVULRisk;
+const LoginWhiteItem = models.LoginWhiteItem;
 const CreateScanTaskRequest = models.CreateScanTaskRequest;
 const RuleStatisticsItem = models.RuleStatisticsItem;
 const BehaviorInfo = models.BehaviorInfo;
@@ -1327,6 +1352,7 @@ const DspmAssetSecurityAnalyseStatus = models.DspmAssetSecurityAnalyseStatus;
 const ComplianceTermItem = models.ComplianceTermItem;
 const BackupLog = models.BackupLog;
 const CreateEdrLessAlertExportJobResponse = models.CreateEdrLessAlertExportJobResponse;
+const ClusterBaselinePolicy = models.ClusterBaselinePolicy;
 const BaselineSystemCategory = models.BaselineSystemCategory;
 const DeleteEdrLogCollectPathsResponse = models.DeleteEdrLogCollectPathsResponse;
 const DspmAuditSessionInfo = models.DspmAuditSessionInfo;
@@ -1397,6 +1423,7 @@ const ProtectionConfigItem = models.ProtectionConfigItem;
 const DescribeCosRiskActionListResponse = models.DescribeCosRiskActionListResponse;
 const DescribeAccessKeyRiskResponse = models.DescribeAccessKeyRiskResponse;
 const LogDynamicIndex = models.LogDynamicIndex;
+const DescribeLoginWhiteCustomListEDRRequest = models.DescribeLoginWhiteCustomListEDRRequest;
 const DescribeDspmApplyHistoryResponse = models.DescribeDspmApplyHistoryResponse;
 const CreateAccessKeyCheckTaskRequest = models.CreateAccessKeyCheckTaskRequest;
 const DspmFrequency = models.DspmFrequency;
@@ -1510,6 +1537,7 @@ const SecurityGroupPolicyItem = models.SecurityGroupPolicyItem;
 const DescribeDspmAccessTopologyAssetsRequest = models.DescribeDspmAccessTopologyAssetsRequest;
 const DescribeExposeRiskStatisticsRequest = models.DescribeExposeRiskStatisticsRequest;
 const VULRiskInfo = models.VULRiskInfo;
+const CreateAssetBaselineRiskExportJobRequest = models.CreateAssetBaselineRiskExportJobRequest;
 const DescribePublicIpAssetsResponse = models.DescribePublicIpAssetsResponse;
 const EnableAIScheduleRequest = models.EnableAIScheduleRequest;
 const DescribeEDRRuleListResponse = models.DescribeEDRRuleListResponse;
@@ -1610,6 +1638,7 @@ const DescribeCWPMachineDetailResponse = models.DescribeCWPMachineDetailResponse
 const StopRiskCenterTaskResponse = models.StopRiskCenterTaskResponse;
 const DescribeVpcAssetsRequest = models.DescribeVpcAssetsRequest;
 const DescribeExposePathRequest = models.DescribeExposePathRequest;
+const ModifyBaselineIgnorePolicyRequest = models.ModifyBaselineIgnorePolicyRequest;
 const RetryDspmExportLogResponse = models.RetryDspmExportLogResponse;
 const ImageSensitiveInfo = models.ImageSensitiveInfo;
 const DescribeDspmAssetIdentifyInfoListResponse = models.DescribeDspmAssetIdentifyInfoListResponse;
@@ -1618,6 +1647,7 @@ const ClientSettingHost = models.ClientSettingHost;
 const SendDspmAssetLoginSmsCodeResponse = models.SendDspmAssetLoginSmsCodeResponse;
 const DescribeRiskCenterAssetViewCFGRiskListResponse = models.DescribeRiskCenterAssetViewCFGRiskListResponse;
 const DeleteAssetTagRequest = models.DeleteAssetTagRequest;
+const ExpiringProduct = models.ExpiringProduct;
 const DescribeDspmLogDeliveryTypeRequest = models.DescribeDspmLogDeliveryTypeRequest;
 const CreateImageRegistryListExportJobResponse = models.CreateImageRegistryListExportJobResponse;
 const DescribeBaselineMainTaskItemListResponse = models.DescribeBaselineMainTaskItemListResponse;
@@ -1653,6 +1683,7 @@ const LicenseBindFailedItem = models.LicenseBindFailedItem;
 const CustomRiskRuleItem = models.CustomRiskRuleItem;
 const DescribeDspmAssetSupportedPrivilegesRequest = models.DescribeDspmAssetSupportedPrivilegesRequest;
 const ModifySandboxDLPRuleStatusResponse = models.ModifySandboxDLPRuleStatusResponse;
+const ModifyLoginWhiteLearnEDRResponse = models.ModifyLoginWhiteLearnEDRResponse;
 const TrafficSandboxDLPURLRuleItem = models.TrafficSandboxDLPURLRuleItem;
 const DescribeEdrAlertCountForAssetResponse = models.DescribeEdrAlertCountForAssetResponse;
 const ModifyImageRegistryResponse = models.ModifyImageRegistryResponse;
@@ -1693,7 +1724,7 @@ const CreateSandboxACLRuleResponse = models.CreateSandboxACLRuleResponse;
 const DescribeClusterContainerWebServiceListResponse = models.DescribeClusterContainerWebServiceListResponse;
 const DescribeImageVirusWhitelistRequest = models.DescribeImageVirusWhitelistRequest;
 const ExportClientSettingHostListRequest = models.ExportClientSettingHostListRequest;
-const DescribeSourceIPDetailRequest = models.DescribeSourceIPDetailRequest;
+const CreateAssetBaselineRiskExportJobResponse = models.CreateAssetBaselineRiskExportJobResponse;
 const ModifyCSIPRaspLicenseBindsRequest = models.ModifyCSIPRaspLicenseBindsRequest;
 const DescribeImageAssociatedHostListRequest = models.DescribeImageAssociatedHostListRequest;
 const LogAppCollectPath = models.LogAppCollectPath;
@@ -1727,9 +1758,11 @@ const DescribeVdbAndPocInfoResponse = models.DescribeVdbAndPocInfoResponse;
 const TrafficSandboxEffectScope = models.TrafficSandboxEffectScope;
 const DescribeBaselineMainTaskItemListRequest = models.DescribeBaselineMainTaskItemListRequest;
 const DescribeSandboxLLMAuditAlertListResponse = models.DescribeSandboxLLMAuditAlertListResponse;
+const ModifyLoginWhiteCustomEDRRequest = models.ModifyLoginWhiteCustomEDRRequest;
 const DescribeNotifySettingAlertRequest = models.DescribeNotifySettingAlertRequest;
 const DescribeDspmLogListRequest = models.DescribeDspmLogListRequest;
 const DescribeImageRegistryTimedScanTaskPreviewRequest = models.DescribeImageRegistryTimedScanTaskPreviewRequest;
+const DescribeEdrMalwareFileResponse = models.DescribeEdrMalwareFileResponse;
 const DescribeDspmAccessRecordResponse = models.DescribeDspmAccessRecordResponse;
 const DescribeBaselineCalculatingStatisticsPolicyIDListResponse = models.DescribeBaselineCalculatingStatisticsPolicyIDListResponse;
 const DeleteDspmCkafkaConfigResponse = models.DeleteDspmCkafkaConfigResponse;
@@ -1738,6 +1771,7 @@ const ModifyDspmIdentifyLevelItemResponse = models.ModifyDspmIdentifyLevelItemRe
 const DescribeImageExportJobListResponse = models.DescribeImageExportJobListResponse;
 const OrderDetail = models.OrderDetail;
 const CreateImageVirusWhitelistResponse = models.CreateImageVirusWhitelistResponse;
+const DeleteLoginWhiteLearnEDRResponse = models.DeleteLoginWhiteLearnEDRResponse;
 const CreateCosObjectScanTaskRequest = models.CreateCosObjectScanTaskRequest;
 const ScanBaselinePolicyListResponse = models.ScanBaselinePolicyListResponse;
 const UpdateClusterOwnerRequest = models.UpdateClusterOwnerRequest;
@@ -1748,7 +1782,7 @@ const RevertDspmAssetAccountRequest = models.RevertDspmAssetAccountRequest;
 const DescribeDspmAssetIdentifyInfoListRequest = models.DescribeDspmAssetIdentifyInfoListRequest;
 const CreateImageRegistryScanTaskResponse = models.CreateImageRegistryScanTaskResponse;
 const DescribeAILinkSettingRequest = models.DescribeAILinkSettingRequest;
-const ModifyAssetTagsResponse = models.ModifyAssetTagsResponse;
+const DescribeEdrMalwareFileRequest = models.DescribeEdrMalwareFileRequest;
 const ModifyDspmBackupSettingResponse = models.ModifyDspmBackupSettingResponse;
 const DescribeAIAgentAssetListResponse = models.DescribeAIAgentAssetListResponse;
 const ModifyDspmIdentifyComplianceGroupStatusRequest = models.ModifyDspmIdentifyComplianceGroupStatusRequest;
@@ -1791,9 +1825,9 @@ const DescribeAssetOverviewRequest = models.DescribeAssetOverviewRequest;
 const DescribeAssetInfoResponse = models.DescribeAssetInfoResponse;
 const CreateImageVulListExportJobResponse = models.CreateImageVulListExportJobResponse;
 const DescribeTagRuleAssetsRequest = models.DescribeTagRuleAssetsRequest;
-const DescribeBaselineSyncConfRequest = models.DescribeBaselineSyncConfRequest;
+const DescribePodContainerListRequest = models.DescribePodContainerListRequest;
 const ModifyUebaRuleSwitchRequest = models.ModifyUebaRuleSwitchRequest;
-const CreateBaselineMainTaskExportJobResponse = models.CreateBaselineMainTaskExportJobResponse;
+const DescribeAssetBaselineRiskListResponse = models.DescribeAssetBaselineRiskListResponse;
 const DescribeScanStatisticRequest = models.DescribeScanStatisticRequest;
 const DescribeCFGRiskReportStatisticsRequest = models.DescribeCFGRiskReportStatisticsRequest;
 const ModifyNotifySettingAlertResponse = models.ModifyNotifySettingAlertResponse;
@@ -1824,6 +1858,7 @@ const NatSnatRuleItem = models.NatSnatRuleItem;
 const RelatedEvent = models.RelatedEvent;
 const CommandPluginState = models.CommandPluginState;
 const EnableAIScheduleResponse = models.EnableAIScheduleResponse;
+const DescribeLoginWhiteLearnListEDRResponse = models.DescribeLoginWhiteLearnListEDRResponse;
 const ModifySkillScanAlertStatusRequest = models.ModifySkillScanAlertStatusRequest;
 const DescribeBaselineSystemCategoryListResponse = models.DescribeBaselineSystemCategoryListResponse;
 const ProtectionDetail = models.ProtectionDetail;
@@ -1859,6 +1894,7 @@ const DescribeClusterServiceListResponse = models.DescribeClusterServiceListResp
 const RiskCenterOverviewTrendAnalysis = models.RiskCenterOverviewTrendAnalysis;
 const VULViewVULRisk = models.VULViewVULRisk;
 const DescribeCVMAssetsResponse = models.DescribeCVMAssetsResponse;
+const DescribeBaselineIgnorePolicyListResponse = models.DescribeBaselineIgnorePolicyListResponse;
 const ModifyShareUserAKResponse = models.ModifyShareUserAKResponse;
 const CreateAllAssetsExportJobResponse = models.CreateAllAssetsExportJobResponse;
 const DescribeDspmBackupSettingRequest = models.DescribeDspmBackupSettingRequest;
@@ -1905,6 +1941,7 @@ const ScanTaskInfoList = models.ScanTaskInfoList;
 const ModifyDspmAssetDataScanTaskStatusResponse = models.ModifyDspmAssetDataScanTaskStatusResponse;
 const ScanBaselineRiskListRequest = models.ScanBaselineRiskListRequest;
 const DescribeRiskCenterAssetViewVULRiskListRequest = models.DescribeRiskCenterAssetViewVULRiskListRequest;
+const DescribeSourceIPDetailRequest = models.DescribeSourceIPDetailRequest;
 const DescribeImageAssociatedHostListResponse = models.DescribeImageAssociatedHostListResponse;
 const DspmScheduleConfig = models.DspmScheduleConfig;
 const DescribeCWPExposePathRequest = models.DescribeCWPExposePathRequest;
@@ -2054,6 +2091,7 @@ const ModifyDspmRiskInfoResponse = models.ModifyDspmRiskInfoResponse;
 const DescribeDspmAuditFilterStrategyRequest = models.DescribeDspmAuditFilterStrategyRequest;
 const DownloadDspmExportLogRequest = models.DownloadDspmExportLogRequest;
 const DisableAIScheduleRequest = models.DisableAIScheduleRequest;
+const DescribeClusterBaselineRiskPolicyListResponse = models.DescribeClusterBaselineRiskPolicyListResponse;
 const DescribeLastScanTaskInfoResponse = models.DescribeLastScanTaskInfoResponse;
 const DeleteDspmIdentifyComplianceCategoryRelationResponse = models.DeleteDspmIdentifyComplianceCategoryRelationResponse;
 const DescribeCSIPRiskStatisticsRequest = models.DescribeCSIPRiskStatisticsRequest;
@@ -2062,6 +2100,7 @@ const CreateSandboxDLPRuleRequest = models.CreateSandboxDLPRuleRequest;
 const DescribeReverseShellSystemPolicyConfigRequest = models.DescribeReverseShellSystemPolicyConfigRequest;
 const DescribeAIAgentSkillListRequest = models.DescribeAIAgentSkillListRequest;
 const AccessKeyWhiteList = models.AccessKeyWhiteList;
+const LoginWhitePlace = models.LoginWhitePlace;
 const ModifySecurityScoreRuleResponse = models.ModifySecurityScoreRuleResponse;
 const DescribeIaCFileOverviewRequest = models.DescribeIaCFileOverviewRequest;
 const CreateAssetComponentRelatedImageListExportJobRequest = models.CreateAssetComponentRelatedImageListExportJobRequest;
@@ -2350,6 +2389,17 @@ class CsipClient extends AbstractClient {
     DescribeRiskItemList(req, cb) {
         let resp = new DescribeRiskItemListResponse();
         this.request("DescribeRiskItemList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the CSC abnormal login custom allowlist. In multi-account scenarios, parse out all member AppIds by MemberId and perform an aggregate query only once. Return in pages by ModifyTime DESC. The output slice field is always [] and never null.
+     * @param {DescribeLoginWhiteCustomListEDRRequest} req
+     * @param {function(string, DescribeLoginWhiteCustomListEDRResponse):void} cb
+     * @public
+     */
+    DescribeLoginWhiteCustomListEDR(req, cb) {
+        let resp = new DescribeLoginWhiteCustomListEDRResponse();
+        this.request("DescribeLoginWhiteCustomListEDR", req, resp, cb);
     }
 
     /**
@@ -2702,6 +2752,17 @@ class CsipClient extends AbstractClient {
     DescribeExposureTrend(req, cb) {
         let resp = new DescribeExposureTrendResponse();
         this.request("DescribeExposureTrend", req, resp, cb);
+    }
+
+    /**
+     * Delete CSC abnormal login self-learning allowlist rule groups in batches (soft delete the entire group with enable=0). Import any row ID in a group to locate the entire group. Cross-page select all is supported (cap: 100,000 rule groups). Once deleted, the groups will not be automatically re-learned. You need to toggle self-learning again to update the learning anchor. This interface does not rescan historical alarms.
+     * @param {DeleteLoginWhiteLearnEDRRequest} req
+     * @param {function(string, DeleteLoginWhiteLearnEDRResponse):void} cb
+     * @public
+     */
+    DeleteLoginWhiteLearnEDR(req, cb) {
+        let resp = new DeleteLoginWhiteLearnEDRResponse();
+        this.request("DeleteLoginWhiteLearnEDR", req, resp, cb);
     }
 
     /**
@@ -3455,6 +3516,17 @@ Supports paging query and status filtering, and returns the scheduled task list 
     }
 
     /**
+     * This API is used to create an asset baseline risk export task.
+     * @param {CreateAssetBaselineRiskExportJobRequest} req
+     * @param {function(string, CreateAssetBaselineRiskExportJobResponse):void} cb
+     * @public
+     */
+    CreateAssetBaselineRiskExportJob(req, cb) {
+        let resp = new CreateAssetBaselineRiskExportJobResponse();
+        this.request("CreateAssetBaselineRiskExportJob", req, resp, cb);
+    }
+
+    /**
      * Enable AI scheduled tasks.
 
 Set the status of the specified AI scheduled task to enabled. After it is enabled, the task will automatically execute based on the trigger configuration.
@@ -4083,6 +4155,17 @@ Partial update is supported. Only the passed-in optional fields are updated. Whe
     DescribeNICAssets(req, cb) {
         let resp = new DescribeNICAssetsResponse();
         this.request("DescribeNICAssets", req, resp, cb);
+    }
+
+    /**
+     * Locate malicious file alarms by EDR alarm ID and return the download URL of the malicious sample. Only alarms with alert_sub_type=1 (malicious file) can be downloaded. Other sub-types are handled as resource not found. Public cloud returns a COS presigned URL (valid for 1 hour). Non-public cloud returns a base64 DataURL and FileName when the export switch is on. In cross-account scenarios, TargetAppId specifies the account that owns the alarm, and ownership verification is performed (fail-close, InvalidParameter is returned if no permission).
+     * @param {DescribeEdrMalwareFileRequest} req
+     * @param {function(string, DescribeEdrMalwareFileResponse):void} cb
+     * @public
+     */
+    DescribeEdrMalwareFile(req, cb) {
+        let resp = new DescribeEdrMalwareFileResponse();
+        this.request("DescribeEdrMalwareFile", req, resp, cb);
     }
 
     /**
@@ -4781,6 +4864,17 @@ This API is used to delete a scheduled task based on the specified AI scheduled 
     }
 
     /**
+     * This API is used to obtain the asset risk list.
+     * @param {DescribeAssetBaselineRiskListRequest} req
+     * @param {function(string, DescribeAssetBaselineRiskListResponse):void} cb
+     * @public
+     */
+    DescribeAssetBaselineRiskList(req, cb) {
+        let resp = new DescribeAssetBaselineRiskListResponse();
+        this.request("DescribeAssetBaselineRiskList", req, resp, cb);
+    }
+
+    /**
      * Obtains the vulnerability tag list
      * @param {DescribeVulLabelListRequest} req
      * @param {function(string, DescribeVulLabelListResponse):void} cb
@@ -5009,6 +5103,17 @@ This API is used to delete a scheduled task based on the specified AI scheduled 
     CreateCSIPManualMalwareScan(req, cb) {
         let resp = new CreateCSIPManualMalwareScanResponse();
         this.request("CreateCSIPManualMalwareScan", req, resp, cb);
+    }
+
+    /**
+     * Queries the baseline ignore policy list
+     * @param {DescribeBaselineIgnorePolicyListRequest} req
+     * @param {function(string, DescribeBaselineIgnorePolicyListResponse):void} cb
+     * @public
+     */
+    DescribeBaselineIgnorePolicyList(req, cb) {
+        let resp = new DescribeBaselineIgnorePolicyListResponse();
+        this.request("DescribeBaselineIgnorePolicyList", req, resp, cb);
     }
 
     /**
@@ -5900,6 +6005,17 @@ The original address of the input file. Returns a signed temporary download link
     }
 
     /**
+     * Query the host vulnerability scanning status to determine whether vulnerabilities have been scanned, whether the first vulnerability scan failed, and the fixable vulnerability status after the first scan is completed.
+     * @param {DescribeHostVulScanStatusRequest} req
+     * @param {function(string, DescribeHostVulScanStatusResponse):void} cb
+     * @public
+     */
+    DescribeHostVulScanStatus(req, cb) {
+        let resp = new DescribeHostVulScanStatusResponse();
+        this.request("DescribeHostVulScanStatus", req, resp, cb);
+    }
+
+    /**
      * Obtain Content Risk List
      * @param {DescribeRiskCenterWebsiteRiskListRequest} req
      * @param {function(string, DescribeRiskCenterWebsiteRiskListResponse):void} cb
@@ -6117,6 +6233,17 @@ The original address of the input file. Returns a signed temporary download link
     ModifyAssetTag(req, cb) {
         let resp = new ModifyAssetTagResponse();
         this.request("ModifyAssetTag", req, resp, cb);
+    }
+
+    /**
+     * Delete baseline ignore policy
+     * @param {DeleteBaselineIgnorePolicyRequest} req
+     * @param {function(string, DeleteBaselineIgnorePolicyResponse):void} cb
+     * @public
+     */
+    DeleteBaselineIgnorePolicy(req, cb) {
+        let resp = new DeleteBaselineIgnorePolicyResponse();
+        this.request("DeleteBaselineIgnorePolicy", req, resp, cb);
     }
 
     /**
@@ -6637,6 +6764,17 @@ The original address of the input file. Returns a signed temporary download link
     }
 
     /**
+     * This API is used to modify the CSC abnormal login self-learning allowlist rule group, locating the entire group by (AppId, common login location). Constraints: creating is not supported, and taking effect by tag is not supported (TagIDs must be empty). Only Scope=0 direct selection and Scope=1 all assets + removal are supported. Reject when the rule group row count exceeds 5000. In a single transaction, insert first and delete later. It takes effect within one cache cycle (default 120s) after editing. This API does not rescan historical alarms.
+     * @param {ModifyLoginWhiteLearnEDRRequest} req
+     * @param {function(string, ModifyLoginWhiteLearnEDRResponse):void} cb
+     * @public
+     */
+    ModifyLoginWhiteLearnEDR(req, cb) {
+        let resp = new ModifyLoginWhiteLearnEDRResponse();
+        this.request("ModifyLoginWhiteLearnEDR", req, resp, cb);
+    }
+
+    /**
      * Get the dspm information list of an account
      * @param {DescribeUserDspmInfoListRequest} req
      * @param {function(string, DescribeUserDspmInfoListResponse):void} cb
@@ -6735,6 +6873,17 @@ Returns the total number of scheduled tasks and the number of running tasks for 
     DescribeDefaultSecurityScoreRule(req, cb) {
         let resp = new DescribeDefaultSecurityScoreRuleResponse();
         this.request("DescribeDefaultSecurityScoreRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the host vulnerability risk event list and return basic vulnerability information, instance information, risk status, and latest scan time by risk record dimension.
+     * @param {DescribeHostVulRiskEventListRequest} req
+     * @param {function(string, DescribeHostVulRiskEventListResponse):void} cb
+     * @public
+     */
+    DescribeHostVulRiskEventList(req, cb) {
+        let resp = new DescribeHostVulRiskEventListResponse();
+        this.request("DescribeHostVulRiskEventList", req, resp, cb);
     }
 
     /**
@@ -7131,6 +7280,17 @@ Returns the total number of scheduled tasks and the number of running tasks for 
     DescribeRepositoryImageAssets(req, cb) {
         let resp = new DescribeRepositoryImageAssetsResponse();
         this.request("DescribeRepositoryImageAssets", req, resp, cb);
+    }
+
+    /**
+     * Modify baseline ignore policy
+     * @param {ModifyBaselineIgnorePolicyRequest} req
+     * @param {function(string, ModifyBaselineIgnorePolicyResponse):void} cb
+     * @public
+     */
+    ModifyBaselineIgnorePolicy(req, cb) {
+        let resp = new ModifyBaselineIgnorePolicyResponse();
+        this.request("ModifyBaselineIgnorePolicy", req, resp, cb);
     }
 
     /**
@@ -7718,6 +7878,17 @@ Queries the historical execution records of AI scheduled tasks. Supports paginat
     DescribeTopAttackInfo(req, cb) {
         let resp = new DescribeTopAttackInfoResponse();
         this.request("DescribeTopAttackInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the CSC abnormal login self-learning allowlist (rule group). Rule groups are aggregated by (AppId, common login location), and the ID is the minimum line ID in the group. The output fields SrcIp, UserName, StartTime, and EndTime are always empty. AutoLearnEnable returns the self-learning switch state for the frontend to determine whether to redirect to enable it based on the empty state.
+     * @param {DescribeLoginWhiteLearnListEDRRequest} req
+     * @param {function(string, DescribeLoginWhiteLearnListEDRResponse):void} cb
+     * @public
+     */
+    DescribeLoginWhiteLearnListEDR(req, cb) {
+        let resp = new DescribeLoginWhiteLearnListEDRResponse();
+        this.request("DescribeLoginWhiteLearnListEDR", req, resp, cb);
     }
 
     /**
@@ -8335,6 +8506,17 @@ Supplemental description:
     }
 
     /**
+     * Get the cluster risk policy list.
+     * @param {DescribeClusterBaselineRiskPolicyListRequest} req
+     * @param {function(string, DescribeClusterBaselineRiskPolicyListResponse):void} cb
+     * @public
+     */
+    DescribeClusterBaselineRiskPolicyList(req, cb) {
+        let resp = new DescribeClusterBaselineRiskPolicyListResponse();
+        this.request("DescribeClusterBaselineRiskPolicyList", req, resp, cb);
+    }
+
+    /**
      * Obtain the Temporary Link for Report Download
      * @param {DescribeTaskLogURLRequest} req
      * @param {function(string, DescribeTaskLogURLResponse):void} cb
@@ -8343,6 +8525,17 @@ Supplemental description:
     DescribeTaskLogURL(req, cb) {
         let resp = new DescribeTaskLogURLResponse();
         this.request("DescribeTaskLogURL", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete CSC abnormal login custom allowlist entries in batches (soft delete, status=2), with support for cross-page select all. Either Ids or SelectAll is required. If both are empty, InvalidParameter is returned. If the total amount of cross-page select all exceeds 100,000 entries, the entire request is denied.
+     * @param {DeleteLoginWhiteCustomEDRRequest} req
+     * @param {function(string, DeleteLoginWhiteCustomEDRResponse):void} cb
+     * @public
+     */
+    DeleteLoginWhiteCustomEDR(req, cb) {
+        let resp = new DeleteLoginWhiteCustomEDRResponse();
+        this.request("DeleteLoginWhiteCustomEDR", req, resp, cb);
     }
 
     /**
@@ -9599,6 +9792,17 @@ Create an AI scheduled task by entering the task name, prompt content, and trigg
     DeleteDspmRestoreLogList(req, cb) {
         let resp = new DeleteDspmRestoreLogListResponse();
         this.request("DeleteDspmRestoreLogList", req, resp, cb);
+    }
+
+    /**
+     * Modify the CSC abnormal login custom allowlist with full coverage saving (fields not passed are deemed as cleared). This API does not trigger historical alarm rescanning. Exclude itself during deduplication. If the rule does not exist, return ResourceNotFound.
+     * @param {ModifyLoginWhiteCustomEDRRequest} req
+     * @param {function(string, ModifyLoginWhiteCustomEDRResponse):void} cb
+     * @public
+     */
+    ModifyLoginWhiteCustomEDR(req, cb) {
+        let resp = new ModifyLoginWhiteCustomEDRResponse();
+        this.request("ModifyLoginWhiteCustomEDR", req, resp, cb);
     }
 
     /**

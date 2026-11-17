@@ -9656,7 +9656,7 @@ class OpenKafkaConsumerResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Topic parameter used by KafkaConsumer during consumption</p>
+         * <p>Topic parameter used by KafkaConsumer for consumption</p>
          * @type {string || null}
          */
         this.TopicID = null;
@@ -12217,31 +12217,43 @@ class OpenKafkaConsumerRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Log topic Id.</p><ul><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">get log topic list</a>.</li><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">create log topic</a>.</li></ul>
+         * <p>Log topic Id.</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">obtaining the log topic list</a>.</li><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">creating a log topic</a>.</li></ul>
          * @type {string || null}
          */
         this.FromTopicId = null;
 
         /**
-         * <p>Compression mode [0:NONE; 2:SNAPPY; 3:LZ4], default: 0</p>
+         * <p>Compression type [0: NONE; 2: SNAPPY; 3: LZ4]. Default value: 0</p>
          * @type {number || null}
          */
         this.Compression = null;
 
         /**
-         * <p>kafka protocol consumption data format</p>
+         * <p>kafka consumption data format</p>
          * @type {KafkaConsumerContent || null}
          */
         this.ConsumerContent = null;
 
         /**
-         * <p>Whether to enable service log shipping. Valid values: 1: disable; 2: enable. Default value: 2</p>
+         * <p>Whether to enable the delivery service log. 1: Disabled; 2: Enabled. Default value: 2</p>
          * @type {number || null}
          */
         this.HasServicesLog = null;
 
         /**
-         * <p>Range type of consumption, 0: latest; 1: historic + latest; default value: 0</p>
+         * <p>Public network consumption switch. Enabled by default</p>
+         * @type {boolean || null}
+         */
+        this.EnableInternetConsume = null;
+
+        /**
+         * <p>Private network consumption switch. Enabled by default</p>
+         * @type {boolean || null}
+         */
+        this.EnableIntranetConsume = null;
+
+        /**
+         * <p>Consumption scope type. 0: Latest; 1: Historical + latest. Default value: 0</p>
          * @type {number || null}
          */
         this.ScopeType = null;
@@ -12264,6 +12276,8 @@ class OpenKafkaConsumerRequest extends  AbstractModel {
             this.ConsumerContent = obj;
         }
         this.HasServicesLog = 'HasServicesLog' in params ? params.HasServicesLog : null;
+        this.EnableInternetConsume = 'EnableInternetConsume' in params ? params.EnableInternetConsume : null;
+        this.EnableIntranetConsume = 'EnableIntranetConsume' in params ? params.EnableIntranetConsume : null;
         this.ScopeType = 'ScopeType' in params ? params.ScopeType : null;
 
     }
@@ -16569,7 +16583,7 @@ class DescribeKafkaConsumerRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Log topic Id.</p><ul><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">get log topic list</a>.</li><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">create log topic</a>.</li></ul>
+         * <p>Log topic Id.</p><ul><li>Get the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">getting the log topic list</a>.</li><li>Get the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">creating a log topic</a>.</li></ul>
          * @type {string || null}
          */
         this.FromTopicId = null;
@@ -17820,37 +17834,49 @@ class DescribeKafkaConsumerResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Whether Kafka Protocol Consumption is enabled</p>
+         * <p>Whether Kafka consumption is enabled</p>
          * @type {boolean || null}
          */
         this.Status = null;
 
         /**
-         * <p>Topic parameter used by KafkaConsumer during consumption</p>
+         * <p>Topic parameter used by KafkaConsumer for consumption</p>
          * @type {string || null}
          */
         this.TopicID = null;
 
         /**
-         * <p>Compression mode [0:NONE;2:SNAPPY;3:LZ4]</p>
+         * <p>Compression method [0: NONE; 2: SNAPPY; 3: LZ4]</p>
          * @type {number || null}
          */
         this.Compression = null;
 
         /**
-         * <p>kafka protocol consumption data format</p>
+         * <p>kafka consumption data format</p>
          * @type {KafkaConsumerContent || null}
          */
         this.ConsumerContent = null;
 
         /**
-         * <p>Whether to enable the delivery service log. 1: Disabled, 2: Enabled.</p>
+         * <p>Whether to enable delivery service logs. 1: Disable, 2: Enable.</p>
          * @type {number || null}
          */
         this.HasServicesLog = null;
 
         /**
-         * <p>Range type of consumption, 0: latest, 1: history + latest</p>
+         * <p>Public network consumption switch.</p>
+         * @type {boolean || null}
+         */
+        this.EnableInternetConsume = null;
+
+        /**
+         * <p>Private network consumption switch.</p>
+         * @type {boolean || null}
+         */
+        this.EnableIntranetConsume = null;
+
+        /**
+         * <p>Consumption scope type. 0: Latest, 1: Historical + latest</p>
          * @type {number || null}
          */
         this.ScopeType = null;
@@ -17880,6 +17906,8 @@ class DescribeKafkaConsumerResponse extends  AbstractModel {
             this.ConsumerContent = obj;
         }
         this.HasServicesLog = 'HasServicesLog' in params ? params.HasServicesLog : null;
+        this.EnableInternetConsume = 'EnableInternetConsume' in params ? params.EnableInternetConsume : null;
+        this.EnableIntranetConsume = 'EnableIntranetConsume' in params ? params.EnableIntranetConsume : null;
         this.ScopeType = 'ScopeType' in params ? params.ScopeType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -26821,31 +26849,43 @@ class ModifyKafkaConsumerRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>log topic id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">Create Log Topic</a>.</li></ul>
+         * <p>Log topic Id.</p><ul><li>Get the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">getting the log topic list</a>.</li><li>Get the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">creating a log topic</a>.</li></ul>
          * @type {string || null}
          */
         this.FromTopicId = null;
 
         /**
-         * <p>Compression mode. 0: No compression; 2: Use Snappy compression; 3: Use LZ4 compression</p>
+         * <p>Compression method. 0: No compression; 2: Snappy compression; 3: LZ4 compression</p>
          * @type {number || null}
          */
         this.Compression = null;
 
         /**
-         * <p>kafka protocol consumption data format</p>
+         * <p>kafka consumption data format</p>
          * @type {KafkaConsumerContent || null}
          */
         this.ConsumerContent = null;
 
         /**
-         * <p>Whether to enable the delivery service log. 1: Disabled, 2: Enabled.</p>
+         * <p>Whether to enable delivery service logs. 1: Disable, 2: Enable.</p>
          * @type {number || null}
          */
         this.HasServicesLog = null;
 
         /**
-         * <p>Range type of consumption, 0: latest, 1: history + latest</p>
+         * <p>Public network consumption switch.</p>
+         * @type {boolean || null}
+         */
+        this.EnableInternetConsume = null;
+
+        /**
+         * <p>Private network consumption switch.</p>
+         * @type {boolean || null}
+         */
+        this.EnableIntranetConsume = null;
+
+        /**
+         * <p>Consumption scope type. 0: Latest, 1: Historical + latest</p>
          * @type {number || null}
          */
         this.ScopeType = null;
@@ -26868,6 +26908,8 @@ class ModifyKafkaConsumerRequest extends  AbstractModel {
             this.ConsumerContent = obj;
         }
         this.HasServicesLog = 'HasServicesLog' in params ? params.HasServicesLog : null;
+        this.EnableInternetConsume = 'EnableInternetConsume' in params ? params.EnableInternetConsume : null;
+        this.EnableIntranetConsume = 'EnableIntranetConsume' in params ? params.EnableIntranetConsume : null;
         this.ScopeType = 'ScopeType' in params ? params.ScopeType : null;
 
     }
@@ -28135,7 +28177,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Kafka consumer content
+ * Kafka consumption content
  * @class
  */
 class KafkaConsumerContent extends  AbstractModel {
@@ -28143,52 +28185,40 @@ class KafkaConsumerContent extends  AbstractModel {
         super();
 
         /**
-         * Consumption data format. Valid values: 0 (original content) and 1 (JSON).
+         * <p>Consumption data format. 0: Raw content; 1: JSON.</p>
          * @type {number || null}
          */
         this.Format = null;
 
         /**
-         * Whether to ship tag information
-This parameter does not need to be set when `Format` is set to `0`.
+         * <p>Whether to deliver TAG information<br>When Format is 0, this field does not need to be assigned a value</p>
          * @type {boolean || null}
          */
         this.EnableTag = null;
 
         /**
-         * Metadata information list. Valid values: \_\_SOURCE\_\_, \_\_FILENAME\_\_,
-\_\_TIMESTAMP\_\_, \_\_HOSTNAME\_\_, and \_\_PKGID\_\_.
-This parameter does not need to be set when `Format` is set to `0`.
+         * <p>Metadata information list. Valid values: __SOURCE__, __FILENAME__<br>, __TIMESTAMP__, __HOSTNAME__, __PKGID__<br>When Format is 0, this field does not need to be assigned a value</p>
          * @type {Array.<string> || null}
          */
         this.MetaFields = null;
 
         /**
-         * tag data processing method: 1: Not Tiled (default value); 2: Tile.
-
-Untiled example:
-TAG information: `{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
-No tiling: `{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
-
-Tiled example:
-TAG information: `{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
-Tiled: `{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}`
+         * <p>Tag data processing method. 1: Not flattened (default); 2: Flattened.</p><p>Not flattened example:<br>TAG information: <code>{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}</code><br>Not flattened: <code>{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}</code></p><p>Flattened example:<br>TAG information: <code>{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}</code><br>Flattened: <code>{&quot;__TAG__.fieldA&quot;:200,&quot;__TAG__.fieldB&quot;:&quot;text&quot;}</code></p>
          * @type {number || null}
          */
         this.TagTransaction = null;
 
         /**
-         * JSON data format:
-1: Not escaped (default format)
-2: Escaped
-
-Deliver in JSON format.JsonType is 1: Consistent with the original log, not escaped. Example:
-Original log: `{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`
-Deliver to CKafka: `{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`JsonType is 2: escaped. Example:Original log: `{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`
-Deliver to CKafka: `{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}`
+         * <p>Consumption data Json format:<br>1: Not escaped (default format)<br>2: Escaped</p><p>Delivery Json format.<br>When JsonType is 1: Consistent with the original log, not escaped. Example:<br>Original log: <code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code><br>Delivered to Ckafka: <code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code></p><p>When JsonType is 2: Escaped. Example:<br>Original log: <code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code><br>Delivered to Ckafka: <code>{&quot;a&quot;:&quot;aa&quot;,&quot;b&quot;:&quot;{\&quot;b1\&quot;:\&quot;b1b1\&quot;, \&quot;c1\&quot;:\&quot;c1c1\&quot;}&quot;}</code></p>
          * @type {number || null}
          */
         this.JsonType = null;
+
+        /**
+         * <p>Switch for automatic conversion of numeric types</p><p>Valid values:</p><ul><li>true: Numeric strings (such as &quot;123&quot;) in the first-level values of the JSON structure are automatically converted to numeric types (int/float).</li><li>false: Numeric strings (such as &quot;123&quot;) in the first-level values of the JSON structure remain strings.</li></ul><p>Default value: false</p>
+         * @type {boolean || null}
+         */
+        this.AutoConvertNumber = null;
 
     }
 
@@ -28204,6 +28234,7 @@ Deliver to CKafka: `{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}`
         this.MetaFields = 'MetaFields' in params ? params.MetaFields : null;
         this.TagTransaction = 'TagTransaction' in params ? params.TagTransaction : null;
         this.JsonType = 'JsonType' in params ? params.JsonType : null;
+        this.AutoConvertNumber = 'AutoConvertNumber' in params ? params.AutoConvertNumber : null;
 
     }
 }

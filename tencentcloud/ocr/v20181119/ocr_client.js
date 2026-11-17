@@ -26,19 +26,21 @@ const WordItem = models.WordItem;
 const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
 const ItemInfo = models.ItemInfo;
 const SmartStructuralOCRV2Request = models.SmartStructuralOCRV2Request;
+const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
 const RecognizeBrazilCommonOCRResponse = models.RecognizeBrazilCommonOCRResponse;
 const RecognizeMacaoIDCardOCRResponse = models.RecognizeMacaoIDCardOCRResponse;
 const GetCardVerificationExternalResultResponse = models.GetCardVerificationExternalResultResponse;
 const PermitOCRResponse = models.PermitOCRResponse;
 const RecognizeBrazilDriverLicenseOCRRequest = models.RecognizeBrazilDriverLicenseOCRRequest;
 const RecognizeMainlandIDCardOCRRequest = models.RecognizeMainlandIDCardOCRRequest;
-const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
+const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
 const WordPolygon = models.WordPolygon;
 const Value = models.Value;
 const RecognizeDetectCardCoordsResponse = models.RecognizeDetectCardCoordsResponse;
 const RecognizePhilippinesVoteIDOCRRequest = models.RecognizePhilippinesVoteIDOCRRequest;
 const BrazilRNMInfo = models.BrazilRNMInfo;
 const TextDetection = models.TextDetection;
+const SkippedCheck = models.SkippedCheck;
 const RecognizeDetectCardCoordsRequest = models.RecognizeDetectCardCoordsRequest;
 const GeneralCard = models.GeneralCard;
 const MainlandPermitOCRRequest = models.MainlandPermitOCRRequest;
@@ -50,24 +52,27 @@ const BrazilDriverLicenseInfo = models.BrazilDriverLicenseInfo;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
 const HmtResidentPermitOCRRequest = models.HmtResidentPermitOCRRequest;
 const PortraitImageInfo = models.PortraitImageInfo;
+const RecognizeGeneralCardVerificationResponse = models.RecognizeGeneralCardVerificationResponse;
 const ApplyOcrTokenResponse = models.ApplyOcrTokenResponse;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
-const PermitOCRRequest = models.PermitOCRRequest;
+const ItemNames = models.ItemNames;
 const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
 const RecognizePhilippinesSssIDOCRRequest = models.RecognizePhilippinesSssIDOCRRequest;
 const Key = models.Key;
 const BrazilIDCardInfo = models.BrazilIDCardInfo;
 const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
 const GroupInfo = models.GroupInfo;
-const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
+const PermitOCRRequest = models.PermitOCRRequest;
+const CardVerificationConfig = models.CardVerificationConfig;
 const ExtractDocMultiResponse = models.ExtractDocMultiResponse;
 const RecognizePhilippinesSssIDOCRResponse = models.RecognizePhilippinesSssIDOCRResponse;
 const ApplyOcrTokenRequest = models.ApplyOcrTokenRequest;
 const RecognizePhilippinesUMIDOCRResponse = models.RecognizePhilippinesUMIDOCRResponse;
-const RecognizeThaiIDCardOCRRequest = models.RecognizeThaiIDCardOCRRequest;
+const ApplyCardVerificationExternalRequest = models.ApplyCardVerificationExternalRequest;
 const PassportRecognizeInfos = models.PassportRecognizeInfos;
 const RecognizeSingaporeIDCardOCRRequest = models.RecognizeSingaporeIDCardOCRRequest;
 const RecognizeBrazilRNMOCRResponse = models.RecognizeBrazilRNMOCRResponse;
+const RecognizeGeneralCardVerificationRequest = models.RecognizeGeneralCardVerificationRequest;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
 const RecognizeBrazilRNMOCRRequest = models.RecognizeBrazilRNMOCRRequest;
 const RecognizeBrazilIDCardOCRResponse = models.RecognizeBrazilIDCardOCRResponse;
@@ -76,12 +81,11 @@ const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
 const RecognizeMacaoIDCardOCRRequest = models.RecognizeMacaoIDCardOCRRequest;
 const CoordsItem = models.CoordsItem;
 const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
-const ApplyCardVerificationExternalRequest = models.ApplyCardVerificationExternalRequest;
+const RecognizeThaiIDCardOCRRequest = models.RecognizeThaiIDCardOCRRequest;
 const GetCardVerificationExternalResultRequest = models.GetCardVerificationExternalResultRequest;
 const Coord = models.Coord;
 const RecognizeBrazilRNEOCRResponse = models.RecognizeBrazilRNEOCRResponse;
 const RecognizeIndonesiaIDCardOCRResponse = models.RecognizeIndonesiaIDCardOCRResponse;
-const ItemNames = models.ItemNames;
 const VinOCRResponse = models.VinOCRResponse;
 const ConfigAdvanced = models.ConfigAdvanced;
 const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
@@ -93,7 +97,7 @@ const RecognizeSingaporeIDCardOCRResponse = models.RecognizeSingaporeIDCardOCRRe
 const SmartStructuralOCRV2Response = models.SmartStructuralOCRV2Response;
 const RecognizeMainlandIDCardOCRResponse = models.RecognizeMainlandIDCardOCRResponse;
 const MainlandPermitOCRResponse = models.MainlandPermitOCRResponse;
-const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
+const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
 const ImageCoordinates = models.ImageCoordinates;
 const RecognizeMexicoVTIDRequest = models.RecognizeMexicoVTIDRequest;
 const PODAuditAIResponse = models.PODAuditAIResponse;
@@ -491,6 +495,18 @@ A maximum of 20 requests can be initiated per second for this API.
     RecognizePhilippinesDrivingLicenseOCR(req, cb) {
         let resp = new RecognizePhilippinesDrivingLicenseOCRResponse();
         this.request("RecognizePhilippinesDrivingLicenseOCR", req, resp, cb);
+    }
+
+    /**
+     * This API performs unified verification on images of various card types worldwide. It supports automatic card type classification, field recognition, quality check, tampering (PS) detection, copy detection, recapture detection, format validation, and information consistency check. Candidate card types and check items can be flexibly combined.
+The following 20 document types are currently supported: Mainland China ID Card, Passport, Thai ID Card, Malaysian ID Card, Indonesian ID Card, Singapore ID Card, Philippine Driver's License, Philippine SSS ID, Philippine PRC ID, Philippine Postal ID Card, Philippine UMID, Philippine Voter ID, Philippine TIN Card, Philippine National ID, Philippine Health Card, Taiwan (China) ID Card, Vietnamese ID Card, Myanmar Driver's License, Brazilian ID Card, and Brazilian Driver's License.
+     * @param {RecognizeGeneralCardVerificationRequest} req
+     * @param {function(string, RecognizeGeneralCardVerificationResponse):void} cb
+     * @public
+     */
+    RecognizeGeneralCardVerification(req, cb) {
+        let resp = new RecognizeGeneralCardVerificationResponse();
+        this.request("RecognizeGeneralCardVerification", req, resp, cb);
     }
 
     /**

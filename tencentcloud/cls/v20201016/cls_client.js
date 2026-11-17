@@ -2800,7 +2800,7 @@ Import the generated cls.pb.h header file into the code and call the interface t
     }
 
     /**
-     * This API is used to access Kafka protocol consumption information.
+     * Accesses Kafka protocol consumption information
      * @param {DescribeKafkaConsumerRequest} req
      * @param {function(string, DescribeKafkaConsumerResponse):void} cb
      * @public

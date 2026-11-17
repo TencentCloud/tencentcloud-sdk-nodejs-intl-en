@@ -52,6 +52,7 @@ const DescribeResourceUsageRequest = models.DescribeResourceUsageRequest;
 const Label = models.Label;
 const PodLimitsByType = models.PodLimitsByType;
 const CreateEdgeLogConfigRequest = models.CreateEdgeLogConfigRequest;
+const RotateClusterTokenRequest = models.RotateClusterTokenRequest;
 const DescribeTKEEdgeClusterStatusResponse = models.DescribeTKEEdgeClusterStatusResponse;
 const DescribeClusterStatusRequest = models.DescribeClusterStatusRequest;
 const CreateBackupStorageLocationRequest = models.CreateBackupStorageLocationRequest;
@@ -174,6 +175,7 @@ const DescribeTKEEdgeExternalKubeconfigResponse = models.DescribeTKEEdgeExternal
 const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
 const DescribeLogSwitchesResponse = models.DescribeLogSwitchesResponse;
 const ModifyClusterVirtualNodePoolResponse = models.ModifyClusterVirtualNodePoolResponse;
+const RotateClusterTokenResponse = models.RotateClusterTokenResponse;
 const InstanceUpgradeClusterStatus = models.InstanceUpgradeClusterStatus;
 const DescribeClusterRoutesRequest = models.DescribeClusterRoutesRequest;
 const DeleteECMInstancesRequest = models.DeleteECMInstancesRequest;
@@ -600,6 +602,17 @@ class TkeClient extends AbstractClient {
     CreateClusterRouteTable(req, cb) {
         let resp = new CreateClusterRouteTableResponse();
         this.request("CreateClusterRouteTable", req, resp, cb);
+    }
+
+    /**
+     * This API is used to rotate a cluster token.
+     * @param {RotateClusterTokenRequest} req
+     * @param {function(string, RotateClusterTokenResponse):void} cb
+     * @public
+     */
+    RotateClusterToken(req, cb) {
+        let resp = new RotateClusterTokenResponse();
+        this.request("RotateClusterToken", req, resp, cb);
     }
 
     /**

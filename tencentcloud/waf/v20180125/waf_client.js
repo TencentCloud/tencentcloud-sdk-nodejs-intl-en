@@ -16,292 +16,365 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CreateOwaspWhiteRuleRequest = models.CreateOwaspWhiteRuleRequest;
-const PiechartItem = models.PiechartItem;
-const DeleteOwaspWhiteRuleRequest = models.DeleteOwaspWhiteRuleRequest;
+const DescribeLLMWafDLPRulesResponse = models.DescribeLLMWafDLPRulesResponse;
+const AddLLMSdkAccessResponse = models.AddLLMSdkAccessResponse;
 const ModifyUserLevelResponse = models.ModifyUserLevelResponse;
-const SearchAttackLogResponse = models.SearchAttackLogResponse;
-const KVInt = models.KVInt;
-const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
-const DescribeCustomRulesRspRuleListItem = models.DescribeCustomRulesRspRuleListItem;
-const ModifyAntiInfoLeakRulesResponse = models.ModifyAntiInfoLeakRulesResponse;
+const DescribeSkillSecScanResultResponse = models.DescribeSkillSecScanResultResponse;
 const ModifyWebshellStatusRequest = models.ModifyWebshellStatusRequest;
-const DescribeCertificateVerifyResultRequest = models.DescribeCertificateVerifyResultRequest;
+const WafRuleLimit = models.WafRuleLimit;
 const DescribeUserClbWafRegionsResponse = models.DescribeUserClbWafRegionsResponse;
-const ModifyInstanceRenewFlagResponse = models.ModifyInstanceRenewFlagResponse;
-const CreateIpAccessControlRequest = models.CreateIpAccessControlRequest;
-const TLSCiphers = models.TLSCiphers;
 const AddAntiFakeUrlRequest = models.AddAntiFakeUrlRequest;
-const WebshellStatus = models.WebshellStatus;
-const AddCustomWhiteRuleResponse = models.AddCustomWhiteRuleResponse;
-const SearchAttackLogRequest = models.SearchAttackLogRequest;
-const ModifyHostFlowModeResponse = models.ModifyHostFlowModeResponse;
-const DescribeOwaspWhiteRulesResponse = models.DescribeOwaspWhiteRulesResponse;
-const SwitchElasticModeRequest = models.SwitchElasticModeRequest;
-const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
-const HostDel = models.HostDel;
-const DeleteCustomWhiteRuleResponse = models.DeleteCustomWhiteRuleResponse;
-const DescribeIpAccessControlResponse = models.DescribeIpAccessControlResponse;
+const DeleteOwaspWhiteRuleRequest = models.DeleteOwaspWhiteRuleRequest;
 const DescribeAntiLeakageItem = models.DescribeAntiLeakageItem;
 const LoadBalancerPackageNew = models.LoadBalancerPackageNew;
 const DescribeOwaspWhiteRulesRequest = models.DescribeOwaspWhiteRulesRequest;
-const ModifyDomainIpv6StatusResponse = models.ModifyDomainIpv6StatusResponse;
-const CCRuleData = models.CCRuleData;
-const DescribeCustomRuleListRequest = models.DescribeCustomRuleListRequest;
-const DescribeUserClbWafRegionsRequest = models.DescribeUserClbWafRegionsRequest;
-const DescribeHostsResponse = models.DescribeHostsResponse;
-const DescribePeakPointsRequest = models.DescribePeakPointsRequest;
-const ModifyInstanceQpsLimitRequest = models.ModifyInstanceQpsLimitRequest;
+const DescribeLLMWafProtectRulesResponse = models.DescribeLLMWafProtectRulesResponse;
+const ModifyHostRequest = models.ModifyHostRequest;
+const LLMDetectResult = models.LLMDetectResult;
 const DeleteHostRequest = models.DeleteHostRequest;
-const ModifyDomainPostActionResponse = models.ModifyDomainPostActionResponse;
 const DescribeCertificateVerifyResultResponse = models.DescribeCertificateVerifyResultResponse;
 const ModifyUserSignatureRuleResponse = models.ModifyUserSignatureRuleResponse;
-const DescribeAntiInfoLeakRulesStrategyItem = models.DescribeAntiInfoLeakRulesStrategyItem;
-const ModifyApiAnalyzeStatusRequest = models.ModifyApiAnalyzeStatusRequest;
-const TLSVersion = models.TLSVersion;
-const UpsertSessionResponse = models.UpsertSessionResponse;
-const DescribeDomainsResponse = models.DescribeDomainsResponse;
-const DeleteSessionRequest = models.DeleteSessionRequest;
+const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
 const GenerateDealsAndPayNewRequest = models.GenerateDealsAndPayNewRequest;
-const RefreshAccessCheckResultRequest = models.RefreshAccessCheckResultRequest;
-const AddAntiFakeUrlResponse = models.AddAntiFakeUrlResponse;
-const ModifyHostResponse = models.ModifyHostResponse;
-const DescribeCiphersDetailRequest = models.DescribeCiphersDetailRequest;
-const AddCustomRuleResponse = models.AddCustomRuleResponse;
-const CCRuleItems = models.CCRuleItems;
-const ModifySpartaProtectionModeResponse = models.ModifySpartaProtectionModeResponse;
-const ModifyDomainIpv6StatusRequest = models.ModifyDomainIpv6StatusRequest;
-const CreateIpAccessControlResponse = models.CreateIpAccessControlResponse;
-const RefreshAccessCheckResultResponse = models.RefreshAccessCheckResultResponse;
-const DescribeAntiInfoLeakageRulesResponse = models.DescribeAntiInfoLeakageRulesResponse;
-const SessionItem = models.SessionItem;
+const DeleteCustomWhiteRuleResponse = models.DeleteCustomWhiteRuleResponse;
+const DeleteLLMSdkAccessRequest = models.DeleteLLMSdkAccessRequest;
 const MajorEventsPkg = models.MajorEventsPkg;
-const ModifyObjectRequest = models.ModifyObjectRequest;
-const ModifyHostFlowModeRequest = models.ModifyHostFlowModeRequest;
-const OwaspRule = models.OwaspRule;
-const GetAttackHistogramRequest = models.GetAttackHistogramRequest;
-const UserDomainInfo = models.UserDomainInfo;
-const ModifyAntiInfoLeakRulesRequest = models.ModifyAntiInfoLeakRulesRequest;
-const ModifyProtectionStatusRequest = models.ModifyProtectionStatusRequest;
-const CCRuleLists = models.CCRuleLists;
-const ModifyApiAnalyzeStatusResponse = models.ModifyApiAnalyzeStatusResponse;
-const DescribeCustomWhiteRuleRequest = models.DescribeCustomWhiteRuleRequest;
-const DeleteAntiFakeUrlResponse = models.DeleteAntiFakeUrlResponse;
-const SearchItem = models.SearchItem;
-const UpsertCCRuleResponse = models.UpsertCCRuleResponse;
-const DescribeAttackTypeRequest = models.DescribeAttackTypeRequest;
-const ModifyAntiFakeUrlStatusRequest = models.ModifyAntiFakeUrlStatusRequest;
-const DeleteCustomWhiteRuleRequest = models.DeleteCustomWhiteRuleRequest;
-const ModifyHostModeResponse = models.ModifyHostModeResponse;
-const DescribeOwaspRulesRequest = models.DescribeOwaspRulesRequest;
-const DescribeCCRuleListRequest = models.DescribeCCRuleListRequest;
-const ModifyOwaspRuleTypeStatusResponse = models.ModifyOwaspRuleTypeStatusResponse;
-const ModifyProtectionStatusResponse = models.ModifyProtectionStatusResponse;
-const ResponseCode = models.ResponseCode;
-const DescribeCustomRuleListResponse = models.DescribeCustomRuleListResponse;
-const ModifyDomainsCLSStatusResponse = models.ModifyDomainsCLSStatusResponse;
-const ImportIpAccessControlResponse = models.ImportIpAccessControlResponse;
-const DescribeVipInfoRequest = models.DescribeVipInfoRequest;
-const DeleteIpAccessControlV2Request = models.DeleteIpAccessControlV2Request;
-const CronJob = models.CronJob;
-const IpAccessControlData = models.IpAccessControlData;
+const DescribeLLMContentRuleListResponse = models.DescribeLLMContentRuleListResponse;
+const LLMSensitiveValueLevel = models.LLMSensitiveValueLevel;
+const ModifyLLMWafProtectRuleResponse = models.ModifyLLMWafProtectRuleResponse;
+const DescribeModuleStatusResponse = models.DescribeModuleStatusResponse;
+const LLMOptionsItem = models.LLMOptionsItem;
+const KVInt = models.KVInt;
+const ModifyLLMWafProtectRuleRequest = models.ModifyLLMWafProtectRuleRequest;
+const DescribeWebshellStatusRequest = models.DescribeWebshellStatusRequest;
 const GetAttackHistogramResponse = models.GetAttackHistogramResponse;
-const GetInstanceQpsLimitRequest = models.GetInstanceQpsLimitRequest;
+const KeyWordInfo = models.KeyWordInfo;
 const FiltersItemNew = models.FiltersItemNew;
 const DeleteSpartaProtectionResponse = models.DeleteSpartaProtectionResponse;
-const SessionData = models.SessionData;
-const ModifyUserLevelRequest = models.ModifyUserLevelRequest;
-const QpsData = models.QpsData;
-const DescribeAntiInfoLeakageRulesRequest = models.DescribeAntiInfoLeakageRulesRequest;
-const CreateHostResponse = models.CreateHostResponse;
-const DeleteOwaspWhiteRuleResponse = models.DeleteOwaspWhiteRuleResponse;
-const UpsertCCRuleRequest = models.UpsertCCRuleRequest;
-const IpAccessControlItem = models.IpAccessControlItem;
+const PiechartItem = models.PiechartItem;
 const DeleteHostResponse = models.DeleteHostResponse;
-const SwitchElasticModeResponse = models.SwitchElasticModeResponse;
-const FreshAntiFakeUrlResponse = models.FreshAntiFakeUrlResponse;
-const ModifyBotStatusRequest = models.ModifyBotStatusRequest;
-const DeleteSpartaProtectionRequest = models.DeleteSpartaProtectionRequest;
-const DomainsPartInfo = models.DomainsPartInfo;
-const DescribeAntiFakeRulesResponse = models.DescribeAntiFakeRulesResponse;
-const AddAntiInfoLeakRulesRequest = models.AddAntiInfoLeakRulesRequest;
-const ModifyObjectResponse = models.ModifyObjectResponse;
-const HostRecord = models.HostRecord;
-const CreateHostRequest = models.CreateHostRequest;
-const DescribeSpartaProtectionInfoResponse = models.DescribeSpartaProtectionInfoResponse;
+const ModifyApiAnalyzeStatusResponse = models.ModifyApiAnalyzeStatusResponse;
+const LLMHourBillTrendItem = models.LLMHourBillTrendItem;
+const SessionData = models.SessionData;
+const ModifyCustomRuleResponse = models.ModifyCustomRuleResponse;
 const FreshAntiFakeUrlRequest = models.FreshAntiFakeUrlRequest;
-const DescribeFindDomainListResponse = models.DescribeFindDomainListResponse;
 const SpartaProtectionPort = models.SpartaProtectionPort;
-const AddSpartaProtectionRequest = models.AddSpartaProtectionRequest;
 const ModifyOwaspWhiteRuleRequest = models.ModifyOwaspWhiteRuleRequest;
-const GetInstanceQpsLimitResponse = models.GetInstanceQpsLimitResponse;
-const CreateDealsRequest = models.CreateDealsRequest;
-const JobDateTime = models.JobDateTime;
-const ModifyCustomWhiteRuleResponse = models.ModifyCustomWhiteRuleResponse;
+const ClbObject = models.ClbObject;
 const DescribeSessionRequest = models.DescribeSessionRequest;
-const ModifyModuleStatusResponse = models.ModifyModuleStatusResponse;
 const DescribePolicyStatusRequest = models.DescribePolicyStatusRequest;
-const DescribePortsResponse = models.DescribePortsResponse;
 const ModifyIpAccessControlRequest = models.ModifyIpAccessControlRequest;
-const ApiPkg = models.ApiPkg;
-const AttackLogInfo = models.AttackLogInfo;
-const DescribeModuleStatusResponse = models.DescribeModuleStatusResponse;
-const DescribeAttackOverviewResponse = models.DescribeAttackOverviewResponse;
-const ModifyOwaspRuleTypeStatusRequest = models.ModifyOwaspRuleTypeStatusRequest;
-const DescribeCCRuleListResponse = models.DescribeCCRuleListResponse;
+const ModifyApiAnalyzeStatusRequest = models.ModifyApiAnalyzeStatusRequest;
 const DescribeDomainCountInfoResponse = models.DescribeDomainCountInfoResponse;
-const PeakPointsItem = models.PeakPointsItem;
-const DescribePortsRequest = models.DescribePortsRequest;
 const ModifyHostModeRequest = models.ModifyHostModeRequest;
-const QPSPackageNew = models.QPSPackageNew;
-const DescribeOwaspRuleTypesResponse = models.DescribeOwaspRuleTypesResponse;
-const DescribeDomainDetailsClbRequest = models.DescribeDomainDetailsClbRequest;
 const ModifyAntiInfoLeakRuleStatusRequest = models.ModifyAntiInfoLeakRuleStatusRequest;
-const DescribeDomainVerifyResultRequest = models.DescribeDomainVerifyResultRequest;
-const CreateDealsGoods = models.CreateDealsGoods;
-const TimedJob = models.TimedJob;
-const DescribeTlsVersionRequest = models.DescribeTlsVersionRequest;
 const DescribeCiphersDetailResponse = models.DescribeCiphersDetailResponse;
-const DealData = models.DealData;
+const DescribeCustomRuleListRequest = models.DescribeCustomRuleListRequest;
 const DeleteIpAccessControlV2Response = models.DeleteIpAccessControlV2Response;
-const ModifyOwaspWhiteRuleResponse = models.ModifyOwaspWhiteRuleResponse;
-const ModifyBotStatusResponse = models.ModifyBotStatusResponse;
-const DescribeDomainDetailsSaasRequest = models.DescribeDomainDetailsSaasRequest;
 const DescribeOwaspRulesResponse = models.DescribeOwaspRulesResponse;
-const ModifyCustomRuleStatusResponse = models.ModifyCustomRuleStatusResponse;
 const StrategyForAntiInfoLeak = models.StrategyForAntiInfoLeak;
 const AddSpartaProtectionResponse = models.AddSpartaProtectionResponse;
 const DescribeUserDomainInfoRequest = models.DescribeUserDomainInfoRequest;
-const DomainRuleId = models.DomainRuleId;
-const DescribeModuleStatusRequest = models.DescribeModuleStatusRequest;
-const PortItem = models.PortItem;
-const CreateDealsGoodsDetail = models.CreateDealsGoodsDetail;
-const DescribeOwaspRuleTypesRequest = models.DescribeOwaspRuleTypesRequest;
-const ModifyAntiFakeUrlRequest = models.ModifyAntiFakeUrlRequest;
-const ModifyCustomWhiteRuleStatusResponse = models.ModifyCustomWhiteRuleStatusResponse;
-const ModifyHostStatusResponse = models.ModifyHostStatusResponse;
-const BatchIpAccessControlData = models.BatchIpAccessControlData;
-const ModifyCustomRuleStatusRequest = models.ModifyCustomRuleStatusRequest;
-const DescribePeakPointsResponse = models.DescribePeakPointsResponse;
-const OwaspRuleType = models.OwaspRuleType;
-const GoodNews = models.GoodNews;
-const ModifySpartaProtectionModeRequest = models.ModifySpartaProtectionModeRequest;
+const HybridPkg = models.HybridPkg;
+const IpAccessControlData = models.IpAccessControlData;
+const DescribeHostResponse = models.DescribeHostResponse;
+const ModifyLLMKeywordLibraryResponse = models.ModifyLLMKeywordLibraryResponse;
+const UpsertCCRuleResponse = models.UpsertCCRuleResponse;
 const DescribeHostRequest = models.DescribeHostRequest;
-const ModifyCustomRuleRequest = models.ModifyCustomRuleRequest;
+const DeleteCustomRuleRequest = models.DeleteCustomRuleRequest;
+const JobDateTime = models.JobDateTime;
+const DescribeHostsRequest = models.DescribeHostsRequest;
+const ModifyCustomWhiteRuleStatusRequest = models.ModifyCustomWhiteRuleStatusRequest;
+const ModifyLLMStatusRequest = models.ModifyLLMStatusRequest;
+const ClbWafRegionItem = models.ClbWafRegionItem;
+const DescribeFindDomainListRequest = models.DescribeFindDomainListRequest;
+const ModifyInstanceElasticModeResponse = models.ModifyInstanceElasticModeResponse;
+const TargetEntity = models.TargetEntity;
+const CCRuleItem = models.CCRuleItem;
+const DescribeDomainCountInfoRequest = models.DescribeDomainCountInfoRequest;
+const DescribeCustomWhiteRuleResponse = models.DescribeCustomWhiteRuleResponse;
+const ModifySpartaProtectionRequest = models.ModifySpartaProtectionRequest;
+const DescribeAntiFakeRulesRequest = models.DescribeAntiFakeRulesRequest;
+const DescribeVipInfoRequest = models.DescribeVipInfoRequest;
+const ModifyLLMContentRuleRequest = models.ModifyLLMContentRuleRequest;
+const DescribeFindDomainListResponse = models.DescribeFindDomainListResponse;
+const DeleteSessionResponse = models.DeleteSessionResponse;
+const ModifyUserSignatureRuleRequest = models.ModifyUserSignatureRuleRequest;
+const ModifyWebshellStatusResponse = models.ModifyWebshellStatusResponse;
+const DescribeUserDomainInfoResponse = models.DescribeUserDomainInfoResponse;
+const TLSVersion = models.TLSVersion;
+const ModifyOwaspRuleTypeActionResponse = models.ModifyOwaspRuleTypeActionResponse;
+const LoadBalancer = models.LoadBalancer;
+const DescribeCustomRulesRspRuleListItem = models.DescribeCustomRulesRspRuleListItem;
+const ModifyAntiInfoLeakRulesResponse = models.ModifyAntiInfoLeakRulesResponse;
+const QpsData = models.QpsData;
+const AddCustomWhiteRuleResponse = models.AddCustomWhiteRuleResponse;
+const DescribeLLMWafProtectRulesRequest = models.DescribeLLMWafProtectRulesRequest;
+const DescribeLLMContentRuleListRequest = models.DescribeLLMContentRuleListRequest;
+const SwitchElasticModeRequest = models.SwitchElasticModeRequest;
+const HostDel = models.HostDel;
+const DescribeModuleStatusRequest = models.DescribeModuleStatusRequest;
+const ModifyHostModeResponse = models.ModifyHostModeResponse;
+const DeleteLLMContentRuleRequest = models.DeleteLLMContentRuleRequest;
+const DescribeHostsResponse = models.DescribeHostsResponse;
+const DomainInfo = models.DomainInfo;
+const DescribeDomainsResponse = models.DescribeDomainsResponse;
+const UploadSkillSecScanRequest = models.UploadSkillSecScanRequest;
+const AddAntiFakeUrlResponse = models.AddAntiFakeUrlResponse;
+const ModifyOwaspWhiteRuleResponse = models.ModifyOwaspWhiteRuleResponse;
+const UrlDetectResult = models.UrlDetectResult;
+const ModifySpartaProtectionResponse = models.ModifySpartaProtectionResponse;
+const SwitchElasticModeResponse = models.SwitchElasticModeResponse;
+const CCRuleLists = models.CCRuleLists;
+const ModifyAntiFakeUrlStatusRequest = models.ModifyAntiFakeUrlStatusRequest;
+const UploadSkillSecScanResponse = models.UploadSkillSecScanResponse;
+const DeleteLLMKeywordLibraryResponse = models.DeleteLLMKeywordLibraryResponse;
+const TLSCiphers = models.TLSCiphers;
+const ResponseCode = models.ResponseCode;
+const ModifyLLMContentRuleStatusResponse = models.ModifyLLMContentRuleStatusResponse;
+const DescribeAntiInfoLeakageRulesRequest = models.DescribeAntiInfoLeakageRulesRequest;
+const CreateHostResponse = models.CreateHostResponse;
+const LLMHourBillDetailItem = models.LLMHourBillDetailItem;
+const ModifyBotStatusRequest = models.ModifyBotStatusRequest;
+const ModifyHostFlowModeRequest = models.ModifyHostFlowModeRequest;
+const CreateHostRequest = models.CreateHostRequest;
+const GetInstanceQpsLimitResponse = models.GetInstanceQpsLimitResponse;
+const CreateDealsRequest = models.CreateDealsRequest;
+const ModifyCustomWhiteRuleResponse = models.ModifyCustomWhiteRuleResponse;
+const SearchItem = models.SearchItem;
+const ApiPkg = models.ApiPkg;
+const DescribePortsRequest = models.DescribePortsRequest;
+const ModifyLLMWafDLPRuleResponse = models.ModifyLLMWafDLPRuleResponse;
+const DescribeTlsVersionRequest = models.DescribeTlsVersionRequest;
+const RuleItem = models.RuleItem;
+const DealData = models.DealData;
+const LLMBillItemFee = models.LLMBillItemFee;
+const DescribeDomainDetailsSaasRequest = models.DescribeDomainDetailsSaasRequest;
+const ValueLevel = models.ValueLevel;
+const CreateDealsGoodsDetail = models.CreateDealsGoodsDetail;
+const ModifyLLMWafToolCallRuleResponse = models.ModifyLLMWafToolCallRuleResponse;
+const DescribePeakPointsResponse = models.DescribePeakPointsResponse;
+const ModifyInstanceRenewFlagRequest = models.ModifyInstanceRenewFlagRequest;
+const ModifyLLMSdkAccessRequest = models.ModifyLLMSdkAccessRequest;
+const GoodsDetailNew = models.GoodsDetailNew;
+const DescribeLLMKeywordLibraryRequest = models.DescribeLLMKeywordLibraryRequest;
+const ToolCallResult = models.ToolCallResult;
+const BatchIpAccessControlItem = models.BatchIpAccessControlItem;
+const PortInfo = models.PortInfo;
+const FraudPkg = models.FraudPkg;
+const DescribeDomainDetailsClbResponse = models.DescribeDomainDetailsClbResponse;
+const DescribeIpAccessControlRequest = models.DescribeIpAccessControlRequest;
+const PromptDetectResult = models.PromptDetectResult;
+const ModifyOwaspRuleTypeActionRequest = models.ModifyOwaspRuleTypeActionRequest;
+const ModifyInstanceQpsLimitResponse = models.ModifyInstanceQpsLimitResponse;
+const ReqUserRule = models.ReqUserRule;
+const DescribeLLMHourBillDetailResponse = models.DescribeLLMHourBillDetailResponse;
+const GoodNews = models.GoodNews;
+const DeleteLLMSdkAccessResponse = models.DeleteLLMSdkAccessResponse;
+const DeleteOwaspRuleStatusResponse = models.DeleteOwaspRuleStatusResponse;
+const DescribeDomainsRequest = models.DescribeDomainsRequest;
+const DescribeUserClbWafRegionsRequest = models.DescribeUserClbWafRegionsRequest;
+const AddLLMSdkAccessRequest = models.AddLLMSdkAccessRequest;
+const AddAntiInfoLeakRulesResponse = models.AddAntiInfoLeakRulesResponse;
+const QPSPackageNew = models.QPSPackageNew;
+const DeleteAntiInfoLeakRuleResponse = models.DeleteAntiInfoLeakRuleResponse;
+const DescribeRuleLimitResponse = models.DescribeRuleLimitResponse;
+const ModifyOwaspRuleTypeLevelRequest = models.ModifyOwaspRuleTypeLevelRequest;
+const ModifyLLMKeywordLibraryRequest = models.ModifyLLMKeywordLibraryRequest;
+const DescribeLLMWafToolCallRulesResponse = models.DescribeLLMWafToolCallRulesResponse;
+const DescribeHistogramResponse = models.DescribeHistogramResponse;
+const RefreshAccessCheckResultResponse = models.RefreshAccessCheckResultResponse;
+const CreateOwaspWhiteRuleRequest = models.CreateOwaspWhiteRuleRequest;
+const SkillScanRuleHit = models.SkillScanRuleHit;
+const ModifyHostResponse = models.ModifyHostResponse;
+const ModifyLLMWafDLPRuleRequest = models.ModifyLLMWafDLPRuleRequest;
+const DescribeCertificateVerifyResultRequest = models.DescribeCertificateVerifyResultRequest;
+const CreateIpAccessControlRequest = models.CreateIpAccessControlRequest;
+const MiniPkg = models.MiniPkg;
+const DescribeIpAccessControlResponse = models.DescribeIpAccessControlResponse;
+const ModifyProtectionStatusRequest = models.ModifyProtectionStatusRequest;
+const CCRuleData = models.CCRuleData;
+const DescribeLLMSdkAccessResponse = models.DescribeLLMSdkAccessResponse;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const IpAccessControlItem = models.IpAccessControlItem;
+const SkillScanUploadData = models.SkillScanUploadData;
+const ModifyOwaspRuleStatusResponse = models.ModifyOwaspRuleStatusResponse;
+const UpsertSessionResponse = models.UpsertSessionResponse;
+const DeleteSessionRequest = models.DeleteSessionRequest;
+const LLMKeywordLibrary = models.LLMKeywordLibrary;
+const SearchAttackLogRequest = models.SearchAttackLogRequest;
+const DescribeLLMSdkAccessRequest = models.DescribeLLMSdkAccessRequest;
+const CreateIpAccessControlResponse = models.CreateIpAccessControlResponse;
+const SessionItem = models.SessionItem;
+const ModifyObjectRequest = models.ModifyObjectRequest;
+const DescribeCustomWhiteRuleRequest = models.DescribeCustomWhiteRuleRequest;
+const DeleteAntiFakeUrlResponse = models.DeleteAntiFakeUrlResponse;
+const Area = models.Area;
+const DescribeUserLevelResponse = models.DescribeUserLevelResponse;
+const IpAccessControlParam = models.IpAccessControlParam;
+const IntentContent = models.IntentContent;
+const DescribeCustomRuleListResponse = models.DescribeCustomRuleListResponse;
+const GetInstanceQpsLimitRequest = models.GetInstanceQpsLimitRequest;
+const HostRecord = models.HostRecord;
+const ModifyUserLevelRequest = models.ModifyUserLevelRequest;
+const ModifyLLMWafToolCallRuleRequest = models.ModifyLLMWafToolCallRuleRequest;
+const ModifyInstanceQpsLimitRequest = models.ModifyInstanceQpsLimitRequest;
+const FreshAntiFakeUrlResponse = models.FreshAntiFakeUrlResponse;
+const DeleteSpartaProtectionRequest = models.DeleteSpartaProtectionRequest;
+const UserDomainInfo = models.UserDomainInfo;
+const DescribeAntiFakeRulesResponse = models.DescribeAntiFakeRulesResponse;
+const ImportIpAccessControlRequest = models.ImportIpAccessControlRequest;
+const GetAttackTotalCountRequest = models.GetAttackTotalCountRequest;
+const DescribeAttackOverviewResponse = models.DescribeAttackOverviewResponse;
+const DescribeCCRuleListResponse = models.DescribeCCRuleListResponse;
+const PeakPointsItem = models.PeakPointsItem;
+const ModifyAntiFakeUrlRequest = models.ModifyAntiFakeUrlRequest;
+const DescribeDomainDetailsClbRequest = models.DescribeDomainDetailsClbRequest;
+const TimedJob = models.TimedJob;
+const DomainPackageNew = models.DomainPackageNew;
+const ModifyDomainsCLSStatusResponse = models.ModifyDomainsCLSStatusResponse;
+const ModifyBotStatusResponse = models.ModifyBotStatusResponse;
+const ModifyCustomRuleStatusResponse = models.ModifyCustomRuleStatusResponse;
+const DomainRuleId = models.DomainRuleId;
+const PortItem = models.PortItem;
+const DescribeOwaspRuleTypesRequest = models.DescribeOwaspRuleTypesRequest;
+const ModifyHostStatusResponse = models.ModifyHostStatusResponse;
+const ModifyCustomRuleStatusRequest = models.ModifyCustomRuleStatusRequest;
+const AddCustomRuleResponse = models.AddCustomRuleResponse;
+const OwaspRuleType = models.OwaspRuleType;
+const ModifySpartaProtectionModeRequest = models.ModifySpartaProtectionModeRequest;
 const DescribeAttackOverviewRequest = models.DescribeAttackOverviewRequest;
 const DescribeUserLevelRequest = models.DescribeUserLevelRequest;
-const BotQPS = models.BotQPS;
-const ModifyOwaspRuleTypeActionResponse = models.ModifyOwaspRuleTypeActionResponse;
-const DescribeDomainDetailsClbResponse = models.DescribeDomainDetailsClbResponse;
-const HostStatus = models.HostStatus;
-const GoodsDetailNew = models.GoodsDetailNew;
-const ModifyAntiFakeUrlResponse = models.ModifyAntiFakeUrlResponse;
-const GetAttackTotalCountRequest = models.GetAttackTotalCountRequest;
-const ModifySpartaProtectionResponse = models.ModifySpartaProtectionResponse;
-const DomainInfo = models.DomainInfo;
-const DescribeBatchIpAccessControlRequest = models.DescribeBatchIpAccessControlRequest;
-const DescribePolicyStatusResponse = models.DescribePolicyStatusResponse;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const ModifyCustomWhiteRuleRequest = models.ModifyCustomWhiteRuleRequest;
-const GetAttackTotalCountResponse = models.GetAttackTotalCountResponse;
-const DescribeObjectsResponse = models.DescribeObjectsResponse;
-const BatchIpAccessControlItem = models.BatchIpAccessControlItem;
 const InstanceInfo = models.InstanceInfo;
-const ModifyOwaspRuleTypeLevelRequest = models.ModifyOwaspRuleTypeLevelRequest;
+const HostStatus = models.HostStatus;
+const ModifyAntiFakeUrlResponse = models.ModifyAntiFakeUrlResponse;
+const DescribeBatchIpAccessControlRequest = models.DescribeBatchIpAccessControlRequest;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const ModifyAntiInfoLeakRulesRequest = models.ModifyAntiInfoLeakRulesRequest;
 const OwaspWhiteRule = models.OwaspWhiteRule;
-const IpAccessControlParam = models.IpAccessControlParam;
-const ModifyInstanceRenewFlagRequest = models.ModifyInstanceRenewFlagRequest;
 const DescribeBatchIpAccessControlResponse = models.DescribeBatchIpAccessControlResponse;
 const DescribeDomainDetailsSaasResponse = models.DescribeDomainDetailsSaasResponse;
-const DescribeDomainVerifyResultResponse = models.DescribeDomainVerifyResultResponse;
-const DomainPackageNew = models.DomainPackageNew;
-const AddCustomRuleRequest = models.AddCustomRuleRequest;
+const ExportLLMKeywordLibRequest = models.ExportLLMKeywordLibRequest;
 const ModifyAntiInfoLeakRuleStatusResponse = models.ModifyAntiInfoLeakRuleStatusResponse;
-const FraudPkg = models.FraudPkg;
-const DeleteCCRuleRequest = models.DeleteCCRuleRequest;
-const DescribeAttackTypeResponse = models.DescribeAttackTypeResponse;
-const GenerateDealsAndPayNewResponse = models.GenerateDealsAndPayNewResponse;
-const DeleteCustomRuleRequest = models.DeleteCustomRuleRequest;
-const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const DescribeCCRuleResponse = models.DescribeCCRuleResponse;
-const MiniExtendPkg = models.MiniExtendPkg;
-const Strategy = models.Strategy;
+const DeleteIpAccessControlV2Request = models.DeleteIpAccessControlV2Request;
 const DescribeTopAttackDomainRequest = models.DescribeTopAttackDomainRequest;
-const DescribeIpAccessControlRequest = models.DescribeIpAccessControlRequest;
-const DescribeFindDomainListRequest = models.DescribeFindDomainListRequest;
-const ModifyAntiFakeUrlStatusResponse = models.ModifyAntiFakeUrlStatusResponse;
-const DescribeHostsRequest = models.DescribeHostsRequest;
-const ModifyInstanceElasticModeRequest = models.ModifyInstanceElasticModeRequest;
+const ModifyDomainIpv6StatusResponse = models.ModifyDomainIpv6StatusResponse;
 const DescribeHostLimitResponse = models.DescribeHostLimitResponse;
-const ModifyOwaspRuleTypeActionRequest = models.ModifyOwaspRuleTypeActionRequest;
-const DescribeWebshellStatusResponse = models.DescribeWebshellStatusResponse;
-const ModifyCustomWhiteRuleStatusRequest = models.ModifyCustomWhiteRuleStatusRequest;
 const DeleteAntiFakeUrlRequest = models.DeleteAntiFakeUrlRequest;
 const DescribeSpartaProtectionInfoRequest = models.DescribeSpartaProtectionInfoRequest;
 const CacheUrlItems = models.CacheUrlItems;
-const ModifyInstanceQpsLimitResponse = models.ModifyInstanceQpsLimitResponse;
-const ReqUserRule = models.ReqUserRule;
-const ModifyWebshellStatusResponse = models.ModifyWebshellStatusResponse;
-const ClbWafRegionItem = models.ClbWafRegionItem;
-const FindAllDomainDetail = models.FindAllDomainDetail;
-const DeleteAntiInfoLeakRuleRequest = models.DeleteAntiInfoLeakRuleRequest;
-const ModifyInstanceElasticModeResponse = models.ModifyInstanceElasticModeResponse;
-const WafRuleLimit = models.WafRuleLimit;
-const DescribeUserLevelResponse = models.DescribeUserLevelResponse;
-const DescribeVipInfoResponse = models.DescribeVipInfoResponse;
-const ModifyIpAccessControlResponse = models.ModifyIpAccessControlResponse;
+const Strategy = models.Strategy;
+const GenerateDealsAndPayNewResponse = models.GenerateDealsAndPayNewResponse;
 const DescribeCCRuleRequest = models.DescribeCCRuleRequest;
-const ModifyModuleStatusRequest = models.ModifyModuleStatusRequest;
-const MiniPkg = models.MiniPkg;
-const DescribeRuleLimitRequest = models.DescribeRuleLimitRequest;
-const TargetEntity = models.TargetEntity;
-const DeleteOwaspRuleStatusResponse = models.DeleteOwaspRuleStatusResponse;
-const CCRuleItem = models.CCRuleItem;
-const DescribeDomainCountInfoRequest = models.DescribeDomainCountInfoRequest;
-const ModifyDomainsCLSStatusRequest = models.ModifyDomainsCLSStatusRequest;
-const DescribeCustomWhiteRuleResponse = models.DescribeCustomWhiteRuleResponse;
-const ModifyOwaspRuleStatusRequest = models.ModifyOwaspRuleStatusRequest;
-const ModifySpartaProtectionRequest = models.ModifySpartaProtectionRequest;
-const DescribeTlsVersionResponse = models.DescribeTlsVersionResponse;
-const ModifyDomainPostActionRequest = models.ModifyDomainPostActionRequest;
+const IntentDetectResult = models.IntentDetectResult;
+const DescribeLLMKeywordLibraryResponse = models.DescribeLLMKeywordLibraryResponse;
 const VipInfo = models.VipInfo;
 const DeleteOwaspRuleStatusRequest = models.DeleteOwaspRuleStatusRequest;
 const DescribeTopAttackDomainResponse = models.DescribeTopAttackDomainResponse;
-const DescribeSessionResponse = models.DescribeSessionResponse;
-const AddAntiInfoLeakRulesResponse = models.AddAntiInfoLeakRulesResponse;
-const DescribeAntiFakeRulesRequest = models.DescribeAntiFakeRulesRequest;
-const AddCustomWhiteRuleRequest = models.AddCustomWhiteRuleRequest;
-const PortInfo = models.PortInfo;
-const DescribeWebshellStatusRequest = models.DescribeWebshellStatusRequest;
-const ImportIpAccessControlRequest = models.ImportIpAccessControlRequest;
-const ModifyOwaspRuleStatusResponse = models.ModifyOwaspRuleStatusResponse;
-const DeleteAntiInfoLeakRuleResponse = models.DeleteAntiInfoLeakRuleResponse;
-const DeleteSessionResponse = models.DeleteSessionResponse;
-const UpsertSessionRequest = models.UpsertSessionRequest;
-const DescribeRuleLimitResponse = models.DescribeRuleLimitResponse;
-const DescribeHostLimitRequest = models.DescribeHostLimitRequest;
+const ModifyLLMSdkAccessResponse = models.ModifyLLMSdkAccessResponse;
 const DeleteCustomRuleResponse = models.DeleteCustomRuleResponse;
-const ModifyOwaspRuleTypeLevelResponse = models.ModifyOwaspRuleTypeLevelResponse;
-const ModifyUserSignatureRuleRequest = models.ModifyUserSignatureRuleRequest;
-const ClbDomainsInfo = models.ClbDomainsInfo;
-const CreateDealsResponse = models.CreateDealsResponse;
+const SkillScanCapabilityTag = models.SkillScanCapabilityTag;
 const DescribeHistogramRequest = models.DescribeHistogramRequest;
-const DescribeHostResponse = models.DescribeHostResponse;
 const DeleteCCRuleResponse = models.DeleteCCRuleResponse;
+const UpsertCCRuleRequest = models.UpsertCCRuleRequest;
+const ModifyLLMStatusResponse = models.ModifyLLMStatusResponse;
+const ModifyProtectionStatusResponse = models.ModifyProtectionStatusResponse;
+const ModifyOwaspRuleStatusRequest = models.ModifyOwaspRuleStatusRequest;
+const ModifyDomainPostActionRequest = models.ModifyDomainPostActionRequest;
+const BotPkg = models.BotPkg;
+const SearchAttackLogResponse = models.SearchAttackLogResponse;
+const RefreshAccessCheckResultRequest = models.RefreshAccessCheckResultRequest;
+const WebshellStatus = models.WebshellStatus;
+const DescribeSpartaProtectionInfoResponse = models.DescribeSpartaProtectionInfoResponse;
+const ModifyModuleStatusRequest = models.ModifyModuleStatusRequest;
+const DeleteLLMContentRuleResponse = models.DeleteLLMContentRuleResponse;
+const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
+const DescribePortsResponse = models.DescribePortsResponse;
+const ModifyCustomRuleRequest = models.ModifyCustomRuleRequest;
+const ModifyOwaspRuleTypeLevelResponse = models.ModifyOwaspRuleTypeLevelResponse;
+const DescribeLLMContentSecCheckResponse = models.DescribeLLMContentSecCheckResponse;
+const DescribePeakPointsRequest = models.DescribePeakPointsRequest;
+const ModifyHostFlowModeResponse = models.ModifyHostFlowModeResponse;
+const DescribeAntiInfoLeakRulesStrategyItem = models.DescribeAntiInfoLeakRulesStrategyItem;
+const DescribeCiphersDetailRequest = models.DescribeCiphersDetailRequest;
+const CCRuleItems = models.CCRuleItems;
+const ModifyDomainIpv6StatusRequest = models.ModifyDomainIpv6StatusRequest;
+const SkillScanQueryData = models.SkillScanQueryData;
+const LLMSdkAccessItem = models.LLMSdkAccessItem;
+const DescribeAntiInfoLeakageRulesResponse = models.DescribeAntiInfoLeakageRulesResponse;
+const DescribeSkillSecScanResultRequest = models.DescribeSkillSecScanResultRequest;
+const OwaspRule = models.OwaspRule;
+const GetAttackHistogramRequest = models.GetAttackHistogramRequest;
+const ImageResult = models.ImageResult;
+const DescribeAttackTypeRequest = models.DescribeAttackTypeRequest;
+const CategoryGroup = models.CategoryGroup;
+const ModifyCustomWhiteRuleRequest = models.ModifyCustomWhiteRuleRequest;
+const DeleteCustomWhiteRuleRequest = models.DeleteCustomWhiteRuleRequest;
+const ModifyInstanceRenewFlagResponse = models.ModifyInstanceRenewFlagResponse;
+const ModifyOwaspRuleTypeStatusResponse = models.ModifyOwaspRuleTypeStatusResponse;
+const ImportIpAccessControlResponse = models.ImportIpAccessControlResponse;
+const AddCustomWhiteRuleRequest = models.AddCustomWhiteRuleRequest;
+const CronJob = models.CronJob;
+const DeleteOwaspWhiteRuleResponse = models.DeleteOwaspWhiteRuleResponse;
+const DomainsPartInfo = models.DomainsPartInfo;
+const AddAntiInfoLeakRulesRequest = models.AddAntiInfoLeakRulesRequest;
+const AddSpartaProtectionRequest = models.AddSpartaProtectionRequest;
+const ModifyModuleStatusResponse = models.ModifyModuleStatusResponse;
+const RuleDetail = models.RuleDetail;
+const AttackLogInfo = models.AttackLogInfo;
+const ModifyOwaspRuleTypeStatusRequest = models.ModifyOwaspRuleTypeStatusRequest;
+const SkillScanItem = models.SkillScanItem;
 const LogHistogramInfo = models.LogHistogramInfo;
+const DescribeDomainVerifyResultRequest = models.DescribeDomainVerifyResultRequest;
+const CreateDealsGoods = models.CreateDealsGoods;
+const DescribeLLMWafToolCallRulesRequest = models.DescribeLLMWafToolCallRulesRequest;
+const ModifySpartaProtectionModeResponse = models.ModifySpartaProtectionModeResponse;
+const SkillRuleCatalogItem = models.SkillRuleCatalogItem;
+const ModifyCustomWhiteRuleStatusResponse = models.ModifyCustomWhiteRuleStatusResponse;
+const BatchIpAccessControlData = models.BatchIpAccessControlData;
+const DeleteLLMKeywordLibraryRequest = models.DeleteLLMKeywordLibraryRequest;
+const BotQPS = models.BotQPS;
+const DescribeLLMHourBillDetailRequest = models.DescribeLLMHourBillDetailRequest;
+const DescribePolicyStatusResponse = models.DescribePolicyStatusResponse;
+const GetAttackTotalCountResponse = models.GetAttackTotalCountResponse;
+const DescribeLLMWafDLPRulesRequest = models.DescribeLLMWafDLPRulesRequest;
+const CreateDealsResponse = models.CreateDealsResponse;
+const DescribeOwaspRulesRequest = models.DescribeOwaspRulesRequest;
+const DescribeCCRuleListRequest = models.DescribeCCRuleListRequest;
+const ModifyLLMContentRuleStatusRequest = models.ModifyLLMContentRuleStatusRequest;
+const DescribeDomainVerifyResultResponse = models.DescribeDomainVerifyResultResponse;
+const AddCustomRuleRequest = models.AddCustomRuleRequest;
+const DeleteCCRuleRequest = models.DeleteCCRuleRequest;
+const DescribeAttackTypeResponse = models.DescribeAttackTypeResponse;
+const DescribeCCRuleResponse = models.DescribeCCRuleResponse;
+const ModifyObjectResponse = models.ModifyObjectResponse;
+const ModifyAntiFakeUrlStatusResponse = models.ModifyAntiFakeUrlStatusResponse;
+const DescribeOwaspRuleTypesResponse = models.DescribeOwaspRuleTypesResponse;
+const ModifyInstanceElasticModeRequest = models.ModifyInstanceElasticModeRequest;
+const DescribeWebshellStatusResponse = models.DescribeWebshellStatusResponse;
+const ModifyLLMContentRuleResponse = models.ModifyLLMContentRuleResponse;
+const FindAllDomainDetail = models.FindAllDomainDetail;
+const DeleteAntiInfoLeakRuleRequest = models.DeleteAntiInfoLeakRuleRequest;
+const DescribeVipInfoResponse = models.DescribeVipInfoResponse;
+const ModifyIpAccessControlResponse = models.ModifyIpAccessControlResponse;
+const DescribeRuleLimitRequest = models.DescribeRuleLimitRequest;
+const UrlHitInfo = models.UrlHitInfo;
+const ModifyDomainPostActionResponse = models.ModifyDomainPostActionResponse;
+const ModifyDomainsCLSStatusRequest = models.ModifyDomainsCLSStatusRequest;
+const DescribeTlsVersionResponse = models.DescribeTlsVersionResponse;
+const DescribeLLMContentSecCheckRequest = models.DescribeLLMContentSecCheckRequest;
+const DescribeSessionResponse = models.DescribeSessionResponse;
+const UpsertSessionRequest = models.UpsertSessionRequest;
+const DescribeHostLimitRequest = models.DescribeHostLimitRequest;
+const DescribeOwaspWhiteRulesResponse = models.DescribeOwaspWhiteRulesResponse;
+const ClbDomainsInfo = models.ClbDomainsInfo;
+const DescribeObjectsResponse = models.DescribeObjectsResponse;
+const ExportLLMKeywordLibResponse = models.ExportLLMKeywordLibResponse;
+const MiniExtendPkg = models.MiniExtendPkg;
 const CreateOwaspWhiteRuleResponse = models.CreateOwaspWhiteRuleResponse;
 const DomainURI = models.DomainURI;
-const ModifyHostRequest = models.ModifyHostRequest;
-const DescribeDomainsRequest = models.DescribeDomainsRequest;
-const HybridPkg = models.HybridPkg;
-const BotPkg = models.BotPkg;
 const DescribeObjectsRequest = models.DescribeObjectsRequest;
-const DescribeUserDomainInfoResponse = models.DescribeUserDomainInfoResponse;
 const ModifyHostStatusRequest = models.ModifyHostStatusRequest;
-const DescribeHistogramResponse = models.DescribeHistogramResponse;
-const ModifyCustomRuleResponse = models.ModifyCustomRuleResponse;
-const LoadBalancer = models.LoadBalancer;
-const ClbObject = models.ClbObject;
 
 
 /**
@@ -323,6 +396,17 @@ class WafClient extends AbstractClient {
     DescribeAttackType(req, cb) {
         let resp = new DescribeAttackTypeResponse();
         this.request("DescribeAttackType", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query DLP rules.
+     * @param {DescribeLLMWafDLPRulesRequest} req
+     * @param {function(string, DescribeLLMWafDLPRulesResponse):void} cb
+     * @public
+     */
+    DescribeLLMWafDLPRules(req, cb) {
+        let resp = new DescribeLLMWafDLPRulesResponse();
+        this.request("DescribeLLMWafDLPRules", req, resp, cb);
     }
 
     /**
@@ -356,6 +440,17 @@ class WafClient extends AbstractClient {
     GetAttackHistogram(req, cb) {
         let resp = new GetAttackHistogramResponse();
         this.request("GetAttackHistogram", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query LLM rule requests.
+     * @param {DescribeLLMWafProtectRulesRequest} req
+     * @param {function(string, DescribeLLMWafProtectRulesResponse):void} cb
+     * @public
+     */
+    DescribeLLMWafProtectRules(req, cb) {
+        let resp = new DescribeLLMWafProtectRulesResponse();
+        this.request("DescribeLLMWafProtectRules", req, resp, cb);
     }
 
     /**
@@ -458,6 +553,17 @@ class WafClient extends AbstractClient {
     }
 
     /**
+     * This API is used to upload a Skill ZIP file and trigger asynchronous security detection.
+     * @param {UploadSkillSecScanRequest} req
+     * @param {function(string, UploadSkillSecScanResponse):void} cb
+     * @public
+     */
+    UploadSkillSecScan(req, cb) {
+        let resp = new UploadSkillSecScanResponse();
+        this.request("UploadSkillSecScan", req, resp, cb);
+    }
+
+    /**
      * This API is used to unlock the Door God rule status.
      * @param {DeleteOwaspRuleStatusRequest} req
      * @param {function(string, DeleteOwaspRuleStatusResponse):void} cb
@@ -477,6 +583,17 @@ class WafClient extends AbstractClient {
     DeleteCustomRule(req, cb) {
         let resp = new DeleteCustomRuleResponse();
         this.request("DeleteCustomRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add an access configuration in llmwaf-sdk.
+     * @param {AddLLMSdkAccessRequest} req
+     * @param {function(string, AddLLMSdkAccessResponse):void} cb
+     * @public
+     */
+    AddLLMSdkAccess(req, cb) {
+        let resp = new AddLLMSdkAccessResponse();
+        this.request("AddLLMSdkAccess", req, resp, cb);
     }
 
     /**
@@ -557,14 +674,14 @@ class WafClient extends AbstractClient {
     }
 
     /**
-     * Query various conditions of cluster analysis
-     * @param {DescribeHistogramRequest} req
-     * @param {function(string, DescribeHistogramResponse):void} cb
+     * This API is used to export lexicon files.
+     * @param {ExportLLMKeywordLibRequest} req
+     * @param {function(string, ExportLLMKeywordLibResponse):void} cb
      * @public
      */
-    DescribeHistogram(req, cb) {
-        let resp = new DescribeHistogramResponse();
-        this.request("DescribeHistogram", req, resp, cb);
+    ExportLLMKeywordLib(req, cb) {
+        let resp = new ExportLLMKeywordLibResponse();
+        this.request("ExportLLMKeywordLib", req, resp, cb);
     }
 
     /**
@@ -623,6 +740,28 @@ class WafClient extends AbstractClient {
     }
 
     /**
+     * This API is used to edit WAF IP allowlists/blocklists.
+     * @param {ModifyIpAccessControlRequest} req
+     * @param {function(string, ModifyIpAccessControlResponse):void} cb
+     * @public
+     */
+    ModifyIpAccessControl(req, cb) {
+        let resp = new ModifyIpAccessControlResponse();
+        this.request("ModifyIpAccessControl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to configure boundary access for llmwaf-sdk.
+     * @param {ModifyLLMSdkAccessRequest} req
+     * @param {function(string, ModifyLLMSdkAccessResponse):void} cb
+     * @public
+     */
+    ModifyLLMSdkAccess(req, cb) {
+        let resp = new ModifyLLMSdkAccessResponse();
+        this.request("ModifyLLMSdkAccess", req, resp, cb);
+    }
+
+    /**
      * Obtain specific specification limits for each module
      * @param {DescribeRuleLimitRequest} req
      * @param {function(string, DescribeRuleLimitResponse):void} cb
@@ -657,6 +796,17 @@ Batch operation is supported.
     }
 
     /**
+     * This API is used to query sdk access configurations.
+     * @param {DescribeLLMSdkAccessRequest} req
+     * @param {function(string, DescribeLLMSdkAccessResponse):void} cb
+     * @public
+     */
+    DescribeLLMSdkAccess(req, cb) {
+        let resp = new DescribeLLMSdkAccessResponse();
+        this.request("DescribeLLMSdkAccess", req, resp, cb);
+    }
+
+    /**
      * Query the switch status of each WAF basic security module, check if each module is enabled
      * @param {DescribeModuleStatusRequest} req
      * @param {function(string, DescribeModuleStatusResponse):void} cb
@@ -665,6 +815,17 @@ Batch operation is supported.
     DescribeModuleStatus(req, cb) {
         let resp = new DescribeModuleStatusResponse();
         this.request("DescribeModuleStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the LLM content security rule.
+     * @param {ModifyLLMContentRuleRequest} req
+     * @param {function(string, ModifyLLMContentRuleResponse):void} cb
+     * @public
+     */
+    ModifyLLMContentRule(req, cb) {
+        let resp = new ModifyLLMContentRuleResponse();
+        this.request("ModifyLLMContentRule", req, resp, cb);
     }
 
     /**
@@ -712,6 +873,17 @@ Batch operation is supported.
     }
 
     /**
+     * Enable or disable auto-renewal for instance
+     * @param {ModifyInstanceRenewFlagRequest} req
+     * @param {function(string, ModifyInstanceRenewFlagResponse):void} cb
+     * @public
+     */
+    ModifyInstanceRenewFlag(req, cb) {
+        let resp = new ModifyInstanceRenewFlagResponse();
+        this.request("ModifyInstanceRenewFlag", req, resp, cb);
+    }
+
+    /**
      * This API is used to edit a precise allowlist.
      * @param {ModifyCustomWhiteRuleRequest} req
      * @param {function(string, ModifyCustomWhiteRuleResponse):void} cb
@@ -756,14 +928,14 @@ Batch operation is supported.
     }
 
     /**
-     * Enable or disable auto-renewal for instance
-     * @param {ModifyInstanceRenewFlagRequest} req
-     * @param {function(string, ModifyInstanceRenewFlagResponse):void} cb
+     * This API is used to delete a thesaurus list.
+     * @param {DeleteLLMKeywordLibraryRequest} req
+     * @param {function(string, DeleteLLMKeywordLibraryResponse):void} cb
      * @public
      */
-    ModifyInstanceRenewFlag(req, cb) {
-        let resp = new ModifyInstanceRenewFlagResponse();
-        this.request("ModifyInstanceRenewFlag", req, resp, cb);
+    DeleteLLMKeywordLibrary(req, cb) {
+        let resp = new DeleteLLMKeywordLibraryResponse();
+        this.request("DeleteLLMKeywordLibrary", req, resp, cb);
     }
 
     /**
@@ -775,6 +947,17 @@ Batch operation is supported.
     DescribeUserLevel(req, cb) {
         let resp = new DescribeUserLevelResponse();
         this.request("DescribeUserLevel", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a custom lexicon.
+     * @param {ModifyLLMKeywordLibraryRequest} req
+     * @param {function(string, ModifyLLMKeywordLibraryResponse):void} cb
+     * @public
+     */
+    ModifyLLMKeywordLibrary(req, cb) {
+        let resp = new ModifyLLMKeywordLibraryResponse();
+        this.request("ModifyLLMKeywordLibrary", req, resp, cb);
     }
 
     /**
@@ -811,6 +994,17 @@ Batch operation is supported.
     }
 
     /**
+     * This API is used to modify LLM rules.
+     * @param {ModifyLLMWafProtectRuleRequest} req
+     * @param {function(string, ModifyLLMWafProtectRuleResponse):void} cb
+     * @public
+     */
+    ModifyLLMWafProtectRule(req, cb) {
+        let resp = new ModifyLLMWafProtectRuleResponse();
+        this.request("ModifyLLMWafProtectRule", req, resp, cb);
+    }
+
+    /**
      * Obtain the access control policy list in the protection configuration
      * @param {DescribeCustomRuleListRequest} req
      * @param {function(string, DescribeCustomRuleListResponse):void} cb
@@ -841,6 +1035,17 @@ Batch operation is supported.
     ModifyOwaspWhiteRule(req, cb) {
         let resp = new ModifyOwaspWhiteRuleResponse();
         this.request("ModifyOwaspWhiteRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the hourly bill details of a single instance for a single day, including the estimated total bill amount, itemized costs, hourly trends, and hourly details.
+     * @param {DescribeLLMHourBillDetailRequest} req
+     * @param {function(string, DescribeLLMHourBillDetailResponse):void} cb
+     * @public
+     */
+    DescribeLLMHourBillDetail(req, cb) {
+        let resp = new DescribeLLMHourBillDetailResponse();
+        this.request("DescribeLLMHourBillDetail", req, resp, cb);
     }
 
     /**
@@ -877,6 +1082,17 @@ Batch operation is supported.
     }
 
     /**
+     * Query various conditions of cluster analysis
+     * @param {DescribeHistogramRequest} req
+     * @param {function(string, DescribeHistogramResponse):void} cb
+     * @public
+     */
+    DescribeHistogram(req, cb) {
+        let resp = new DescribeHistogramResponse();
+        this.request("DescribeHistogram", req, resp, cb);
+    }
+
+    /**
      * WAF session definition query API
      * @param {DescribeSessionRequest} req
      * @param {function(string, DescribeSessionResponse):void} cb
@@ -910,14 +1126,25 @@ Batch operation is supported.
     }
 
     /**
-     * This API is used to query TLS versions supported by SaaS WAF.
-     * @param {DescribeTlsVersionRequest} req
-     * @param {function(string, DescribeTlsVersionResponse):void} cb
+     * This API is used to modify the module switch status of large model protection, supporting independent on/off operations for the master switch and each submodule. Before enabling, ensure that the instance has purchased the large model protection capability. If not purchased, the enable operation returns the AuthFailure.ErrCodeNoPurchased error.
+     * @param {ModifyLLMStatusRequest} req
+     * @param {function(string, ModifyLLMStatusResponse):void} cb
      * @public
      */
-    DescribeTlsVersion(req, cb) {
-        let resp = new DescribeTlsVersionResponse();
-        this.request("DescribeTlsVersion", req, resp, cb);
+    ModifyLLMStatus(req, cb) {
+        let resp = new ModifyLLMStatusResponse();
+        this.request("ModifyLLMStatus", req, resp, cb);
+    }
+
+    /**
+     * Bot_V2 bot master switch update
+     * @param {ModifyBotStatusRequest} req
+     * @param {function(string, ModifyBotStatusResponse):void} cb
+     * @public
+     */
+    ModifyBotStatus(req, cb) {
+        let resp = new ModifyBotStatusResponse();
+        this.request("ModifyBotStatus", req, resp, cb);
     }
 
     /**
@@ -954,14 +1181,25 @@ Batch operation is supported.
     }
 
     /**
-     * This API is used to edit WAF IP allowlists/blocklists.
-     * @param {ModifyIpAccessControlRequest} req
-     * @param {function(string, ModifyIpAccessControlResponse):void} cb
+     * This API is used to delete an LLM content protection rule.
+     * @param {DeleteLLMContentRuleRequest} req
+     * @param {function(string, DeleteLLMContentRuleResponse):void} cb
      * @public
      */
-    ModifyIpAccessControl(req, cb) {
-        let resp = new ModifyIpAccessControlResponse();
-        this.request("ModifyIpAccessControl", req, resp, cb);
+    DeleteLLMContentRule(req, cb) {
+        let resp = new DeleteLLMContentRuleResponse();
+        this.request("DeleteLLMContentRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the keyword list.
+     * @param {DescribeLLMKeywordLibraryRequest} req
+     * @param {function(string, DescribeLLMKeywordLibraryResponse):void} cb
+     * @public
+     */
+    DescribeLLMKeywordLibrary(req, cb) {
+        let resp = new DescribeLLMKeywordLibraryResponse();
+        this.request("DescribeLLMKeywordLibrary", req, resp, cb);
     }
 
     /**
@@ -998,14 +1236,25 @@ Batch operation is supported.
     }
 
     /**
-     * Bot_V2 bot master switch update
-     * @param {ModifyBotStatusRequest} req
-     * @param {function(string, ModifyBotStatusResponse):void} cb
+     * This API is used to obtain the LLM content protection rules.
+     * @param {DescribeLLMContentRuleListRequest} req
+     * @param {function(string, DescribeLLMContentRuleListResponse):void} cb
      * @public
      */
-    ModifyBotStatus(req, cb) {
-        let resp = new ModifyBotStatusResponse();
-        this.request("ModifyBotStatus", req, resp, cb);
+    DescribeLLMContentRuleList(req, cb) {
+        let resp = new DescribeLLMContentRuleListResponse();
+        this.request("DescribeLLMContentRuleList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query TLS versions supported by SaaS WAF.
+     * @param {DescribeTlsVersionRequest} req
+     * @param {function(string, DescribeTlsVersionResponse):void} cb
+     * @public
+     */
+    DescribeTlsVersion(req, cb) {
+        let resp = new DescribeTlsVersionResponse();
+        this.request("DescribeTlsVersion", req, resp, cb);
     }
 
     /**
@@ -1042,6 +1291,28 @@ Batch operation is supported.
     }
 
     /**
+     * This API is used to query Tool Call rules.
+     * @param {DescribeLLMWafToolCallRulesRequest} req
+     * @param {function(string, DescribeLLMWafToolCallRulesResponse):void} cb
+     * @public
+     */
+    DescribeLLMWafToolCallRules(req, cb) {
+        let resp = new DescribeLLMWafToolCallRulesResponse();
+        this.request("DescribeLLMWafToolCallRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify Tool Call rules.
+     * @param {ModifyLLMWafToolCallRuleRequest} req
+     * @param {function(string, ModifyLLMWafToolCallRuleResponse):void} cb
+     * @public
+     */
+    ModifyLLMWafToolCallRule(req, cb) {
+        let resp = new ModifyLLMWafToolCallRuleResponse();
+        this.request("ModifyLLMWafToolCallRule", req, resp, cb);
+    }
+
+    /**
      * View protected object list
      * @param {DescribeObjectsRequest} req
      * @param {function(string, DescribeObjectsResponse):void} cb
@@ -1061,6 +1332,28 @@ Batch operation is supported.
     ModifyCustomRuleStatus(req, cb) {
         let resp = new ModifyCustomRuleStatusResponse();
         this.request("ModifyCustomRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable the switch of protection rules for LLM content.
+     * @param {ModifyLLMContentRuleStatusRequest} req
+     * @param {function(string, ModifyLLMContentRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifyLLMContentRuleStatus(req, cb) {
+        let resp = new ModifyLLMContentRuleStatusResponse();
+        this.request("ModifyLLMContentRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * WAF CC V2 upsert API
+     * @param {UpsertCCRuleRequest} req
+     * @param {function(string, UpsertCCRuleResponse):void} cb
+     * @public
+     */
+    UpsertCCRule(req, cb) {
+        let resp = new UpsertCCRuleResponse();
+        this.request("UpsertCCRule", req, resp, cb);
     }
 
     /**
@@ -1105,6 +1398,17 @@ Batch operation is supported.
     DescribeBatchIpAccessControl(req, cb) {
         let resp = new DescribeBatchIpAccessControlResponse();
         this.request("DescribeBatchIpAccessControl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query Skill security detection results by file Hash.
+     * @param {DescribeSkillSecScanResultRequest} req
+     * @param {function(string, DescribeSkillSecScanResultResponse):void} cb
+     * @public
+     */
+    DescribeSkillSecScanResult(req, cb) {
+        let resp = new DescribeSkillSecScanResultResponse();
+        this.request("DescribeSkillSecScanResult", req, resp, cb);
     }
 
     /**
@@ -1163,14 +1467,14 @@ Batch operation is supported.
     }
 
     /**
-     * Refresh integration check results. The backend will generate integration check tasks
-     * @param {RefreshAccessCheckResultRequest} req
-     * @param {function(string, RefreshAccessCheckResultResponse):void} cb
+     * This API is used to delete the access configuration in llmwaf-sdk.
+     * @param {DeleteLLMSdkAccessRequest} req
+     * @param {function(string, DeleteLLMSdkAccessResponse):void} cb
      * @public
      */
-    RefreshAccessCheckResult(req, cb) {
-        let resp = new RefreshAccessCheckResultResponse();
-        this.request("RefreshAccessCheckResult", req, resp, cb);
+    DeleteLLMSdkAccess(req, cb) {
+        let resp = new DeleteLLMSdkAccessResponse();
+        this.request("DeleteLLMSdkAccess", req, resp, cb);
     }
 
     /**
@@ -1328,6 +1632,17 @@ Batch operation is supported.
     }
 
     /**
+     * This API is used to review the request and response content of large models.
+     * @param {DescribeLLMContentSecCheckRequest} req
+     * @param {function(string, DescribeLLMContentSecCheckResponse):void} cb
+     * @public
+     */
+    DescribeLLMContentSecCheck(req, cb) {
+        let resp = new DescribeLLMContentSecCheckResponse();
+        this.request("DescribeLLMContentSecCheck", req, resp, cb);
+    }
+
+    /**
      * API analysis page switch
      * @param {ModifyApiAnalyzeStatusRequest} req
      * @param {function(string, ModifyApiAnalyzeStatusResponse):void} cb
@@ -1394,14 +1709,14 @@ Batch operation is supported.
     }
 
     /**
-     * WAF CC V2 upsert API
-     * @param {UpsertCCRuleRequest} req
-     * @param {function(string, UpsertCCRuleResponse):void} cb
+     * This API is used to modify llmwaf DLP rules.
+     * @param {ModifyLLMWafDLPRuleRequest} req
+     * @param {function(string, ModifyLLMWafDLPRuleResponse):void} cb
      * @public
      */
-    UpsertCCRule(req, cb) {
-        let resp = new UpsertCCRuleResponse();
-        this.request("UpsertCCRule", req, resp, cb);
+    ModifyLLMWafDLPRule(req, cb) {
+        let resp = new ModifyLLMWafDLPRuleResponse();
+        this.request("ModifyLLMWafDLPRule", req, resp, cb);
     }
 
     /**
@@ -1468,6 +1783,17 @@ Batch operation is supported.
     FreshAntiFakeUrl(req, cb) {
         let resp = new FreshAntiFakeUrlResponse();
         this.request("FreshAntiFakeUrl", req, resp, cb);
+    }
+
+    /**
+     * Refresh integration check results. The backend will generate integration check tasks
+     * @param {RefreshAccessCheckResultRequest} req
+     * @param {function(string, RefreshAccessCheckResultResponse):void} cb
+     * @public
+     */
+    RefreshAccessCheckResult(req, cb) {
+        let resp = new RefreshAccessCheckResultResponse();
+        this.request("RefreshAccessCheckResult", req, resp, cb);
     }
 
     /**

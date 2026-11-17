@@ -65,11 +65,13 @@ const ModifyWebhookPolicyResponse = models.ModifyWebhookPolicyResponse;
 const ModifyMalwareTimingScanSettingsResponse = models.ModifyMalwareTimingScanSettingsResponse;
 const WhereFilter = models.WhereFilter;
 const ModifyCosAuditObjectIdentifyStatusResponse = models.ModifyCosAuditObjectIdentifyStatusResponse;
+const VPRExplainInfo = models.VPRExplainInfo;
 const DeleteImageRegistryRequest = models.DeleteImageRegistryRequest;
 const DescribeVulItemListResponse = models.DescribeVulItemListResponse;
 const ClusterCustomParameters = models.ClusterCustomParameters;
 const DeleteWebhookPoliciesRequest = models.DeleteWebhookPoliciesRequest;
 const DescribeNotifySettingAkRequest = models.DescribeNotifySettingAkRequest;
+const VPRExplainDimensionItem = models.VPRExplainDimensionItem;
 const DeleteImageRegistryScanTaskRequest = models.DeleteImageRegistryScanTaskRequest;
 const DspmStatisticsItem = models.DspmStatisticsItem;
 const CheckImageRegistryInstanceNameDuplicateRequest = models.CheckImageRegistryInstanceNameDuplicateRequest;
@@ -140,6 +142,7 @@ const DescribePortScanTaskCountResponse = models.DescribePortScanTaskCountRespon
 const DeleteImageRegistryTimedScanTaskConfigRequest = models.DeleteImageRegistryTimedScanTaskConfigRequest;
 const CreateRiskCenterScanTaskRequest = models.CreateRiskCenterScanTaskRequest;
 const BaselinePolicyBrief = models.BaselinePolicyBrief;
+const ContainerAutoScaleConfig = models.ContainerAutoScaleConfig;
 const ModifyEDRRuleStatusResponse = models.ModifyEDRRuleStatusResponse;
 const DescribeBanStatusResponse = models.DescribeBanStatusResponse;
 const DescribeDynamicAssetsResponse = models.DescribeDynamicAssetsResponse;
@@ -866,6 +869,7 @@ const CreateAssetFilterViewRequest = models.CreateAssetFilterViewRequest;
 const DescribeClusterPodAssetsRequest = models.DescribeClusterPodAssetsRequest;
 const ModifyBaselineUserWeakPasswordConfRequest = models.ModifyBaselineUserWeakPasswordConfRequest;
 const ModifyShareUserCSPMRequest = models.ModifyShareUserCSPMRequest;
+const VPRExplainDimension = models.VPRExplainDimension;
 const VPRLabel = models.VPRLabel;
 const DescribeTopAttackInfoRequest = models.DescribeTopAttackInfoRequest;
 const VulTrend = models.VulTrend;
@@ -1176,6 +1180,7 @@ const CreateDspmIdentifyComplianceRuleRelationRequest = models.CreateDspmIdentif
 const LogDeliveryType = models.LogDeliveryType;
 const DescribePolicyHitDataRequest = models.DescribePolicyHitDataRequest;
 const DescribeSandboxDLPSystemRuleListRequest = models.DescribeSandboxDLPSystemRuleListRequest;
+const RuleContentK8sAPI = models.RuleContentK8sAPI;
 const LevelOption = models.LevelOption;
 const CSIPMalwareScanUuidDetailItem = models.CSIPMalwareScanUuidDetailItem;
 const DescribeCosAccessPermissionRequest = models.DescribeCosAccessPermissionRequest;
@@ -1310,6 +1315,7 @@ const DescribeEdrExcludeNetworkSegmentsRequest = models.DescribeEdrExcludeNetwor
 const DeleteSandboxACLRuleResponse = models.DeleteSandboxACLRuleResponse;
 const DescribeCosIpInvokeLogResponse = models.DescribeCosIpInvokeLogResponse;
 const DeleteDspmShareUserDataRequest = models.DeleteDspmShareUserDataRequest;
+const QuaraTypeDictItem = models.QuaraTypeDictItem;
 const DescribeImageAssetDetailRequest = models.DescribeImageAssetDetailRequest;
 const CreatePodServiceListExportJobRequest = models.CreatePodServiceListExportJobRequest;
 const DescribeImageRegistryListRequest = models.DescribeImageRegistryListRequest;
@@ -1565,6 +1571,7 @@ const DescribeDspmAssetSecurityAnalyseStatusRequest = models.DescribeDspmAssetSe
 const CreateAssetFilterViewResponse = models.CreateAssetFilterViewResponse;
 const DescribeVulScanPeriodicRequest = models.DescribeVulScanPeriodicRequest;
 const DescribeSubUserInfoResponse = models.DescribeSubUserInfoResponse;
+const RuleContentFileOperation = models.RuleContentFileOperation;
 const DescribeDomainAssetsResponse = models.DescribeDomainAssetsResponse;
 const DescribeNICAssetsResponse = models.DescribeNICAssetsResponse;
 const DeleteDspmRiskStrategyRequest = models.DeleteDspmRiskStrategyRequest;
@@ -2766,7 +2773,7 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the repair details of a certain fixed vulnerability on a specified host, including basic information about the vulnerability, repair host information, and a detailed list of associated components and paths (component name, version number hit, associated path, repair command).
+     * This API is used to query the repair details of a fixed vulnerability on specified hosts, including basic vulnerability information, host information, and a detailed list of associated components and paths, such as component name, hit version, associated path, and fix command.
      * @param {DescribeVulFixedHostDetailRequest} req
      * @param {function(string, DescribeVulFixedHostDetailResponse):void} cb
      * @public
@@ -2832,7 +2839,7 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the vulnerability repair task record list with paging, support by conditional filtering such as remediation status and time range, and show summary information for each repair task.
+     * Paginate the vulnerability fix task record list, support filtering by remediation status, time range, and other conditions, and show summary information of each fix task.
      * @param {DescribeVulFixTaskListRequest} req
      * @param {function(string, DescribeVulFixTaskListResponse):void} cb
      * @public
@@ -2865,7 +2872,7 @@ class CsipClient extends AbstractClient {
     }
 
     /**
-     * Create an export task for the list of fixed vulnerabilities. It supports the same filter criteria as DescribeVulFixedList. The export is implemented via an asynchronous task. After a JobID is returned, the frontend polls to query the export task status. The export fields include vulnerability ID, vulnerability name, vulnerability level, VPR rating, vulnerability type, CVE ID, host name, instance ID, associated component & path, and repair time.
+     * This API is used to create an export task for a fixed vulnerability list. It supports the same filter criteria as DescribeVulFixedList. The export is implemented through an asynchronous task. After a JobID is returned, the frontend polls the export task status. Export fields include vulnerability ID, vulnerability name, vulnerability level, VPR rating, vulnerability type, CVE ID, host name, instance ID, associated component & path, and repair time.
      * @param {CreateVulFixedExportJobRequest} req
      * @param {function(string, CreateVulFixedExportJobResponse):void} cb
      * @public
@@ -3815,7 +3822,7 @@ Set the status of the specified AI scheduled task to enabled. After it is enable
     }
 
     /**
-     * This API is used to obtain vulnerability scanning (period scanning).
+     * This API is used to query vulnerability scan settings.
      * @param {DescribeVulScanPeriodicRequest} req
      * @param {function(string, DescribeVulScanPeriodicResponse):void} cb
      * @public
@@ -5271,7 +5278,7 @@ This API is used to delete a scheduled task based on the specified AI scheduled 
     }
 
     /**
-     * This API is used to create a host vulnerability table export task.
+     * Creates an export task for a vulnerability table on hosts.
      * @param {CreateHostVulExportJobRequest} req
      * @param {function(string, CreateHostVulExportJobResponse):void} cb
      * @public
@@ -5343,7 +5350,7 @@ Description (container asset revision 2026 H1): This API is a passthrough API. T
     }
 
     /**
-     * Retrieve the associated component of a vulnerability
+     * Retrieve the associated components of a vulnerability
      * @param {DescribeVulRiskRelateComponentRequest} req
      * @param {function(string, DescribeVulRiskRelateComponentResponse):void} cb
      * @public
@@ -5431,7 +5438,7 @@ Description (container asset revision 2026 H1): This API is a passthrough API. T
     }
 
     /**
-     * Search for hosts associated with vulnerabilities or KBs
+     * This API is used to search hosts associated with a vulnerability or KB.
      * @param {DescribeVulRiskRelateHostRequest} req
      * @param {function(string, DescribeVulRiskRelateHostResponse):void} cb
      * @public
@@ -6632,7 +6639,7 @@ The original address of the input file. Returns a signed temporary download link
     }
 
     /**
-     * Users manually submit vulnerability repair tasks, specify the vulnerabilities and target hosts that need to be repaired, and the system creates fixing tasks and dispatches execution. It supports options such as specifying the repair timeout period and whether to create a snapshot. The FixItems array is used to precisely control which hosts each vulnerability or KB patch repairs.
+     * This API is used to manually submit vulnerability repair tasks, specify the vulnerabilities to fix and the target hosts, create fixing tasks, and dispatch execution. It supports options such as specifying the timeout period and whether to create a snapshot. The FixItems array is used to precisely control which hosts each vulnerability or KB patch repairs.
      * @param {CreateVulFixTaskRequest} req
      * @param {function(string, CreateVulFixTaskResponse):void} cb
      * @public
@@ -8275,7 +8282,7 @@ Supplemental description:
     }
 
     /**
-     * This API is used to query the host list where specified vulnerabilities can be repaired. Before a user submits a repair task, it is necessary to query which hosts support automatic fix, providing data support for users to select repair targets.
+     * This API is used to query the host list for a specified vulnerability that can be repaired. Before users submit a fix task, they need to query which hosts support automatic fix to provide data support for user selection of repair targets.
      * @param {DescribeVulFixableMachineListRequest} req
      * @param {function(string, DescribeVulFixableMachineListResponse):void} cb
      * @public
@@ -9586,7 +9593,7 @@ Create an AI scheduled task by entering the task name, prompt content, and trigg
     }
 
     /**
-     * This API is used to query the list of repaired vulnerabilities, show vulnerability information with successful fixes and statistics on repair conditions, helping users understand the repair results.
+     * Query the list of repaired vulnerabilities, show successful fix details and repair statistics to help users understand the fix result.
      * @param {DescribeVulFixedListRequest} req
      * @param {function(string, DescribeVulFixedListResponse):void} cb
      * @public
@@ -9696,7 +9703,7 @@ Create an AI scheduled task by entering the task name, prompt content, and trigg
     }
 
     /**
-     * Retry the vulnerability repair task that failed to fix, and redispatch the repair instruction only for the hosts of the original task that failed to fix. Retry is allowed only when the task status is partially or totally failed to fix.
+     * Retry the vulnerability repair tasks that failed to fix. Redispatch repair instructions only to the hosts of the original task where the fix failed. Retry is allowed only when the task status is partially failed to fix or fix failure.
      * @param {CreateVulFixRetryTaskRequest} req
      * @param {function(string, CreateVulFixRetryTaskResponse):void} cb
      * @public
@@ -10558,7 +10565,7 @@ This API is used to query the detailed information of a specified task execution
     }
 
     /**
-     * This API is used to query the details of a specified vulnerability repair task, including detailed data such as remediation status and snapshot status for each host, and supports pagination and filtering.
+     * This API is used to query details of a specified vulnerability repair task, including remediation status and snapshot status of each host, and supports pagination and filtering.
      * @param {DescribeVulFixTaskDetailRequest} req
      * @param {function(string, DescribeVulFixTaskDetailResponse):void} cb
      * @public

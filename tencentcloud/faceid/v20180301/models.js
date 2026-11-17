@@ -83,7 +83,7 @@ class GetLivenessResultResponse extends  AbstractModel {
 }
 
 /**
- * Suspected attack detail
+ * Suspected attack risk details
  * @class
  */
 class AttackRiskDetail extends  AbstractModel {
@@ -91,7 +91,7 @@ class AttackRiskDetail extends  AbstractModel {
         super();
 
         /**
-         * <p>Suspected attack trace type, specific type as follows:<br>SuspectedSpoofingAttack: Re-photography Attack<br>SuspectedSynthesisImage: Suspected synthesized image<br>SuspectedSynthesisVideo: Suspected synthesized video<br>SuspectedAnomalyAttack: Facial features suspected of not being real<br>SuspectedAdversarialAttack: Suspected adversarial sample attack<br>SuspectedBlackIndustry: Suspected black industry batch Template attack<br>SuspectedWatermark: Suspected watermark</p>
+         * <p>Types of suspected attack traces. The specific types are as follows:<br>SuspectedSpoofingAttack: Recapture attack<br>SuspectedSynthesisImage: Suspected synthetic image<br>SuspectedSynthesisVideo: Suspected synthetic video<br>SuspectedAnomalyAttack: Suspected non-live facial features<br>SuspectedAdversarialAttack: Suspected adversarial example attack<br>SuspectedBlackIndustry: Suspected batch template attack from black market operations<br>SuspectedWatermark: Suspected watermark presence</p>
          * @type {string || null}
          */
         this.Type = null;
@@ -111,7 +111,7 @@ class AttackRiskDetail extends  AbstractModel {
 }
 
 /**
- * Additional details
+ * Additional detailed information
  * @class
  */
 class ExtraInfo extends  AbstractModel {
@@ -119,7 +119,7 @@ class ExtraInfo extends  AbstractModel {
         super();
 
         /**
-         * Detailed information of the hit template, return only the template information with the highest similarity.
+         * Detailed information of the matched template. Only the template with the highest similarity is returned.
          * @type {Array.<RetrievalLivenessExtraInfo> || null}
          */
         this.RetrievalLivenessExtraInfo = null;
@@ -981,28 +981,34 @@ class DetectAIFakeFacesRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data is recommended not to exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding is recommended to be within 8M, with a maximum of 10M. Supported formats include mp4, avi,flv,and mov, captured by the mobile front camera.<br>Video duration is recommended to be 2-5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
+         * <p>Pass in the face image or face video to be detected (currently only single-face detection is supported), encoded in Base64. If both video and image are available in your scenario, we recommend using video for detection. For better detection results, note the following restrictions and recommendations for input data:</p><ul><li><p>Base64 value of the image:<br>Recommended overall image resolution is 480x640, with the face size above 100X100, captured by the front camera of a mobile phone.<br>The Base64-encoded image data is recommended to be no more than 3 MB, and must not exceed 10 MB. Only jpg and png formats are supported.<br>Use the standard Base64 encoding method (with = padding). For encoding specifications, refer to RFC4648.</p></li><li><p>Base64 value of the video:<br>The Base64-encoded size is recommended to be within 8 MB, and must not exceed 10 MB. mp4, avi, flv, and mov formats are supported, captured by the front camera of a mobile phone.<br>Recommended video duration is 2 to 5 seconds, and must not exceed 20 seconds.<br>Recommended video resolution is 480x640 (up to 720p supported), with a frame rate between 25 fps and 30 fps.<br>Use the standard Base64 encoding method (with = padding). For encoding specifications, refer to RFC4648.</p></li></ul><p>If you do not use Encryption for encrypted transmission, this field is required.</p>
          * @type {string || null}
          */
         this.FaceInput = null;
 
         /**
-         * <p>Passed in type.</p><ul><li>Value ranges from 1 to 2:<br>1: Passed in image type.<br>2: Passed in video type.<br>Other: Return error code InvalidParameter.</li></ul><p>If you do not use Encryption for encrypting transmission, this field is mandatory.</p>
+         * <p>Type of the input.</p><ul><li>Valid values:<br>1: image type.<br>2: video type.<br>Others: the error code InvalidParameter is returned.</li></ul><p>If you do not use Encryption for encrypted transmission, this field is required.</p>
          * @type {number || null}
          */
         this.FaceInputType = null;
 
         /**
-         * <p>Whether to encrypt the entire request information.</p><ul><li>Supported encryption algorithms: AES-256-CBC, SM4-GCM.</li><li>The user with encryption requirements can use this parameter. For details, please click the left-side link.</li></ul>
+         * <p>Whether to encrypt the entire request body.</p><ul><li>Supported encryption algorithms: AES-256-CBC and SM4-GCM.</li><li>Users with encryption requirements can use this parameter. For details, click the link on the left.</li></ul>
          * @type {Encryption || null}
          */
         this.Encryption = null;
 
         /**
-         * <p>Encrypted ciphertext.</p><ul><li>The data format before encryption is as follows: {"FaceInput":"AAAAA","FaceInputType":1}.</li></ul>
+         * <p>Encrypted ciphertext.</p><ul><li>The data format before encryption is as follows: {&quot;FaceInput&quot;:&quot;AAAAA&quot;,&quot;FaceInputType&quot;:1}.</li></ul>
          * @type {string || null}
          */
         this.EncryptedBody = null;
+
+        /**
+         * <p>Carries the risk control context of this request at one time, that is, "who, where, and from which IP the request is initiated".</p>
+         * @type {ExtraRiskInfo || null}
+         */
+        this.ExtraRiskInfo = null;
 
     }
 
@@ -1022,6 +1028,12 @@ class DetectAIFakeFacesRequest extends  AbstractModel {
             this.Encryption = obj;
         }
         this.EncryptedBody = 'EncryptedBody' in params ? params.EncryptedBody : null;
+
+        if (params.ExtraRiskInfo) {
+            let obj = new ExtraRiskInfo();
+            obj.deserialize(params.ExtraRiskInfo)
+            this.ExtraRiskInfo = obj;
+        }
 
     }
 }
@@ -2600,6 +2612,7 @@ class ApplySdkVerificationTokenRequest extends  AbstractModel {
 1: OCR + liveness detection + face comparison
 2: Liveness detection + face comparison
 3: Liveness detection
+4: OCR
 Default value: 1
          * @type {number || null}
          */
@@ -2986,8 +2999,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
 -9101 Alarm for covered certificate,
 -9102 Alarm for photocopied certificate,
 -9103 Alarm for photographed certificate,
+-9104 Alarm for tamper certificate,
 -9107 Alarm for reflective certificate,
 -9108 Alarm for blurry image,
+-8101 Alarm for document information format verification,
+-8102 Alarm for document information consistency verification,
 -9109 This capability is not enabled.
          * @type {Array.<number> || null}
          */
@@ -2998,6 +3014,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {Array.<EditDetail> || null}
          */
         this.EditDetails = null;
+
+        /**
+         * Detected card type. Returns the corresponding document type combining country or region name and document type. Enums: Passport, IndonesiaIDCard, MalaysiaIDCard, SingaporeIDCard, ThailandIDCard, ThailandPinkCard, VietnamIDCard, MyanmarDriverLicense, HongKongIDCard, MacaoIDCard, TaiwanIDCard, HmtTravelPermit, HmtMainlandTravelPermit, HmtResidencePermit, HmtResidencePermitBack, MainlandIDCard, MainlandIDCardBack, MainlandTempIDCard, MainlandTempIDCardBack, BrazilIDCard, BrazilIDCardBack, BrazilRNM, BrazilRNMBack, BrazilRNE, BrazilDriverLicense, BrazilDriverLicenseBack, MexicoVoterCard, PhilippinesUMID, PhilippinesDriverLicense, PhilippinesVoteID, PhilippinesSSSID, PhilippinesTINID, PhilippinesNationalID, PhilippinesPRCID, PhilippinesPostalID, PhilippinesHealthCard, Other.
+         * @type {string || null}
+         */
+        this.DetectedCardType = null;
 
     }
 
@@ -3051,6 +3073,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.EditDetails.push(obj);
             }
         }
+        this.DetectedCardType = 'DetectedCardType' in params ? params.DetectedCardType : null;
 
     }
 }
@@ -4287,22 +4310,28 @@ class DetectAIFakeFacesResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Detection result for the input image/video to check the existence of face spoofing attack.</p><ul><li>Low: Low attack risk.</li><li>Mid: Moderately suspected attack.</li><li>High: Highly suspected attack.</li></ul><p>It is advisable to judge as interception when the return value is High, and pass for Mid and Low to better balance security and pass rate.</p>
+         * <p>Detection result for the input image/video, indicating whether a face attack exists.</p><ul><li>Low: Low attack risk.</li><li>Mid: Moderate suspected attack.</li><li>High: High suspected attack.</li></ul><p>It is recommended to block requests when the returned value is High, and allow requests when the value is Mid or Low, to better balance security and pass rate.</p>
          * @type {string || null}
          */
         this.AttackRiskLevel = null;
 
         /**
-         * <p>List of suspected attack traces detected. It is returned only when AttackRiskLevel is High or Mid.</p><ul><li>Description: Return an empty array if no attack traces are detected.</li><li>This output parameter is for result determination reference. The result of AttackRiskLevel is still recommended for actual use.</li></ul>
+         * <p>List of detected suspected attack traces. Returned only when AttackRiskLevel is High or Mid.</p><ul><li>Note: An empty array is returned when no attack trace is detected.</li><li>This output parameter is for reference only. It is recommended to use the result of AttackRiskLevel in actual applications.</li></ul>
          * @type {Array.<AttackRiskDetail> || null}
          */
         this.AttackRiskDetailList = null;
 
         /**
-         * <p>Return additional information (including detailed information of cache hit templates).</p>
+         * <p>Returns additional information, including details of the matched template.</p>
          * @type {ExtraInfo || null}
          */
         this.ExtraInfo = null;
+
+        /**
+         * <p>Independent container for additional risk conclusions, indicating whether the additional risk check is trustworthy and whether any issues are found.</p>
+         * @type {ExtraRiskResult || null}
+         */
+        this.ExtraRiskResult = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4334,6 +4363,12 @@ class DetectAIFakeFacesResponse extends  AbstractModel {
             let obj = new ExtraInfo();
             obj.deserialize(params.ExtraInfo)
             this.ExtraInfo = obj;
+        }
+
+        if (params.ExtraRiskResult) {
+            let obj = new ExtraRiskResult();
+            obj.deserialize(params.ExtraRiskResult)
+            this.ExtraRiskResult = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -4652,6 +4687,71 @@ Only returned for the Enhance and Plus version, with the default value being emp
         this.DeviceInfoLevel = 'DeviceInfoLevel' in params ? params.DeviceInfoLevel : null;
         this.LivenessInfoTag = 'LivenessInfoTag' in params ? params.LivenessInfoTag : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ExtraRiskResult
+ * @class
+ */
+class ExtraRiskResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Completion of the additional checks in this request, indicating whether the result can be trusted.</p><p>Valid values:</p><ul><li>Completed: Conclusions (matched or passed) have been given for all checks required by this request.</li><li>Partial: At least one check cannot reach a conclusion due to unavailable dependencies, insufficient data, or incomplete or invalid input parameters. The result is for reference only and does not indicate security.</li></ul>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * <p>Additional risk level, which may be an empty string.</p><p>Valid values:</p><ul><li>High: An effective risk match exists (RiskDetailList is not empty in this case).</li><li>Low: The check is completed and no match is confirmed.</li><li>&quot;&quot; (empty string): Unrecognized. No check in this request can reach a conclusion, or not all checks are completed. It indicates neither risk nor security.</li></ul>
+         * @type {string || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * <p>List of matched risk items. An empty array [] is returned if no risk item is matched.</p>
+         * @type {Array.<BlackListItem> || null}
+         */
+        this.BlackListResult = null;
+
+        /**
+         * <p>Face blocklist match details. An empty array [] is returned if no match is found.</p>
+         * @type {Array.<RiskDetailItem> || null}
+         */
+        this.RiskDetailList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+
+        if (params.BlackListResult) {
+            this.BlackListResult = new Array();
+            for (let z in params.BlackListResult) {
+                let obj = new BlackListItem();
+                obj.deserialize(params.BlackListResult[z]);
+                this.BlackListResult.push(obj);
+            }
+        }
+
+        if (params.RiskDetailList) {
+            this.RiskDetailList = new Array();
+            for (let z in params.RiskDetailList) {
+                let obj = new RiskDetailItem();
+                obj.deserialize(params.RiskDetailList[z]);
+                this.RiskDetailList.push(obj);
+            }
+        }
 
     }
 }
@@ -5398,7 +5498,7 @@ class PakistanIDCard extends  AbstractModel {
 }
 
 /**
- * Sensitive Data Encryption
+ * Sensitive data encryption
  * @class
  */
 class Encryption extends  AbstractModel {
@@ -5406,25 +5506,25 @@ class Encryption extends  AbstractModel {
         super();
 
         /**
-         * <p>When using the encryption service, fill in the field to be encrypted. This API can auto-fill one or more encrypted fields.</p>
+         * <p>When using the encryption service, enter the fields to be encrypted. In this API, you can enter one or more encrypted fields.</p>
          * @type {Array.<string> || null}
          */
         this.EncryptList = null;
 
         /**
-         * <p>Encrypted symmetric key. For key generation and use, see the <a href="https://www.tencentcloud.com/document/product/1007/47180?from_cn_redirect=1">data encryption</a> document.</p>
+         * <p>Encrypted symmetric key. For key generation and usage, see the <a href="https://www.tencentcloud.com/document/product/1007/47180?from_cn_redirect=1">Data Encryption</a> documentation.</p>
          * @type {string || null}
          */
         this.CiphertextBlob = null;
 
         /**
-         * <p>Users with encryption requirements import the initial vector for CBC encryption (custom string, length 16 characters).</p>
+         * <p>For users with encryption requirements, pass in the CBC encryption initialization vector (a customer-defined string with a length of 16 characters).</p>
          * @type {string || null}
          */
         this.Iv = null;
 
         /**
-         * <p>Encryption algorithm (supports 'AES-256-CBC', 'SM4-GCM'), defaults to 'AES-256-CBC' if not passed.</p>
+         * <p>Algorithm used for encryption (supports &#39;AES-256-CBC&#39; and &#39;SM4-GCM&#39;). If not passed, the default is &#39;AES-256-CBC&#39;.</p>
          * @type {string || null}
          */
         this.Algorithm = null;
@@ -5798,7 +5898,7 @@ class CompareFaceLivenessResponse extends  AbstractModel {
          * Business Error Codes.
 -When the return value is "Success", it indicates that liveness detection and face comparison passed. Determined to be the same person.
 -When the return value is "FailedOperation.CompareLowSimilarity", it indicates that liveness detection passed, but face comparison similarity is below 70. Determined not to be the same person.
--For other error cases, please refer to [Liveness Face Comparison (API only) Error Codes](https://www.tencentcloud.com/zh/document/product/1061/55390?lang=zh&pg=#97df7537-87fe-4266-87e9-02c816d41ee2)
+-For other error cases, please refer to [Selfie Verification (Pure API) Error Codes](https://www.tencentcloud.com/document/product/1061/55390?lang=en&pg=#97df7537-87fe-4266-87e9-02c816d41ee2)
          * @type {string || null}
          */
         this.Result = null;
@@ -6527,6 +6627,55 @@ class GenerateReflectSequenceResponse extends  AbstractModel {
         this.ReflectSequenceUrl = 'ReflectSequenceUrl' in params ? params.ReflectSequenceUrl : null;
         this.ReflectSequenceMd5 = 'ReflectSequenceMd5' in params ? params.ReflectSequenceMd5 : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ExtraRiskInfo
+ * @class
+ */
+class ExtraRiskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>A stable and unique person identifier within the customer's business domain, used to correlate multiple location reports from the same person to determine whether abnormal displacement exists.</p><p>Input restrictions: Length ≤ 128 characters; Must not contain control characters (ASCII &lt; 0x20 or 0x7F); It is recommended to pass a desensitized identifier instead of a plaintext ID number or mobile number.</p>
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * <p>Latitude at the time of device collection, in WGS84 decimal degrees    </p><p>Input restrictions: Must be paired with Longitude; Valid range: [-90, 90]; Must be a valid number, NaN/Inf not accepted; Pass as a string in JSON (e.g., &quot;22.5431&quot;)</p>
+         * @type {string || null}
+         */
+        this.Latitude = null;
+
+        /**
+         * <p>Longitude at the time of device collection, in WGS84 decimal degrees    </p><p>Input restrictions: Must be paired with Latitude; Valid range: [-180, 180]; Other restrictions are the same as above</p>
+         * @type {string || null}
+         */
+        this.Longitude = null;
+
+        /**
+         * <p>Public egress IP of the device at the time of collection    </p><p>Input restrictions: Length ≤ 64; Must be a resolvable IPv4/IPv6 address; Private, loopback, link-local, and multicast addresses are considered non-locatable</p>
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.Latitude = 'Latitude' in params ? params.Latitude : null;
+        this.Longitude = 'Longitude' in params ? params.Longitude : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
 
     }
 }
@@ -8092,7 +8241,56 @@ class Address extends  AbstractModel {
 }
 
 /**
- * Template retrieve detailed information
+ * BlackListItem
+ * @class
+ */
+class BlackListItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Blocklist entry ID, customized by the customer when creating the entry, used to trace which entry is matched.</p>
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * <p>Entry type. Currently only face is supported.</p>
+         * @type {string || null}
+         */
+        this.ModelType = null;
+
+        /**
+         * <p>Face similarity, expressed as a string with 4 decimal places, ranging from 0.0000 to 1.0000.</p>
+         * @type {string || null}
+         */
+        this.FaceScore = null;
+
+        /**
+         * <p>Background similarity</p>
+         * @type {string || null}
+         */
+        this.BackgroundScore = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.ModelType = 'ModelType' in params ? params.ModelType : null;
+        this.FaceScore = 'FaceScore' in params ? params.FaceScore : null;
+        this.BackgroundScore = 'BackgroundScore' in params ? params.BackgroundScore : null;
+
+    }
+}
+
+/**
+ * Template retrieval details
  * @class
  */
 class RetrievalLivenessExtraInfo extends  AbstractModel {
@@ -8100,19 +8298,19 @@ class RetrievalLivenessExtraInfo extends  AbstractModel {
         super();
 
         /**
-         * <p>Hit template type, among them Common-public library; Auto-Auto Clustering Library; Owner-custom template library</p>
+         * <p>Type of the matched template. Common: public library; Auto: automatic clustering library; Owner: custom template library.</p>
          * @type {string || null}
          */
         this.HitGroup = null;
 
         /**
-         * <p>Similarity between the request image and the attack template hit. The similarity value ranges from 0 to 2. The smaller the value, the higher the probability of hitting the attack template. The default threshold is 0.6. When the SimilarityScore is ≥0.6, the judgment is as normal. When the SimilarityScore is <0.6, the judgment is an attack.</p>
+         * <p>Similarity between the request image and the matched attack template. The value range is [0,2]. A smaller value indicates a higher probability of matching an attack template. The default threshold is 0.6. A SimilarityScore ≥ 0.6 indicates normal, and a SimilarityScore &lt; 0.6 indicates an attack.</p>
          * @type {number || null}
          */
         this.SimilarityScore = null;
 
         /**
-         * <p>Template id of the cache hit</p>
+         * <p>id of the matched template</p>
          * @type {string || null}
          */
         this.HitTemplate = null;
@@ -8765,6 +8963,34 @@ Their meanings are as follows:
 }
 
 /**
+ * RiskDetailItem
+ * @class
+ */
+class RiskDetailItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Risk item type.</p><p>Valid values:</p><ul><li>IpLocationMismatch: The country/region of the reported coordinates is inconsistent with the country/region of the IP address.</li><li>AbnormalLocationChange: The same person has physically impossible displacement within a short period of time.</li><li>BlacklistHit: A customer-created face blocklist is matched.</li></ul>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
  * GetNFCToken request structure.
  * @class
  */
@@ -8960,6 +9186,7 @@ module.exports = {
     LivenessCompareRequest: LivenessCompareRequest,
     MLIDCard: MLIDCard,
     GetFaceIdResultIntlResponse: GetFaceIdResultIntlResponse,
+    ExtraRiskResult: ExtraRiskResult,
     CheckBankCardInformationRequest: CheckBankCardInformationRequest,
     ListEKYCWebhooksRequest: ListEKYCWebhooksRequest,
     BankCardVerificationRequest: BankCardVerificationRequest,
@@ -8988,6 +9215,7 @@ module.exports = {
     FileInfo: FileInfo,
     PhilippinesDrivingLicense: PhilippinesDrivingLicense,
     GenerateReflectSequenceResponse: GenerateReflectSequenceResponse,
+    ExtraRiskInfo: ExtraRiskInfo,
     IdCardVerificationResponse: IdCardVerificationResponse,
     WebVerificationConfigIntl: WebVerificationConfigIntl,
     CompareResult: CompareResult,
@@ -9007,6 +9235,7 @@ module.exports = {
     UpdateAMLCustomerProfileResponse: UpdateAMLCustomerProfileResponse,
     BankCard2EVerificationRequest: BankCard2EVerificationRequest,
     Address: Address,
+    BlackListItem: BlackListItem,
     RetrievalLivenessExtraInfo: RetrievalLivenessExtraInfo,
     ImageRecognitionV2Request: ImageRecognitionV2Request,
     MainlandIDCard: MainlandIDCard,
@@ -9019,6 +9248,7 @@ module.exports = {
     GetSdkVerificationResultRequest: GetSdkVerificationResultRequest,
     RunAMLNameScreeningRequest: RunAMLNameScreeningRequest,
     ApplyLivenessTokenRequest: ApplyLivenessTokenRequest,
+    RiskDetailItem: RiskDetailItem,
     GetNFCTokenRequest: GetNFCTokenRequest,
     UpdateAMLOngoingScreeningStatusRequest: UpdateAMLOngoingScreeningStatusRequest,
     TaiWanIDCard: TaiWanIDCard,

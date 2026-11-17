@@ -2564,6 +2564,57 @@ class ModifyCosAuditObjectIdentifyStatusResponse extends  AbstractModel {
 }
 
 /**
+ * VPR rating interpretation card
+ * @class
+ */
+class VPRExplainInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Vulnerability intelligence</p>
+         * @type {Array.<VPRExplainDimension> || null}
+         */
+        this.VulIntel = null;
+
+        /**
+         * <p>Asset context</p>
+         * @type {Array.<VPRExplainDimension> || null}
+         */
+        this.AssetContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VulIntel) {
+            this.VulIntel = new Array();
+            for (let z in params.VulIntel) {
+                let obj = new VPRExplainDimension();
+                obj.deserialize(params.VulIntel[z]);
+                this.VulIntel.push(obj);
+            }
+        }
+
+        if (params.AssetContext) {
+            this.AssetContext = new Array();
+            for (let z in params.AssetContext) {
+                let obj = new VPRExplainDimension();
+                obj.deserialize(params.AssetContext[z]);
+                this.AssetContext.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteImageRegistry request structure.
  * @class
  */
@@ -2741,6 +2792,48 @@ class DescribeNotifySettingAkRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * Interpret a single tag item in the VPR card
+ * @class
+ */
+class VPRExplainDimensionItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tag.</p>
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * <p>Tag name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Tag description.</p>
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -3556,13 +3649,13 @@ class CreateVulFixRetryTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Repair task ID that needs to be retried</p>
+         * <p>Repair task ID that needs to retry</p>
          * @type {number || null}
          */
         this.TaskId = null;
 
         /**
-         * <p>Specify the list of host instance IDs that need to retry. If not passed, retry all failed hosts.</p>
+         * <p>Specify the instance ID list of the host that needs to retry. If not passed, retry all failed hosts.</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -4147,7 +4240,7 @@ class DspmRiskTendency extends  AbstractModel {
 }
 
 /**
- * Vulnerability repair summary
+ * Vulnerability repair summary information
  * @class
  */
 class VulFixSummaryItem extends  AbstractModel {
@@ -4179,13 +4272,13 @@ class VulFixSummaryItem extends  AbstractModel {
         this.AffectedCount = null;
 
         /**
-         * <p>Whether restart is required after repair</p>
+         * <p>Whether the system needs to be restarted after repair</p>
          * @type {boolean || null}
          */
         this.NeedReboot = null;
 
         /**
-         * <p>Whether one-click repair is supported true-supported false-unsupported</p>
+         * <p>Whether one-click repair is supported. true - support; false - not support</p>
          * @type {boolean || null}
          */
         this.FixSwitch = null;
@@ -5317,7 +5410,7 @@ class DescribeVulRiskRelateHostRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>p>KB patch internal ID (kb_info.id)</p>
+         * <p>KB patch internal ID (kb_info.id)</p>
          * @type {number || null}
          */
         this.KBID = null;
@@ -5335,31 +5428,31 @@ class DescribeVulRiskRelateHostRequest extends  AbstractModel {
         this.MemberId = null;
 
         /**
-         * <p>Filter conditions array. Multi-condition with each other is AND relationship<br>Supported Filter.Name:<br>Keyword: Keyword fuzzy search (fuzzy matching for host name/IP/InstanceID)<br>CloudTag: Cloud tag<br>Tag: Security center tag</p>
+         * <p>Criteria array, multi-condition uses AND relationship with each other<br>Supported Filter.Name:<br>Keyword: Keyword fuzzy search (fuzzy matching for host name/IP/InstanceID)<br>CloudTag: Cloud tag<br>Tag: Security center tag</p>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
 
         /**
-         * <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+         * <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+         * <p>Paging offset<br>Value range: [0, positive infinity)<br>Default value: 0</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * <p>Sorting order<br>Enumeration value:<br>ASC: Ascending<br>DESC: Descending order<br>Default value: DESC</p>
+         * <p>Sorting order<br>Enumeration values:<br>ASC: ascending<br>DESC: descending<br>Default value: DESC</p>
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * <p>Sorting field<br>Enumeration value:<br>LatestScanTime: Latest scan time<br>VPRLevel: VPR rating<br>RiskStatus: Remediation status<br>Default value: LatestScanTime</p>
+         * <p>Sorting field<br>Enumeration values:<br>LatestScanTime: Latest scan time<br>VPRLevel: VPR rating<br>RiskStatus: Remediation status<br>Default value: LatestScanTime</p>
          * @type {string || null}
          */
         this.By = null;
@@ -6289,6 +6382,34 @@ class BaselinePolicyBrief extends  AbstractModel {
         this.ID = 'ID' in params ? params.ID : null;
         this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
         this.IsSystem = 'IsSystem' in params ? params.IsSystem : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ContainerAutoScaleConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -15105,7 +15226,7 @@ class DescribeCheckConnectivityHostListResponse extends  AbstractModel {
 }
 
 /**
- * Vulnerability repair item, specify a vulnerability/KB patch and its target host that needs to be repaired.
+ * Vulnerability repair item. Specify a vulnerability/KB patch and its target host for repair.
  * @class
  */
 class VulFixItem extends  AbstractModel {
@@ -15113,19 +15234,19 @@ class VulFixItem extends  AbstractModel {
         super();
 
         /**
-         * <p>Instance ID list of hosts requiring fixing<br>Input parameter limitation: Up to 1,000 instance IDs per single item</p>
+         * <p>Instance ID list of hosts requiring fixing<br>Input limit: up to 1000 instance IDs per single item</p>
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * <p>Vulnerability ID. Choose either VulId or KBId.</p>
+         * <p>Vulnerability ID. Choose either VulId or KBId</p>
          * @type {number || null}
          */
         this.VulId = null;
 
         /**
-         * <p>Patch ID. Choose either VulId or KBId.</p>
+         * <p>KB patch ID. Either VulId or KBId is required.</p>
          * @type {number || null}
          */
         this.KBId = null;
@@ -15792,6 +15913,12 @@ class ExportEDRRulesRequest extends  AbstractModel {
          */
         this.By = null;
 
+        /**
+         * <p>File operation rules, populated when ContentType=file_operation (file path regex AND any selected action)</p>
+         * @type {RuleContentFileOperation || null}
+         */
+        this.FileOperationRules = null;
+
     }
 
     /**
@@ -15813,6 +15940,12 @@ class ExportEDRRulesRequest extends  AbstractModel {
         }
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
+
+        if (params.FileOperationRules) {
+            let obj = new RuleContentFileOperation();
+            obj.deserialize(params.FileOperationRules)
+            this.FileOperationRules = obj;
+        }
 
     }
 }
@@ -20579,31 +20712,31 @@ class DescribeVulFixTaskDetailRequest extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+         * <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+         * <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * <p>Filter criteria<br>Supported Filter.Name:<br>InstanceId - Exact match, filter by host instance ID<br>VulId - Exact match, filter by vulnerability ID, filter out hosts under a certain vulnerability<br>KBId - Exact match, filter by KB Patch ID, filter out hosts under a certain KB patch<br>Status - Exact match, filter by execution status: 0-Initial status 1-Issued 11-Client confirmed 2-Repair completed 3-Client offline 4-Timeout 5-Failure 6-No support 9-Waiting for snapshot creation to complete 10-Snapshot creation failed<br>FixStatus - Exact match, filter by repair result: 0-Initial status 1-Repair successful 2-Fix failure<br>SnapshotStatus - Exact match, filter by snapshot status: -1-No need to create snapshot 0-Not started 1-In progress 2-Completed 3-Creation failure</p>
+         * <p>Filter criteria<br>Supported Filter.Name:<br>InstanceId - Exact match. Filter by host instance ID.<br>VulId - Exact match. Filter by vulnerability ID to filter out hosts under a vulnerability.<br>KBId - Exact match. Filter by KB Patch ID to filter out hosts under a KB patch.<br>Status - Exact match. Filter by execution status: 0-Initial status 1-Issued 11-Confirmed by client 2-Repair completed 3-Client offline 4-Timeout 5-Failed 6-Unsupported 9-Waiting for snapshot creation 10-Snapshot creation failed<br>FixStatus - Exact match. Filter by fix result: 0-Initial status 1-Repair successful 2-Failed to fix<br>SnapshotStatus - Exact match. Filter by snapshot status: -1-No need to create snapshot 0-Not started 1-In progress 2-Completed 3-Creation failed</p>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
 
         /**
-         * <p>Sorting field<br>Enumeration value:<br>StartTime: Sort by repair start time<br>EndTime: Sort by repair end time</p>
+         * <p>Sorting field<br>Enumeration values:<br>StartTime: sort by repair start time<br>EndTime: sort by repair end time</p>
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending<br>Default value: desc</p>
+         * <p>Sorting method<br>Enumeration values:<br>asc: in ascending order<br>desc: in descending order<br>Default value: desc</p>
          * @type {string || null}
          */
         this.By = null;
@@ -23953,13 +24086,13 @@ class CreateVulFixRetryTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>New task ID generated by retry, used for subsequent query task status</p>
+         * <p>ID of the generated new task for retry, used for subsequently querying task status</p>
          * @type {number || null}
          */
         this.TaskId = null;
 
         /**
-         * <p>Number of hosts retried this time</p>
+         * <p>Number of hosts to retry this time</p>
          * @type {number || null}
          */
         this.RetryCount = null;
@@ -26880,13 +27013,13 @@ class VPRRatingStage extends  AbstractModel {
         super();
 
         /**
-         * Stage name (for example: threat activity level, exploitability, vulnerability severity)
+         * Stage name (for example, threat activity, exploitability, vulnerability severity)
          * @type {string || null}
          */
         this.Stage = null;
 
         /**
-         * Rating result of this stage
+         * Rating result of this stage.
          * @type {string || null}
          */
         this.Result = null;
@@ -29746,19 +29879,19 @@ class CreateVulFixedExportJobRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Filter criteria (same as DescribeVulFixedList)<br>Supported Filter.Name:<br>Keyword - Fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - Fuzzy matching, vulnerability name search<br>Level - Exact match, filter by vulnerability level: LOW-Low risk MEDIUM-Medium risk HIGH-High risk CRITICAL-Critical<br>VprLevel - Exact match, filter by VPR rating: 1-Low 2-Medium 3-High 4-Critical<br>VulCategory - Exact match, filter by vulnerability type: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-Application vulnerability EMERGENCY-Emergency vulnerability<br>MachineName - Fuzzy matching, host name search<br>InstanceId - Fuzzy matching, instance ID search<br>FixTime - Range matching, repair time range, input two values for start and end time</p>
+         * <p>Filter criteria (same as DescribeVulFixedList)<br>Supported Filter.Name:<br>Keyword - fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - fuzzy matching, search by vulnerability name<br>Level - exact match, filter by vulnerability level: LOW-low MEDIUM-medium HIGH-high CRITICAL-critical<br>VprLevel - exact match, filter by VPR rating: 1-Low 2-Medium 3-High 4-Critical<br>VulCategory - exact match, filter by vulnerability type: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-application vulnerability EMERGENCY-urgent vulnerability<br>MachineName - fuzzy matching, search by host name<br>InstanceId - fuzzy matching, search by instance ID<br>FixTime - range matching, repair time range. Input two values for start and end time</p>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
 
         /**
-         * <p>Sorting field<br>Enumeration value:<br>FixTime: Sort by repair time<br>VulName: Sort by vulnerability name</p>
+         * <p>Sorting field<br>Enumeration values:<br>FixTime: Sort by fix time<br>VulName: Sort by vulnerability name</p>
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending order<br>Default value: desc</p>
+         * <p>Sorting method<br>Enumeration values:<br>asc: ascending<br>desc: descending<br>Default value: desc</p>
          * @type {string || null}
          */
         this.By = null;
@@ -31840,7 +31973,7 @@ class VulVendorProduct extends  AbstractModel {
 }
 
 /**
- * Task summary of vulnerability repair
+ * Vulnerability repair task summary information
  * @class
  */
 class VulFixTaskInfo extends  AbstractModel {
@@ -31848,7 +31981,7 @@ class VulFixTaskInfo extends  AbstractModel {
         super();
 
         /**
-         * Primary key ID of the fix task
+         * Repair task primary key ID
          * @type {number || null}
          */
         this.Id = null;
@@ -31865,7 +31998,7 @@ Enumeration values:
 0: initialization
 1: In remediation
 2: Repair successful
-3: Partially fix failed
+3: Partially fixed
 4: All fix failures
 5: Stop repair
          * @type {number || null}
@@ -31873,7 +32006,7 @@ Enumeration values:
         this.FixStatus = null;
 
         /**
-         * Repair total number of assets
+         * Total number of repaired assets
          * @type {number || null}
          */
         this.AssetCount = null;
@@ -31885,7 +32018,7 @@ Enumeration values:
         this.SuccessCount = null;
 
         /**
-         * FIX_FAILURE count
+         * Number of failed fixes
          * @type {number || null}
          */
         this.FailCount = null;
@@ -31903,15 +32036,15 @@ Enumeration values:
         this.QueueCount = null;
 
         /**
-         * Progress percentage of the repair
+         * Repair progress percentage
 Value range: [0, 100].
-Supplemental description: Calculation method is (SuccessCount+FailCount)/AssetCount×100.
+Supplemental description: Calculation method: (SuccessCount+FailCount)/AssetCount×100
          * @type {number || null}
          */
         this.Progress = null;
 
         /**
-         * Number of successfully fixed vulnerabilities
+         * Number of vulnerabilities with successful fixes
          * @type {number || null}
          */
         this.SuccessVulCount = null;
@@ -31923,27 +32056,27 @@ Supplemental description: Calculation method is (SuccessCount+FailCount)/AssetCo
         this.FailVulCount = null;
 
         /**
-         * List of vulnerability names to be fixed
+         * List of fixed vulnerability names
          * @type {Array.<string> || null}
          */
         this.VulNames = null;
 
         /**
-         * Fix startup time
-Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+         * Startup time for repair
+Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Fixing end time
-Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+         * Repair end time
+Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * List of vulnerability dimensional remediation status, status details of each vulnerability
+         * List of vulnerability dimensional remediation statuses, with status details for each vulnerability
          * @type {Array.<VulFixStatusItem> || null}
          */
         this.VulFixStatusList = null;
@@ -34891,6 +35024,18 @@ class DescribeCSCPayInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.MemberId = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.NeedQuotaUsed = null;
+
     }
 
     /**
@@ -34900,6 +35045,8 @@ class DescribeCSCPayInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MemberId = 'MemberId' in params ? params.MemberId : null;
+        this.NeedQuotaUsed = 'NeedQuotaUsed' in params ? params.NeedQuotaUsed : null;
 
     }
 }
@@ -38522,7 +38669,7 @@ class CreateVulFixTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Repair task ID, used for subsequent query task status</p>
+         * <p>Repair task ID, used for subsequent query of task status</p>
          * @type {number || null}
          */
         this.TaskId = null;
@@ -43082,37 +43229,37 @@ class VulFixTaskItem extends  AbstractModel {
         super();
 
         /**
-         * Primary key ID of the fix task
+         * Primary key ID of the repair task
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * Task ID, hash flag for interactive
+         * Task ID, a hash flag for interaction.
          * @type {number || null}
          */
         this.TaskId = null;
 
         /**
-         * JobId, corresponding to the Task ID of the task system.
+         * Task JobId, corresponding to the task ID in the task system.
          * @type {string || null}
          */
         this.JobId = null;
 
         /**
-         * List of vulnerability IDs to be fixed
+         * List of fixed vulnerability IDs
          * @type {Array.<number> || null}
          */
         this.VulIds = null;
 
         /**
-         * List of fixed KB patch IDs
+         * List of repaired KB patch IDs
          * @type {Array.<number> || null}
          */
         this.KBIds = null;
 
         /**
-         * Repair the total number of assets
+         * Total number of repaired assets
          * @type {number || null}
          */
         this.AssetCount = null;
@@ -43130,26 +43277,26 @@ class VulFixTaskItem extends  AbstractModel {
         this.FailCount = null;
 
         /**
-         * Progress percentage of the repair
-Valid values: [0, 100]
-Supplemental description: Calculation method is (SuccessCount+FailCount)/AssetCount×100.
+         * Repair progress percentage
+Valid values: [0, 100].
+Supplemental description: Calculation method: (SuccessCount+FailCount)/AssetCount×100
          * @type {number || null}
          */
         this.Progress = null;
 
         /**
-         * Number of users in the fix task
+         * Number of users for fix tasks
          * @type {number || null}
          */
         this.TargetAppIdsCount = null;
 
         /**
          * Remediation status
-Enumeration value:
+Enumeration values:
 0: initialization
 1: In remediation
 2: Repair successful
-3: Partially fix failed
+3: Partial fix failure
 4: All fix failures
 5: Stop repair
          * @type {number || null}
@@ -43164,38 +43311,38 @@ Unit: seconds.
         this.Timeout = null;
 
         /**
-         * Fix startup time
-Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+         * Repair startup time
+Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Fix end time
-Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+         * Repair end time
+Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
          * Record creation time.
-Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * List of vulnerability names to be fixed, making it easy to show directly on the list page
+         * List of names of repaired vulnerabilities, making it easy to show directly on the list page
          * @type {Array.<string> || null}
          */
         this.VulNames = null;
 
         /**
          * Vulnerability Type List
-Enumeration values:
+Enumeration value:
 LINUX: Linux software vulnerability
-WINDOWS: Windows system patch vulnerability
-WEB_CMS: Web-CMS vulnerabilities
+WINDOWS: WINDOWS system patch vulnerabilities
+WEB_CMS: Web-CMS vulnerability
 APPLICATION: Application vulnerability
 EMERGENCY: Urgent vulnerability
          * @type {Array.<string> || null}
@@ -43203,7 +43350,7 @@ EMERGENCY: Urgent vulnerability
         this.VulCategory = null;
 
         /**
-         * Creator AppId
+         * Creator `AppId`
          * @type {number || null}
          */
         this.AppId = null;
@@ -44062,7 +44209,7 @@ class DescribeVulFixTaskDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Task details</p>
+         * <p>Task details list</p>
          * @type {Array.<VulFixTaskDetailItem> || null}
          */
         this.Data = null;
@@ -45508,7 +45655,7 @@ class DescribeVulFixableMachineListResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Repair host list</p>
+         * <p>Repairable host list</p>
          * @type {Array.<VulFixableMachineItem> || null}
          */
         this.Data = null;
@@ -45526,13 +45673,13 @@ class DescribeVulFixableMachineListResponse extends  AbstractModel {
         this.FixableCount = null;
 
         /**
-         * <p>Number of hosts that cannot be one-click repaired</p>
+         * <p>Number of hosts that cannot be repaired with one click</p>
          * @type {number || null}
          */
         this.NotFixableCount = null;
 
         /**
-         * <p>Summary information of vulnerability dimension, showing overview of list of vulnerabilities to be fixed</p>
+         * <p>Vulnerability dimensional summary, showing an overview of the list of repaired vulnerabilities</p>
          * @type {Array.<VulFixSummaryItem> || null}
          */
         this.VulSummary = null;
@@ -46543,7 +46690,7 @@ class ComplianceChapterItem extends  AbstractModel {
 }
 
 /**
- * Fixable host information
+ * Repairable host information
  * @class
  */
 class VulFixableMachineItem extends  AbstractModel {
@@ -46551,7 +46698,7 @@ class VulFixableMachineItem extends  AbstractModel {
         super();
 
         /**
-         * <p>Vulnerability ID list, grouped by SupportAutoFix dimension: repairable vulnerability IDs when SupportAutoFix=1, non-repairable vulnerability IDs when SupportAutoFix=0</p>
+         * <p>Vulnerability ID list, grouped by the SupportAutoFix dimension: When SupportAutoFix=1, it is a repairable vulnerability ID; when SupportAutoFix=0, it is a non-repairable vulnerability ID</p>
          * @type {Array.<number> || null}
          */
         this.VulIds = null;
@@ -46575,19 +46722,19 @@ class VulFixableMachineItem extends  AbstractModel {
         this.MachineIp = null;
 
         /**
-         * <p>public IP address</p>
+         * <p>Public IP Address</p>
          * @type {string || null}
          */
         this.PublicIp = null;
 
         /**
-         * <p>OS type<br>Enumeration value:<br>linux: Linux operating system<br>windows: Windows operating system</p>
+         * <p>Operating system type<br>Enumeration values:<br>linux: Linux operating system<br>windows: Windows operating system</p>
          * @type {string || null}
          */
         this.OsType = null;
 
         /**
-         * <p>Operating system name.</p>
+         * <p>OS name</p>
          * @type {string || null}
          */
         this.OsName = null;
@@ -46599,13 +46746,13 @@ class VulFixableMachineItem extends  AbstractModel {
         this.MachineStatus = null;
 
         /**
-         * <p>Is auto-repair supported<br>Enumeration value:<br>0: No support<br>1: Support</p>
+         * <p>Is auto-repair supported<br>Enumeration values:<br>0: No support<br>1: Support</p>
          * @type {number || null}
          */
         this.SupportAutoFix = null;
 
         /**
-         * <p>Current remediation status<br>Enumeration value:<br>0: Unfixed<br>1: In remediation<br>2: Fix failure<br>3: Repair successful<br>4: Timeout</p>
+         * <p>Current remediation status<br>Enumeration values:<br>0: unfixed<br>1: in remediation<br>2: fix failed<br>3: successful fix<br>4: remediation timeout</p>
          * @type {number || null}
          */
         this.FixStatus = null;
@@ -46623,7 +46770,7 @@ class VulFixableMachineItem extends  AbstractModel {
         this.NotFixableReason = null;
 
         /**
-         * <p>Fix command list, returned when SupportAutoFix is 1</p>
+         * <p>List of fix commands. Returned when SupportAutoFix is 1</p>
          * @type {Array.<string> || null}
          */
         this.FixCommands = null;
@@ -46641,13 +46788,13 @@ class VulFixableMachineItem extends  AbstractModel {
         this.TagItems = null;
 
         /**
-         * <p>Account AppId</p>
+         * <p>Associated account AppId</p>
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * <p>Paid edition info<br>Enumeration value:<br>BASIC: Basic version<br>PRO: Pro edition<br>ULTIMATE: Flagship edition</p>
+         * <p>Paid edition info<br>Enumeration values:<br>BASIC: Basic version<br>PRO: Pro edition<br>ULTIMATE: Flagship edition</p>
          * @type {string || null}
          */
         this.PayVersion = null;
@@ -50075,6 +50222,56 @@ class ModifyShareUserCSPMRequest extends  AbstractModel {
 }
 
 /**
+ * Explain one dimension in the VPR interpretation card.
+ * @class
+ */
+class VPRExplainDimension extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Tag key</p>
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * <p>Tag name</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Tag sub-item.</p>
+         * @type {Array.<VPRExplainDimensionItem> || null}
+         */
+        this.Items = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new VPRExplainDimensionItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Vulnerability VPR tag
  * @class
  */
@@ -52305,7 +52502,7 @@ class DescribeVulRiskRelateComponentRequest extends  AbstractModel {
         this.MemberId = null;
 
         /**
-         * <p>Filter conditions array, multi-condition with each other in the AND relationship<br>Supported Filter.Name:<br>Keyword: Keyword fuzzy search (fuzzy matching for component name)</p>
+         * <p>Criteria array, multi-condition uses AND relationship with each other<br>Supported Filter.Name:<br>Keyword: keyword fuzzy search (fuzzy matching for component name)</p>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -53350,6 +53547,18 @@ class DescribeMalwareTimingScanSettingResponse extends  AbstractModel {
         this.Timeout = null;
 
         /**
+         * <p>List of alarm type codes saved in custom quarantine mode</p>
+         * @type {Array.<string> || null}
+         */
+        this.QuaraTypes = null;
+
+        /**
+         * <p>Alarm type dictionary (delivered via gray release rules, used by the frontend to render checkbox options)</p>
+         * @type {Array.<QuaraTypeDictItem> || null}
+         */
+        this.QuaraTypeDict = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -53458,6 +53667,16 @@ class DescribeMalwareTimingScanSettingResponse extends  AbstractModel {
             }
         }
         this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.QuaraTypes = 'QuaraTypes' in params ? params.QuaraTypes : null;
+
+        if (params.QuaraTypeDict) {
+            this.QuaraTypeDict = new Array();
+            for (let z in params.QuaraTypeDict) {
+                let obj = new QuaraTypeDictItem();
+                obj.deserialize(params.QuaraTypeDict[z]);
+                this.QuaraTypeDict.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -57452,6 +57671,12 @@ class ModifyMalwareTimingScanSettingsRequest extends  AbstractModel {
          */
         this.Timeout = null;
 
+        /**
+         * <p>List of alarm type codes for custom quarantine mode (required when ProtectMode=2; codes are taken from the QuaraTypeDict returned by Describe)</p>
+         * @type {Array.<string> || null}
+         */
+        this.QuaraTypes = null;
+
     }
 
     /**
@@ -57556,6 +57781,7 @@ class ModifyMalwareTimingScanSettingsRequest extends  AbstractModel {
             }
         }
         this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.QuaraTypes = 'QuaraTypes' in params ? params.QuaraTypes : null;
 
     }
 }
@@ -68227,7 +68453,7 @@ class VulHostBriefInfo extends  AbstractModel {
         this.Name = null;
 
         /**
-         * <p>Public network IP address</p>
+         * <p>Public IP address</p>
          * @type {string || null}
          */
         this.PublicIP = null;
@@ -68239,31 +68465,31 @@ class VulHostBriefInfo extends  AbstractModel {
         this.PrivateIP = null;
 
         /**
-         * <p>Protection edition<br>Enumeration value:<br>NONE: No protection<br>BASIC: Basic version<br>PRO: Pro edition<br>ULTIMATE: Flagship edition<br>PRO_LH: Lightweight edition</p>
+         * <p>Protection edition<br>Enumeration values:<br>NONE: no protection<br>BASIC: basic version<br>PRO: pro edition<br>ULTIMATE: flagship edition<br>PRO_LH: lightweight edition</p>
          * @type {string || null}
          */
         this.DefendVersion = null;
 
         /**
-         * <p>Vulnerability defense status<br>Enumeration value:<br>ENABLED: Enabled<br>NOT_SUPPORTED: Unsupported<br>NOT_ENABLED: Not enabled</p>
+         * <p>Vulnerability defense status<br>Enumeration values:<br>ENABLED: enabled<br>NOT_SUPPORTED: unsupported<br>NOT_ENABLED: not enabled</p>
          * @type {string || null}
          */
         this.DefendStatus = null;
 
         /**
-         * <p>Associated account information</p>
+         * <p>Account information belonging to</p>
          * @type {AccountBriefInfo || null}
          */
         this.Account = null;
 
         /**
-         * <p>Cloud host instance status<br>Enumeration value:<br>RUNNING: running<br>STOPPED: stopped<br>UNKNOWN: unknown</p>
+         * <p>CVM instance status<br>Enumeration value:<br>RUNNING: running<br>STOPPED: stopped<br>UNKNOWN: unknown</p>
          * @type {string || null}
          */
         this.InstanceStatus = null;
 
         /**
-         * <p>Remediation status enumeration values.</p><p>Enumeration values: </p><ul><li>PENDING: To be fixed, </li><li>SCANNING: Scan in progress, </li><li>FIXED: Fixed, </li><li>IGNORED: Ignored, </li><li>FIXING: In remediation, </li><li>FIX_FAILED: Fix failure, </li><li>NEED_REBOOT: Pending restart.</li></ul>
+         * <p>Remediation status enumeration values.</p><p>Enumeration values: </p><ul><li>PENDING: To be fixed, </li><li>SCANNING: Scanning, </li><li>FIXED: Fixed, </li><li>IGNORED: Ignored, </li><li>FIXING: In remediation, </li><li>FIX_FAILED: Fix failure, </li><li>NEED_REBOOT: Pending restart.</li></ul>
          * @type {string || null}
          */
         this.RiskStatus = null;
@@ -68275,13 +68501,13 @@ class VulHostBriefInfo extends  AbstractModel {
         this.VPRRating = null;
 
         /**
-         * <p>CWP Agent status<br>Enumeration value:<br>ONLINE: Online<br>OFFLINE: Offline<br>UNINSTALLED: Not installed</p>
+         * <p>CWP Agent status<br>Enumeration values:<br>ONLINE: ONLINE<br>OFFLINE: OFFLINE<br>UNINSTALLED: not installed</p>
          * @type {string || null}
          */
         this.AgentStatus = null;
 
         /**
-         * <p>Asset tag list (CSIP internal asset tag)</p>
+         * <p>Asset tag list (CSIP internal asset tags)</p>
          * @type {Array.<MiniTagItem> || null}
          */
         this.TagItem = null;
@@ -68735,6 +68961,104 @@ RuleName: fuzzy search by rule name
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class RuleContentK8sAPI extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RequestURI = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Verb = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RequestUser = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.UserAgent = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SourceIPS = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResponseStatusCode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RequestObject = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ResponseObject = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MountHostDir = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PodNameIP = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AuditID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestURI = 'RequestURI' in params ? params.RequestURI : null;
+        this.Verb = 'Verb' in params ? params.Verb : null;
+        this.RequestUser = 'RequestUser' in params ? params.RequestUser : null;
+        this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
+        this.SourceIPS = 'SourceIPS' in params ? params.SourceIPS : null;
+        this.ResponseStatusCode = 'ResponseStatusCode' in params ? params.ResponseStatusCode : null;
+        this.RequestObject = 'RequestObject' in params ? params.RequestObject : null;
+        this.ResponseObject = 'ResponseObject' in params ? params.ResponseObject : null;
+        this.MountHostDir = 'MountHostDir' in params ? params.MountHostDir : null;
+        this.PodNameIP = 'PodNameIP' in params ? params.PodNameIP : null;
+        this.AuditID = 'AuditID' in params ? params.AuditID : null;
 
     }
 }
@@ -71106,7 +71430,7 @@ class CreateHostVulExportJobRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Exported action</p><p>Enumeration value:</p><ul><li>LinuxHostVulRiskList: linux vulnerability risk list</li><li>WebCmsHostVulRiskList: WebCms vulnerability risk list</li><li>AppHostVulRiskList: App vulnerability risk list</li><li>EmergencyHostVulRiskList: Emergency vulnerability risk list</li><li>KBRiskList: Windows kb risk list</li><li>RelateHostList: Associated host list</li><li>WhiteList: Vulnerability allowlist</li></ul>
+         * <p>Export action</p><p>Enumeration values:</p><ul><li>LinuxHostVulRiskList: linux vulnerability risk list</li><li>WebCmsHostVulRiskList: WebCms vulnerability risk list</li><li>AppHostVulRiskList: App vulnerability risk list</li><li>EmergencyHostVulRiskList: Emergency vulnerability risk list</li><li>KBRiskList: Windows kb risk list</li><li>RelateHostList: Associated host list</li><li>WhiteList: Vulnerability allowlist</li></ul>
          * @type {string || null}
          */
         this.BusinessAction = null;
@@ -71118,7 +71442,7 @@ class CreateHostVulExportJobRequest extends  AbstractModel {
         this.MemberId = null;
 
         /**
-         * <p>Filter conditions array, multi-condition with each other is AND relationship<br>Supported Filter.Name:<br>KbID: KB risk associated server in the current situation needs to add KB Risk ID<br>VulID: Vulnerability risk associated server in the current situation needs to add vul Risk ID</p>
+         * <p>Criteria array, multi-condition uses AND relationship with each other<br>Supported Filter.Name:<br>KbID: KB risk associated host requires adding KB Risk ID as needed<br>VulID: Vulnerability risk associated host requires adding vul Risk ID as needed</p>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -71628,31 +71952,31 @@ class CreateVulFixTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Repair item list, each item specifies a vulnerability/KB patch and its hosts requiring fixing<br>Input parameter limit: No more than 100 items, total number of instances not more than 5000</p>
+         * <p>Repair item list. Each item specifies a vulnerability/KB patch and its hosts requiring fixing<br>Input limit: up to 100 items, and the total number of instances cannot exceed 5000</p>
          * @type {Array.<VulFixItem> || null}
          */
         this.FixItems = null;
 
         /**
-         * <p>Maximum repair time<br>Measurement unit: second<br>Default value: 3600</p>
+         * <p>Maximum repair time<br>Unit: second<br>Default value: 3600</p>
          * @type {number || null}
          */
         this.Timeout = null;
 
         /**
-         * <p>Whether to create a disk snapshot before repair<br>Default value: false</p>
+         * <p>Create a disk snapshot before repair<br>Default value: false</p>
          * @type {boolean || null}
          */
         this.CreateSnapshot = null;
 
         /**
-         * <p>Snapshot name. Valid when CreateSnapshot is true.<br>Input parameter limit: Up to 128 characters.</p>
+         * <p>Snapshot name. Valid when CreateSnapshot is true. Input limits: up to 60 characters, with automatic truncation for overly long ones.</p>
          * @type {string || null}
          */
         this.SnapshotName = null;
 
         /**
-         * <p>Snapshot retention days. Valid when CreateSnapshot is true.</p>
+         * <p>Snapshot retention days. Valid when CreateSnapshot is true</p>
          * @type {number || null}
          */
         this.SaveDays = null;
@@ -72384,7 +72708,7 @@ class BaselineIgnorePolicy extends  AbstractModel {
 }
 
 /**
- * Associated component & path description
+ * Associated component & path details
  * @class
  */
 class ComponentDetailItem extends  AbstractModel {
@@ -72398,7 +72722,7 @@ class ComponentDetailItem extends  AbstractModel {
         this.Name = null;
 
         /**
-         * cache hit version
+         * Hit version
          * @type {string || null}
          */
         this.Version = null;
@@ -77601,6 +77925,55 @@ class DeleteDspmShareUserDataRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class QuaraTypeDictItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.Recommend = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Recommend = 'Recommend' in params ? params.Recommend : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
  * DescribeImageAssetDetail request structure.
  * @class
  */
@@ -81983,25 +82356,25 @@ class DescribeVulFixableMachineListRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Vulnerability ID list, a maximum of 100</p>
+         * <p>List of vulnerability IDs. Supports up to 100.</p>
          * @type {Array.<number> || null}
          */
         this.VulIds = null;
 
         /**
-         * <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+         * <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+         * <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * <p>Filtering Conditions<br>Supported Filter.Name:<br>Keyword - fuzzy matching, search by asset ID, asset name<br>ComponentName - fuzzy matching, search by associated component name<br>InstanceId - exact match, filter by host instance ID<br>MachineName - fuzzy matching, search by host name<br>MachineIp - fuzzy matching, search by host IP<br>OsType - exact match, filter by OS type: linux/windows<br>SupportAutoFix - exact match, filter by whether automatic fixing is supported: 0-unsupported 1-supported<br>Tag - exact match, filter by asset tag<br>AppId - exact match, filter by associated account</p>
+         * <p>Filter criteria<br>Supported Filter.Name:<br>Keyword - Fuzzy matching. Search by asset ID or asset name.<br>ComponentName - Fuzzy matching. Search by associated component name.<br>InstanceId - Exact match. Filter by host instance ID.<br>MachineName - Fuzzy matching. Search by host name.<br>MachineIp - Fuzzy matching. Search by host IP.<br>OsType - Exact match. Filter by OS type: linux/windows<br>SupportAutoFix - Exact match. Filter by whether auto-repair is supported: 0-unsupported 1-supported<br>Tag - Exact match. Filter by asset tag.<br>AppId - Exact match. Filter by associated account.</p>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
@@ -83014,7 +83387,7 @@ class CreateVulFixedExportJobResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Export task ID<br>Used when: front-end polling the status of tasks for reference</p>
+         * <p>Export task ID<br>Value for reference: used when polling the export task status on the frontend</p>
          * @type {string || null}
          */
         this.JobID = null;
@@ -84544,7 +84917,7 @@ class DescribeVulFixedListResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>List of fixed vulnerabilities</p>
+         * <p>Fixed vulnerability list</p>
          * @type {Array.<VulFixedItem> || null}
          */
         this.Data = null;
@@ -86939,13 +87312,13 @@ class DescribeVulRiskRelateHostResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>List of affected hosts for the vulnerability</p>
+         * <p>List of affected hosts</p>
          * @type {Array.<VulHostBriefInfo> || null}
          */
         this.List = null;
 
         /**
-         * <p>Total number of qualified instances</p>
+         * <p>Total number of eligible items</p>
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -87525,7 +87898,7 @@ class DescribeVulRiskRelateComponentResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>List of affected components for the vulnerability</p>
+         * <p>List of affected components</p>
          * @type {Array.<VulComponentSummary> || null}
          */
         this.List = null;
@@ -87610,7 +87983,7 @@ class CosIdentifyCategoryDetail extends  AbstractModel {
 }
 
 /**
- * Host Vulnerability Component Overview
+ * Host vulnerability component overview
  * @class
  */
 class VulComponentSummary extends  AbstractModel {
@@ -87618,13 +87991,13 @@ class VulComponentSummary extends  AbstractModel {
         super();
 
         /**
-         * <p>Component name.</p>
+         * <p>Component name</p>
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * <p>Associated hosts.</p>
+         * <p>Number of associated hosts</p>
          * @type {number || null}
          */
         this.RelateHostCount = null;
@@ -87761,13 +88134,13 @@ class DescribeVulFixedHostDetailRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * <p>Paging offset, used for associated component & path list pagination.<br>Value ranges from 0 to +∞.<br>Default value: 0.</p>
+         * <p>Paging offset for associated component &amp; path list pagination<br>Value range: [0, +∞)<br>Default value: 0</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * <p>Number of results per page, used for paginating associated components & path list<br>Value ranges from 1 to 100<br>Default value: 10</p>
+         * <p>Number of results per page, used for list pagination of associated components &amp; paths<br>Value range: [1, 100]<br>Default value: 10</p>
          * @type {number || null}
          */
         this.Limit = null;
@@ -88313,6 +88686,12 @@ Supplemental description: if not passed, host configuration will not be modified
          */
         this.HostConfig = null;
 
+        /**
+         * <p>Auto-scaling configuration for the container security module; if not passed, it remains unchanged</p>
+         * @type {ContainerAutoScaleConfig || null}
+         */
+        this.ContainerConfig = null;
+
     }
 
     /**
@@ -88327,6 +88706,12 @@ Supplemental description: if not passed, host configuration will not be modified
             let obj = new HostAutoScaleConfig();
             obj.deserialize(params.HostConfig)
             this.HostConfig = obj;
+        }
+
+        if (params.ContainerConfig) {
+            let obj = new ContainerAutoScaleConfig();
+            obj.deserialize(params.ContainerConfig)
+            this.ContainerConfig = obj;
         }
 
     }
@@ -90474,31 +90859,31 @@ class DescribeVulFixedListRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+         * <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+         * <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * <p>Filtering Conditions<br>Supported Filter.Name:<br>Keyword - Fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - Fuzzy matching, vulnerability name search<br>Level - Exact match, filter by vulnerability level: LOW-Low risk MEDIUM-Medium risk HIGH-High risk CRITICAL-Critical<br>VprLevel - Exact match, filter by VPR rating: 1-Low 2-Medium 3-High 4-Critical<br>VulCategory - Exact match, type filter: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-Application vulnerability EMERGENCY-Emergency vulnerability<br>MachineName - Fuzzy matching, search by host name<br>InstanceId - Fuzzy matching, id search by instance<br>FixTime - Range matching, repair time range, input two values to indicate start and end time</p>
+         * <p>Filter criteria<br>Supported Filter.Name:<br>Keyword - fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - fuzzy matching, search by vulnerability name<br>Level - exact matching, filter by vulnerability level: LOW - low risk, MEDIUM - medium risk, HIGH - high risk, CRITICAL - critical<br>VprLevel - exact matching, filter by VPR rating: 1 - Low, 2 - Medium, 3 - High, 4 - Critical<br>VulCategory - exact matching, filter by vulnerability type: LINUX - Linux software vulnerability, WINDOWS - Windows system patch vulnerability, WEB_CMS - Web-CMS vulnerability, APPLICATION - application vulnerability, EMERGENCY - urgent vulnerability<br>MachineName - fuzzy matching, search by host name<br>InstanceId - fuzzy matching, search by instance ID<br>FixTime - range matching, repair time range. Input two values to indicate the start and end time</p>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
 
         /**
-         * <p>Sorting field<br>Enumeration value:<br>FixTime: Sort by repair time<br>VulName: Sort by vulnerability name</p>
+         * <p>Sorting field<br>Enumeration values:<br>FixTime: sort by fix time<br>VulName: sort by vulnerability name</p>
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending order<br>Default value: desc</p>
+         * <p>Sorting method<br>Enumeration values:<br>asc: Ascending<br>desc: Descending<br>Default value: desc</p>
          * @type {string || null}
          */
         this.By = null;
@@ -91657,31 +92042,31 @@ class DescribeVulFixTaskListRequest extends  AbstractModel {
         super();
 
         /**
-         * <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+         * <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+         * <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * <p>Filtering Conditions<br>Supported Filter.Name:<br>TaskId - Exact match, filter by task ID<br>JobId - Exact match, filter by task JobId, corresponding to the task ID of the background job system<br>FixStatus - Exact match, filter by remediation status: 0-Initialization 1-In remediation 2-Repair successful 3-Partially fix failed 4-All fix failed 5-Stop fix<br>StartTime - Range match, remediation startup time range, input two values to indicate start and end time<br>AppId - Exact match, filter by creator AppId<br>VulCategory - Exact match, filter by vulnerability type: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-Application vulnerability EMERGENCY-Emergency vulnerability<br>TaskName - Fuzzy matching, filter by vulnerability name/CVE ID/KB patch name, matching task associated vulnerability or KB patch</p>
+         * <p>Filter criteria<br>Supported Filter.Name:<br>TaskId - Exact match, Filter by task ID<br>JobId - Exact match, Filter by task JobId, which corresponds to the task ID in the background job system<br>FixStatus - Exact match, Filter by remediation status: 0-initialization 1-in remediation 2-repair successful 3-partially failed to fix 4-all failed to fix 5-stop fix<br>StartTime - Range match, remediation start time range. Input two values to indicate the start and end time<br>AppId - Exact match, Filter by creator AppId<br>VulCategory - Exact match, Filter by vulnerability type: LINUX-LINUX software vulnerability WINDOWS-WINDOWS system patch vulnerability WEB_CMS-WEB-CMS vulnerability APPLICATION-APPLICATION vulnerability EMERGENCY-urgent vulnerability<br>TaskName - Fuzzy matching, Filter by vulnerability Name/CVE ID/KB patch Name, matching the vulnerability or KB patch associated with the task</p>
          * @type {Array.<Filters> || null}
          */
         this.Filters = null;
 
         /**
-         * <p>Sorting field<br>Enumeration value:<br>StartTime: Sort by repair start time<br>EndTime: Sort by repair end time<br>CreateTime: Sort by creation time</p>
+         * <p>Sorting field<br>Enumeration values:<br>StartTime: sort by repair start time<br>EndTime: sort by repair end time<br>CreateTime: sort by creation time</p>
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending order<br>Default value: desc</p>
+         * <p>Sorting method<br>Enumeration values:<br>asc: in ascending order<br>desc: in descending order<br>Default value: desc</p>
          * @type {string || null}
          */
         this.By = null;
@@ -92568,6 +92953,65 @@ class DescribeSubUserInfoResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class RuleContentFileOperation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {RuleContentProcessInfo || null}
+         */
+        this.Process = null;
+
+        /**
+         * 
+         * @type {RuleContentProcessInfo || null}
+         */
+        this.ParentProcess = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.FileActions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Process) {
+            let obj = new RuleContentProcessInfo();
+            obj.deserialize(params.Process)
+            this.Process = obj;
+        }
+
+        if (params.ParentProcess) {
+            let obj = new RuleContentProcessInfo();
+            obj.deserialize(params.ParentProcess)
+            this.ParentProcess = obj;
+        }
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.FileActions = 'FileActions' in params ? params.FileActions : null;
 
     }
 }
@@ -100367,8 +100811,8 @@ class VPRRatingInfo extends  AbstractModel {
         /**
          * VPR rating result
 Enumeration value:
-URGENT: Immediate repair
-SUGGESTED: Suggested repairs
+URGENT: immediate repair
+SUGGESTED repairs
 DEFERRABLE: Deferrable repair
          * @type {string || null}
          */
@@ -100381,7 +100825,7 @@ DEFERRABLE: Deferrable repair
         this.Remark = null;
 
         /**
-         * List of stage rating details
+         * List of phased rating details
          * @type {Array.<VPRRatingStage> || null}
          */
         this.Stage = null;
@@ -103360,6 +103804,12 @@ class DescribeClusterSummaryResponse extends  AbstractModel {
         this.UnboundUltimateNodeCount = null;
 
         /**
+         * Total number of regular nodes
+         * @type {number || null}
+         */
+        this.NormalNodeCount = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -103403,6 +103853,7 @@ class DescribeClusterSummaryResponse extends  AbstractModel {
         this.CriticalRiskClusterCount = 'CriticalRiskClusterCount' in params ? params.CriticalRiskClusterCount : null;
         this.HighRiskClusterCount = 'HighRiskClusterCount' in params ? params.HighRiskClusterCount : null;
         this.UnboundUltimateNodeCount = 'UnboundUltimateNodeCount' in params ? params.UnboundUltimateNodeCount : null;
+        this.NormalNodeCount = 'NormalNodeCount' in params ? params.NormalNodeCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -105619,6 +106070,18 @@ class ModifyEDRRuleRequest extends  AbstractModel {
          */
         this.ConditionMatches = null;
 
+        /**
+         * <p>File operation rules, populated when ContentType=file_operation (file path regex AND any selected action)</p>
+         * @type {RuleContentFileOperation || null}
+         */
+        this.FileOperationRules = null;
+
+        /**
+         * <p>K8s API rule passed when ContentType=k8s_api. Values of all non-empty fields must be Base64-encoded, and k8s_api rules apply only per cluster.</p>
+         * @type {RuleContentK8sAPI || null}
+         */
+        this.K8sApiRule = null;
+
     }
 
     /**
@@ -105722,6 +106185,18 @@ class ModifyEDRRuleRequest extends  AbstractModel {
                 obj.deserialize(params.ConditionMatches[z]);
                 this.ConditionMatches.push(obj);
             }
+        }
+
+        if (params.FileOperationRules) {
+            let obj = new RuleContentFileOperation();
+            obj.deserialize(params.FileOperationRules)
+            this.FileOperationRules = obj;
+        }
+
+        if (params.K8sApiRule) {
+            let obj = new RuleContentK8sAPI();
+            obj.deserialize(params.K8sApiRule)
+            this.K8sApiRule = obj;
         }
 
     }
@@ -117020,6 +117495,42 @@ class DescribeImageRegistryAssetOverviewResponse extends  AbstractModel {
         this.TrialQuota = null;
 
         /**
+         * <p>Number of risky images</p>
+         * @type {number || null}
+         */
+        this.RiskImageCnt = null;
+
+        /**
+         * <p>Number of CICD images</p>
+         * @type {number || null}
+         */
+        this.CICDImageCnt = null;
+
+        /**
+         * <p>Number of scanned CICD images</p>
+         * @type {number || null}
+         */
+        this.CICDImageScannedCnt = null;
+
+        /**
+         * <p>Number of risky CICD images</p>
+         * @type {number || null}
+         */
+        this.RiskCICDImageCnt = null;
+
+        /**
+         * <p>Number of sensitive files</p>
+         * @type {number || null}
+         */
+        this.SecretFileCnt = null;
+
+        /**
+         * <p>Number of build risks</p>
+         * @type {number || null}
+         */
+        this.BuildRiskCnt = null;
+
+        /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -117045,6 +117556,12 @@ class DescribeImageRegistryAssetOverviewResponse extends  AbstractModel {
         this.UsedQuota = 'UsedQuota' in params ? params.UsedQuota : null;
         this.RemainingQuota = 'RemainingQuota' in params ? params.RemainingQuota : null;
         this.TrialQuota = 'TrialQuota' in params ? params.TrialQuota : null;
+        this.RiskImageCnt = 'RiskImageCnt' in params ? params.RiskImageCnt : null;
+        this.CICDImageCnt = 'CICDImageCnt' in params ? params.CICDImageCnt : null;
+        this.CICDImageScannedCnt = 'CICDImageScannedCnt' in params ? params.CICDImageScannedCnt : null;
+        this.RiskCICDImageCnt = 'RiskCICDImageCnt' in params ? params.RiskCICDImageCnt : null;
+        this.SecretFileCnt = 'SecretFileCnt' in params ? params.SecretFileCnt : null;
+        this.BuildRiskCnt = 'BuildRiskCnt' in params ? params.BuildRiskCnt : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -118840,7 +119357,7 @@ class DescribeSandboxLLMAuditSystemRuleListRequest extends  AbstractModel {
 }
 
 /**
- * Vulnerability repair task details
+ * Vulnerability repair task details item
  * @class
  */
 class VulFixTaskDetailItem extends  AbstractModel {
@@ -118860,13 +119377,13 @@ class VulFixTaskDetailItem extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * <p>Vulnerability ID to be repaired</p>
+         * <p>ID of the repaired vulnerability</p>
          * @type {number || null}
          */
         this.VulId = null;
 
         /**
-         * <p>Patch ID of the fixed KB</p>
+         * <p>KB patch ID repaired</p>
          * @type {number || null}
          */
         this.KBId = null;
@@ -118896,19 +119413,19 @@ class VulFixTaskDetailItem extends  AbstractModel {
         this.VulName = null;
 
         /**
-         * <p>Execution status<br>Enumeration value:<br>0: Initial state<br>1: Task issued<br>11: Client confirmed<br>2: Repair completed<br>3: Client offline<br>4: Timeout<br>5: Failure<br>6: Unsupported<br>9: Waiting for snapshot creation<br>10: Snapshot creation failed</p>
+         * <p>Execution status<br>Enumeration values:<br>0: Initial status<br>1: Task issued<br>11: Confirmed by client<br>2: Repair completed<br>3: Client offline<br>4: Timeout<br>5: Failed<br>6: Not supported<br>9: Waiting for snapshot creation<br>10: Snapshot creation failed</p>
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * <p>Fix result</p><p>Enumeration values:</p><ul><li>0: initial state</li><li>1: repair successful</li><li>2: fix failure</li><li>3: fix</li></ul>
+         * <p>Fix result</p><p>Enumeration values:</p><ul><li>0: initial status</li><li>1: successful fix</li><li>2: fix failure</li><li>3: in remediation</li></ul>
          * @type {number || null}
          */
         this.FixStatus = null;
 
         /**
-         * <p>Snapshot status<br>Enumeration value:<br>-1: No need to create a snapshot<br>0: Not started<br>1: In progress<br>2: Completed<br>3: Creation failed</p>
+         * <p>Snapshot status<br>Enumeration values:<br>-1: No need to create a snapshot<br>0: Not started<br>1: In progress<br>2: Completed<br>3: Creation failed</p>
          * @type {number || null}
          */
         this.SnapshotStatus = null;
@@ -118920,7 +119437,7 @@ class VulFixTaskDetailItem extends  AbstractModel {
         this.ExceptionMessage = null;
 
         /**
-         * <p>Repair startup time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
+         * <p>Recovery startup time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
          * @type {string || null}
          */
         this.StartTime = null;
@@ -118944,7 +119461,7 @@ class VulFixTaskDetailItem extends  AbstractModel {
         this.SnapshotExpireTime = null;
 
         /**
-         * <p>Snapshot creation failure reason (available when SnapshotStatus=3)</p>
+         * <p>Snapshot creation failure reason (valid when SnapshotStatus=3)</p>
          * @type {string || null}
          */
         this.SnapshotFailReason = null;
@@ -120259,7 +120776,7 @@ class ModifyMachineAutoClearConfigResponse extends  AbstractModel {
 }
 
 /**
- * Vulnerability/KB patch dimensional remediation status
+ * Remediation status in vulnerability/KB patch dimension
  * @class
  */
 class VulFixStatusItem extends  AbstractModel {
@@ -120267,13 +120784,13 @@ class VulFixStatusItem extends  AbstractModel {
         super();
 
         /**
-         * Vulnerability ID (empty for KB patch fix tasks)
+         * Vulnerability ID (empty for KB patch repair tasks)
          * @type {number || null}
          */
         this.VulId = null;
 
         /**
-         * Patch ID (empty for vulnerability repair tasks)
+         * KB patch ID (empty for vulnerability repair tasks)
          * @type {number || null}
          */
         this.KBId = null;
@@ -120289,26 +120806,26 @@ class VulFixStatusItem extends  AbstractModel {
 Enumeration value:
 0: In remediation
 1: All successful
-2: partially failed
+2: Partially failed
 3: All failed
          * @type {number || null}
          */
         this.FixStatus = null;
 
         /**
-         * Total hosts associated with the vulnerability/KB patch
+         * Total number of hosts associated with this vulnerability/KB patch
          * @type {number || null}
          */
         this.HostCount = null;
 
         /**
-         * Number of hosts successfully fixed by the vulnerability/KB patch
+         * Number of hosts successfully fixed by this vulnerability/KB patch
          * @type {number || null}
          */
         this.SuccessHostCount = null;
 
         /**
-         * Number of hosts failed to be fixed for the vulnerability/KB patch
+         * Number of hosts failed to be fixed by this vulnerability/KB patch
          * @type {number || null}
          */
         this.FailHostCount = null;
@@ -121423,7 +121940,7 @@ UNKNOWN: unknown
 }
 
 /**
- * Fixed vulnerability information
+ * Information of fixed vulnerabilities
  * @class
  */
 class VulFixedItem extends  AbstractModel {
@@ -121431,82 +121948,76 @@ class VulFixedItem extends  AbstractModel {
         super();
 
         /**
-         * Vulnerability ID
+         * <p>Vulnerability ID</p>
          * @type {number || null}
          */
         this.VulId = null;
 
         /**
-         * Vulnerability name
+         * <p>Vulnerability name</p>
          * @type {string || null}
          */
         this.VulName = null;
 
         /**
-         * Vulnerability level
-Enumeration values:
-LOW: low-risk
-MEDIUM: Medium risk
-HIGH: High risk
-CRITICAL
+         * <p>Vulnerability level<br>Enumeration values:<br>LOW: Low risk<br>MEDIUM: Medium risk<br>HIGH: High risk<br>CRITICAL: Critical</p>
          * @type {string || null}
          */
         this.Level = null;
 
         /**
-         * VPR rating information (including rating result, description, and phased score), consistent with DescribeHostVulRiskList
+         * <p>VPR rating information (including rating result, description, and staged score), consistent with DescribeHostVulRiskList</p>
          * @type {VPRRatingInfo || null}
          */
         this.VRPRatingInfo = null;
 
         /**
-         * Vulnerability Type
-Enumeration values:
-LINUX: Linux software vulnerability
-WINDOWS: Windows system patch vulnerability
-WEB_CMS: Web-CMS vulnerabilities
-APPLICATION: Application vulnerability
-EMERGENCY: Urgent vulnerability
+         * <p>Vulnerability type<br>Enumeration values:<br>LINUX: Linux software vulnerability<br>WINDOWS: Windows system patch vulnerability<br>WEB_CMS: Web-CMS vulnerability<br>APPLICATION: Application vulnerability<br>EMERGENCY: Urgent vulnerability</p>
          * @type {string || null}
          */
         this.VulCategory = null;
 
         /**
-         * CVE id
+         * <p>CVE id</p>
          * @type {string || null}
          */
         this.CveId = null;
 
         /**
-         * Repair the host name
+         * <p>Repair host name</p>
          * @type {string || null}
          */
         this.MachineName = null;
 
         /**
-         * Repair the host instance ID
+         * <p>Repair host instance ID</p>
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Associated component & number of paths
+         * <p>Associated component &amp; number of paths</p>
          * @type {number || null}
          */
         this.ComponentCount = null;
 
         /**
-         * Associated component & path list
+         * <p>Associated component &amp; path list</p>
          * @type {Array.<string> || null}
          */
         this.Components = null;
 
         /**
-         * Last repair time
-Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+         * <p>Last repair time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
          * @type {string || null}
          */
         this.LatestFixTime = null;
+
+        /**
+         * <p>VPR rating basis</p>
+         * @type {VPRExplainInfo || null}
+         */
+        this.VPRExplainInfo = null;
 
     }
 
@@ -121533,6 +122044,12 @@ Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
         this.ComponentCount = 'ComponentCount' in params ? params.ComponentCount : null;
         this.Components = 'Components' in params ? params.Components : null;
         this.LatestFixTime = 'LatestFixTime' in params ? params.LatestFixTime : null;
+
+        if (params.VPRExplainInfo) {
+            let obj = new VPRExplainInfo();
+            obj.deserialize(params.VPRExplainInfo)
+            this.VPRExplainInfo = obj;
+        }
 
     }
 }
@@ -122361,6 +122878,12 @@ class DescribeEDRRuleListRequest extends  AbstractModel {
          */
         this.By = null;
 
+        /**
+         * File operation rule, populated when ContentType=file_operation (file path regex AND any selected action)
+         * @type {RuleContentFileOperation || null}
+         */
+        this.FileOperationRules = null;
+
     }
 
     /**
@@ -122384,6 +122907,12 @@ class DescribeEDRRuleListRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.By = 'By' in params ? params.By : null;
+
+        if (params.FileOperationRules) {
+            let obj = new RuleContentFileOperation();
+            obj.deserialize(params.FileOperationRules)
+            this.FileOperationRules = obj;
+        }
 
     }
 }
@@ -122714,31 +123243,31 @@ class DescribeVulScanPeriodicResponse extends  AbstractModel {
         super();
 
         /**
-         * <p>Period scanning switch (0-off, 1-on)</p>
+         * <p>Periodic scan switch (0-Disable, 1-Enable)</p>
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * <p>Vulnerability type</p><p>Enumeration value:</p><ul><li>LINUX: Linux software vulnerability</li><li>WINDOWS: Windows system patch</li><li>WEB_CMS: Web-CMS vulnerability</li><li>APPLICATION: Application vulnerability</li><li>EMERGENCY: Emergency vulnerability</li></ul>
+         * <p>Vulnerability type</p><p>Enumeration values:</p><ul><li>LINUX: Linux software vulnerability</li><li>WINDOWS: Windows system patch</li><li>WEB_CMS: Web-CMS vulnerability</li><li>APPLICATION: Application vulnerability</li><li>EMERGENCY: Emergency vulnerability</li></ul>
          * @type {Array.<string> || null}
          */
         this.VulCategory = null;
 
         /**
-         * <p>Vulnerability level (INVALID: Invalid, INFO: Notification, LOW: Low risk, MEDIUM: Medium risk, HIGH: High risk, CRITICAL: Critical)</p>
+         * <p>Vulnerability level (INVALID: invalid, INFO: notification, LOW: low risk, MEDIUM: medium risk, HIGH: high risk, CRITICAL: critical)</p>
          * @type {Array.<string> || null}
          */
         this.Level = null;
 
         /**
-         * <p>Scanning method (VersionCompare: version comparison, POC: POC detection, VersionComparePOC: version p comparison+POC detection)</p>
+         * <p>Scan mode (VersionCompare: version comparison, POC: POC detection, VersionComparePOC: version comparison + POC detection)</p>
          * @type {string || null}
          */
         this.Method = null;
 
         /**
-         * <p>Period scanning type</p><p>Enumeration value:</p><ul><li>1: Daily</li><li>2: Weekly</li><li>3: Per month</li></ul>
+         * <p>Periodic scan type</p><p>Enumeration values:</p><ul><li>1: Daily</li><li>2: Weekly</li><li>3: Per month</li></ul>
          * @type {number || null}
          */
         this.CycleType = null;
@@ -122756,7 +123285,7 @@ class DescribeVulScanPeriodicResponse extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * <p>Asset scope (0-All assets, 1-Custom assets, 2-Remove asset)</p>
+         * <p>Asset scope (0 - all assets, 1 - custom asset, 2 - remove asset)</p>
          * @type {number || null}
          */
         this.AssetRange = null;
@@ -122768,40 +123297,46 @@ class DescribeVulScanPeriodicResponse extends  AbstractModel {
         this.AssetList = null;
 
         /**
-         * <p>Period value</p><p>Unit: Day of the week or day of the month</p>
+         * <p>Cycle value</p><p>Unit: day of the week or day per month</p>
          * @type {Array.<number> || null}
          */
         this.CycleValue = null;
 
         /**
-         * <p>Timeout duration</p><p>Unit: second</p>
+         * <p>Timeout duration</p><p>Unit: seconds</p>
          * @type {number || null}
          */
         this.Timeout = null;
 
         /**
-         * <p>Whether to synchronize configuration 0-cannot, 1-permission</p>
+         * <p>Whether to run the synchronized configuration. 0: not allowed, 1: allowed</p>
          * @type {number || null}
          */
         this.AllowSync = null;
 
         /**
-         * <p>Whether the admin account has the automated configuration synchronization switch enabled 0-Off, 1-On</p>
+         * <p>Whether automatic synchronization is enabled for the admin account. 0: disabled, 1: enabled</p>
          * @type {number || null}
          */
         this.EnableSync = null;
 
         /**
-         * <p>Which account the configuration message comes from. Being empty indicates set by oneself.</p>
+         * <p>Which account the configuration message comes from. Being empty indicates it is set by oneself.</p>
          * @type {AccountBriefInfo || null}
          */
         this.AdminInfo = null;
 
         /**
-         * <p>tag id</p>
+         * <p>Tag id</p>
          * @type {Array.<number> || null}
          */
         this.TagIds = null;
+
+        /**
+         * <p>Whether to prefer Tencent Cloud software sources</p>
+         * @type {boolean || null}
+         */
+        this.PreferCloudSource = null;
 
         /**
          * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -122838,6 +123373,7 @@ class DescribeVulScanPeriodicResponse extends  AbstractModel {
             this.AdminInfo = obj;
         }
         this.TagIds = 'TagIds' in params ? params.TagIds : null;
+        this.PreferCloudSource = 'PreferCloudSource' in params ? params.PreferCloudSource : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -124622,13 +125158,13 @@ class DescribeVulFixedHostDetailResponse extends  AbstractModel {
         this.CveId = null;
 
         /**
-         * <p>Vulnerability type<br>Enumeration value:<br>LINUX: Linux software vulnerability<br>WINDOWS: Windows system patch vulnerability<br>WEB_CMS: Web-CMS vulnerability<br>APPLICATION: Application vulnerability</p>
+         * <p>Vulnerability type<br>Enumeration values:<br>LINUX: Linux software vulnerability<br>WINDOWS: Windows system patch vulnerability<br>WEB_CMS: Web-CMS vulnerability<br>APPLICATION: Application vulnerability</p>
          * @type {string || null}
          */
         this.VulCategory = null;
 
         /**
-         * <p>Repair completion time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
+         * <p>Repair completed time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
          * @type {string || null}
          */
         this.FixTime = null;
@@ -124646,7 +125182,7 @@ class DescribeVulFixedHostDetailResponse extends  AbstractModel {
         this.MachineName = null;
 
         /**
-         * <p>Public IP of the server</p>
+         * <p>Public IP of the Server</p>
          * @type {string || null}
          */
         this.PublicIp = null;
@@ -124658,13 +125194,13 @@ class DescribeVulFixedHostDetailResponse extends  AbstractModel {
         this.PrivateIp = null;
 
         /**
-         * <p>Associated component & path detail list</p>
+         * <p>Associated component &amp; path detail list</p>
          * @type {Array.<ComponentDetailItem> || null}
          */
         this.ComponentDetails = null;
 
         /**
-         * <p>Total number of associated components & paths</p>
+         * <p>Total number of associated components &amp; paths</p>
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -126523,11 +127059,13 @@ module.exports = {
     ModifyMalwareTimingScanSettingsResponse: ModifyMalwareTimingScanSettingsResponse,
     WhereFilter: WhereFilter,
     ModifyCosAuditObjectIdentifyStatusResponse: ModifyCosAuditObjectIdentifyStatusResponse,
+    VPRExplainInfo: VPRExplainInfo,
     DeleteImageRegistryRequest: DeleteImageRegistryRequest,
     DescribeVulItemListResponse: DescribeVulItemListResponse,
     ClusterCustomParameters: ClusterCustomParameters,
     DeleteWebhookPoliciesRequest: DeleteWebhookPoliciesRequest,
     DescribeNotifySettingAkRequest: DescribeNotifySettingAkRequest,
+    VPRExplainDimensionItem: VPRExplainDimensionItem,
     DeleteImageRegistryScanTaskRequest: DeleteImageRegistryScanTaskRequest,
     DspmStatisticsItem: DspmStatisticsItem,
     CheckImageRegistryInstanceNameDuplicateRequest: CheckImageRegistryInstanceNameDuplicateRequest,
@@ -126598,6 +127136,7 @@ module.exports = {
     DeleteImageRegistryTimedScanTaskConfigRequest: DeleteImageRegistryTimedScanTaskConfigRequest,
     CreateRiskCenterScanTaskRequest: CreateRiskCenterScanTaskRequest,
     BaselinePolicyBrief: BaselinePolicyBrief,
+    ContainerAutoScaleConfig: ContainerAutoScaleConfig,
     ModifyEDRRuleStatusResponse: ModifyEDRRuleStatusResponse,
     DescribeBanStatusResponse: DescribeBanStatusResponse,
     DescribeDynamicAssetsResponse: DescribeDynamicAssetsResponse,
@@ -127324,6 +127863,7 @@ module.exports = {
     DescribeClusterPodAssetsRequest: DescribeClusterPodAssetsRequest,
     ModifyBaselineUserWeakPasswordConfRequest: ModifyBaselineUserWeakPasswordConfRequest,
     ModifyShareUserCSPMRequest: ModifyShareUserCSPMRequest,
+    VPRExplainDimension: VPRExplainDimension,
     VPRLabel: VPRLabel,
     DescribeTopAttackInfoRequest: DescribeTopAttackInfoRequest,
     VulTrend: VulTrend,
@@ -127634,6 +128174,7 @@ module.exports = {
     LogDeliveryType: LogDeliveryType,
     DescribePolicyHitDataRequest: DescribePolicyHitDataRequest,
     DescribeSandboxDLPSystemRuleListRequest: DescribeSandboxDLPSystemRuleListRequest,
+    RuleContentK8sAPI: RuleContentK8sAPI,
     LevelOption: LevelOption,
     CSIPMalwareScanUuidDetailItem: CSIPMalwareScanUuidDetailItem,
     DescribeCosAccessPermissionRequest: DescribeCosAccessPermissionRequest,
@@ -127768,6 +128309,7 @@ module.exports = {
     DeleteSandboxACLRuleResponse: DeleteSandboxACLRuleResponse,
     DescribeCosIpInvokeLogResponse: DescribeCosIpInvokeLogResponse,
     DeleteDspmShareUserDataRequest: DeleteDspmShareUserDataRequest,
+    QuaraTypeDictItem: QuaraTypeDictItem,
     DescribeImageAssetDetailRequest: DescribeImageAssetDetailRequest,
     CreatePodServiceListExportJobRequest: CreatePodServiceListExportJobRequest,
     DescribeImageRegistryListRequest: DescribeImageRegistryListRequest,
@@ -128023,6 +128565,7 @@ module.exports = {
     CreateAssetFilterViewResponse: CreateAssetFilterViewResponse,
     DescribeVulScanPeriodicRequest: DescribeVulScanPeriodicRequest,
     DescribeSubUserInfoResponse: DescribeSubUserInfoResponse,
+    RuleContentFileOperation: RuleContentFileOperation,
     DescribeDomainAssetsResponse: DescribeDomainAssetsResponse,
     DescribeNICAssetsResponse: DescribeNICAssetsResponse,
     DeleteDspmRiskStrategyRequest: DeleteDspmRiskStrategyRequest,

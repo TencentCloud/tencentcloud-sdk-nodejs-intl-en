@@ -27,6 +27,7 @@ const IsolateSubscribeResponse = models.IsolateSubscribeResponse;
 const ModifyConsumerGroupPasswordRequest = models.ModifyConsumerGroupPasswordRequest;
 const StepTip = models.StepTip;
 const ModifySyncRateLimitResponse = models.ModifySyncRateLimitResponse;
+const TableFilter = models.TableFilter;
 const DestroyMigrateJobRequest = models.DestroyMigrateJobRequest;
 const ModifySubscribeNameRequest = models.ModifySubscribeNameRequest;
 const OffsetTimeMap = models.OffsetTimeMap;
@@ -34,6 +35,7 @@ const SkipCheckItemResponse = models.SkipCheckItemResponse;
 const ResumeSyncJobRequest = models.ResumeSyncJobRequest;
 const PartitionAssignment = models.PartitionAssignment;
 const ResizeSyncJobResponse = models.ResizeSyncJobResponse;
+const StopMigrateJobResponse = models.StopMigrateJobResponse;
 const CreateSubscribeCheckJobRequest = models.CreateSubscribeCheckJobRequest;
 const ResumeMigrateJobResponse = models.ResumeMigrateJobResponse;
 const DifferenceItem = models.DifferenceItem;
@@ -48,7 +50,7 @@ const ModifySubscribeAutoRenewFlagResponse = models.ModifySubscribeAutoRenewFlag
 const DestroySyncJobResponse = models.DestroySyncJobResponse;
 const ErrorInfoItem = models.ErrorInfoItem;
 const IsolateMigrateJobRequest = models.IsolateMigrateJobRequest;
-const StopMigrateJobResponse = models.StopMigrateJobResponse;
+const DBOpFilter = models.DBOpFilter;
 const TableItem = models.TableItem;
 const SubscribeInfo = models.SubscribeInfo;
 const ModifyCompareTaskNameRequest = models.ModifyCompareTaskNameRequest;
@@ -151,6 +153,7 @@ const DescribeMigrateDBInstancesRequest = models.DescribeMigrateDBInstancesReque
 const CheckStepInfo = models.CheckStepInfo;
 const ProcessStepTip = models.ProcessStepTip;
 const ModifyCompareTaskRequest = models.ModifyCompareTaskRequest;
+const OpFilter = models.OpFilter;
 const RecoverSyncJobRequest = models.RecoverSyncJobRequest;
 const Database = models.Database;
 const Column = models.Column;
@@ -181,6 +184,7 @@ const CreateCompareTaskResponse = models.CreateCompareTaskResponse;
 const RateLimitOption = models.RateLimitOption;
 const SkipCheckItemRequest = models.SkipCheckItemRequest;
 const CompareAbstractInfo = models.CompareAbstractInfo;
+const ViewFilter = models.ViewFilter;
 const CheckStep = models.CheckStep;
 const CompareTaskItem = models.CompareTaskItem;
 const ModifyMigrateJobSpecResponse = models.ModifyMigrateJobSpecResponse;
@@ -551,7 +555,7 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to isolate the subscription task. After calling, the subscription task will not be available. Pay-as-you-go tasks will stop billing, and monthly subscription tasks will refund automatically.
+     * This API is used to isolate the subscription task. After calling, the subscription task will not be available. Pay-as-you-go tasks will stop billing, and yearly/monthly subscription tasks will refund automatically.
      * @param {IsolateSubscribeRequest} req
      * @param {function(string, IsolateSubscribeResponse):void} cb
      * @public
@@ -584,7 +588,7 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the auto-renewal flag of your subscription instance. Only the monthly subscription modification task makes sense. After modifying, the pay-as-you-go task has no impact.
+     * This API is used to modify the auto-renewal flag of your subscription instance. Only the yearly/monthly subscription modification task makes sense. After modifying, the pay-as-you-go task has no impact.
      * @param {ModifySubscribeAutoRenewFlagRequest} req
      * @param {function(string, ModifySubscribeAutoRenewFlagResponse):void} cb
      * @public

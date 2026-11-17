@@ -71,6 +71,7 @@ const DeleteEKYCWebhookRequest = models.DeleteEKYCWebhookRequest;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const MLIDCard = models.MLIDCard;
 const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
+const ExtraRiskResult = models.ExtraRiskResult;
 const CheckBankCardInformationRequest = models.CheckBankCardInformationRequest;
 const ListEKYCWebhooksRequest = models.ListEKYCWebhooksRequest;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
@@ -99,6 +100,7 @@ const ApplyWebVerificationBizTokenIntlRequest = models.ApplyWebVerificationBizTo
 const FileInfo = models.FileInfo;
 const PhilippinesDrivingLicense = models.PhilippinesDrivingLicense;
 const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
+const ExtraRiskInfo = models.ExtraRiskInfo;
 const IdCardVerificationResponse = models.IdCardVerificationResponse;
 const WebVerificationConfigIntl = models.WebVerificationConfigIntl;
 const CompareResult = models.CompareResult;
@@ -118,6 +120,7 @@ const VideoLivenessCompareResponse = models.VideoLivenessCompareResponse;
 const UpdateAMLCustomerProfileResponse = models.UpdateAMLCustomerProfileResponse;
 const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
 const Address = models.Address;
+const BlackListItem = models.BlackListItem;
 const RetrievalLivenessExtraInfo = models.RetrievalLivenessExtraInfo;
 const ImageRecognitionV2Request = models.ImageRecognitionV2Request;
 const MainlandIDCard = models.MainlandIDCard;
@@ -130,6 +133,7 @@ const NormalHKIDCard = models.NormalHKIDCard;
 const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
 const RunAMLNameScreeningRequest = models.RunAMLNameScreeningRequest;
 const ApplyLivenessTokenRequest = models.ApplyLivenessTokenRequest;
+const RiskDetailItem = models.RiskDetailItem;
 const GetNFCTokenRequest = models.GetNFCTokenRequest;
 const UpdateAMLOngoingScreeningStatusRequest = models.UpdateAMLOngoingScreeningStatusRequest;
 const TaiWanIDCard = models.TaiWanIDCard;
@@ -375,7 +379,7 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     }
 
     /**
-     * Based on the multimodal AI large model algorithm, it provides anti-attack detection capabilities for facial images and videos. It can effectively identify highly simulated AIGC face-changing, high-definition remakes, batch black market attacks, watermarks and other attack traces, and enhance the anti-counterfeiting security capabilities of images and videos.
+     * Based on multimodal AI large model algorithms, this API provides anti-attack detection capabilities for face images and videos. It can effectively identify highly realistic AIGC face swaps, high-definition recaptures, batch black-market attacks, watermarks, and other attack traces, enhancing the anti-counterfeiting security capabilities for images and videos.
      * @param {DetectAIFakeFacesRequest} req
      * @param {function(string, DetectAIFakeFacesResponse):void} cb
      * @public

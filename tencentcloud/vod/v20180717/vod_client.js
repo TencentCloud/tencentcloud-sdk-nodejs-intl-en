@@ -46,6 +46,7 @@ const LiveRealTimeClipResponse = models.LiveRealTimeClipResponse;
 const AiReviewTaskProhibitedAsrResult = models.AiReviewTaskProhibitedAsrResult;
 const AdaptiveDynamicStreamingTemplate = models.AdaptiveDynamicStreamingTemplate;
 const HttpHeaderPathRule = models.HttpHeaderPathRule;
+const ModifyLLMComprehendTemplateResponse = models.ModifyLLMComprehendTemplateResponse;
 const TextToSpeechAsyncInput = models.TextToSpeechAsyncInput;
 const DeleteJustInTimeTranscodeTemplateRequest = models.DeleteJustInTimeTranscodeTemplateRequest;
 const DeleteAnimatedGraphicsTemplateResponse = models.DeleteAnimatedGraphicsTemplateResponse;
@@ -56,6 +57,7 @@ const AiReviewProhibitedOcrTaskOutput = models.AiReviewProhibitedOcrTaskOutput;
 const ProcessImageAsyncTemplateItem = models.ProcessImageAsyncTemplateItem;
 const DescribeAigcFaceInfoRequest = models.DescribeAigcFaceInfoRequest;
 const CacheConfigFollowOrigin = models.CacheConfigFollowOrigin;
+const SetAigcWhitelistResponse = models.SetAigcWhitelistResponse;
 const NoiseConfigureInfo = models.NoiseConfigureInfo;
 const DescribeAigcFaceInfoAsyncResponse = models.DescribeAigcFaceInfoAsyncResponse;
 const ManageTaskResponse = models.ManageTaskResponse;
@@ -220,7 +222,7 @@ const LLMComprehendFaceRecognitionForUpdate = models.LLMComprehendFaceRecognitio
 const DescribeEventConfigRequest = models.DescribeEventConfigRequest;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
 const OutputAudioStream = models.OutputAudioStream;
-const ModifyLLMComprehendTemplateResponse = models.ModifyLLMComprehendTemplateResponse;
+const HeuristicCache = models.HeuristicCache;
 const DescribeAigcFaceInfoAsyncInput = models.DescribeAigcFaceInfoAsyncInput;
 const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
 const QualityInspectTask = models.QualityInspectTask;
@@ -345,6 +347,7 @@ const SceneAigcVideoOutputConfig = models.SceneAigcVideoOutputConfig;
 const LiveRealTimeClipRequest = models.LiveRealTimeClipRequest;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
+const VideoTrackItem = models.VideoTrackItem;
 const ColorEnhanceInfo = models.ColorEnhanceInfo;
 const DeleteEnhanceMediaTemplateResponse = models.DeleteEnhanceMediaTemplateResponse;
 const EditMediaOutputConfig = models.EditMediaOutputConfig;
@@ -382,7 +385,7 @@ const CreateReviewTemplateRequest = models.CreateReviewTemplateRequest;
 const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
 const DeleteProcedureTemplateResponse = models.DeleteProcedureTemplateResponse;
 const ModifyAigcQuotaResponse = models.ModifyAigcQuotaResponse;
-const DescribeReviewTemplatesResponse = models.DescribeReviewTemplatesResponse;
+const DescribeAigcWhitelistResponse = models.DescribeAigcWhitelistResponse;
 const DescribeAdaptiveDynamicStreamingTemplatesResponse = models.DescribeAdaptiveDynamicStreamingTemplatesResponse;
 const MediaMiniProgramReviewInfo = models.MediaMiniProgramReviewInfo;
 const CacheConfigCache = models.CacheConfigCache;
@@ -539,7 +542,7 @@ const AdvancedElementInfo = models.AdvancedElementInfo;
 const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
 const AigcAudioOutputConfig = models.AigcAudioOutputConfig;
 const AreaCLSTargetInfo = models.AreaCLSTargetInfo;
-const StartCDNDomainRequest = models.StartCDNDomainRequest;
+const AigcWhitelistModel = models.AigcWhitelistModel;
 const DeleteRebuildMediaTemplateResponse = models.DeleteRebuildMediaTemplateResponse;
 const DescribeSubAppIdsResponse = models.DescribeSubAppIdsResponse;
 const MPSOverrideEraseParameter = models.MPSOverrideEraseParameter;
@@ -669,6 +672,7 @@ const ResolutionNameInfo = models.ResolutionNameInfo;
 const OcrFullTextConfigureInfo = models.OcrFullTextConfigureInfo;
 const AiRecognitionTaskOcrWordsResultItem = models.AiRecognitionTaskOcrWordsResultItem;
 const DeleteCDNDomainRequest = models.DeleteCDNDomainRequest;
+const SetAigcWhitelistRequest = models.SetAigcWhitelistRequest;
 const ParseStreamingManifestRequest = models.ParseStreamingManifestRequest;
 const ReviewImageResult = models.ReviewImageResult;
 const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
@@ -746,6 +750,7 @@ const SetCLSPushTargetResponse = models.SetCLSPushTargetResponse;
 const MediaTrackItem = models.MediaTrackItem;
 const MPSAIAnalysisTemplateForUpdate = models.MPSAIAnalysisTemplateForUpdate;
 const ClipTask2017 = models.ClipTask2017;
+const StartCDNDomainRequest = models.StartCDNDomainRequest;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const TranscodeTemplate = models.TranscodeTemplate;
 const DescribeCDNUsageDataRequest = models.DescribeCDNUsageDataRequest;
@@ -873,7 +878,7 @@ const AiRecognitionTaskOcrWordsSegmentItem = models.AiRecognitionTaskOcrWordsSeg
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const DeleteWordSamplesResponse = models.DeleteWordSamplesResponse;
 const MediaCastEvent = models.MediaCastEvent;
-const HeuristicCache = models.HeuristicCache;
+const DescribeAigcWhitelistRequest = models.DescribeAigcWhitelistRequest;
 const DescribeDefaultDistributionConfigResponse = models.DescribeDefaultDistributionConfigResponse;
 const DeleteProcedureTemplateRequest = models.DeleteProcedureTemplateRequest;
 const WatermarkInput = models.WatermarkInput;
@@ -1060,7 +1065,7 @@ const RebuildMediaTask = models.RebuildMediaTask;
 const DescribeVoicesResponse = models.DescribeVoicesResponse;
 const ConfirmEventsResponse = models.ConfirmEventsResponse;
 const CreateAigcApiTokenResponse = models.CreateAigcApiTokenResponse;
-const VideoTrackItem = models.VideoTrackItem;
+const DescribeReviewTemplatesResponse = models.DescribeReviewTemplatesResponse;
 const VideoDenoiseInfo = models.VideoDenoiseInfo;
 const DescribeLicenseUsageDataRequest = models.DescribeLicenseUsageDataRequest;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
@@ -1633,6 +1638,17 @@ Playback key, used to calculate player signature.
     ModifyDefaultDistributionConfig(req, cb) {
         let resp = new ModifyDefaultDistributionConfigResponse();
         this.request("ModifyDefaultDistributionConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify AIGC allowlist settings.
+     * @param {SetAigcWhitelistRequest} req
+     * @param {function(string, SetAigcWhitelistResponse):void} cb
+     * @public
+     */
+    SetAigcWhitelist(req, cb) {
+        let resp = new SetAigcWhitelistResponse();
+        this.request("SetAigcWhitelist", req, resp, cb);
     }
 
     /**
@@ -2491,6 +2507,21 @@ Use a template to initiate audio and video quality revival.
     }
 
     /**
+     * Quickly splice and edit HLS videos in VOD to generate new media in HLS format.
+
+Quickly splice or edit the generated video to generate a new FileId and solidify it. After successful solidification, the new video file exists independent of the original input video and is not affected by the deletion of the original video.
+
+<font color='red'>Note:</font> Enable reception of editing solidification event notifications through the ModifyEventConfig API. After successful solidification, you will receive a PersistenceComplete event notification. Before receiving this event notification, you should not delete or transition the original input video to colder storage. Otherwise, playback of the video generated by splicing and clipping may encounter exceptions.
+     * @param {FastEditMediaRequest} req
+     * @param {function(string, FastEditMediaResponse):void} cb
+     * @public
+     */
+    FastEditMedia(req, cb) {
+        let resp = new FastEditMediaResponse();
+        this.request("FastEditMedia", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a Token for AIGC API calls. Data sync has a delay once created. It can be queried or deleted after about 30 seconds.
      * @param {CreateAigcApiTokenRequest} req
      * @param {function(string, CreateAigcApiTokenResponse):void} cb
@@ -3237,18 +3268,14 @@ This API is used to modify player configurations.
     }
 
     /**
-     * Quickly splice and edit HLS videos in VOD to generate new media in HLS format.
-
-Quickly splice or edit the generated video to generate a new FileId and solidify it. After successful solidification, the new video file exists independent of the original input video and is not affected by the deletion of the original video.
-
-<font color='red'>Note:</font> Enable reception of editing solidification event notifications through the ModifyEventConfig API. After successful solidification, you will receive a PersistenceComplete event notification. Before receiving this event notification, you should not delete or transition the original input video to colder storage. Otherwise, playback of the video generated by splicing and clipping may encounter exceptions.
-     * @param {FastEditMediaRequest} req
-     * @param {function(string, FastEditMediaResponse):void} cb
+     * This API is used to query AIGC allowlist settings.
+     * @param {DescribeAigcWhitelistRequest} req
+     * @param {function(string, DescribeAigcWhitelistResponse):void} cb
      * @public
      */
-    FastEditMedia(req, cb) {
-        let resp = new FastEditMediaResponse();
-        this.request("FastEditMedia", req, resp, cb);
+    DescribeAigcWhitelist(req, cb) {
+        let resp = new DescribeAigcWhitelistResponse();
+        this.request("DescribeAigcWhitelist", req, resp, cb);
     }
 
     /**

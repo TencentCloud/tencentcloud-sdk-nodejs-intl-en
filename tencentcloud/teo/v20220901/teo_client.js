@@ -46,6 +46,7 @@ const InferenceHardwareSpecification = models.InferenceHardwareSpecification;
 const DescribeSecurityClientAttesterResponse = models.DescribeSecurityClientAttesterResponse;
 const CustomVariable = models.CustomVariable;
 const MultiPathGatewayOriginACLInfo = models.MultiPathGatewayOriginACLInfo;
+const DescribeTimingFunctionAnalysisDataResponse = models.DescribeTimingFunctionAnalysisDataResponse;
 const HeaderAction = models.HeaderAction;
 const ModifyEdgeKVNamespaceRequest = models.ModifyEdgeKVNamespaceRequest;
 const PrepaidPlanParam = models.PrepaidPlanParam;
@@ -295,6 +296,7 @@ const BotExtendAction = models.BotExtendAction;
 const CustomAction = models.CustomAction;
 const CreatePurgeTaskResponse = models.CreatePurgeTaskResponse;
 const DeleteApplicationProxyRuleResponse = models.DeleteApplicationProxyRuleResponse;
+const DescribeTopFunctionAnalysisDataRequest = models.DescribeTopFunctionAnalysisDataRequest;
 const URLPath = models.URLPath;
 const DeleteAccelerationDomainsResponse = models.DeleteAccelerationDomainsResponse;
 const ExceptionRules = models.ExceptionRules;
@@ -382,6 +384,7 @@ const DeleteRealtimeLogDeliveryTaskResponse = models.DeleteRealtimeLogDeliveryTa
 const RuleCondition = models.RuleCondition;
 const DescribeOverviewL7DataResponse = models.DescribeOverviewL7DataResponse;
 const DescribeSecurityPolicyRequest = models.DescribeSecurityPolicyRequest;
+const DescribeTimingFunctionAnalysisDataRequest = models.DescribeTimingFunctionAnalysisDataRequest;
 const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
 const CacheParameters = models.CacheParameters;
 const OriginAuthenticationRequestProperties = models.OriginAuthenticationRequestProperties;
@@ -668,7 +671,7 @@ const EnableOriginACLResponse = models.EnableOriginACLResponse;
 const DeleteAliasDomainResponse = models.DeleteAliasDomainResponse;
 const DeleteSecurityJSInjectionRuleRequest = models.DeleteSecurityJSInjectionRuleRequest;
 const BotConfig = models.BotConfig;
-const ModifyFunctionComponentBindingsRequest = models.ModifyFunctionComponentBindingsRequest;
+const DescribeTopFunctionAnalysisDataResponse = models.DescribeTopFunctionAnalysisDataResponse;
 const NSDetail = models.NSDetail;
 const EnableOriginACLRequest = models.EnableOriginACLRequest;
 const CreateEdgeKVNamespaceResponse = models.CreateEdgeKVNamespaceResponse;
@@ -760,6 +763,7 @@ const ModifyMultiPathGatewaySecretKeyResponse = models.ModifyMultiPathGatewaySec
 const DescribeMultiPathGatewaySecretKeyRequest = models.DescribeMultiPathGatewaySecretKeyRequest;
 const DDoSBlockData = models.DDoSBlockData;
 const IPSSLSetting = models.IPSSLSetting;
+const ModifyFunctionComponentBindingsRequest = models.ModifyFunctionComponentBindingsRequest;
 const ModifyZoneCustomVariablesRequest = models.ModifyZoneCustomVariablesRequest;
 const DescribeContentQuotaRequest = models.DescribeContentQuotaRequest;
 const DescribeAvailableOriginACLFamilyRequest = models.DescribeAvailableOriginACLFamilyRequest;
@@ -1745,6 +1749,17 @@ This API is used to check the free certificate application result after triggeri
     OperateInferenceService(req, cb) {
         let resp = new OperateInferenceServiceResponse();
         this.request("OperateInferenceService", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the topN data of Edge Functions by a specified dimension. Note that the data returned by this API has a delay of about 10 minutes. We recommend that you query the data generated at least 10 minutes before the current time.
+     * @param {DescribeTopFunctionAnalysisDataRequest} req
+     * @param {function(string, DescribeTopFunctionAnalysisDataResponse):void} cb
+     * @public
+     */
+    DescribeTopFunctionAnalysisData(req, cb) {
+        let resp = new DescribeTopFunctionAnalysisDataResponse();
+        this.request("DescribeTopFunctionAnalysisData", req, resp, cb);
     }
 
     /**
@@ -3557,6 +3572,17 @@ The feature is only supported in the enterprise plan and is currently in closed 
     DescribeInferenceServiceDeploymentLogs(req, cb) {
         let resp = new DescribeInferenceServiceDeploymentLogsResponse();
         this.request("DescribeInferenceServiceDeploymentLogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the time series data of edge function analysis. Note that the data queried by this API has a delay of about 10 minutes. It is recommended to pull data from at least 10 minutes before the current time.
+     * @param {DescribeTimingFunctionAnalysisDataRequest} req
+     * @param {function(string, DescribeTimingFunctionAnalysisDataResponse):void} cb
+     * @public
+     */
+    DescribeTimingFunctionAnalysisData(req, cb) {
+        let resp = new DescribeTimingFunctionAnalysisDataResponse();
+        this.request("DescribeTimingFunctionAnalysisData", req, resp, cb);
     }
 
     /**

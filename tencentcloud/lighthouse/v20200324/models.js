@@ -101,7 +101,7 @@ class RenewInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
+         * Prepaid mode, i.e., yearly/monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
@@ -357,7 +357,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.BlueprintId = null;
 
         /**
-         * Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
+         * Yearly/monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
@@ -369,7 +369,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * Number of the instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
+         * Number of the instances to purchase. For yearly/monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
          * @type {number || null}
          */
         this.InstanceCount = null;
@@ -397,7 +397,7 @@ If the dry run succeeds, the RequestId will be returned.
         this.ClientToken = null;
 
         /**
-         * Login password of the instance. It’s only available for Windows instances. If it’s not specified, it means that the user choose to set the login password after the instance creation.
+         * Login password of the instance. It's only available for Windows instances. If it's not specified, it means that the user choose to set the login password after the instance creation.
          * @type {LoginConfiguration || null}
          */
         this.LoginConfiguration = null;
@@ -413,6 +413,36 @@ If the dry run succeeds, the RequestId will be returned.
          * @type {boolean || null}
          */
         this.AutoVoucher = null;
+
+        /**
+         * Firewall template ID. If not specified, the default firewall policy is used.
+         * @type {string || null}
+         */
+        this.FirewallTemplateId = null;
+
+        /**
+         * Tag key and tag value. If multiple tags are specified, they are created and bound to the specified resources at the same time. A tag key can have only one value on a given resource. If you attempt to add a tag with an existing key, its value is updated to the new value. Tags that do not exist are created automatically. The array supports a maximum of 10 elements.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * The command to be automatically executed after the instance is created.
+         * @type {Command || null}
+         */
+        this.InitCommand = null;
+
+        /**
+         * The primary domain. Note: Once a domain is specified, only a single instance can be purchased (`InstanceCount` must be set to 1).
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * The subdomain. Note: Once a domain is specified, only a single instance can be purchased (`InstanceCount` must be set to 1).
+         * @type {string || null}
+         */
+        this.Subdomain = null;
 
     }
 
@@ -452,6 +482,24 @@ If the dry run succeeds, the RequestId will be returned.
             }
         }
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.FirewallTemplateId = 'FirewallTemplateId' in params ? params.FirewallTemplateId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.InitCommand) {
+            let obj = new Command();
+            obj.deserialize(params.InitCommand)
+            this.InitCommand = obj;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Subdomain = 'Subdomain' in params ? params.Subdomain : null;
 
     }
 }
@@ -661,7 +709,7 @@ class InquirePriceCreateDisksRequest extends  AbstractModel {
         this.DiskType = null;
 
         /**
-         * Parameter settings for purchasing the monthly subscribed cloud disk.
+         * Parameter settings for purchasing the yearly/monthly subscribed cloud disk.
          * @type {DiskChargePrepaid || null}
          */
         this.DiskChargePrepaid = null;
@@ -673,7 +721,7 @@ class InquirePriceCreateDisksRequest extends  AbstractModel {
         this.DiskCount = null;
 
         /**
-         * Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+         * Specify the quota of disk backups. No quota if it's left empty. Only one quota is allowed.
          * @type {number || null}
          */
         this.DiskBackupQuota = null;
@@ -1336,13 +1384,13 @@ class ModifyInstancesBundleRequest extends  AbstractModel {
         super();
 
         /**
-         * IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 15 instances can be specified at the same time.
+         * List of instance IDs. One or more IDs of the instances to be operated. You can obtain the InstanceId from the value returned by the [DescribeInstances](https://www.tencentcloud.com/document/api/1207/47573?from_cn_redirect=1) API. The maximum number of instances in each request is 15.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * ID of bundles to change. You can get the IDs from the `BundleId` returned by the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1).
+         * ID of the target bundle. Note that it cannot be the same as the current bundle ID of the instance to be upgraded. You can obtain the BundleId from the value returned by the [DescribeBundles](https://www.tencentcloud.com/document/api/1207/47575?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.BundleId = null;
@@ -1784,7 +1832,7 @@ class CreateDisksRequest extends  AbstractModel {
         this.DiskType = null;
 
         /**
-         * Parameters of monthly subscribed cloud disks
+         * Parameters of yearly/monthly subscribed cloud disks
          * @type {DiskChargePrepaid || null}
          */
         this.DiskChargePrepaid = null;
@@ -1802,7 +1850,7 @@ class CreateDisksRequest extends  AbstractModel {
         this.DiskCount = null;
 
         /**
-         * Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+         * Specify the quota of disk backups. No quota if it's left empty. Only one quota is allowed.
          * @type {number || null}
          */
         this.DiskBackupQuota = null;
@@ -1818,6 +1866,12 @@ class CreateDisksRequest extends  AbstractModel {
          * @type {AutoMountConfiguration || null}
          */
         this.AutoMountConfiguration = null;
+
+        /**
+         * Tag key and tag value. If multiple tags are specified, they are created and bound to the specified resources at the same time. A tag key can have only one value on a given resource. If you attempt to add a tag with an existing key, its value is updated to the new value. Tags that do not exist are created automatically. The array supports a maximum of 10 elements.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -1846,6 +1900,15 @@ class CreateDisksRequest extends  AbstractModel {
             let obj = new AutoMountConfiguration();
             obj.deserialize(params.AutoMountConfiguration)
             this.AutoMountConfiguration = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
         }
 
     }
@@ -2218,7 +2281,7 @@ class InquirePriceRenewDisksRequest extends  AbstractModel {
         this.DiskIds = null;
 
         /**
-         * Parameter settings for renewing the monthly subscribed cloud disk.
+         * Parameter settings for renewing the yearly/monthly subscribed cloud disk.
          * @type {RenewDiskChargePrepaid || null}
          */
         this.RenewDiskChargePrepaid = null;
@@ -3236,7 +3299,7 @@ class RenewDisksRequest extends  AbstractModel {
         this.DiskIds = null;
 
         /**
-         * Parameter settings for renewing the monthly subscribed cloud disk.
+         * Parameter settings for renewing the yearly/monthly subscribed cloud disk.
          * @type {RenewDiskChargePrepaid || null}
          */
         this.RenewDiskChargePrepaid = null;
@@ -3900,6 +3963,55 @@ class DataDiskPrice extends  AbstractModel {
         this.Discount = 'Discount' in params ? params.Discount : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class Command extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WorkingDirectory = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Username = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.WorkingDirectory = 'WorkingDirectory' in params ? params.WorkingDirectory : null;
+        this.Username = 'Username' in params ? params.Username : null;
 
     }
 }
@@ -6182,7 +6294,7 @@ class ResizeDisksRequest extends  AbstractModel {
 }
 
 /**
- * Parameter settings for the monthly subscribed cloud disk
+ * Parameter settings for the yearly/monthly subscribed cloud disk
  * @class
  */
 class DiskChargePrepaid extends  AbstractModel {
@@ -7935,7 +8047,7 @@ class TerminateInstancesRequest extends  AbstractModel {
 }
 
 /**
- * Parameter settings for renewing the monthly subscribed cloud disk
+ * Parameter settings for renewing the yearly/monthly subscribed cloud disk
  * @class
  */
 class RenewDiskChargePrepaid extends  AbstractModel {
@@ -9873,6 +9985,7 @@ module.exports = {
     ModifyDisksRenewFlagRequest: ModifyDisksRenewFlagRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
     DataDiskPrice: DataDiskPrice,
+    Command: Command,
     SceneInfo: SceneInfo,
     ImportKeyPairRequest: ImportKeyPairRequest,
     ImportKeyPairResponse: ImportKeyPairResponse,

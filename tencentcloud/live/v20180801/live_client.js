@@ -183,6 +183,7 @@ const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
 const DescribeTimeShiftStreamListResponse = models.DescribeTimeShiftStreamListResponse;
+const StopScreenshotTaskRequest = models.StopScreenshotTaskRequest;
 const ModifyLiveTimeShiftTemplateResponse = models.ModifyLiveTimeShiftTemplateResponse;
 const DescribeStreamPushInfoListResponse = models.DescribeStreamPushInfoListResponse;
 const DescribeLiveStreamPushInfoListRequest = models.DescribeLiveStreamPushInfoListRequest;
@@ -309,6 +310,7 @@ const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
 const DescribeTranscodeTaskNumRequest = models.DescribeTranscodeTaskNumRequest;
 const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesResponse;
 const DescribeLiveTranscodeTotalInfoRequest = models.DescribeLiveTranscodeTotalInfoRequest;
+const StopScreenshotTaskResponse = models.StopScreenshotTaskResponse;
 const CreateRecordTaskResponse = models.CreateRecordTaskResponse;
 const RecordTask = models.RecordTask;
 const DescribeTimeShiftRecordDetailResponse = models.DescribeTimeShiftRecordDetailResponse;
@@ -753,6 +755,17 @@ Notes:
     DescribeLiveRecordTemplate(req, cb) {
         let resp = new DescribeLiveRecordTemplateResponse();
         this.request("DescribeLiveRecordTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to terminate a screenshot task in advance. After the task is successfully terminated, it will not be started again.
+     * @param {StopScreenshotTaskRequest} req
+     * @param {function(string, StopScreenshotTaskResponse):void} cb
+     * @public
+     */
+    StopScreenshotTask(req, cb) {
+        let resp = new StopScreenshotTaskResponse();
+        this.request("StopScreenshotTask", req, resp, cb);
     }
 
     /**

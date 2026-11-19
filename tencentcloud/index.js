@@ -82,6 +82,7 @@ module.exports = {
     live: require("./live"),
     lke: require("./lke"),
     lkeap: require("./lkeap"),
+    makers: require("./makers"),
     mariadb: require("./mariadb"),
     mdc: require("./mdc"),
     mdl: require("./mdl"),

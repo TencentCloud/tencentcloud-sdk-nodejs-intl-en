@@ -1490,7 +1490,7 @@ class InquirePriceRenewInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Parameter setting for prepaid mode. This parameter can specify the renewal period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
+         * Parameter setting for prepaid mode. This parameter can specify the renewal period, whether to enable auto-renewal, and other attributes of the yearly/monthly subscribed instances.
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
@@ -9310,7 +9310,7 @@ class InquirePriceCreateInstancesRequest extends  AbstractModel {
         this.BundleId = null;
 
         /**
-         * Parameter setting for prepaid mode. This parameter can specify the purchase period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
+         * Parameter setting for prepaid mode. This parameter can specify the purchase period, whether to enable auto-renewal, and other attributes of the yearly/monthly subscribed instances.
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;

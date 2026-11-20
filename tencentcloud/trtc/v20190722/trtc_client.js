@@ -22,6 +22,7 @@ const AgentConfig = models.AgentConfig;
 const TerminologyItem = models.TerminologyItem;
 const McuLayout = models.McuLayout;
 const SubscribeModerationUserIds = models.SubscribeModerationUserIds;
+const VoiceConversationTTSConfig = models.VoiceConversationTTSConfig;
 const AudioEncodeParams = models.AudioEncodeParams;
 const ServerPushText = models.ServerPushText;
 const McuRecordParams = models.McuRecordParams;
@@ -34,11 +35,14 @@ const Voice = models.Voice;
 const DescribeTRTCMarketScaleDataRequest = models.DescribeTRTCMarketScaleDataRequest;
 const McuLayoutVolume = models.McuLayoutVolume;
 const VoiceCloneRequest = models.VoiceCloneRequest;
+const VoiceConversationInvokeTTS = models.VoiceConversationInvokeTTS;
 const SetUserBlockedRequest = models.SetUserBlockedRequest;
 const DescribeUserEventRequest = models.DescribeUserEventRequest;
 const DeleteCloudModerationRequest = models.DeleteCloudModerationRequest;
+const DescribeVoiceConversationRequest = models.DescribeVoiceConversationRequest;
 const SetUserBlockedResponse = models.SetUserBlockedResponse;
 const McuBackgroundCustomRender = models.McuBackgroundCustomRender;
+const VoiceConversationInvokeLLM = models.VoiceConversationInvokeLLM;
 const WaterMarkChar = models.WaterMarkChar;
 const DescribeTrtcRoomUsageResponse = models.DescribeTrtcRoomUsageResponse;
 const StopPublishCdnStreamResponse = models.StopPublishCdnStreamResponse;
@@ -59,9 +63,11 @@ const CreateCloudModerationResponse = models.CreateCloudModerationResponse;
 const DescribeTRTCMarketScaleDataResponse = models.DescribeTRTCMarketScaleDataResponse;
 const TranslationConfig = models.TranslationConfig;
 const McuTencentVod = models.McuTencentVod;
+const VoiceConversationS2SConfig = models.VoiceConversationS2SConfig;
 const DescribeWebRecordResponse = models.DescribeWebRecordResponse;
 const DescribeCloudTranscriptionResponse = models.DescribeCloudTranscriptionResponse;
 const DescribeUserInfoRequest = models.DescribeUserInfoRequest;
+const TranscriptionParams = models.TranscriptionParams;
 const DeleteCloudModerationResponse = models.DeleteCloudModerationResponse;
 const DescribeRelayUsageRequest = models.DescribeRelayUsageRequest;
 const DismissRoomResponse = models.DismissRoomResponse;
@@ -78,11 +84,13 @@ const DescribeRoomInfoRequest = models.DescribeRoomInfoRequest;
 const StorageParams = models.StorageParams;
 const CloudVod = models.CloudVod;
 const CloudSliceStorage = models.CloudSliceStorage;
+const WaterMark = models.WaterMark;
 const EmulateMobileParams = models.EmulateMobileParams;
 const PronunciationDict = models.PronunciationDict;
 const DescribeCallDetailInfoResponse = models.DescribeCallDetailInfoResponse;
 const DescribeTRTCRealTimeQualityDataResponse = models.DescribeTRTCRealTimeQualityDataResponse;
 const McuCustomCrop = models.McuCustomCrop;
+const VoiceConversationHistoryMessage = models.VoiceConversationHistoryMessage;
 const DescribeMixTranscodingUsageRequest = models.DescribeMixTranscodingUsageRequest;
 const DescribeTRTCRealTimeQualityDataRequest = models.DescribeTRTCRealTimeQualityDataRequest;
 const DescribeStreamIngestResponse = models.DescribeStreamIngestResponse;
@@ -91,6 +99,7 @@ const CreateCloudTranscriptionResponse = models.CreateCloudTranscriptionResponse
 const DescribeTRTCMarketQualityDataResponse = models.DescribeTRTCMarketQualityDataResponse;
 const TranslationParam = models.TranslationParam;
 const SubscribeStreamUserIds = models.SubscribeStreamUserIds;
+const DeleteVoiceConversationRequest = models.DeleteVoiceConversationRequest;
 const WaterMarkImage = models.WaterMarkImage;
 const McuUserInfoParams = models.McuUserInfoParams;
 const UserMediaStream = models.UserMediaStream;
@@ -106,6 +115,7 @@ const AudioFormat = models.AudioFormat;
 const DeleteCloudTranscriptionResponse = models.DeleteCloudTranscriptionResponse;
 const DescribeUserInfoResponse = models.DescribeUserInfoResponse;
 const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
+const VoiceConversationVisionConfig = models.VoiceConversationVisionConfig;
 const UpdateStreamIngestResponse = models.UpdateStreamIngestResponse;
 const CloudModerationStorage = models.CloudModerationStorage;
 const McuWaterMarkImage = models.McuWaterMarkImage;
@@ -119,7 +129,7 @@ const SliceParams = models.SliceParams;
 const ModerationSupplierParam = models.ModerationSupplierParam;
 const DescribeRecordingUsageRequest = models.DescribeRecordingUsageRequest;
 const StorageFile = models.StorageFile;
-const WaterMark = models.WaterMark;
+const ControlVoiceConversationResponse = models.ControlVoiceConversationResponse;
 const McuStorageParams = models.McuStorageParams;
 const DescribeScaleInfoResponse = models.DescribeScaleInfoResponse;
 const MixLayoutParams = models.MixLayoutParams;
@@ -128,27 +138,33 @@ const DescribeMixTranscodingUsageResponse = models.DescribeMixTranscodingUsageRe
 const AsrParam = models.AsrParam;
 const McuFeedBackRoomParams = models.McuFeedBackRoomParams;
 const TurnDetection = models.TurnDetection;
+const DeleteVoiceConversationResponse = models.DeleteVoiceConversationResponse;
 const AudioEncode = models.AudioEncode;
 const RemoveUserRequest = models.RemoveUserRequest;
 const TTSVoice = models.TTSVoice;
 const DismissRoomRequest = models.DismissRoomRequest;
+const VoiceConversationHistoryContent = models.VoiceConversationHistoryContent;
 const DescribeUnusualEventRequest = models.DescribeUnusualEventRequest;
+const ModifyVoiceConversationRequest = models.ModifyVoiceConversationRequest;
 const DescribeCloudRecordingRequest = models.DescribeCloudRecordingRequest;
 const TencentVod = models.TencentVod;
 const McuPassThrough = models.McuPassThrough;
 const StartWebRecordResponse = models.StartWebRecordResponse;
+const VoiceConversationMcpServer = models.VoiceConversationMcpServer;
 const SetUserBlockedByStrRoomIdResponse = models.SetUserBlockedByStrRoomIdResponse;
 const TRTCDataResult = models.TRTCDataResult;
 const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
 const ModifyCloudModerationRequest = models.ModifyCloudModerationRequest;
 const CreateCloudRecordingRequest = models.CreateCloudRecordingRequest;
 const RecognizeConfig = models.RecognizeConfig;
+const VoiceConversationDialogConfig = models.VoiceConversationDialogConfig;
 const DeleteCloudRecordingResponse = models.DeleteCloudRecordingResponse;
 const StartAITranscriptionRequest = models.StartAITranscriptionRequest;
+const VoiceConversationConfig = models.VoiceConversationConfig;
 const QualityData = models.QualityData;
 const ModerationStorageParams = models.ModerationStorageParams;
 const ModifyCloudRecordingRequest = models.ModifyCloudRecordingRequest;
-const StopAIConversationResponse = models.StopAIConversationResponse;
+const CreateVoiceConversationRequest = models.CreateVoiceConversationRequest;
 const StartPublishCdnStreamRequest = models.StartPublishCdnStreamRequest;
 const DescribeAIConversationRequest = models.DescribeAIConversationRequest;
 const RowValues = models.RowValues;
@@ -157,12 +173,14 @@ const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const DescribeCloudTranscriptionRequest = models.DescribeCloudTranscriptionRequest;
 const CreateCloudSliceTaskResponse = models.CreateCloudSliceTaskResponse;
 const DeleteCloudRecordingRequest = models.DeleteCloudRecordingRequest;
+const ControlVoiceConversationRequest = models.ControlVoiceConversationRequest;
 const TTSParam = models.TTSParam;
 const ModifyCloudModerationResponse = models.ModifyCloudModerationResponse;
 const Terminology = models.Terminology;
 const VideoParams = models.VideoParams;
 const StopStreamIngestResponse = models.StopStreamIngestResponse;
 const SetUserBlockedByStrRoomIdRequest = models.SetUserBlockedByStrRoomIdRequest;
+const VoiceConversationLLMConfig = models.VoiceConversationLLMConfig;
 const DescribeTrtcRoomUsageRequest = models.DescribeTrtcRoomUsageRequest;
 const TextToSpeechResponse = models.TextToSpeechResponse;
 const CreateCloudModerationRequest = models.CreateCloudModerationRequest;
@@ -181,13 +199,15 @@ const ModerationParams = models.ModerationParams;
 const DescribeCloudSliceTaskRequest = models.DescribeCloudSliceTaskRequest;
 const StopPublishCdnStreamRequest = models.StopPublishCdnStreamRequest;
 const MixUserInfo = models.MixUserInfo;
-const DeleteCloudTranscriptionRequest = models.DeleteCloudTranscriptionRequest;
-const AmbientSound = models.AmbientSound;
 const DescribeTRTCMarketQualityDataRequest = models.DescribeTRTCMarketQualityDataRequest;
+const AmbientSound = models.AmbientSound;
+const DeleteCloudTranscriptionRequest = models.DeleteCloudTranscriptionRequest;
 const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
 const InvokeLLM = models.InvokeLLM;
 const SliceStorageParams = models.SliceStorageParams;
 const MaxVideoUser = models.MaxVideoUser;
+const ModifyVoiceConversationResponse = models.ModifyVoiceConversationResponse;
+const KeyValueItem = models.KeyValueItem;
 const VoiceCloneResponse = models.VoiceCloneResponse;
 const UpdateStreamIngestRequest = models.UpdateStreamIngestRequest;
 const TextToSpeechSSERequest = models.TextToSpeechSSERequest;
@@ -195,20 +215,22 @@ const StopWebRecordResponse = models.StopWebRecordResponse;
 const TermPair = models.TermPair;
 const QueryAIMessageListRequest = models.QueryAIMessageListRequest;
 const STTConfig = models.STTConfig;
-const StopWebRecordRequest = models.StopWebRecordRequest;
+const StopAIConversationResponse = models.StopAIConversationResponse;
 const McuSeiParams = models.McuSeiParams;
+const CreateVoiceConversationResponse = models.CreateVoiceConversationResponse;
 const StopAIConversationRequest = models.StopAIConversationRequest;
 const EventMessage = models.EventMessage;
 const UpdateAIConversationRequest = models.UpdateAIConversationRequest;
 const UpdatePublishCdnStreamResponse = models.UpdatePublishCdnStreamResponse;
 const McuWaterMarkText = models.McuWaterMarkText;
-const TranscriptionParams = models.TranscriptionParams;
+const DescribeVoiceConversationResponse = models.DescribeVoiceConversationResponse;
 const SeriesInfos = models.SeriesInfos;
 const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
 const RecordParams = models.RecordParams;
 const TextToSpeechRequest = models.TextToSpeechRequest;
 const DescribeStreamIngestRequest = models.DescribeStreamIngestRequest;
-const TTSConfig = models.TTSConfig;
+const VoiceConversationSTTConfig = models.VoiceConversationSTTConfig;
+const StopWebRecordRequest = models.StopWebRecordRequest;
 const McuAudioParams = models.McuAudioParams;
 const McuPublishCdnParam = models.McuPublishCdnParam;
 const StartStreamIngestResponse = models.StartStreamIngestResponse;
@@ -218,6 +240,7 @@ const WaterMarkTimestamp = models.WaterMarkTimestamp;
 const McuCloudVod = models.McuCloudVod;
 const DescribeCloudModerationRequest = models.DescribeCloudModerationRequest;
 const DescribeAITranscriptionResponse = models.DescribeAITranscriptionResponse;
+const TTSConfig = models.TTSConfig;
 const McuWaterMarkParams = models.McuWaterMarkParams;
 const AbnormalExperience = models.AbnormalExperience;
 const DescribeCloudSliceTaskResponse = models.DescribeCloudSliceTaskResponse;
@@ -238,6 +261,17 @@ class TrtcClient extends AbstractClient {
     }
     
     /**
+     * This API is used to remove a user from a room. It is applicable to scenarios where the anchor, room owner, or admin wants to kick out a user. It supports all platforms. For Android, iOS, Windows, and macOS, the TRTC SDK needs to be upgraded to v6.6 or above.
+     * @param {RemoveUserRequest} req
+     * @param {function(string, RemoveUserResponse):void} cb
+     * @public
+     */
+    RemoveUser(req, cb) {
+        let resp = new RemoveUserResponse();
+        this.request("RemoveUser", req, resp, cb);
+    }
+
+    /**
      * API description:
 This API is used to enable the cloud moderation feature to complete audio and video slicing, video frame extraction, and audio stream recording in the room, and submit them to the specified moderation supplier for completing the moderation.
 
@@ -251,6 +285,17 @@ This API is used to achieve the following goals:
     CreateCloudModeration(req, cb) {
         let resp = new CreateCloudModerationResponse();
         this.request("CreateCloudModeration", req, resp, cb);
+    }
+
+    /**
+     * After a conversation task starts successfully, use this API to stop it.
+     * @param {DeleteVoiceConversationRequest} req
+     * @param {function(string, DeleteVoiceConversationResponse):void} cb
+     * @public
+     */
+    DeleteVoiceConversation(req, cb) {
+        let resp = new DeleteVoiceConversationResponse();
+        this.request("DeleteVoiceConversation", req, resp, cb);
     }
 
     /**
@@ -371,6 +416,17 @@ Forwarding expenses of non-Tencent Cloud CDN.
     }
 
     /**
+     * This API is used to create an AI conversation task.
+     * @param {CreateVoiceConversationRequest} req
+     * @param {function(string, CreateVoiceConversationResponse):void} cb
+     * @public
+     */
+    CreateVoiceConversation(req, cb) {
+        let resp = new CreateVoiceConversationResponse();
+        this.request("CreateVoiceConversation", req, resp, cb);
+    }
+
+    /**
      * This API is used to disable or enable the audio and video of a user. It can be used by an anchor, room owner, or admin to block or unblock a user. It supports platforms including Android, iOS, Windows, macOS, web, and WeChat Mini Program. Use this API if the room ID is a number.
      * @param {SetUserBlockedRequest} req
      * @param {function(string, SetUserBlockedResponse):void} cb
@@ -451,6 +507,17 @@ The TRTC AI dialogue function has built-in speech-to-text capability and provide
     }
 
     /**
+     * After a conversation task starts successfully, use this API to control it.
+     * @param {ControlVoiceConversationRequest} req
+     * @param {function(string, ControlVoiceConversationResponse):void} cb
+     * @public
+     */
+    ControlVoiceConversation(req, cb) {
+        let resp = new ControlVoiceConversationResponse();
+        this.request("ControlVoiceConversation", req, resp, cb);
+    }
+
+    /**
      * Stop AI Transcription task
      * @param {StopAITranscriptionRequest} req
      * @param {function(string, StopAITranscriptionResponse):void} cb
@@ -473,14 +540,14 @@ The TRTC AI dialogue function has built-in speech-to-text capability and provide
     }
 
     /**
-     * This API is used to remove a user from a room. It is applicable to scenarios where the anchor, room owner, or admin wants to kick out a user. It supports all platforms. For Android, iOS, Windows, and macOS, the TRTC SDK needs to be upgraded to v6.6 or above.
-     * @param {RemoveUserRequest} req
-     * @param {function(string, RemoveUserResponse):void} cb
+     * After a conversation task starts successfully, use this API to query the conversation status. It can be used only while the conversation task is in progress. Querying after the conversation task exits returns an error.
+     * @param {DescribeVoiceConversationRequest} req
+     * @param {function(string, DescribeVoiceConversationResponse):void} cb
      * @public
      */
-    RemoveUser(req, cb) {
-        let resp = new RemoveUserResponse();
-        this.request("RemoveUser", req, resp, cb);
+    DescribeVoiceConversation(req, cb) {
+        let resp = new DescribeVoiceConversationResponse();
+        this.request("DescribeVoiceConversation", req, resp, cb);
     }
 
     /**
@@ -506,6 +573,17 @@ The TRTC AI dialogue function has built-in speech-to-text capability and provide
     DescribeUserEvent(req, cb) {
         let resp = new DescribeUserEventResponse();
         this.request("DescribeUserEvent", req, resp, cb);
+    }
+
+    /**
+     * After a conversation task starts successfully, use this API to modify its configuration.
+     * @param {ModifyVoiceConversationRequest} req
+     * @param {function(string, ModifyVoiceConversationResponse):void} cb
+     * @public
+     */
+    ModifyVoiceConversation(req, cb) {
+        let resp = new ModifyVoiceConversationResponse();
+        this.request("ModifyVoiceConversation", req, resp, cb);
     }
 
     /**

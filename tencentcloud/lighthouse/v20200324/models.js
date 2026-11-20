@@ -1134,7 +1134,7 @@ class DescribeInstancesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of instance details
+         * Detailed information list of instances.
          * @type {Array.<Instance> || null}
          */
         this.InstanceSet = null;
@@ -1198,7 +1198,7 @@ class DeleteKeyPairsRequest extends  AbstractModel {
 }
 
 /**
- * Information on the block device where the operating system is installed, namely the system disk.
+ * Describes the information of the block device where the operating system resides, i.e., the system disk.
  * @class
  */
 class SystemDisk extends  AbstractModel {
@@ -1208,20 +1208,19 @@ class SystemDisk extends  AbstractModel {
         /**
          * System disk type.
 Valid values: 
-<li> LOCAL_BASIC: local disk</li><li> LOCAL_SSD: local SSD disk</li><li> CLOUD_BASIC: HDD cloud disk</li><li> CLOUD_SSD: SSD cloud disk</li><li> CLOUD_PREMIUM: Premium Cloud Storage</li>
+<li> LOCAL_BASIC: local disk</li><li> LOCAL_SSD: local SSD disk</li><li> CLOUD_BASIC: basic cloud disk</li><li> CLOUD_SSD: SSD cloud disk</li><li> CLOUD_PREMIUM: premium cloud disk</li>
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * System disk size in GB.
+         * System disk size, in the unit of GB.
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
          * System disk ID.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DiskId = null;
@@ -4913,7 +4912,7 @@ class ResetInstancesPasswordResponse extends  AbstractModel {
 }
 
 /**
- * Describes login settings of an instance.
+ * Describe the instance login related configuration and information.
  * @class
  */
 class LoginSettings extends  AbstractModel {
@@ -4921,7 +4920,7 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * Key ID list. After a key is associated, you can use it to access the instance. Note: this field may return [], indicating that no valid values can be obtained.
+         * List of key IDs. After a key is associated, you can access the instance by using the corresponding private key. Note: This field may return [], indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.KeyIds = null;
@@ -4941,7 +4940,7 @@ class LoginSettings extends  AbstractModel {
 }
 
 /**
- * Instance information.
+ * Describes the instance information.
  * @class
  */
 class Instance extends  AbstractModel {
@@ -4955,7 +4954,7 @@ class Instance extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Package ID.
+         * Bundle ID.
          * @type {string || null}
          */
         this.BundleId = null;
@@ -4967,13 +4966,13 @@ class Instance extends  AbstractModel {
         this.BlueprintId = null;
 
         /**
-         * Number of instance CPU cores.
+         * Number of CPU cores for the instance, in cores.
          * @type {number || null}
          */
         this.CPU = null;
 
         /**
-         * Instance memory capacity in GB.
+         * Instance memory capacity, in GB.
          * @type {number || null}
          */
         this.Memory = null;
@@ -4986,7 +4985,7 @@ class Instance extends  AbstractModel {
 
         /**
          * Instance billing mode. Valid values: 
-PREPAID: prepaid (i.e., monthly subscription).
+PREPAID: prepaid, that is, monthly or yearly subscription.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -4998,15 +4997,15 @@ PREPAID: prepaid (i.e., monthly subscription).
         this.SystemDisk = null;
 
         /**
-         * Private IP of instance primary ENI. 
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Private IP of the instance's primary NIC. 
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.PrivateAddresses = null;
 
         /**
-         * Public IP of instance primary ENI. 
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Public IP of the instance's primary NIC. 
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.PublicAddresses = null;
@@ -5018,93 +5017,96 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.InternetAccessible = null;
 
         /**
-         * Auto-Renewal flag. Valid values: 
-NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically  
-NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically.
+         * Auto-renewal flag. Valid values: 
+NOTIFY_AND_MANUAL_RENEW: Notify when the subscription is about to expire, but do not renew automatically.  
+NOTIFY_AND_AUTO_RENEW: Notify when the subscription is about to expire and renew automatically. DISABLE_NOTIFY_AND_MANUAL_RENEW: Do not renew automatically or send notifications.
          * @type {string || null}
          */
         this.RenewFlag = null;
 
         /**
-         * Instance login settings.
+         * Instance login setting.
          * @type {LoginSettings || null}
          */
         this.LoginSettings = null;
 
         /**
          * Instance status. Valid values: 
-<li>PENDING: Creating</li><li>LAUNCH_FAILED: Failed to create</li><li>RUNNING: Running</li><li>STOPPED: Shut down</li><li>STARTING: Starting up</li><li>STOPPING: Shutting down</li><li>REBOOTING: Restarting</li><li>SHUTDOWN: Shutdown and to be terminated</li><li>TERMINATING: Terminating</li><li>DELETING: Deleting</li><li>FREEZING: Frozen</li><li>ENTER_RESCUE_MODE: Entering the rescue mode</li><li>RESCUE_MODE: Rescue mode</li><li>EXIT_RESCUE_MODE: Exiting from the rescue mode</li>
+<li>PENDING: Creating</li><li>LAUNCH_FAILED: Failed to create</li><li>RUNNING: Running</li><li>STOPPED: Shut down</li><li>STARTING: Starting up</li><li>STOPPING: Shutting down</li><li>REBOOTING: Restarting</li><li>SHUTDOWN: Shutdown and to be terminated</li><li>TERMINATING: Terminating</li><li>DELETING: Deleting</li><li>FREEZING: Frozen</li><li>ENTER_RESCUE_MODE: Entering the rescue mode</li><li>RESCUE_MODE: Rescue mode</li><li>EXIT_RESCUE_MODE: Exiting the rescue mode</li>
          * @type {string || null}
          */
         this.InstanceState = null;
 
         /**
-         * Globally unique ID of instance.
+         * Globally unique ID of the instance.
          * @type {string || null}
          */
         this.Uuid = null;
 
         /**
-         * Last instance operation, such as `StopInstances` and `ResetInstance`. Note: this field may return null, indicating that no valid values can be obtained.
+         * Latest operation on the instance, such as StopInstances and ResetInstance. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LatestOperation = null;
 
         /**
-         * Last instance operation status. Valid values: 
-SUCCESS: operation succeeded 
-OPERATING: the operation is being executed 
-FAILED: operation failed 
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Status of the latest operation on the instance. Valid values: 
+SUCCESS: The operation succeeded. 
+OPERATING: The operation is in progress. 
+FAILED: The operation failed. 
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LatestOperationState = null;
 
         /**
-         * Unique request ID for the last operation of the instance. 
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Unique request ID of the latest operation on the instance. 
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LatestOperationRequestId = null;
 
         /**
-         * Isolation time according to ISO 8601 standard. UTC time is used. 
+         * Start time of the latest operation on the instance.
+         * @type {string || null}
+         */
+        this.LatestOperationStartedTime = null;
+
+        /**
+         * Isolation time in UTC, formatted according to the ISO 8601 standard. 
 Format: YYYY-MM-DDThh:mm:ssZ.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IsolatedTime = null;
 
         /**
-         * Creation time according to ISO 8601 standard. UTC time is used. 
+         * Creation time in UTC, formatted according to the ISO 8601 standard. 
 Format: YYYY-MM-DDThh:mm:ssZ.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreatedTime = null;
 
         /**
-         * Expiration time according to ISO 8601 standard. UTC time is used. 
+         * Expiration time in UTC, formatted according to the ISO 8601 standard. 
 Format: YYYY-MM-DDThh:mm:ssZ.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExpiredTime = null;
 
         /**
-         * OS type, such as LINUX_UNIX and WINDOWS.
+         * Operating system platform type, such as LINUX_UNIX and WINDOWS.
          * @type {string || null}
          */
         this.PlatformType = null;
 
         /**
-         * OS type.
+         * Operating system platform.
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * OS name.
+         * Operating system name.
          * @type {string || null}
          */
         this.OsName = null;
@@ -5116,17 +5118,29 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Zone = null;
 
         /**
-         * The list of tags associated with the instance
+         * List of tags bound to the instance.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
 
         /**
-         * Obtain instance status
-<li>NORMAL: The instance is normal</li><li>NETWORK_RESTRICT: The instance is blocked from the network.</li>
+         * Instance ban status. Valid values:
+<li>NORMAL: The instance is normal.</li><li>NETWORK_RESTRICT: The instance is banned from network access.</li>
          * @type {string || null}
          */
         this.InstanceRestrictState = null;
+
+        /**
+         * Invocation ID of the TAT command to be automatically executed after the instance is created.
+         * @type {string || null}
+         */
+        this.InitInvocationId = null;
+
+        /**
+         * Instance violation details.
+         * @type {InstanceViolationDetail || null}
+         */
+        this.InstanceViolationDetail = null;
 
     }
 
@@ -5170,6 +5184,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.LatestOperation = 'LatestOperation' in params ? params.LatestOperation : null;
         this.LatestOperationState = 'LatestOperationState' in params ? params.LatestOperationState : null;
         this.LatestOperationRequestId = 'LatestOperationRequestId' in params ? params.LatestOperationRequestId : null;
+        this.LatestOperationStartedTime = 'LatestOperationStartedTime' in params ? params.LatestOperationStartedTime : null;
         this.IsolatedTime = 'IsolatedTime' in params ? params.IsolatedTime : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
@@ -5187,6 +5202,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.InstanceRestrictState = 'InstanceRestrictState' in params ? params.InstanceRestrictState : null;
+        this.InitInvocationId = 'InitInvocationId' in params ? params.InitInvocationId : null;
+
+        if (params.InstanceViolationDetail) {
+            let obj = new InstanceViolationDetail();
+            obj.deserialize(params.InstanceViolationDetail)
+            this.InstanceViolationDetail = obj;
+        }
 
     }
 }
@@ -5290,6 +5312,55 @@ class CreateKeyPairResponse extends  AbstractModel {
             this.KeyPair = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Instance violation details.
+ * @class
+ */
+class InstanceViolationDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         *  Source: RESTRICT: Banned; FREEZW: Frozen.
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * Whether self-service unblocking is allowed. 1: Yes; 2: No.
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Violation type.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * Violation content (URL and associated domain name).
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Source = 'Source' in params ? params.Source : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -6378,53 +6449,73 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID list. Each request can contain up to 100 instances at a time.
+         * List of instance IDs. The maximum number of instances in each request is 100. You can obtain the instance IDs from the `InstanceId` field in the response of the [DescribeInstances](https://www.tencentcloud.com/document/api/1207/47573?from_cn_redirect=1) API.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Filter list. 
-<li>instance-name</li>Filter by the **instance name**. 
-Type: String 
-Required: No 
-<li>private-ip-address</li>Filter by the **private IP of instance primary ENI**. 
-Type: String 
-Required: No 
-<li>public-ip-address</li>Filter by the **public IP of instance primary ENI**. 
-Type: String 
-Required: No 
-<li>zone</li>Filter by the availability zone. 
-Type: String 
-Required: No 
-<li>instance-state</li>Filter by the **instance status**. 
-Type: String 
-Required: No 
-<li>tag-key</li>Filter by the **tag key**. 
-Type: String 
-Required: No 
-<li>tag-value</li>Filter by the **tag value**. 
-Type: String 
-Required: No 
-<li> tag:tag-key</li>Filter by tag key-value pair. The `tag-key` should be replaced with a specific tag key. 
-Type: String 
-Required: No 
-Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` at the same time.
+         * List of filters.
+<li>instance-name</li>Filters by instance name.
+Type: String
+Required: No
+<li>private-ip-address</li>Filters by the private IP of the primary ENI of the instance.
+Type: String
+Required: No
+<li>public-ip-address</li>Filters by the public IP of the primary ENI of the instance.
+Type: String
+Required: No
+<li>zone</li>Filters by AZ.
+Type: String
+Required: No
+<li>instance-state</li>Filters by instance state.
+Type: String
+Required: No
+<li>tag-key</li>Filters by tag key.
+Type: String
+Required: No
+<li>tag-value</li>Filters by tag value.
+Type: String
+Required: No
+<li> tag:tag-key</li>Filters by tag key-value pair. Replace tag-key with the specific tag key.
+Type: String
+Required: No
+<li>bundle-id</li>Filters by bundle ID.
+Type: String
+Required: No
+
+The maximum number of Filters per request is 10, and the maximum number of Filter.Values is 100. You cannot specify both InstanceIds and Filters at the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+         * Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/product/1207/47578?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+         * Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/product/1207/47578?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Limit = null;
+
+        /**
+         * Specifies the field by which to sort. Valid values: "EXPIRED_TIME": Sorts by the expiration time of the instance. 
+ If this field is not passed in, instances with the status of "pending reclamation" are returned first, and the remaining instances are returned in descending order by creation time.
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * The order in which the output instance list is sorted. Valid values:
+"ASC": Sorts in ascending order.
+"DESC": Sorts in descending order.
+By default, the list is sorted in ascending order. If this field is passed in, OrderField must be specified.
+         * @type {string || null}
+         */
+        this.Order = null;
 
     }
 
@@ -6447,6 +6538,8 @@ Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot 
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -6558,11 +6651,11 @@ class DescribeImagesToShareResponse extends  AbstractModel {
 }
 
 /**
- * >Key-Value pair filter for conditional filtering queries, such as filtering name
-> * If there are multiple `Filter` parameters, the relationship among them is the logical `AND`.
-> * If there are multiple `Values` for the same `Filter`, the relationship among the `Values` is the logical `OR`.
+ * >Describes key-value pair filters used for conditional filtering queries. For example, filter by name.
+> * If there are multiple `Filter` parameters, the relationship between them is logical AND (`AND`).
+> * If the same `Filter` has multiple `Values`, the relationship between the `Values` under the same `Filter` is logical OR (`OR`).
 >
-> Taking the `Filter` in the `DescribeInstances` API as an example, you can use the following filters to query the instance whose name (`instance-name`) is `test` ***and*** private IP (`private-ip-address`) is 10.10.10.10:
+> Take the `Filter` of the DescribeInstances API as an example. If you need to query instances whose instance name (`instance-name`) is test ***and*** private IP (`private-ip-address`) is 10.10.10.10, you can implement it as follows:
 ```
 Filters.0.Name=instance-name
 &Filters.0.Values.0=test
@@ -6576,13 +6669,13 @@ class Filter extends  AbstractModel {
         super();
 
         /**
-         * Field to be filtered.
+         * Fields to be filtered.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Filter value of field.
+         * Filter value of the field.
          * @type {Array.<string> || null}
          */
         this.Values = null;
@@ -8277,7 +8370,7 @@ class RenewDisksResponse extends  AbstractModel {
 }
 
 /**
- * This describes the internet accessibility of the instance created by a launch configuration and declares the internet usage billing method of the instance and the maximum bandwidth
+ * Describes the public network accessibility of instances created with the launch configuration, and declares the public network billing mode and maximum bandwidth of the instance.
  * @class
  */
 class InternetAccessible extends  AbstractModel {
@@ -8285,21 +8378,21 @@ class InternetAccessible extends  AbstractModel {
         super();
 
         /**
-         * Network billing mode. Valid values:
-<li>Bill by traffic package: TRAFFIC_POSTPAID_BY_HOUR</li>
-<li>Bill by bandwidth: BANDWIDTH_POSTPAID_BY_HOUR</li>
+         * Network billing type. Valid values:
+<li>Pay-as-you-go by traffic: TRAFFIC_POSTPAID_BY_HOUR</li>
+<li>Pay-as-you-go by bandwidth: BANDWIDTH_POSTPAID_BY_HOUR</li>
          * @type {string || null}
          */
         this.InternetChargeType = null;
 
         /**
-         * Public network outbound bandwidth cap in Mbps.
+         * Maximum outbound public bandwidth, in the unit of Mbps.
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * Whether to assign a public IP.
+         * Indicates whether a public IP is assigned.
          * @type {boolean || null}
          */
         this.PublicIpAssigned = null;
@@ -8885,7 +8978,7 @@ class InstancePrice extends  AbstractModel {
 }
 
 /**
- * Information on tags
+ * Tag.
  * @class
  */
 class Tag extends  AbstractModel {
@@ -8893,13 +8986,13 @@ class Tag extends  AbstractModel {
         super();
 
         /**
-         * Tag key
+         * Tag key.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Tag value
+         * Tag value.
          * @type {string || null}
          */
         this.Value = null;
@@ -10011,6 +10104,7 @@ module.exports = {
     DockerContainerVolume: DockerContainerVolume,
     IsolateInstancesResponse: IsolateInstancesResponse,
     CreateKeyPairResponse: CreateKeyPairResponse,
+    InstanceViolationDetail: InstanceViolationDetail,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     ModifyFirewallRulesResponse: ModifyFirewallRulesResponse,
     DiskPrice: DiskPrice,

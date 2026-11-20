@@ -516,6 +516,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * TTS configuration for conversation tasks.
+ * @class
+ */
+class VoiceConversationTTSConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>TTS providers, such as trtc.</p>
+         * @type {string || null}
+         */
+        this.Provider = null;
+
+        /**
+         * <p>Manufacturer exclusive parameter, string after JSON serialization.</p>
+         * @type {string || null}
+         */
+        this.Params = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Provider = 'Provider' in params ? params.Provider : null;
+        this.Params = 'Params' in params ? params.Params : null;
+
+    }
+}
+
+/**
  * Audio transcoding parameters
  * @class
  */
@@ -1331,6 +1366,46 @@ class VoiceCloneRequest extends  AbstractModel {
 }
 
 /**
+ * The server proactively sends a request to TTS.
+ * @class
+ */
+class VoiceConversationInvokeTTS extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Content to inject.</p>
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Priority. If no conversation is in progress, the injected content is sent to TTS. Otherwise, the behavior depends on this value. Default: 0.
+Valid values:
+- 0: High. Interrupt the current conversation, clear the waiting queue, and send the injected content to TTS.
+- 1: Medium. Do not interrupt the current conversation. Clear the waiting queue and queue the injected content. If no conversation is in progress, the injected content is still queued.
+- 2: Low. Discard the injected content.
+`InvokeLLM` and `InvokeTTS` share one queue. The queue can hold only one Invoke event.
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+
+    }
+}
+
+/**
  * SetUserBlocked request structure.
  * @class
  */
@@ -1484,6 +1559,53 @@ class DeleteCloudModerationRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVoiceConversation request structure.
+ * @class
+ */
+class DescribeVoiceConversationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Unique ID of the conversation task. Returned when the conversation task starts successfully.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Whether to include the conversation history.
+Valid values:
+- 0: Do not include the conversation history.
+- 1: Include the conversation history.
+
+Default: 0
+         * @type {number || null}
+         */
+        this.DescribeType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.DescribeType = 'DescribeType' in params ? params.DescribeType : null;
+
+    }
+}
+
+/**
  * SetUserBlocked response structure.
  * @class
  */
@@ -1549,6 +1671,45 @@ class McuBackgroundCustomRender extends  AbstractModel {
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.Radius = 'Radius' in params ? params.Radius : null;
+
+    }
+}
+
+/**
+ * The server proactively sends a request to the LLM.
+ * @class
+ */
+class VoiceConversationInvokeLLM extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>The injected content.</p>
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Priority. If no conversation is in progress, the injected content is sent to the LLM. Otherwise, the behavior depends on this value. Default: 0.
+Valid values:
+- 0: High. Interrupt the current conversation, clear the waiting queue, and send the injected content to the LLM.
+- 1: Medium. Do not interrupt the current conversation. Clear the waiting queue and queue the injected content. If no conversation is in progress, the injected content is still queued.
+- 2: Low. Discard the injected content.
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
 
     }
 }
@@ -1709,7 +1870,7 @@ class TranscriptionUserInfoParams extends  AbstractModel {
         super();
 
         /**
-         * User ID.
+         * <p>uid.</p>
          * @type {string || null}
          */
         this.UserId = null;
@@ -2466,6 +2627,48 @@ The default value is 0, indicating other categories.
 }
 
 /**
+ * Configuration parameters for the end-to-end large speech model of an AI conversation task.
+ * @class
+ */
+class VoiceConversationS2SConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>S2S manufacturer identification, for example, "tencent".</p>
+         * @type {string || null}
+         */
+        this.Provider = null;
+
+        /**
+         * <p>Manufacturer exclusive parameter, JSON serialized string.</p>
+         * @type {string || null}
+         */
+        this.Params = null;
+
+        /**
+         * <p>The welcome message played when the host enters the room for the first time. It will play again if the host leaves and re-enters the room.</p>
+         * @type {string || null}
+         */
+        this.WelcomeMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Provider = 'Provider' in params ? params.Provider : null;
+        this.Params = 'Params' in params ? params.Params : null;
+        this.WelcomeMessage = 'WelcomeMessage' in params ? params.WelcomeMessage : null;
+
+    }
+}
+
+/**
  * DescribeWebRecord response structure.
  * @class
  */
@@ -2643,6 +2846,86 @@ Array length: 1-100.
 }
 
 /**
+ * AI transcribe parameters.
+ * @class
+ */
+class TranscriptionParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The transcription robot's UserId is used to enter the room and trigger a transcription task. note that this UserId cannot be the same as the host or audience [UserId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#UserId) in the current room. if multiple transcription tasks are initiated in a room, the robot's UserId must also be unique to avoid interrupting the previous task. ensure the transcription robot's UserId is unique in the room.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Verification signature corresponding to the transcription bot's UserId, namely, the UserId and UserSig serve as the login password for the transcription bot to enter the room. for specific calculation methods, see TRTC solution for calculating.
+         * @type {string || null}
+         */
+        this.UserSig = null;
+
+        /**
+         * After all push users exit the room and exceed MaxIdleTime seconds, the backend automation shuts down the transcription task. default value is 60s.
+         * @type {number || null}
+         */
+        this.MaxIdleTime = null;
+
+        /**
+         * 1 means the robot subscribes to the stream of an individual, and 0 means the robot subscribes to the stream of the entire room. if left empty, it defaults to subscribing to the stream of the entire room.
+         * @type {number || null}
+         */
+        this.TranscriptionMode = null;
+
+        /**
+         * Required when TranscriptionMode is 1, the robot only pulls streams from this userid and ignores other users in the room.
+         * @type {string || null}
+         */
+        this.TargetUserId = null;
+
+        /**
+         * Voiceprint configuration.
+         * @type {VoicePrint || null}
+         */
+        this.VoicePrint = null;
+
+        /**
+         * Semantic sentence segmentation detection.
+         * @type {TurnDetection || null}
+         */
+        this.TurnDetection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.UserSig = 'UserSig' in params ? params.UserSig : null;
+        this.MaxIdleTime = 'MaxIdleTime' in params ? params.MaxIdleTime : null;
+        this.TranscriptionMode = 'TranscriptionMode' in params ? params.TranscriptionMode : null;
+        this.TargetUserId = 'TargetUserId' in params ? params.TargetUserId : null;
+
+        if (params.VoicePrint) {
+            let obj = new VoicePrint();
+            obj.deserialize(params.VoicePrint)
+            this.VoicePrint = obj;
+        }
+
+        if (params.TurnDetection) {
+            let obj = new TurnDetection();
+            obj.deserialize(params.TurnDetection)
+            this.TurnDetection = obj;
+        }
+
+    }
+}
+
+/**
  * DeleteCloudModeration response structure.
  * @class
  */
@@ -2792,49 +3075,43 @@ class CloudStorage extends  AbstractModel {
         super();
 
         /**
-         * The cloud storage provider.
-`0`: Tencent Cloud COS; `1`: AWS storage. Other vendors are not supported currently.
+         * <p>Information about Tencent Cloud object storage COS and third-party cloud storage accounts<br>0: Tencent Cloud object storage COS<br>1: AWS<br>[Note] Currently, only AWS is supported for third-party cloud storage. More third-party cloud storage options are being added.</p>
          * @type {number || null}
          */
         this.Vendor = null;
 
         /**
-         * [Region information](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of tencent cloud object storage.
-Example value: cn-shanghai-1.
-
-[Region information](https://docs.AWS.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3.
+         * <p>[Region information](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of Tencent Cloud object storage.<br>Example value: cn-shanghai-1</p><p>[Region information](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3</p>
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * The storage bucket.
+         * <p>Cloud bucket name.</p>
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * access_key account information of the cloud storage.
-To store files to tencent cloud object storage (COS), visit https://console.cloud.tencent.com/cam/capi to view or create the SecretId value corresponding to the key fields in the link.
+         * <p>access key account information for cloud storage.<br>To store files to tencent cloud Object Storage (COS), visit https://console.cloud.tencent.com/cam/capi to view or create the SecretId value corresponding to the key field in the link.</p>
          * @type {string || null}
          */
         this.AccessKey = null;
 
         /**
-         * secret_key account information of the cloud storage.
-To store files to tencent cloud object storage (COS), visit https://console.cloud.tencent.com/cam/capi to view or create the SecretKey value corresponding to the key fields in the link.
+         * <p>The secret_key account information for cloud storage.<br>To store files to Tencent Cloud Object Storage (COS), visit https://console.cloud.tencent.com/cam/capi to view or create the SecretKey value corresponding to the key fields in the link.</p>
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * The specified position of the cloud storage bucket consists of an array of strings. valid values: az, az, 0-9, '_', and '-'. for example, the recording file xxx.m3u8 becomes prefix1/prefix2/TaskId/xxx.m3u8 under the function of ["prefix1", "prefix2"].
+         * <p>The user-specified location in the cloud storage bucket consists of an array of strings. Valid string range: az, az, 0-9, '_' and '-'. For example, with ["prefix1", "prefix2"], the recording file xxx.m3u8 becomes prefix1/prefix2/TaskId/xxx.m3u8.</p>
          * @type {Array.<string> || null}
          */
         this.FileNamePrefix = null;
 
         /**
-         * If specified, the client uses this S3-compatible endpoint override instead of the default AWS S3 endpoint. This is useful for S3-compatible storage services such as Cloudflare R2. Example: "account_id.r2.cloudflarestorage.com"
+         * <p>When this parameter is set up for an S3-compatible endpoint override (for example, Cloudflare R2), the client will use this endpoint rather than the default AWS S3 endpoint. Example: "account_id.R2.cloudflarestorage.com"</p>
          * @type {string || null}
          */
         this.EndpointUrl = null;
@@ -3367,6 +3644,70 @@ Example value: test-secretkey.
 }
 
 /**
+ * The watermark layout.
+ * @class
+ */
+class WaterMark extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The watermark type. 0 (default): image; 1: text; 2: timestamp.
+         * @type {number || null}
+         */
+        this.WaterMarkType = null;
+
+        /**
+         * The information of watermark images. This parameter is required if the watermark type is image.
+         * @type {WaterMarkImage || null}
+         */
+        this.WaterMarkImage = null;
+
+        /**
+         * The information of the text watermark. This parameter is required if `WaterMarkType` is `1`.
+         * @type {WaterMarkChar || null}
+         */
+        this.WaterMarkChar = null;
+
+        /**
+         * The information of the timestamp watermark. This parameter is required if `WaterMarkType` is `2`.
+         * @type {WaterMarkTimestamp || null}
+         */
+        this.WaterMarkTimestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WaterMarkType = 'WaterMarkType' in params ? params.WaterMarkType : null;
+
+        if (params.WaterMarkImage) {
+            let obj = new WaterMarkImage();
+            obj.deserialize(params.WaterMarkImage)
+            this.WaterMarkImage = obj;
+        }
+
+        if (params.WaterMarkChar) {
+            let obj = new WaterMarkChar();
+            obj.deserialize(params.WaterMarkChar)
+            this.WaterMarkChar = obj;
+        }
+
+        if (params.WaterMarkTimestamp) {
+            let obj = new WaterMarkTimestamp();
+            obj.deserialize(params.WaterMarkTimestamp)
+            this.WaterMarkTimestamp = obj;
+        }
+
+    }
+}
+
+/**
  * Render the mobile mode parameter. do not set this parameter when not rendering mobile mode.
  * @class
  */
@@ -3592,6 +3933,41 @@ class McuCustomCrop extends  AbstractModel {
         this.LocationY = 'LocationY' in params ? params.LocationY : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
+ * Historical messages of AI conversations.
+ * @class
+ */
+class VoiceConversationHistoryMessage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>The Conversation role, for example, "user", "assistant", "system".</p>
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * <p>Conversation content.</p>
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -3932,6 +4308,41 @@ class SubscribeStreamUserIds extends  AbstractModel {
         this.UnSubscribeAudioUserIds = 'UnSubscribeAudioUserIds' in params ? params.UnSubscribeAudioUserIds : null;
         this.SubscribeVideoUserIds = 'SubscribeVideoUserIds' in params ? params.SubscribeVideoUserIds : null;
         this.UnSubscribeVideoUserIds = 'UnSubscribeVideoUserIds' in params ? params.UnSubscribeVideoUserIds : null;
+
+    }
+}
+
+/**
+ * DeleteVoiceConversation request structure.
+ * @class
+ */
+class DeleteVoiceConversationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Unique ID of the conversation task. Returned when the conversation task starts successfully.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -4789,6 +5200,53 @@ class RemoveUserByStrRoomIdResponse extends  AbstractModel {
 }
 
 /**
+ * Parameter configuration related to AI conversation visual understanding.
+ * @class
+ */
+class VoiceConversationVisionConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Whether to enable visual understanding.</p>
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * <p>Storage type.</p><p>Enumeration values:</p><ul><li>0: Do not store.</li><li>1: Specify cloud storage. In such cases, the CloudStorage parameter is required.</li></ul><p>Default value: 0</p>
+         * @type {number || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * <p>Third-party Cloud Storage archive configuration. After configuration, the backend will automatically upload I-frames received from the SDK to the designated cloud bucket for persistent storage.</p>
+         * @type {CloudStorage || null}
+         */
+        this.CloudStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+
+        if (params.CloudStorage) {
+            let obj = new CloudStorage();
+            obj.deserialize(params.CloudStorage)
+            this.CloudStorage = obj;
+        }
+
+    }
+}
+
+/**
  * UpdateStreamIngest response structure.
  * @class
  */
@@ -5438,36 +5896,24 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * The watermark layout.
+ * ControlVoiceConversation response structure.
  * @class
  */
-class WaterMark extends  AbstractModel {
+class ControlVoiceConversationResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The watermark type. 0 (default): image; 1: text; 2: timestamp.
-         * @type {number || null}
+         * Unique ID of the conversation task.
+         * @type {string || null}
          */
-        this.WaterMarkType = null;
+        this.TaskId = null;
 
         /**
-         * The information of watermark images. This parameter is required if the watermark type is image.
-         * @type {WaterMarkImage || null}
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.WaterMarkImage = null;
-
-        /**
-         * The information of the text watermark. This parameter is required if `WaterMarkType` is `1`.
-         * @type {WaterMarkChar || null}
-         */
-        this.WaterMarkChar = null;
-
-        /**
-         * The information of the timestamp watermark. This parameter is required if `WaterMarkType` is `2`.
-         * @type {WaterMarkTimestamp || null}
-         */
-        this.WaterMarkTimestamp = null;
+        this.RequestId = null;
 
     }
 
@@ -5478,25 +5924,8 @@ class WaterMark extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WaterMarkType = 'WaterMarkType' in params ? params.WaterMarkType : null;
-
-        if (params.WaterMarkImage) {
-            let obj = new WaterMarkImage();
-            obj.deserialize(params.WaterMarkImage)
-            this.WaterMarkImage = obj;
-        }
-
-        if (params.WaterMarkChar) {
-            let obj = new WaterMarkChar();
-            obj.deserialize(params.WaterMarkChar)
-            this.WaterMarkChar = obj;
-        }
-
-        if (params.WaterMarkTimestamp) {
-            let obj = new WaterMarkTimestamp();
-            obj.deserialize(params.WaterMarkTimestamp)
-            this.WaterMarkTimestamp = obj;
-        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6018,6 +6447,41 @@ Regardless of the mode, it will eventually split and send to a large model for r
 }
 
 /**
+ * DeleteVoiceConversation response structure.
+ * @class
+ */
+class DeleteVoiceConversationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the conversation task.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The audio encoding parameters.
  * @class
  */
@@ -6193,6 +6657,41 @@ class DismissRoomRequest extends  AbstractModel {
 }
 
 /**
+ * Historical conversation content.
+ * @class
+ */
+class VoiceConversationHistoryContent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Conversation role.</p>
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * <p>Conversation content.</p>
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
  * DescribeUnusualEvent request structure.
  * @class
  */
@@ -6238,6 +6737,84 @@ Note: support querying data within the last 14 days.
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
+ * ModifyVoiceConversation request structure.
+ * @class
+ */
+class ModifyVoiceConversationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>The <a href="https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid">SdkAppId</a> of TRTC, which is the same as the SdkAppId corresponding to the conversation room.</p>
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Unique ID of the conversation task. Returned when the conversation task starts successfully.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * For the same task, `SequenceNumber` must increase with each modification request. This prevents requests from being applied out of order.
+         * @type {number || null}
+         */
+        this.SequenceNumber = null;
+
+        /**
+         * Large language model (LLM) configuration. Applies only in `Cascade` mode. In `S2S` mode, the request returns an error.
+         * @type {VoiceConversationLLMConfig || null}
+         */
+        this.LLMConfig = null;
+
+        /**
+         * End-to-end speech-to-speech model configuration. Applies only in `S2S` mode. In `Cascade` mode, the request returns an error.
+         * @type {VoiceConversationS2SConfig || null}
+         */
+        this.S2SConfig = null;
+
+        /**
+         * Conversation control configuration. Applies only in `Cascade` mode.
+         * @type {VoiceConversationDialogConfig || null}
+         */
+        this.DialogConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.SequenceNumber = 'SequenceNumber' in params ? params.SequenceNumber : null;
+
+        if (params.LLMConfig) {
+            let obj = new VoiceConversationLLMConfig();
+            obj.deserialize(params.LLMConfig)
+            this.LLMConfig = obj;
+        }
+
+        if (params.S2SConfig) {
+            let obj = new VoiceConversationS2SConfig();
+            obj.deserialize(params.S2SConfig)
+            this.S2SConfig = obj;
+        }
+
+        if (params.DialogConfig) {
+            let obj = new VoiceConversationDialogConfig();
+            obj.deserialize(params.DialogConfig)
+            this.DialogConfig = obj;
+        }
 
     }
 }
@@ -6451,6 +7028,70 @@ class StartWebRecordResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MCP Sever parameters.
+ * @class
+ */
+class VoiceConversationMcpServer extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>The unique mcp identifier.</p>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <p>Endpoint URL.</p>
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * <p>Request timeout in ms. Default: 5000. This value should not exceed 30000.</p>
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+        /**
+         * <p>Custom request headers, such as authentication information.</p>
+         * @type {Array.<KeyValueItem> || null}
+         */
+        this.Headers = null;
+
+        /**
+         * <p>Allowlist of tools that can be used.</p>
+         * @type {Array.<string> || null}
+         */
+        this.ToolList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+
+        if (params.Headers) {
+            this.Headers = new Array();
+            for (let z in params.Headers) {
+                let obj = new KeyValueItem();
+                obj.deserialize(params.Headers[z]);
+                this.Headers.push(obj);
+            }
+        }
+        this.ToolList = 'ToolList' in params ? params.ToolList : null;
 
     }
 }
@@ -6862,6 +7503,75 @@ Note: does not support entering "zh-dialect".
 }
 
 /**
+ * Configuration for AI conversation.
+ * @class
+ */
+class VoiceConversationDialogConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Interrupt mode. Default: 0.
+Valid values:
+- 0: Automatic. When STT returns text, it interrupts TTS playback. Use this mode with InterruptSpeechDuration.
+- 1: Manual. The bot is interrupted only by the Interrupt command from the server or client API.
+- 2: Keyword.
+         * @type {number || null}
+         */
+        this.InterruptMode = null;
+
+        /**
+         * Minimum duration of user speech that triggers an automatic interrupt. Default: 200. Unit: ms.
+         * @type {number || null}
+         */
+        this.InterruptSpeechDuration = null;
+
+        /**
+         * Preset keywords that interrupt the bot. Use them when the user must explicitly indicate the intent to interrupt. You can set up to 128 keywords. Applies only when `InterruptMode` is 2.
+         * @type {Array.<string> || null}
+         */
+        this.InterruptKeywords = null;
+
+        /**
+         * How long the user is silent before the bot asks a follow-up question. Valid range: 0 to 300. 0 turns this off. Default: 0. Unit: seconds.
+
+
+         * @type {number || null}
+         */
+        this.SilenceFollowUp = null;
+
+        /**
+         * <p>Text of the proactive follow-up question.</p>
+         * @type {string || null}
+         */
+        this.SilenceFollowUpText = null;
+
+        /**
+         * Welcome message the bot broadcasts when an anchor enters the room for the first time. It is broadcast again when the anchor leaves the room and enters again.
+         * @type {string || null}
+         */
+        this.WelcomeMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InterruptMode = 'InterruptMode' in params ? params.InterruptMode : null;
+        this.InterruptSpeechDuration = 'InterruptSpeechDuration' in params ? params.InterruptSpeechDuration : null;
+        this.InterruptKeywords = 'InterruptKeywords' in params ? params.InterruptKeywords : null;
+        this.SilenceFollowUp = 'SilenceFollowUp' in params ? params.SilenceFollowUp : null;
+        this.SilenceFollowUpText = 'SilenceFollowUpText' in params ? params.SilenceFollowUpText : null;
+        this.WelcomeMessage = 'WelcomeMessage' in params ? params.WelcomeMessage : null;
+
+    }
+}
+
+/**
  * DeleteCloudRecording response structure.
  * @class
  */
@@ -6979,6 +7689,101 @@ When TranscriptionMode is 0, ensure only one task is initiated in a room. if mul
             obj.deserialize(params.TranslationConfig)
             this.TranslationConfig = obj;
         }
+
+    }
+}
+
+/**
+ * Task parameters for an AI conversation.
+ * @class
+ */
+class VoiceConversationConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * [UserId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#userid) used by the conversation service in the TRTC room. It must not match a UserId already used by another TRTC user or by the conversation service. Include the room ID in the UserId.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * [UserSig](https://www.tencentcloud.com/document/product/647/45910?from_cn_redirect=1#UserSig) for the conversation service to join the TRTC room. It is the authentication signature of this UserId and works like a login password. For how to calculate UserSig, see the linked topic.
+         * @type {string || null}
+         */
+        this.UserSig = null;
+
+        /**
+         * <p>UserId of the anchor whose audio the conversation service subscribes to. Specify one anchor only.</p>
+         * @type {Array.<string> || null}
+         */
+        this.TargetUserId = null;
+
+        /**
+         * <p>Parameters of the bot that publishes TTS audio back to the room.</p>
+         * @type {TranscriptionUserInfoParams || null}
+         */
+        this.TTSPushRoomParams = null;
+
+        /**
+         * <p>If an anchor in the conversation stays out of the TRTC room, or stays in the audience role, for longer than `MaxIdleTime`, the conversation task stops automatically. Valid range: 5 to 86400 (24 hours). Default: 30. Unit: seconds.</p>
+         * @type {number || null}
+         */
+        this.MaxIdleTime = null;
+
+        /**
+         * Filters content returned by the LLM. Text inside the specified brackets is not played. If this parameter is not set, nothing is filtered. Valid range: 1 to 5. Example: 1. 
+Not supported in S2S mode.
+Valid values:
+- 1: Chinese parentheses 
+- 2: English parentheses
+- 3: Chinese square brackets
+- 4: English square brackets
+- 5: English curly braces
+         * @type {Array.<number> || null}
+         */
+        this.FilterBracketsContent = null;
+
+        /**
+         * Subtitle display mode. Not supported in S2S mode.
+Valid values:
+- 0: Show subtitles as soon as possible.
+- 1: Show subtitles sentence by sentence in real time.
+         * @type {number || null}
+         */
+        this.SubtitleMode = null;
+
+        /**
+         * Controls how a new conversation turn starts. Default: `auto`. Not supported in S2S mode.
+Valid values:
+
+- `auto`: The backend detects the end of a sentence from the silence duration, and then calls the LLM.
+         * @type {string || null}
+         */
+        this.TurnDetectionMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.UserSig = 'UserSig' in params ? params.UserSig : null;
+        this.TargetUserId = 'TargetUserId' in params ? params.TargetUserId : null;
+
+        if (params.TTSPushRoomParams) {
+            let obj = new TranscriptionUserInfoParams();
+            obj.deserialize(params.TTSPushRoomParams)
+            this.TTSPushRoomParams = obj;
+        }
+        this.MaxIdleTime = 'MaxIdleTime' in params ? params.MaxIdleTime : null;
+        this.FilterBracketsContent = 'FilterBracketsContent' in params ? params.FilterBracketsContent : null;
+        this.SubtitleMode = 'SubtitleMode' in params ? params.SubtitleMode : null;
+        this.TurnDetectionMode = 'TurnDetectionMode' in params ? params.TurnDetectionMode : null;
 
     }
 }
@@ -7134,18 +7939,85 @@ class ModifyCloudRecordingRequest extends  AbstractModel {
 }
 
 /**
- * StopAIConversation response structure.
+ * CreateVoiceConversation request structure.
  * @class
  */
-class StopAIConversationResponse extends  AbstractModel {
+class CreateVoiceConversationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * [Room ID](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#roomid) of the TRTC room where the conversation runs. Room IDs are numeric by default. If the room ID is a string, set RoomIdType to 1.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RoomId = null;
+
+        /**
+         * Room ID type. It must match the room ID type of the conversation room. 0 is a numeric room ID, and 1 is a string room ID.
+Valid values:
+- 0: numeric room ID (Default)
+- 1: string room ID
+         * @type {number || null}
+         */
+        this.RoomIdType = null;
+
+        /**
+         * <p>Chatbot configuration.</p>
+         * @type {VoiceConversationConfig || null}
+         */
+        this.AgentConfig = null;
+
+        /**
+         * Conversation pipeline mode: `Cascade` (default, three-stage pipeline) or `S2S` (end-to-end speech-to-speech model).
+Valid values:
+- Cascade: three-stage pipeline (default). Speech recognition, a large language model, and text-to-speech.
+- S2S: end-to-end speech-to-speech model.
+Default: Cascade
+         * @type {string || null}
+         */
+        this.ConversationMode = null;
+
+        /**
+         * End-to-end speech-to-speech model configuration. Required only in `S2S` mode. Ignored in `Cascade` mode.
+         * @type {VoiceConversationS2SConfig || null}
+         */
+        this.S2SConfig = null;
+
+        /**
+         * <p>Speech recognition configuration. <strong>Required only in <code>Cascade</code> mode</strong>; ignored in <code>S2S</code> mode.</p>
+         * @type {VoiceConversationSTTConfig || null}
+         */
+        this.STTConfig = null;
+
+        /**
+         * Large language model (LLM) configuration. Required only in `Cascade` mode. Ignored in `S2S` mode.
+         * @type {VoiceConversationLLMConfig || null}
+         */
+        this.LLMConfig = null;
+
+        /**
+         * <p>Text to speech configuration. <strong>Required only in <code>Cascade</code> mode</strong>; ignored in <code>S2S</code> mode.</p>
+         * @type {VoiceConversationTTSConfig || null}
+         */
+        this.TTSConfig = null;
+
+        /**
+         * Conversation control configuration. Not supported in `S2S` mode.
+         * @type {VoiceConversationDialogConfig || null}
+         */
+        this.DialogConfig = null;
+
+        /**
+         * Visual understanding configuration. Not supported in `S2S` mode.
+         * @type {VoiceConversationVisionConfig || null}
+         */
+        this.VisionConfig = null;
 
     }
 
@@ -7156,7 +8028,52 @@ class StopAIConversationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.RoomIdType = 'RoomIdType' in params ? params.RoomIdType : null;
+
+        if (params.AgentConfig) {
+            let obj = new VoiceConversationConfig();
+            obj.deserialize(params.AgentConfig)
+            this.AgentConfig = obj;
+        }
+        this.ConversationMode = 'ConversationMode' in params ? params.ConversationMode : null;
+
+        if (params.S2SConfig) {
+            let obj = new VoiceConversationS2SConfig();
+            obj.deserialize(params.S2SConfig)
+            this.S2SConfig = obj;
+        }
+
+        if (params.STTConfig) {
+            let obj = new VoiceConversationSTTConfig();
+            obj.deserialize(params.STTConfig)
+            this.STTConfig = obj;
+        }
+
+        if (params.LLMConfig) {
+            let obj = new VoiceConversationLLMConfig();
+            obj.deserialize(params.LLMConfig)
+            this.LLMConfig = obj;
+        }
+
+        if (params.TTSConfig) {
+            let obj = new VoiceConversationTTSConfig();
+            obj.deserialize(params.TTSConfig)
+            this.TTSConfig = obj;
+        }
+
+        if (params.DialogConfig) {
+            let obj = new VoiceConversationDialogConfig();
+            obj.deserialize(params.DialogConfig)
+            this.DialogConfig = obj;
+        }
+
+        if (params.VisionConfig) {
+            let obj = new VoiceConversationVisionConfig();
+            obj.deserialize(params.VisionConfig)
+            this.VisionConfig = obj;
+        }
 
     }
 }
@@ -7620,6 +8537,77 @@ class DeleteCloudRecordingRequest extends  AbstractModel {
 }
 
 /**
+ * ControlVoiceConversation request structure.
+ * @class
+ */
+class ControlVoiceConversationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * Unique ID of the conversation task. Returned when the conversation task starts successfully.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Control command.
+Valid values:
+
+- `Interrupt`: Force-interrupt the AI bot's current speech.
+- `invokellm`: Inject text into the current conversation context to trigger one LLM response. Not supported in `S2S` mode.
+- `invoketts`: Inject text into the current TTS so the AI bot broadcasts it. Not supported in `S2S` mode.
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * Configuration for injecting text into the LLM. Required when `Command` is `invokellm`.
+         * @type {VoiceConversationInvokeLLM || null}
+         */
+        this.InvokeLLM = null;
+
+        /**
+         * Configuration for injecting text into TTS. Required when `Command` is `invoketts`.
+         * @type {VoiceConversationInvokeTTS || null}
+         */
+        this.InvokeTTS = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Command = 'Command' in params ? params.Command : null;
+
+        if (params.InvokeLLM) {
+            let obj = new VoiceConversationInvokeLLM();
+            obj.deserialize(params.InvokeLLM)
+            this.InvokeLLM = obj;
+        }
+
+        if (params.InvokeTTS) {
+            let obj = new VoiceConversationInvokeTTS();
+            obj.deserialize(params.InvokeTTS)
+            this.InvokeTTS = obj;
+        }
+
+    }
+}
+
+/**
  * Transcription TTS parameter
  * @class
  */
@@ -7893,6 +8881,175 @@ class SetUserBlockedByStrRoomIdRequest extends  AbstractModel {
         this.StrRoomId = 'StrRoomId' in params ? params.StrRoomId : null;
         this.UserId = 'UserId' in params ? params.UserId : null;
         this.IsMute = 'IsMute' in params ? params.IsMute : null;
+
+    }
+}
+
+/**
+ * LLM parameter configuration for AI conversation.
+ * @class
+ */
+class VoiceConversationLLMConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>LLM API type, for example, openai (OpenAI-compatible API).</p>
+         * @type {string || null}
+         */
+        this.LLMType = null;
+
+        /**
+         * <p>Model name, for example, gpt-4o-mini</p>
+         * @type {string || null}
+         */
+        this.Model = null;
+
+        /**
+         * <p>OpenAI-compatible endpoint.</p>
+         * @type {string || null}
+         */
+        this.APIUrl = null;
+
+        /**
+         * Provider API key.
+         * @type {string || null}
+         */
+        this.APIKey = null;
+
+        /**
+         * <p>System prompt.</p>
+         * @type {string || null}
+         */
+        this.SystemPrompt = null;
+
+        /**
+         * <p>Text used to generate TTS audio when the LLM call fails.</p>
+         * @type {string || null}
+         */
+        this.FailureMessage = null;
+
+        /**
+         * <p>Maximum number of tokens in a single response. 0 means no limit. Default: 0. If the model outputs more tokens than MaxTokens, the response is truncated.</p>
+         * @type {number || null}
+         */
+        this.MaxTokens = null;
+
+        /**
+         * <p>Whether to enable thinking mode. Availability depends on the model provider. Enabling thinking mode consumes output tokens.</p>
+         * @type {boolean || null}
+         */
+        this.ThinkingMode = null;
+
+        /**
+         * <p>Number of conversation turns cached for the LLM. Valid range: 0 to 50. Recommended range: 10 to 30. The total number of tokens in this context must not exceed the LLM context limit.</p>
+         * @type {number || null}
+         */
+        this.MaxHistory = null;
+
+        /**
+         * <p>Maximum rounds of MCP tool calls, ranging from 0 to 50. Default: 10.</p>
+         * @type {number || null}
+         */
+        this.MaxToolRound = null;
+
+        /**
+         * Timeout for a single request, in milliseconds. Valid range: 1000 to 60000. Default: 10000.
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+        /**
+         * <p>Sampling temperature, ranging from 0.0 to 2.0. Default: 1.0.</p>
+         * @type {number || null}
+         */
+        this.Temperature = null;
+
+        /**
+         * <p>Top p nucleus sampling. Valid range: 0.0 to 1.0. Default: 1.0.</p>
+         * @type {number || null}
+         */
+        this.TopP = null;
+
+        /**
+         * <p>MCP Server parameters.</p>
+         * @type {VoiceConversationMcpServer || null}
+         */
+        this.McpServer = null;
+
+        /**
+         * <p>Custom HTTP request headers.</p>
+         * @type {Array.<KeyValueItem> || null}
+         */
+        this.CustomHeaders = null;
+
+        /**
+         * Provider-specific parameters, such as DeepSeek's reasoning_effort and Hunyuan's enable_enhancement.
+         * @type {Array.<KeyValueItem> || null}
+         */
+        this.CustomFields = null;
+
+        /**
+         * <p>Initial conversation history. Each item uses this format: `{"Role": "user"/"assistant"/"system", "Content": "xxx"}`.</p>
+         * @type {Array.<VoiceConversationHistoryMessage> || null}
+         */
+        this.HistoryMessages = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LLMType = 'LLMType' in params ? params.LLMType : null;
+        this.Model = 'Model' in params ? params.Model : null;
+        this.APIUrl = 'APIUrl' in params ? params.APIUrl : null;
+        this.APIKey = 'APIKey' in params ? params.APIKey : null;
+        this.SystemPrompt = 'SystemPrompt' in params ? params.SystemPrompt : null;
+        this.FailureMessage = 'FailureMessage' in params ? params.FailureMessage : null;
+        this.MaxTokens = 'MaxTokens' in params ? params.MaxTokens : null;
+        this.ThinkingMode = 'ThinkingMode' in params ? params.ThinkingMode : null;
+        this.MaxHistory = 'MaxHistory' in params ? params.MaxHistory : null;
+        this.MaxToolRound = 'MaxToolRound' in params ? params.MaxToolRound : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.Temperature = 'Temperature' in params ? params.Temperature : null;
+        this.TopP = 'TopP' in params ? params.TopP : null;
+
+        if (params.McpServer) {
+            let obj = new VoiceConversationMcpServer();
+            obj.deserialize(params.McpServer)
+            this.McpServer = obj;
+        }
+
+        if (params.CustomHeaders) {
+            this.CustomHeaders = new Array();
+            for (let z in params.CustomHeaders) {
+                let obj = new KeyValueItem();
+                obj.deserialize(params.CustomHeaders[z]);
+                this.CustomHeaders.push(obj);
+            }
+        }
+
+        if (params.CustomFields) {
+            this.CustomFields = new Array();
+            for (let z in params.CustomFields) {
+                let obj = new KeyValueItem();
+                obj.deserialize(params.CustomFields[z]);
+                this.CustomFields.push(obj);
+            }
+        }
+
+        if (params.HistoryMessages) {
+            this.HistoryMessages = new Array();
+            for (let z in params.HistoryMessages) {
+                let obj = new VoiceConversationHistoryMessage();
+                obj.deserialize(params.HistoryMessages[z]);
+                this.HistoryMessages.push(obj);
+            }
+        }
 
     }
 }
@@ -8907,80 +10064,6 @@ class MixUserInfo extends  AbstractModel {
 }
 
 /**
- * DeleteCloudTranscription request structure.
- * @class
- */
-class DeleteCloudTranscriptionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * SDKAppId of TRTC, which is the same as the SDKAppId of the room being transcribed.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * The unique Id of the task will be returned upon success.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-
-    }
-}
-
-/**
- * Background sound settings will add environmental sound effects during a call to make the experience more realistic. currently support the following options:.
-Coffee_shops: chat in a coffee shop communication environment with background chatter.
-busy office: customer service center.
-Street traffic: outdoors street.
-evening_mountain: outdoors mountain.
- * @class
- */
-class AmbientSound extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Scenario selection.
-         * @type {string || null}
-         */
-        this.Scene = null;
-
-        /**
-         * Control the volume of ambient sound. value ranges from [0,2]. the lower the value, the softer the ambient sound; the higher the value, the louder the ambient sound. if not set, use the default value 1.
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Scene = 'Scene' in params ? params.Scene : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-
-    }
-}
-
-/**
  * DescribeTRTCMarketQualityData request structure.
  * @class
  */
@@ -9034,6 +10117,80 @@ h: billed hourly. at this point, return the data of full hour UTC time within a 
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.IsFloat = 'IsFloat' in params ? params.IsFloat : null;
+
+    }
+}
+
+/**
+ * Background sound settings will add environmental sound effects during a call to make the experience more realistic. currently support the following options:.
+Coffee_shops: chat in a coffee shop communication environment with background chatter.
+busy office: customer service center.
+Street traffic: outdoors street.
+evening_mountain: outdoors mountain.
+ * @class
+ */
+class AmbientSound extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scenario selection.
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * Control the volume of ambient sound. value ranges from [0,2]. the lower the value, the softer the ambient sound; the higher the value, the louder the ambient sound. if not set, use the default value 1.
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+
+    }
+}
+
+/**
+ * DeleteCloudTranscription request structure.
+ * @class
+ */
+class DeleteCloudTranscriptionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SDKAppId of TRTC, which is the same as the SDKAppId of the room being transcribed.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The unique Id of the task will be returned upon success.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -9262,6 +10419,76 @@ class MaxVideoUser extends  AbstractModel {
             obj.deserialize(params.UserMediaStream)
             this.UserMediaStream = obj;
         }
+
+    }
+}
+
+/**
+ * ModifyVoiceConversation response structure.
+ * @class
+ */
+class ModifyVoiceConversationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the conversation task.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * LLM custom data structure
+ * @class
+ */
+class KeyValueItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <p>Key</p>
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * <p>Value</p>
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -9654,18 +10881,18 @@ If the language you need is not available, contact our technical staff.
 }
 
 /**
- * StopWebRecord request structure.
+ * StopAIConversation response structure.
  * @class
  */
-class StopWebRecordRequest extends  AbstractModel {
+class StopAIConversationResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The ID of the task that needs to be stopped
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.RequestId = null;
 
     }
 
@@ -9676,7 +10903,7 @@ class StopWebRecordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9722,6 +10949,41 @@ class McuSeiParams extends  AbstractModel {
             obj.deserialize(params.PassThrough)
             this.PassThrough = obj;
         }
+
+    }
+}
+
+/**
+ * CreateVoiceConversation response structure.
+ * @class
+ */
+class CreateVoiceConversationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the conversation task, generated by the Tencent Cloud server. Later requests that query or control the task must include this TaskId.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10011,54 +11273,47 @@ class McuWaterMarkText extends  AbstractModel {
 }
 
 /**
- * AI transcribe parameters.
+ * DescribeVoiceConversation response structure.
  * @class
  */
-class TranscriptionParams extends  AbstractModel {
+class DescribeVoiceConversationResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The transcription robot's UserId is used to enter the room and trigger a transcription task. note that this UserId cannot be the same as the host or audience [UserId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#UserId) in the current room. if multiple transcription tasks are initiated in a room, the robot's UserId must also be unique to avoid interrupting the previous task. ensure the transcription robot's UserId is unique in the room.
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * Verification signature corresponding to the transcription bot's UserId, namely, the UserId and UserSig serve as the login password for the transcription bot to enter the room. for specific calculation methods, see TRTC solution for calculating.
-         * @type {string || null}
-         */
-        this.UserSig = null;
-
-        /**
-         * After all push users exit the room and exceed MaxIdleTime seconds, the backend automation shuts down the transcription task. default value is 60s.
+         * <p>Task start time</p><p>Unit: ms</p>
          * @type {number || null}
          */
-        this.MaxIdleTime = null;
+        this.StartTime = null;
 
         /**
-         * 1 means the robot subscribes to the stream of an individual, and 0 means the robot subscribes to the stream of the entire room. if left empty, it defaults to subscribing to the stream of the entire room.
-         * @type {number || null}
-         */
-        this.TranscriptionMode = null;
+         * Conversation task status.
+Valid values:
 
-        /**
-         * Required when TranscriptionMode is 1, the robot only pulls streams from this userid and ignores other users in the room.
+- `Idle`: The conversation task is idle.
+- `InProgress`: The conversation task is in progress.
+- `Exited`: The conversation task is exiting.
          * @type {string || null}
          */
-        this.TargetUserId = null;
+        this.Status = null;
 
         /**
-         * Voiceprint configuration.
-         * @type {VoicePrint || null}
+         * Unique ID of the conversation task.
+         * @type {string || null}
          */
-        this.VoicePrint = null;
+        this.TaskId = null;
 
         /**
-         * Semantic sentence segmentation detection.
-         * @type {TurnDetection || null}
+         * Conversation history.
+         * @type {Array.<VoiceConversationHistoryContent> || null}
          */
-        this.TurnDetection = null;
+        this.HistoryContents = null;
+
+        /**
+         * The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -10069,23 +11324,19 @@ class TranscriptionParams extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.UserSig = 'UserSig' in params ? params.UserSig : null;
-        this.MaxIdleTime = 'MaxIdleTime' in params ? params.MaxIdleTime : null;
-        this.TranscriptionMode = 'TranscriptionMode' in params ? params.TranscriptionMode : null;
-        this.TargetUserId = 'TargetUserId' in params ? params.TargetUserId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
-        if (params.VoicePrint) {
-            let obj = new VoicePrint();
-            obj.deserialize(params.VoicePrint)
-            this.VoicePrint = obj;
+        if (params.HistoryContents) {
+            this.HistoryContents = new Array();
+            for (let z in params.HistoryContents) {
+                let obj = new VoiceConversationHistoryContent();
+                obj.deserialize(params.HistoryContents[z]);
+                this.HistoryContents.push(obj);
+            }
         }
-
-        if (params.TurnDetection) {
-            let obj = new TurnDetection();
-            obj.deserialize(params.TurnDetection)
-            this.TurnDetection = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10426,36 +11677,24 @@ class DescribeStreamIngestRequest extends  AbstractModel {
 }
 
 /**
- * TTS configuration.
+ * STT configuration parameters for the AI conversation task
  * @class
  */
-class TTSConfig extends  AbstractModel {
+class VoiceConversationSTTConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Voice type ID.
+         * <p>ASR provider name: trtc (Tencent Self-developed) or third-party provider (for example, azure).</p>
          * @type {string || null}
          */
-        this.VoiceId = null;
+        this.Provider = null;
 
         /**
-         * TTS model: flow_01_turbo is selected by default. options: [flow_01_turbo, flow_01_ex].
+         * <p>ASR manufacturer exclusive parameter. Fill in the JSON serialized string.</p>
          * @type {string || null}
          */
-        this.Model = null;
-
-        /**
-         * Speaking rate. value range: 0.5-2.0. default: 1.0.
-         * @type {number || null}
-         */
-        this.Speed = null;
-
-        /**
-         * Value range: (0, 10]. default value: 1.0.
-         * @type {number || null}
-         */
-        this.Volume = null;
+        this.Params = null;
 
     }
 
@@ -10466,10 +11705,36 @@ class TTSConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
-        this.Model = 'Model' in params ? params.Model : null;
-        this.Speed = 'Speed' in params ? params.Speed : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.Provider = 'Provider' in params ? params.Provider : null;
+        this.Params = 'Params' in params ? params.Params : null;
+
+    }
+}
+
+/**
+ * StopWebRecord request structure.
+ * @class
+ */
+class StopWebRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the task that needs to be stopped
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -10845,6 +12110,55 @@ class DescribeAITranscriptionResponse extends  AbstractModel {
 }
 
 /**
+ * TTS configuration.
+ * @class
+ */
+class TTSConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Voice type ID.
+         * @type {string || null}
+         */
+        this.VoiceId = null;
+
+        /**
+         * TTS model: flow_01_turbo is selected by default. options: [flow_01_turbo, flow_01_ex].
+         * @type {string || null}
+         */
+        this.Model = null;
+
+        /**
+         * Speaking rate. value range: 0.5-2.0. default: 1.0.
+         * @type {number || null}
+         */
+        this.Speed = null;
+
+        /**
+         * Value range: (0, 10]. default value: 1.0.
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.Model = 'Model' in params ? params.Model : null;
+        this.Speed = 'Speed' in params ? params.Speed : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+
+    }
+}
+
+/**
  * The Watermark information.
  * @class
  */
@@ -11184,6 +12498,7 @@ module.exports = {
     TerminologyItem: TerminologyItem,
     McuLayout: McuLayout,
     SubscribeModerationUserIds: SubscribeModerationUserIds,
+    VoiceConversationTTSConfig: VoiceConversationTTSConfig,
     AudioEncodeParams: AudioEncodeParams,
     ServerPushText: ServerPushText,
     McuRecordParams: McuRecordParams,
@@ -11196,11 +12511,14 @@ module.exports = {
     DescribeTRTCMarketScaleDataRequest: DescribeTRTCMarketScaleDataRequest,
     McuLayoutVolume: McuLayoutVolume,
     VoiceCloneRequest: VoiceCloneRequest,
+    VoiceConversationInvokeTTS: VoiceConversationInvokeTTS,
     SetUserBlockedRequest: SetUserBlockedRequest,
     DescribeUserEventRequest: DescribeUserEventRequest,
     DeleteCloudModerationRequest: DeleteCloudModerationRequest,
+    DescribeVoiceConversationRequest: DescribeVoiceConversationRequest,
     SetUserBlockedResponse: SetUserBlockedResponse,
     McuBackgroundCustomRender: McuBackgroundCustomRender,
+    VoiceConversationInvokeLLM: VoiceConversationInvokeLLM,
     WaterMarkChar: WaterMarkChar,
     DescribeTrtcRoomUsageResponse: DescribeTrtcRoomUsageResponse,
     StopPublishCdnStreamResponse: StopPublishCdnStreamResponse,
@@ -11221,9 +12539,11 @@ module.exports = {
     DescribeTRTCMarketScaleDataResponse: DescribeTRTCMarketScaleDataResponse,
     TranslationConfig: TranslationConfig,
     McuTencentVod: McuTencentVod,
+    VoiceConversationS2SConfig: VoiceConversationS2SConfig,
     DescribeWebRecordResponse: DescribeWebRecordResponse,
     DescribeCloudTranscriptionResponse: DescribeCloudTranscriptionResponse,
     DescribeUserInfoRequest: DescribeUserInfoRequest,
+    TranscriptionParams: TranscriptionParams,
     DeleteCloudModerationResponse: DeleteCloudModerationResponse,
     DescribeRelayUsageRequest: DescribeRelayUsageRequest,
     DismissRoomResponse: DismissRoomResponse,
@@ -11240,11 +12560,13 @@ module.exports = {
     StorageParams: StorageParams,
     CloudVod: CloudVod,
     CloudSliceStorage: CloudSliceStorage,
+    WaterMark: WaterMark,
     EmulateMobileParams: EmulateMobileParams,
     PronunciationDict: PronunciationDict,
     DescribeCallDetailInfoResponse: DescribeCallDetailInfoResponse,
     DescribeTRTCRealTimeQualityDataResponse: DescribeTRTCRealTimeQualityDataResponse,
     McuCustomCrop: McuCustomCrop,
+    VoiceConversationHistoryMessage: VoiceConversationHistoryMessage,
     DescribeMixTranscodingUsageRequest: DescribeMixTranscodingUsageRequest,
     DescribeTRTCRealTimeQualityDataRequest: DescribeTRTCRealTimeQualityDataRequest,
     DescribeStreamIngestResponse: DescribeStreamIngestResponse,
@@ -11253,6 +12575,7 @@ module.exports = {
     DescribeTRTCMarketQualityDataResponse: DescribeTRTCMarketQualityDataResponse,
     TranslationParam: TranslationParam,
     SubscribeStreamUserIds: SubscribeStreamUserIds,
+    DeleteVoiceConversationRequest: DeleteVoiceConversationRequest,
     WaterMarkImage: WaterMarkImage,
     McuUserInfoParams: McuUserInfoParams,
     UserMediaStream: UserMediaStream,
@@ -11268,6 +12591,7 @@ module.exports = {
     DeleteCloudTranscriptionResponse: DeleteCloudTranscriptionResponse,
     DescribeUserInfoResponse: DescribeUserInfoResponse,
     RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
+    VoiceConversationVisionConfig: VoiceConversationVisionConfig,
     UpdateStreamIngestResponse: UpdateStreamIngestResponse,
     CloudModerationStorage: CloudModerationStorage,
     McuWaterMarkImage: McuWaterMarkImage,
@@ -11281,7 +12605,7 @@ module.exports = {
     ModerationSupplierParam: ModerationSupplierParam,
     DescribeRecordingUsageRequest: DescribeRecordingUsageRequest,
     StorageFile: StorageFile,
-    WaterMark: WaterMark,
+    ControlVoiceConversationResponse: ControlVoiceConversationResponse,
     McuStorageParams: McuStorageParams,
     DescribeScaleInfoResponse: DescribeScaleInfoResponse,
     MixLayoutParams: MixLayoutParams,
@@ -11290,27 +12614,33 @@ module.exports = {
     AsrParam: AsrParam,
     McuFeedBackRoomParams: McuFeedBackRoomParams,
     TurnDetection: TurnDetection,
+    DeleteVoiceConversationResponse: DeleteVoiceConversationResponse,
     AudioEncode: AudioEncode,
     RemoveUserRequest: RemoveUserRequest,
     TTSVoice: TTSVoice,
     DismissRoomRequest: DismissRoomRequest,
+    VoiceConversationHistoryContent: VoiceConversationHistoryContent,
     DescribeUnusualEventRequest: DescribeUnusualEventRequest,
+    ModifyVoiceConversationRequest: ModifyVoiceConversationRequest,
     DescribeCloudRecordingRequest: DescribeCloudRecordingRequest,
     TencentVod: TencentVod,
     McuPassThrough: McuPassThrough,
     StartWebRecordResponse: StartWebRecordResponse,
+    VoiceConversationMcpServer: VoiceConversationMcpServer,
     SetUserBlockedByStrRoomIdResponse: SetUserBlockedByStrRoomIdResponse,
     TRTCDataResult: TRTCDataResult,
     DescribeCloudRecordingResponse: DescribeCloudRecordingResponse,
     ModifyCloudModerationRequest: ModifyCloudModerationRequest,
     CreateCloudRecordingRequest: CreateCloudRecordingRequest,
     RecognizeConfig: RecognizeConfig,
+    VoiceConversationDialogConfig: VoiceConversationDialogConfig,
     DeleteCloudRecordingResponse: DeleteCloudRecordingResponse,
     StartAITranscriptionRequest: StartAITranscriptionRequest,
+    VoiceConversationConfig: VoiceConversationConfig,
     QualityData: QualityData,
     ModerationStorageParams: ModerationStorageParams,
     ModifyCloudRecordingRequest: ModifyCloudRecordingRequest,
-    StopAIConversationResponse: StopAIConversationResponse,
+    CreateVoiceConversationRequest: CreateVoiceConversationRequest,
     StartPublishCdnStreamRequest: StartPublishCdnStreamRequest,
     DescribeAIConversationRequest: DescribeAIConversationRequest,
     RowValues: RowValues,
@@ -11319,12 +12649,14 @@ module.exports = {
     DescribeCloudTranscriptionRequest: DescribeCloudTranscriptionRequest,
     CreateCloudSliceTaskResponse: CreateCloudSliceTaskResponse,
     DeleteCloudRecordingRequest: DeleteCloudRecordingRequest,
+    ControlVoiceConversationRequest: ControlVoiceConversationRequest,
     TTSParam: TTSParam,
     ModifyCloudModerationResponse: ModifyCloudModerationResponse,
     Terminology: Terminology,
     VideoParams: VideoParams,
     StopStreamIngestResponse: StopStreamIngestResponse,
     SetUserBlockedByStrRoomIdRequest: SetUserBlockedByStrRoomIdRequest,
+    VoiceConversationLLMConfig: VoiceConversationLLMConfig,
     DescribeTrtcRoomUsageRequest: DescribeTrtcRoomUsageRequest,
     TextToSpeechResponse: TextToSpeechResponse,
     CreateCloudModerationRequest: CreateCloudModerationRequest,
@@ -11343,13 +12675,15 @@ module.exports = {
     DescribeCloudSliceTaskRequest: DescribeCloudSliceTaskRequest,
     StopPublishCdnStreamRequest: StopPublishCdnStreamRequest,
     MixUserInfo: MixUserInfo,
-    DeleteCloudTranscriptionRequest: DeleteCloudTranscriptionRequest,
-    AmbientSound: AmbientSound,
     DescribeTRTCMarketQualityDataRequest: DescribeTRTCMarketQualityDataRequest,
+    AmbientSound: AmbientSound,
+    DeleteCloudTranscriptionRequest: DeleteCloudTranscriptionRequest,
     UpdatePublishCdnStreamRequest: UpdatePublishCdnStreamRequest,
     InvokeLLM: InvokeLLM,
     SliceStorageParams: SliceStorageParams,
     MaxVideoUser: MaxVideoUser,
+    ModifyVoiceConversationResponse: ModifyVoiceConversationResponse,
+    KeyValueItem: KeyValueItem,
     VoiceCloneResponse: VoiceCloneResponse,
     UpdateStreamIngestRequest: UpdateStreamIngestRequest,
     TextToSpeechSSERequest: TextToSpeechSSERequest,
@@ -11357,20 +12691,22 @@ module.exports = {
     TermPair: TermPair,
     QueryAIMessageListRequest: QueryAIMessageListRequest,
     STTConfig: STTConfig,
-    StopWebRecordRequest: StopWebRecordRequest,
+    StopAIConversationResponse: StopAIConversationResponse,
     McuSeiParams: McuSeiParams,
+    CreateVoiceConversationResponse: CreateVoiceConversationResponse,
     StopAIConversationRequest: StopAIConversationRequest,
     EventMessage: EventMessage,
     UpdateAIConversationRequest: UpdateAIConversationRequest,
     UpdatePublishCdnStreamResponse: UpdatePublishCdnStreamResponse,
     McuWaterMarkText: McuWaterMarkText,
-    TranscriptionParams: TranscriptionParams,
+    DescribeVoiceConversationResponse: DescribeVoiceConversationResponse,
     SeriesInfos: SeriesInfos,
     RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
     RecordParams: RecordParams,
     TextToSpeechRequest: TextToSpeechRequest,
     DescribeStreamIngestRequest: DescribeStreamIngestRequest,
-    TTSConfig: TTSConfig,
+    VoiceConversationSTTConfig: VoiceConversationSTTConfig,
+    StopWebRecordRequest: StopWebRecordRequest,
     McuAudioParams: McuAudioParams,
     McuPublishCdnParam: McuPublishCdnParam,
     StartStreamIngestResponse: StartStreamIngestResponse,
@@ -11380,6 +12716,7 @@ module.exports = {
     McuCloudVod: McuCloudVod,
     DescribeCloudModerationRequest: DescribeCloudModerationRequest,
     DescribeAITranscriptionResponse: DescribeAITranscriptionResponse,
+    TTSConfig: TTSConfig,
     McuWaterMarkParams: McuWaterMarkParams,
     AbnormalExperience: AbnormalExperience,
     DescribeCloudSliceTaskResponse: DescribeCloudSliceTaskResponse,

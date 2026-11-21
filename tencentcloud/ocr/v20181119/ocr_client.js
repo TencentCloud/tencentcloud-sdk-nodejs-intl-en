@@ -47,7 +47,7 @@ const MainlandPermitOCRRequest = models.MainlandPermitOCRRequest;
 const RecognizeBrazilCommonOCRRequest = models.RecognizeBrazilCommonOCRRequest;
 const RecognizePhilippinesTinIDOCRResponse = models.RecognizePhilippinesTinIDOCRResponse;
 const DetectedWords = models.DetectedWords;
-const LineInfo = models.LineInfo;
+const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
 const BrazilDriverLicenseInfo = models.BrazilDriverLicenseInfo;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
 const HmtResidentPermitOCRRequest = models.HmtResidentPermitOCRRequest;
@@ -59,6 +59,7 @@ const ItemNames = models.ItemNames;
 const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
 const RecognizePhilippinesSssIDOCRRequest = models.RecognizePhilippinesSssIDOCRRequest;
 const Key = models.Key;
+const SignResult = models.SignResult;
 const BrazilIDCardInfo = models.BrazilIDCardInfo;
 const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
 const GroupInfo = models.GroupInfo;
@@ -66,6 +67,7 @@ const PermitOCRRequest = models.PermitOCRRequest;
 const CardVerificationConfig = models.CardVerificationConfig;
 const ExtractDocMultiResponse = models.ExtractDocMultiResponse;
 const RecognizePhilippinesSssIDOCRResponse = models.RecognizePhilippinesSssIDOCRResponse;
+const Record = models.Record;
 const ApplyOcrTokenRequest = models.ApplyOcrTokenRequest;
 const RecognizePhilippinesUMIDOCRResponse = models.RecognizePhilippinesUMIDOCRResponse;
 const ApplyCardVerificationExternalRequest = models.ApplyCardVerificationExternalRequest;
@@ -82,13 +84,16 @@ const RecognizeMacaoIDCardOCRRequest = models.RecognizeMacaoIDCardOCRRequest;
 const CoordsItem = models.CoordsItem;
 const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
 const RecognizeThaiIDCardOCRRequest = models.RecognizeThaiIDCardOCRRequest;
+const VerifyPdfOcrResponse = models.VerifyPdfOcrResponse;
+const VerifyPdfOcrRequest = models.VerifyPdfOcrRequest;
 const GetCardVerificationExternalResultRequest = models.GetCardVerificationExternalResultRequest;
+const PersonInfo = models.PersonInfo;
 const Coord = models.Coord;
 const RecognizeBrazilRNEOCRResponse = models.RecognizeBrazilRNEOCRResponse;
 const RecognizeIndonesiaIDCardOCRResponse = models.RecognizeIndonesiaIDCardOCRResponse;
 const VinOCRResponse = models.VinOCRResponse;
 const ConfigAdvanced = models.ConfigAdvanced;
-const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
+const LineInfo = models.LineInfo;
 const ItemCoord = models.ItemCoord;
 const ApplyCardVerificationExternalResponse = models.ApplyCardVerificationExternalResponse;
 const Polygon = models.Polygon;
@@ -97,6 +102,7 @@ const RecognizeSingaporeIDCardOCRResponse = models.RecognizeSingaporeIDCardOCRRe
 const SmartStructuralOCRV2Response = models.SmartStructuralOCRV2Response;
 const RecognizeMainlandIDCardOCRResponse = models.RecognizeMainlandIDCardOCRResponse;
 const MainlandPermitOCRResponse = models.MainlandPermitOCRResponse;
+const ExtractedFields = models.ExtractedFields;
 const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
 const ImageCoordinates = models.ImageCoordinates;
 const RecognizeMexicoVTIDRequest = models.RecognizeMexicoVTIDRequest;
@@ -141,6 +147,17 @@ A maximum of 5 requests can be initiated per second for this API.
     RecognizeThaiPinkCard(req, cb) {
         let resp = new RecognizeThaiPinkCardResponse();
         this.request("RecognizeThaiPinkCard", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize entry and exit record PDFs and verify electronic signatures, returning structured entry and exit records and signature verification conclusions.
+     * @param {VerifyPdfOcrRequest} req
+     * @param {function(string, VerifyPdfOcrResponse):void} cb
+     * @public
+     */
+    VerifyPdfOcr(req, cb) {
+        let resp = new VerifyPdfOcrResponse();
+        this.request("VerifyPdfOcr", req, resp, cb);
     }
 
     /**
